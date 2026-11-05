@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#111111" />
+    <meta
+      name="description"
+      content="Sheep Store: tecnología, servicios y fondos de pantalla gratuitos para personalizar tus dispositivos."
+    />
+    <title>Sheep Store — Tecnología con propósito</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#inicio" aria-label="Sheep Store, inicio">
+        <img class="brand-mark" src="assets/logo.png" alt="" />
+        <span class="brand-name">sheep<span>store</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú">
+        <span></span><span></span>
+      </button>
+      <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
+        <a href="#catalogo">Catálogo</a>
+        <a href="#fondos">Fondos gratis</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#contacto">Contáctanos</a>
+        <a class="nav-cta" href="#soluciones">Encuentra tu solución <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="inicio">
+        <div class="threads-bg" aria-hidden="true">
+          <canvas class="threads-canvas"></canvas>
+        </div>
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-dot"></span> Tecnología para lo que sigue</p>
+          <h1>Ideas grandes.<br />Tecnología <span>que acompaña.</span></h1>
+          <p class="hero-description">
+            Productos que inspiran y servicios que hacen que todo funcione.
+            Encuentra en Sheep Store un mejor camino para conectar con lo que importa.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#catalogo">Explorar catálogo <span aria-hidden="true">↗</span></a>
+            <a class="text-link" href="#servicios">Conoce nuestros servicios <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="hero-note"><span class="note-icon" aria-hidden="true">✳</span> Tecnología pensada para la vida real.</div>
+        </div>
+
+        <div class="hero-art">
+          <div class="logo-stage">
+            <img class="hero-logo" src="assets/logo.png" alt="Logo de la oveja de Sheep Store" />
+          </div>
+          <div class="art-tag"><span></span> HECHO PARA TI</div>
+          <div class="art-caption"><span>01</span> Un mundo más conectado</div>
+        </div>
+        <a class="scroll-cue" href="#catalogo"><span></span> DESLIZA PARA DESCUBRIR</a>
+      </section>
+
+      <section class="trust-strip" aria-label="Lo que nos distingue">
+        <span>TECNOLOGÍA CON INTENCIÓN</span><i aria-hidden="true"></i>
+        <span>ASESORÍA SIN COMPLICACIONES</span><i aria-hidden="true"></i>
+        <span>EXPERIENCIAS QUE CONECTAN</span>
+      </section>
+
+      <section class="section catalog-section" id="catalogo">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Una selección para ti</p>
+            <h2>Descubre lo que<br />puedes <span>hacer.</span></h2>
+          </div>
+          <p class="section-intro">
+            Desde equipos que potencian tus ideas hasta esos accesorios que
+            hacen que cada día fluya mejor.
+          </p>
+        </div>
+        <div class="category-tabs" role="group" aria-label="Filtrar productos">
+          <button class="category-tab is-active" type="button" data-filter="todos" aria-pressed="true">Todo</button>
+          <button class="category-tab" type="button" data-filter="computacion" aria-pressed="false">Computación</button>
+          <button class="category-tab" type="button" data-filter="moviles" aria-pressed="false">Móviles</button>
+          <button class="category-tab" type="button" data-filter="accesorios" aria-pressed="false">Accesorios</button>
+        </div>
+        <div class="product-grid">
+          <article class="product-card" data-category="computacion">
+            <div class="product-art product-art-laptop">
+              <span class="product-badge">COMPUTACIÓN</span>
+              <div class="mini-laptop"><div class="mini-screen"><span></span><i></i></div><div class="mini-base"></div></div>
+              <span class="art-index">01 / 03</span>
+            </div>
+            <div class="product-info">
+              <div><h3>Computación</h3><p>Equipos listos para tus próximos proyectos.</p></div>
+              <a class="round-link" href="#soluciones" aria-label="Consultar por computación">↗</a>
+            </div>
+          </article>
+          <article class="product-card" data-category="moviles">
+            <div class="product-art product-art-phone">
+              <span class="product-badge">MÓVILES</span>
+              <div class="mini-phone"><div class="mini-phone-screen"><span class="phone-orb"></span><i></i><i></i></div></div>
+              <span class="art-index">02 / 03</span>
+            </div>
+            <div class="product-info">
+              <div><h3>Móviles</h3><p>Conecta con tus ideas, estés donde estés.</p></div>
+              <a class="round-link" href="#soluciones" aria-label="Consultar por móviles">↗</a>
+            </div>
+          </article>
+          <article class="product-card" data-category="accesorios">
+            <div class="product-art product-art-audio">
+              <span class="product-badge">ACCESORIOS</span>
+              <div class="headphones"><span class="headphone-band"></span><span class="earcup earcup-left"></span><span class="earcup earcup-right"></span></div>
+              <span class="art-index">03 / 03</span>
+            </div>
+            <div class="product-info">
+              <div><h3>Accesorios</h3><p>Detalles que elevan tu experiencia.</p></div>
+              <a class="round-link" href="#soluciones" aria-label="Consultar por accesorios">↗</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="wallpapers-section" id="fondos">
+        <div class="section wallpapers-inner">
+          <div class="section-heading wallpapers-heading">
+            <div>
+              <p class="eyebrow">Descargas gratuitas</p>
+              <h2>Un fondo nuevo.<br />Un poco más <span>Sheep.</span></h2>
+            </div>
+            <p class="section-intro">
+              Lleva Sheep Store contigo. Descarga gratis tu diseño favorito
+              para computadora o celular.
+            </p>
+          </div>
+          <div class="wallpaper-grid">
+            <article class="wallpaper-card wallpaper-card-featured">
+              <a class="wallpaper-preview" href="assets/wallpapers/sheep-gamer.gif" target="_blank" rel="noopener" aria-label="Ver fondo animado Sheep Gamer">
+                <img src="assets/wallpapers/sheep-gamer.gif" alt="Animación de Sheep Store jugando en una computadora" loading="lazy" decoding="async" />
+                <span class="wallpaper-open" aria-hidden="true">↗</span>
+              </a>
+              <div class="wallpaper-info">
+                <div><h3>Sheep Gamer</h3><p>Fondo animado · GIF</p></div>
+                <a class="wallpaper-download" href="assets/wallpapers/sheep-gamer.gif" download="sheep-store-gamer.gif" aria-label="Descargar fondo animado Sheep Gamer">↓</a>
+              </div>
+            </article>
+            <article class="wallpaper-card">
+              <a class="wallpaper-preview" href="assets/wallpapers/sheep-neon.png" target="_blank" rel="noopener" aria-label="Ver fondo Sheep Store Neón">
+                <img src="assets/wallpapers/sheep-neon.png" alt="Logo de Sheep Store con luces neón cian y violetas" loading="lazy" decoding="async" />
+                <span class="wallpaper-open" aria-hidden="true">↗</span>
+              </a>
+              <div class="wallpaper-info">
+                <div><h3>Neón</h3><p>Vibrante y futurista</p></div>
+                <a class="wallpaper-download" href="assets/wallpapers/sheep-neon.png" download="sheep-store-neon.png" aria-label="Descargar fondo Neón">↓</a>
+              </div>
+            </article>
+            <article class="wallpaper-card">
+              <a class="wallpaper-preview" href="assets/wallpapers/sheep-gold.jpg" target="_blank" rel="noopener" aria-label="Ver fondo Sheep Store Dorado">
+                <img src="assets/wallpapers/sheep-gold.jpg" alt="Logo de Sheep Store en dorado sobre fondo negro" loading="lazy" decoding="async" />
+                <span class="wallpaper-open" aria-hidden="true">↗</span>
+              </a>
+              <div class="wallpaper-info">
+                <div><h3>Dorado</h3><p>Un toque elegante</p></div>
+                <a class="wallpaper-download" href="assets/wallpapers/sheep-gold.jpg" download="sheep-store-dorado.jpg" aria-label="Descargar fondo Dorado">↓</a>
+              </div>
+            </article>
+            <article class="wallpaper-card">
+              <a class="wallpaper-preview" href="assets/wallpapers/sheep-dark.png" target="_blank" rel="noopener" aria-label="Ver fondo Sheep Store Oscuro">
+                <img src="assets/wallpapers/sheep-dark.png" alt="Logo de Sheep Store en un fondo oscuro con patrón tecnológico sutil" loading="lazy" decoding="async" />
+                <span class="wallpaper-open" aria-hidden="true">↗</span>
+              </a>
+              <div class="wallpaper-info">
+                <div><h3>Oscuro</h3><p>Discreto y minimalista</p></div>
+                <a class="wallpaper-download" href="assets/wallpapers/sheep-dark.png" download="sheep-store-oscuro.png" aria-label="Descargar fondo Oscuro">↓</a>
+              </div>
+            </article>
+            <article class="wallpaper-card">
+              <a class="wallpaper-preview" href="assets/wallpapers/sheep-neon-tech.png" target="_blank" rel="noopener" aria-label="Ver fondo Sheep Store Gamer">
+                <img src="assets/wallpapers/sheep-neon-tech.png" alt="Logo de Sheep Store con iluminación neón estilo gamer" loading="lazy" decoding="async" />
+                <span class="wallpaper-open" aria-hidden="true">↗</span>
+              </a>
+              <div class="wallpaper-info">
+                <div><h3>Gamer</h3><p>Color y energía</p></div>
+                <a class="wallpaper-download" href="assets/wallpapers/sheep-neon-tech.png" download="sheep-store-gamer.png" aria-label="Descargar fondo Gamer">↓</a>
+              </div>
+            </article>
+            <article class="wallpaper-card">
+              <a class="wallpaper-preview" href="assets/wallpapers/sheep-circuit.png" target="_blank" rel="noopener" aria-label="Ver fondo Sheep Store Circuitos">
+                <img src="assets/wallpapers/sheep-circuit.png" alt="Logo de Sheep Store rodeado de circuitos y detalles tecnológicos" loading="lazy" decoding="async" />
+                <span class="wallpaper-open" aria-hidden="true">↗</span>
+              </a>
+              <div class="wallpaper-info">
+                <div><h3>Circuitos</h3><p>Inspiración tecnológica</p></div>
+                <a class="wallpaper-download" href="assets/wallpapers/sheep-circuit.png" download="sheep-store-circuitos.png" aria-label="Descargar fondo Circuitos">↓</a>
+              </div>
+            </article>
+            <article class="wallpaper-card">
+              <a class="wallpaper-preview" href="assets/wallpapers/sheep-monochrome.png" target="_blank" rel="noopener" aria-label="Ver fondo Sheep Store Monocromo">
+                <img src="assets/wallpapers/sheep-monochrome.png" alt="Logo blanco de Sheep Store sobre fondo negro" loading="lazy" decoding="async" />
+                <span class="wallpaper-open" aria-hidden="true">↗</span>
+              </a>
+              <div class="wallpaper-info">
+                <div><h3>Monocromo</h3><p>Negro, blanco y Sheep</p></div>
+                <a class="wallpaper-download" href="assets/wallpapers/sheep-monochrome.png" download="sheep-store-monocromo.png" aria-label="Descargar fondo Monocromo">↓</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="services-section" id="servicios">
+        <div class="section services-inner">
+          <div class="services-copy">
+            <p class="eyebrow">Más que una tienda</p>
+            <h2>Cuenta con nosotros<br />para que <span>todo fluya.</span></h2>
+            <p>
+              La tecnología funciona mejor cuando tienes a alguien de tu lado.
+              Te acompañamos antes, durante y después.
+            </p>
+            <a class="button button-light" href="#soluciones">Conoce cómo podemos ayudarte <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="service-list">
+            <article class="service-item">
+              <span class="service-number">01</span>
+              <div><h3>Asesoría personalizada</h3><p>Encuentra el equipo y la solución que mejor se adaptan a ti.</p></div>
+              <span class="service-arrow" aria-hidden="true">↗</span>
+            </article>
+            <article class="service-item">
+              <span class="service-number">02</span>
+              <div><h3>Configuración y puesta en marcha</h3><p>Dejamos tu tecnología lista para empezar desde el primer día.</p></div>
+              <span class="service-arrow" aria-hidden="true">↗</span>
+            </article>
+            <article class="service-item">
+              <span class="service-number">03</span>
+              <div><h3>Soporte tecnológico</h3><p>Un equipo a tu lado para resolver dudas y mantener todo en marcha.</p></div>
+              <span class="service-arrow" aria-hidden="true">↗</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="about-section section" id="nosotros">
+        <div class="about-mark" aria-hidden="true">
+          <span class="about-circle"></span><span class="about-cross">✳</span><span class="about-word">SHEEP<br />STORE</span>
+        </div>
+        <div class="about-copy">
+          <p class="eyebrow">Una forma más humana de conectar</p>
+          <h2>La buena tecnología<br />se siente <span>cercana.</span></h2>
+          <p>
+            Creemos que elegir tecnología no debería ser complicado. Por eso
+            combinamos una selección cuidada con atención cercana: para que
+            encuentres justo lo que necesitas, sin ruido.
+          </p>
+          <a class="text-link dark-link" href="#soluciones">Así trabajamos <span aria-hidden="true">→</span></a>
+        </div>
+      </section>
+
+      <section class="contact-section" id="contacto">
+        <div class="section contact-inner">
+          <div class="contact-copy">
+            <p class="eyebrow">Estamos para ayudarte</p>
+            <h2>Contáctanos.<br /><span>Hablemos de tecnología.</span></h2>
+            <p>¿Buscas un equipo, un servicio o simplemente tienes una consulta? Escríbenos o llámanos.</p>
+          </div>
+          <div class="contact-options">
+            <a class="contact-option" href="mailto:ovejanegraservices@gmail.com">
+              <span class="contact-icon" aria-hidden="true">@</span>
+              <span><small>ESCRÍBENOS</small><strong>ovejanegraservices@gmail.com</strong></span>
+              <span class="contact-arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="contact-option" href="tel:978561560">
+              <span class="contact-icon contact-phone-icon" aria-hidden="true">✆</span>
+              <span><small>LLÁMANOS</small><strong>978 561 560</strong></span>
+              <span class="contact-arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="closing-section" id="soluciones">
+        <div class="closing-orb" aria-hidden="true"></div>
+        <p class="eyebrow">Tu próximo paso empieza aquí</p>
+        <h2>¿Listo para llevar<br />tus ideas <span>más lejos?</span></h2>
+        <p>Explora nuestras soluciones y encuentra la tecnología que va contigo.</p>
+        <a class="button button-primary" href="#catalogo">Encuentra tu solución <span aria-hidden="true">↗</span></a>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="brand footer-brand" href="#inicio" aria-label="Sheep Store, volver al inicio">
+        <img class="brand-mark" src="assets/logo.png" alt="" />
+        <span class="brand-name">sheep<span>store</span></span>
+      </a>
+      <p>Tecnología con propósito. Hecha para ti.</p>
+      <a class="footer-top" href="#inicio">Volver arriba ↑</a>
+      <a class="footer-contact" href="#contacto">Contáctanos</a>
+      <span class="footer-copy">© <span id="current-year"></span> Sheep Store</span>
+    </footer>
+  </body>
+</html>
