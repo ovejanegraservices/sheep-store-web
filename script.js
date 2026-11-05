@@ -148,6 +148,512 @@ if (menuToggle && mainNav) {
   });
 }
 
+if (mainNav) {
+  const soundToggle = document.querySelector(".nav-sound-toggle");
+  let audioContext = null;
+  let hoverSoundEnabled = true;
+  let lastHoverSound = 0;
+  let soundResumePending = false;
+
+  const playHoverSound = () => {
+    if (!hoverSoundEnabled || !audioContext || audioContext.state !== "running") return;
+
+    const now = performance.now();
+    if (now - lastHoverSound < 100) return;
+    lastHoverSound = now;
+
+    const start = audioContext.currentTime;
+    [740, 990].forEach((frequency, index) => {
+      const toneStart = start + index * 0.025;
+      const oscillator = audioContext.createOscillator();
+      const volume = audioContext.createGain();
+
+      oscillator.type = "sine";
+      oscillator.frequency.setValueAtTime(frequency, toneStart);
+      oscillator.frequency.exponentialRampToValueAtTime(frequency * 1.08, toneStart + 0.075);
+      volume.gain.setValueAtTime(0.0001, toneStart);
+      volume.gain.exponentialRampToValueAtTime(0.025, toneStart + 0.009);
+      volume.gain.exponentialRampToValueAtTime(0.0001, toneStart + 0.11);
+
+      oscillator.connect(volume);
+      volume.connect(audioContext.destination);
+      oscillator.start(toneStart);
+      oscillator.stop(toneStart + 0.115);
+    });
+  };
+
+  const playClickTone = () => {
+    if (!hoverSoundEnabled || !audioContext || audioContext.state !== "running") return;
+
+    const start = audioContext.currentTime;
+    const oscillator = audioContext.createOscillator();
+    const volume = audioContext.createGain();
+
+    oscillator.type = "sine";
+    oscillator.frequency.setValueAtTime(1150, start);
+    oscillator.frequency.exponentialRampToValueAtTime(760, start + 0.045);
+    volume.gain.setValueAtTime(0.0001, start);
+    volume.gain.exponentialRampToValueAtTime(0.035, start + 0.004);
+    volume.gain.exponentialRampToValueAtTime(0.0001, start + 0.055);
+
+    oscillator.connect(volume);
+    volume.connect(audioContext.destination);
+    oscillator.start(start);
+    oscillator.stop(start + 0.06);
+  };
+
+  const playClickSound = () => {
+    if (!hoverSoundEnabled) return;
+
+    if (audioContext?.state === "running") {
+      playClickTone();
+      return;
+    }
+
+    try {
+      if (!audioContext) audioContext = new AudioContext();
+    } catch (error) {
+      console.error("No se pudo iniciar el sonido de clic.", error);
+      return;
+    }
+
+    audioContext.resume().then(() => {
+      if (!hoverSoundEnabled) return;
+      updateSoundToggle();
+      playClickTone();
+    }).catch((error) => {
+      console.error("No se pudo reproducir el sonido de clic.", error);
+    });
+  };
+
+  const updateSoundToggle = () => {
+    if (!soundToggle) return;
+    const label = hoverSoundEnabled ? "Silenciar sonido de navegación" : "Activar sonido de navegación";
+    soundToggle.setAttribute("aria-pressed", String(hoverSoundEnabled));
+    soundToggle.setAttribute("aria-label", label);
+    soundToggle.title = label;
+  };
+
+  const enableHoverSound = (playConfirmation = false) => {
+    if (typeof window.AudioContext !== "function") {
+      console.warn("El navegador no admite el sonido de navegación.");
+      return;
+    }
+
+    try {
+      if (!audioContext) audioContext = new AudioContext();
+    } catch (error) {
+      console.error("No se pudo iniciar el sonido de navegación.", error);
+      return;
+    }
+
+    if (audioContext.state === "running") {
+      hoverSoundEnabled = true;
+      updateSoundToggle();
+      if (playConfirmation) playHoverSound();
+      return;
+    }
+
+    if (soundResumePending) return;
+    soundResumePending = true;
+    audioContext.resume().then(() => {
+      soundResumePending = false;
+      hoverSoundEnabled = true;
+      updateSoundToggle();
+      if (playConfirmation) playHoverSound();
+    }).catch((error) => {
+      soundResumePending = false;
+      console.error("No se pudo activar el sonido de navegación.", error);
+    });
+  };
+
+  updateSoundToggle();
+
+  soundToggle?.addEventListener("click", () => {
+    if (hoverSoundEnabled) {
+      hoverSoundEnabled = false;
+      updateSoundToggle();
+      if (audioContext?.state === "running") {
+        audioContext.suspend().catch((error) => {
+          console.error("No se pudo silenciar el sonido de navegación.", error);
+        });
+      }
+      return;
+    }
+
+    enableHoverSound(true);
+  });
+
+  const unlockHoverSound = (event) => {
+    if (event.target instanceof Element && event.target.closest(".nav-sound-toggle")) return;
+    if (hoverSoundEnabled && audioContext?.state !== "running") enableHoverSound();
+  };
+
+  document.addEventListener("pointerdown", unlockHoverSound, { passive: true });
+  document.addEventListener("keydown", unlockHoverSound);
+
+  document.addEventListener("click", (event) => {
+    if (!(event.target instanceof Element)) return;
+    const control = event.target.closest("a, button, [role='button']");
+    if (
+      !control ||
+      control.matches(":disabled, [aria-disabled='true'], [data-game-launch], .nav-sound-toggle")
+    ) return;
+    playClickSound();
+  });
+
+  const getSoundLink = (target) => {
+    if (!(target instanceof Element)) return null;
+    return target.closest("a[data-hover-sound]");
+  };
+
+  mainNav.addEventListener("pointerover", (event) => {
+    const link = getSoundLink(event.target);
+    if (!link || (event.relatedTarget instanceof Node && link.contains(event.relatedTarget))) return;
+    if (hoverSoundEnabled && audioContext?.state !== "running") {
+      enableHoverSound(true);
+      return;
+    }
+    playHoverSound();
+  });
+
+  mainNav.addEventListener("focusin", (event) => {
+    if (!getSoundLink(event.target)) return;
+    if (hoverSoundEnabled && audioContext?.state !== "running") {
+      enableHoverSound(true);
+      return;
+    }
+    playHoverSound();
+  });
+}
+
+const gameLaunchers = document.querySelectorAll("[data-game-launch]");
+const gameDialog = document.querySelector("#sheep-game");
+const gameCanvas = document.querySelector("#sheep-game-canvas");
+const gameLaunchStatus = document.querySelector("#game-launch-status");
+const gameStatus = document.querySelector("#sheep-game-status");
+const gameScoreLabel = document.querySelector("#sheep-game-score");
+const gameRestart = document.querySelector("#sheep-game-restart");
+const gameClose = document.querySelector(".sheep-game-close");
+
+if (
+  gameLaunchers.length &&
+  gameDialog instanceof HTMLDialogElement &&
+  gameCanvas instanceof HTMLCanvasElement &&
+  gameLaunchStatus &&
+  gameStatus &&
+  gameScoreLabel &&
+  gameRestart instanceof HTMLButtonElement &&
+  gameClose instanceof HTMLButtonElement
+) {
+  const context = gameCanvas.getContext("2d");
+  const sheepImage = document.querySelector(".hero-logo-front");
+
+  if (!context) {
+    throw new Error("No se pudo inicializar el juego de Sheep Store.");
+  }
+
+  if (!(sheepImage instanceof HTMLImageElement)) {
+    throw new Error("No se encontró el logo de la oveja para el juego.");
+  }
+
+  const groundY = 260;
+  const sheepX = 105;
+  const sheepSize = 64;
+  const sheep = { y: groundY - sheepSize, velocity: 0 };
+  const obstacles = [];
+  const gameAudioUrl = new URL("assets/audio/sheep-bleat.mp3", document.baseURI);
+  const AudioContextConstructor = window.AudioContext;
+  let gameFrame = 0;
+  let previousFrame = 0;
+  let nextObstacleX = gameCanvas.width;
+  let distance = 0;
+  let speed = 365;
+  let launchPending = false;
+  let gameRunning = false;
+  let audioContext = null;
+  let bleatBuffer = null;
+
+  const drawLaptop = (obstacle) => {
+    const { x, y } = obstacle;
+    context.fillStyle = "#d8d8d8";
+    context.beginPath();
+    context.roundRect(x + 7, y, 54, 39, 4);
+    context.fill();
+    context.fillStyle = "#292929";
+    context.beginPath();
+    context.roundRect(x + 11, y + 4, 46, 31, 2);
+    context.fill();
+    context.fillStyle = "#bdbdbd";
+    context.beginPath();
+    context.moveTo(x, y + 41);
+    context.lineTo(x + 68, y + 41);
+    context.lineTo(x + 61, y + 47);
+    context.lineTo(x + 6, y + 47);
+    context.closePath();
+    context.fill();
+    context.fillStyle = "rgba(255,255,255,.7)";
+    context.fillRect(x + 20, y + 16, 29, 2);
+    obstacle.width = 68;
+    obstacle.height = 47;
+  };
+
+  const drawPhone = (obstacle) => {
+    const { x, y } = obstacle;
+    context.fillStyle = "#e5e5e5";
+    context.beginPath();
+    context.roundRect(x + 5, y, 31, 67, 8);
+    context.fill();
+    context.fillStyle = "#303030";
+    context.beginPath();
+    context.roundRect(x + 8, y + 4, 25, 59, 6);
+    context.fill();
+    context.fillStyle = "#f4f4f4";
+    context.beginPath();
+    context.arc(x + 20, y + 31, 5, 0, Math.PI * 2);
+    context.fill();
+    obstacle.width = 41;
+    obstacle.height = 67;
+  };
+
+  const drawHeadphones = (obstacle) => {
+    const { x, y } = obstacle;
+    context.strokeStyle = "#dedede";
+    context.lineWidth = 9;
+    context.beginPath();
+    context.arc(x + 34, y + 30, 25, Math.PI, 0);
+    context.stroke();
+    context.fillStyle = "#bdbdbd";
+    context.beginPath();
+    context.roundRect(x + 2, y + 26, 15, 29, 6);
+    context.roundRect(x + 51, y + 26, 15, 29, 6);
+    context.fill();
+    obstacle.width = 68;
+    obstacle.height = 55;
+  };
+
+  const drawObstacle = (obstacle) => {
+    const dimensions = obstacle.type === "phone"
+      ? { width: 41, height: 67 }
+      : { width: 68, height: obstacle.type === "laptop" ? 47 : 55 };
+
+    obstacle.width = dimensions.width;
+    obstacle.height = dimensions.height;
+    obstacle.y = groundY - dimensions.height;
+
+    if (obstacle.type === "laptop") drawLaptop(obstacle);
+    else if (obstacle.type === "phone") drawPhone(obstacle);
+    else drawHeadphones(obstacle);
+  };
+
+  const drawScene = (timestamp) => {
+    const { width, height } = gameCanvas;
+    context.clearRect(0, 0, width, height);
+    context.fillStyle = "#151515";
+    context.fillRect(0, 0, width, height);
+
+    const glow = context.createRadialGradient(width * 0.26, groundY, 8, width * 0.26, groundY, 290);
+    glow.addColorStop(0, "rgba(220,220,220,.13)");
+    glow.addColorStop(1, "rgba(220,220,220,0)");
+    context.fillStyle = glow;
+    context.fillRect(0, 0, width, height);
+
+    context.strokeStyle = "rgba(235,235,235,.16)";
+    context.lineWidth = 1;
+    context.beginPath();
+    context.moveTo(0, groundY + 1);
+    context.lineTo(width, groundY + 1);
+    context.stroke();
+
+    context.strokeStyle = "rgba(235,235,235,.25)";
+    context.setLineDash([18, 19]);
+    context.lineDashOffset = -(distance % 37);
+    context.beginPath();
+    context.moveTo(0, groundY + 19);
+    context.lineTo(width, groundY + 19);
+    context.stroke();
+    context.setLineDash([]);
+
+    context.fillStyle = "rgba(245,245,245,.56)";
+    context.font = "600 12px Segoe UI, sans-serif";
+    context.fillText("SHEEP STORE RUN", 26, 35);
+    context.textAlign = "right";
+    context.fillStyle = "rgba(245,245,245,.82)";
+    context.fillText(`PUNTOS ${Math.floor(distance / 10)}`, width - 26, 35);
+    context.textAlign = "left";
+
+    obstacles.forEach(drawObstacle);
+
+    const airborne = sheep.y < groundY - sheepSize;
+    const runCycle = Math.sin(timestamp * 0.018) * (airborne ? 0.06 : 1);
+    context.fillStyle = "rgba(0,0,0,.35)";
+    context.beginPath();
+    context.ellipse(sheepX + sheepSize / 2, groundY + 5, airborne ? 23 : 29 + Math.abs(runCycle) * 3, 5, 0, 0, Math.PI * 2);
+    context.fill();
+
+    context.save();
+    context.translate(sheepX + sheepSize / 2, sheep.y + sheepSize / 2);
+    context.rotate(airborne ? -0.07 : runCycle * 0.035);
+    context.beginPath();
+    context.arc(0, 0, sheepSize / 2, 0, Math.PI * 2);
+    context.fillStyle = "#fff";
+    context.fill();
+    context.lineWidth = 3;
+    context.strokeStyle = "#dedede";
+    context.stroke();
+    context.save();
+    context.beginPath();
+    context.arc(0, 0, sheepSize / 2 - 3, 0, Math.PI * 2);
+    context.clip();
+    context.drawImage(sheepImage, -sheepSize / 2 + 2, -sheepSize / 2 + 2, sheepSize - 4, sheepSize - 4);
+    context.restore();
+    context.restore();
+  };
+
+  const endGame = () => {
+    gameRunning = false;
+    gameStatus.textContent = `¡Buen intento! Conseguí ${Math.floor(distance / 10)} puntos.`;
+    gameRestart.hidden = false;
+    gameCanvas.setAttribute("aria-label", `Fin del juego. Puntuación: ${Math.floor(distance / 10)} puntos.`);
+  };
+
+  const runGameFrame = (timestamp) => {
+    gameFrame = 0;
+    if (!gameRunning || !gameDialog.open) return;
+
+    const delta = previousFrame ? Math.min((timestamp - previousFrame) / 1000, 0.04) : 0;
+    previousFrame = timestamp;
+    distance += speed * delta * 0.12;
+    speed = Math.min(speed + delta * 4, 560);
+    sheep.velocity += 1750 * delta;
+    sheep.y = Math.min(sheep.y + sheep.velocity * delta, groundY - sheepSize);
+
+    if (sheep.y === groundY - sheepSize) sheep.velocity = 0;
+
+    obstacles.forEach((obstacle) => { obstacle.x -= speed * delta; });
+    while (obstacles.length && obstacles[0].x + obstacles[0].width < 0) obstacles.shift();
+
+    if (!obstacles.length || obstacles[obstacles.length - 1].x < nextObstacleX - 390) {
+      const type = ["laptop", "phone", "headphones"][Math.floor(Math.random() * 3)];
+      const dimensions = type === "phone" ? { width: 41, height: 67 } : { width: 68, height: type === "laptop" ? 47 : 55 };
+      obstacles.push({ type, x: nextObstacleX, y: groundY - dimensions.height, ...dimensions });
+      nextObstacleX += 390 + Math.random() * 250;
+    }
+
+    const sheepHitbox = { x: sheepX + 13, y: sheep.y + 9, width: sheepSize - 24, height: sheepSize - 15 };
+    const hasCollision = obstacles.some((obstacle) => {
+      const obstacleHitbox = { x: obstacle.x + 5, y: obstacle.y + 4, width: obstacle.width - 10, height: obstacle.height - 4 };
+      return sheepHitbox.x < obstacleHitbox.x + obstacleHitbox.width &&
+        sheepHitbox.x + sheepHitbox.width > obstacleHitbox.x &&
+        sheepHitbox.y < obstacleHitbox.y + obstacleHitbox.height &&
+        sheepHitbox.y + sheepHitbox.height > obstacleHitbox.y;
+    });
+
+    gameScoreLabel.textContent = String(Math.floor(distance / 10));
+    drawScene(timestamp);
+
+    if (hasCollision) {
+      endGame();
+      return;
+    }
+
+    gameFrame = window.requestAnimationFrame(runGameFrame);
+  };
+
+  const startGame = () => {
+    if (gameFrame) window.cancelAnimationFrame(gameFrame);
+    gameRunning = true;
+    previousFrame = 0;
+    distance = 0;
+    speed = 365;
+    nextObstacleX = gameCanvas.width + 80;
+    sheep.y = groundY - sheepSize;
+    sheep.velocity = 0;
+    obstacles.length = 0;
+    gameStatus.textContent = "¡A correr! Salta los equipos.";
+    gameScoreLabel.textContent = "0";
+    gameRestart.hidden = true;
+    gameCanvas.setAttribute("aria-label", "Juego de carrera en curso. Pulsa espacio o la flecha arriba para saltar.");
+    drawScene(0);
+    gameFrame = window.requestAnimationFrame(runGameFrame);
+  };
+
+  const openGame = (message = "") => {
+    gameLaunchStatus.textContent = "";
+    gameLaunchStatus.classList.remove("is-visible");
+    if (!gameDialog.open) gameDialog.showModal();
+    startGame();
+    if (message) gameStatus.textContent = message;
+    gameCanvas.focus();
+  };
+
+  const launchGame = async () => {
+    if (launchPending || gameDialog.open) return;
+
+    launchPending = true;
+    gameLaunchStatus.textContent = "Escuchando el balido de la oveja...";
+    gameLaunchStatus.classList.remove("is-visible");
+
+    try {
+      if (typeof AudioContextConstructor !== "function") {
+        throw new Error("Este navegador no admite Web Audio.");
+      }
+
+      if (!audioContext) audioContext = new AudioContextConstructor();
+      await audioContext.resume();
+
+      if (!bleatBuffer) {
+        const response = await fetch(gameAudioUrl);
+        if (!response.ok) {
+          throw new Error(`No se pudo cargar el audio de la oveja (${response.status}).`);
+        }
+        bleatBuffer = await audioContext.decodeAudioData(await response.arrayBuffer());
+      }
+
+      if (!launchPending) return;
+
+      const source = audioContext.createBufferSource();
+      const volume = audioContext.createGain();
+      source.buffer = bleatBuffer;
+      volume.gain.value = 2.2;
+      source.connect(volume);
+      volume.connect(audioContext.destination);
+      source.addEventListener("ended", () => {
+        if (!launchPending) return;
+        launchPending = false;
+        openGame();
+      }, { once: true });
+      source.start();
+    } catch (error) {
+      launchPending = false;
+      console.error("No se pudo preparar o reproducir el balido de la oveja.", error);
+      openGame("Audio no disponible. Comprueba que assets/audio/sheep-bleat.mp3 esté publicado; puedes jugar sin sonido.");
+    }
+  };
+
+  gameLaunchers.forEach((launcher) => launcher.addEventListener("click", launchGame));
+
+  gameCanvas.addEventListener("pointerdown", (event) => {
+    event.preventDefault();
+    if (gameRunning && sheep.y >= groundY - sheepSize) sheep.velocity = -650;
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (!gameDialog.open || !["Space", "ArrowUp"].includes(event.code)) return;
+    if (event.target instanceof HTMLElement && event.target.closest("button")) return;
+    event.preventDefault();
+    if (gameRunning && sheep.y >= groundY - sheepSize) sheep.velocity = -650;
+  });
+
+  gameRestart.addEventListener("click", startGame);
+  gameClose.addEventListener("click", () => gameDialog.close());
+  gameDialog.addEventListener("close", () => {
+    gameRunning = false;
+    if (gameFrame) window.cancelAnimationFrame(gameFrame);
+    gameFrame = 0;
+  });
+}
+
 categoryTabs.forEach((tab) => {
   tab.addEventListener("click", () => {
     const selectedCategory = tab.dataset.filter;

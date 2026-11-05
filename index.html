@@ -14,19 +14,26 @@
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="#inicio" aria-label="Sheep Store, inicio">
-        <img class="brand-mark" src="assets/logo.png" alt="" />
-        <span class="brand-name">sheep<span>store</span></span>
-      </a>
+      <div class="brand">
+        <button class="brand-game-trigger" type="button" data-game-launch aria-label="Escuchar el balido y jugar con Sheep Store" title="Juega con Sheep Store">
+          <img class="brand-mark" src="assets/logo.png" alt="" />
+        </button>
+        <a class="brand-home" href="#inicio" aria-label="Sheep Store, inicio">
+          <span class="brand-name">sheep<span>store</span></span>
+        </a>
+      </div>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú">
         <span></span><span></span>
       </button>
       <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
         <a href="#catalogo">Catálogo</a>
-        <a href="#fondos">Fondos gratis</a>
-        <a href="#servicios">Servicios</a>
-        <a href="#nosotros">Nosotros</a>
+        <a href="#fondos" data-hover-sound>Fondos gratis</a>
+        <a href="#servicios" data-hover-sound>Servicios</a>
+        <a href="#nosotros" data-hover-sound>Nosotros</a>
         <a href="#contacto">Contáctanos</a>
+        <button class="nav-sound-toggle" type="button" aria-label="Silenciar sonido de navegación" aria-pressed="true" title="Silenciar sonido de navegación">
+          <span aria-hidden="true">♪</span>
+        </button>
         <a class="nav-cta" href="#soluciones">Encuentra tu solución <span aria-hidden="true">↗</span></a>
       </nav>
     </header>
@@ -52,7 +59,12 @@
 
         <div class="hero-art">
           <div class="logo-stage">
-            <img class="hero-logo" src="assets/logo.png" alt="Logo de la oveja de Sheep Store" />
+            <button class="hero-logo-launch" type="button" data-game-launch aria-label="Escuchar el balido y jugar con la oveja" title="¡Haz clic para jugar!">
+              <span class="hero-logo-coin">
+                <img class="hero-logo-face hero-logo-front" src="assets/logo.png" alt="" />
+                <img class="hero-logo-face hero-logo-back" src="assets/logo.png" alt="" aria-hidden="true" />
+              </span>
+            </button>
           </div>
           <div class="art-tag"><span></span> HECHO PARA TI</div>
           <div class="art-caption"><span>01</span> Un mundo más conectado</div>
@@ -73,22 +85,23 @@
             <h2>Descubre lo que<br />puedes <span>hacer.</span></h2>
           </div>
           <p class="section-intro">
-            Desde equipos que potencian tus ideas hasta esos accesorios que
-            hacen que cada día fluya mejor.
+            Explora equipos, accesorios y servicios para que tu tecnología
+            te acompañe en cada etapa.
           </p>
         </div>
-        <div class="category-tabs" role="group" aria-label="Filtrar productos">
+        <div class="category-tabs" role="group" aria-label="Filtrar el catálogo">
           <button class="category-tab is-active" type="button" data-filter="todos" aria-pressed="true">Todo</button>
           <button class="category-tab" type="button" data-filter="computacion" aria-pressed="false">Computación</button>
           <button class="category-tab" type="button" data-filter="moviles" aria-pressed="false">Móviles</button>
           <button class="category-tab" type="button" data-filter="accesorios" aria-pressed="false">Accesorios</button>
+          <button class="category-tab" type="button" data-filter="servicios" aria-pressed="false">Servicios</button>
         </div>
         <div class="product-grid">
           <article class="product-card" data-category="computacion">
             <div class="product-art product-art-laptop">
               <span class="product-badge">COMPUTACIÓN</span>
               <div class="mini-laptop"><div class="mini-screen"><span></span><i></i></div><div class="mini-base"></div></div>
-              <span class="art-index">01 / 03</span>
+              <span class="art-index">01 / 04</span>
             </div>
             <div class="product-info">
               <div><h3>Computación</h3><p>Equipos listos para tus próximos proyectos.</p></div>
@@ -99,7 +112,7 @@
             <div class="product-art product-art-phone">
               <span class="product-badge">MÓVILES</span>
               <div class="mini-phone"><div class="mini-phone-screen"><span class="phone-orb"></span><i></i><i></i></div></div>
-              <span class="art-index">02 / 03</span>
+              <span class="art-index">02 / 04</span>
             </div>
             <div class="product-info">
               <div><h3>Móviles</h3><p>Conecta con tus ideas, estés donde estés.</p></div>
@@ -110,11 +123,27 @@
             <div class="product-art product-art-audio">
               <span class="product-badge">ACCESORIOS</span>
               <div class="headphones"><span class="headphone-band"></span><span class="earcup earcup-left"></span><span class="earcup earcup-right"></span></div>
-              <span class="art-index">03 / 03</span>
+              <span class="art-index">03 / 04</span>
             </div>
             <div class="product-info">
               <div><h3>Accesorios</h3><p>Detalles que elevan tu experiencia.</p></div>
               <a class="round-link" href="#soluciones" aria-label="Consultar por accesorios">↗</a>
+            </div>
+          </article>
+          <article class="product-card" data-category="servicios">
+            <div class="product-art product-art-service">
+              <span class="product-badge">SERVICIOS</span>
+              <div class="service-illustration" aria-hidden="true">
+                <span class="service-illustration-title">LAPTOP CARE</span>
+                <span class="service-illustration-row"><i>✓</i>Limpieza interna</span>
+                <span class="service-illustration-row"><i>✓</i>Revisión térmica</span>
+                <span class="service-illustration-row"><i>✓</i>Optimización</span>
+              </div>
+              <span class="art-index">04 / 04</span>
+            </div>
+            <div class="product-info">
+              <div><h3>Mantenimiento</h3><p>Limpieza profunda, revisión térmica y optimización para laptops.</p></div>
+              <a class="round-link" href="#servicios" aria-label="Conocer el mantenimiento preventivo">↗</a>
             </div>
           </article>
         </div>
@@ -210,31 +239,42 @@
       <section class="services-section" id="servicios">
         <div class="section services-inner">
           <div class="services-copy">
-            <p class="eyebrow">Más que una tienda</p>
-            <h2>Cuenta con nosotros<br />para que <span>todo fluya.</span></h2>
+            <p class="eyebrow">Cuidado integral para tu laptop</p>
+            <h2>Mantenimiento<br />para que <span>siga dando lo mejor.</span></h2>
             <p>
-              La tecnología funciona mejor cuando tienes a alguien de tu lado.
-              Te acompañamos antes, durante y después.
+              Evaluamos el equipo antes y después del servicio, realizamos
+              limpieza interna y externa, revisamos la refrigeración y ayudamos
+              a optimizar el sistema para prolongar su vida útil.
             </p>
-            <a class="button button-light" href="#soluciones">Conoce cómo podemos ayudarte <span aria-hidden="true">↗</span></a>
+            <a class="button button-light" href="#contacto">Consulta por mantenimiento <span aria-hidden="true">↗</span></a>
           </div>
           <div class="service-list">
             <article class="service-item">
               <span class="service-number">01</span>
-              <div><h3>Asesoría personalizada</h3><p>Encuentra el equipo y la solución que mejor se adaptan a ti.</p></div>
+              <div><h3>Diagnóstico y pruebas</h3><p>Revisamos encendido, pantalla, teclado, puertos, conectividad, batería, almacenamiento y temperaturas.</p></div>
               <span class="service-arrow" aria-hidden="true">↗</span>
             </article>
             <article class="service-item">
               <span class="service-number">02</span>
-              <div><h3>Configuración y puesta en marcha</h3><p>Dejamos tu tecnología lista para empezar desde el primer día.</p></div>
+              <div><h3>Limpieza interna y externa</h3><p>Limpieza cuidadosa de componentes, ventiladores, disipadores, pantalla, teclado, puertos y carcasa.</p></div>
               <span class="service-arrow" aria-hidden="true">↗</span>
             </article>
             <article class="service-item">
               <span class="service-number">03</span>
-              <div><h3>Soporte tecnológico</h3><p>Un equipo a tu lado para resolver dudas y mantener todo en marcha.</p></div>
+              <div><h3>Refrigeración y sistema</h3><p>Revisión del sistema térmico y optimización de archivos, inicio, actualizaciones y controladores.</p></div>
+              <span class="service-arrow" aria-hidden="true">↗</span>
+            </article>
+            <article class="service-item">
+              <span class="service-number">04</span>
+              <div><h3>Ensamblaje y verificación final</h3><p>Volvemos a comprobar las funciones principales y el rendimiento general del equipo.</p></div>
               <span class="service-arrow" aria-hidden="true">↗</span>
             </article>
           </div>
+          <p class="service-disclaimer">
+            El procedimiento se adapta al modelo y a su arquitectura. La renovación
+            de pasta térmica o thermal pads se realiza cuando corresponde; los
+            repuestos y reparaciones se cotizan por separado.
+          </p>
         </div>
       </section>
 
@@ -286,14 +326,40 @@
     </main>
 
     <footer class="site-footer">
-      <a class="brand footer-brand" href="#inicio" aria-label="Sheep Store, volver al inicio">
-        <img class="brand-mark" src="assets/logo.png" alt="" />
-        <span class="brand-name">sheep<span>store</span></span>
-      </a>
+      <div class="brand footer-brand">
+        <button class="brand-game-trigger" type="button" data-game-launch aria-label="Escuchar el balido y jugar con Sheep Store" title="Juega con Sheep Store">
+          <img class="brand-mark" src="assets/logo.png" alt="" />
+        </button>
+        <a class="brand-home" href="#inicio" aria-label="Sheep Store, volver al inicio">
+          <span class="brand-name">sheep<span>store</span></span>
+        </a>
+      </div>
       <p>Tecnología con propósito. Hecha para ti.</p>
       <a class="footer-top" href="#inicio">Volver arriba ↑</a>
       <a class="footer-contact" href="#contacto">Contáctanos</a>
       <span class="footer-copy">© <span id="current-year"></span> Sheep Store</span>
     </footer>
+
+    <span class="visually-hidden game-launch-status" id="game-launch-status" role="status" aria-live="polite"></span>
+    <dialog class="sheep-game-dialog" id="sheep-game" aria-labelledby="sheep-game-title">
+      <div class="sheep-game-panel">
+        <div class="sheep-game-header">
+          <div>
+            <p class="eyebrow">Sheep Store arcade</p>
+            <h2 id="sheep-game-title">¡Corre, ovejita!</h2>
+          </div>
+          <button class="sheep-game-close" type="button" aria-label="Cerrar juego">×</button>
+        </div>
+        <p class="sheep-game-instructions">Pulsa espacio, ↑ o toca el juego para saltar los equipos.</p>
+        <div class="sheep-game-screen">
+          <canvas id="sheep-game-canvas" width="900" height="320" tabindex="0" role="img" aria-label="Juego de carrera: pulsa espacio o flecha arriba para que la oveja salte equipos"></canvas>
+        </div>
+        <div class="sheep-game-footer">
+          <p id="sheep-game-status" aria-live="polite">¡A correr!</p>
+          <p class="sheep-game-score">Puntos: <span id="sheep-game-score">0</span></p>
+          <button class="sheep-game-restart" id="sheep-game-restart" type="button" hidden>Volver a jugar</button>
+        </div>
+      </div>
+    </dialog>
   </body>
 </html>
