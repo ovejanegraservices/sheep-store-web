@@ -140,42 +140,51 @@
           <article class="product-card" data-category="servicios">
             <div class="product-art product-art-service">
               <span class="product-badge">SERVICIOS</span>
-              <div class="service-illustration" aria-hidden="true">
-                <span class="service-illustration-title">LAPTOP CARE</span>
-                <span class="service-illustration-row"><i>✓</i>Limpieza interna</span>
-                <span class="service-illustration-row"><i>✓</i>Revisión térmica</span>
-                <span class="service-illustration-row"><i>✓</i>Optimización</span>
-              </div>
+              <img class="maintenance-cover" src="assets/sheep-maintenance-cover.png" alt="Logo de Sheep Store en una escena tecnológica oscura" loading="lazy" decoding="async" />
+              <svg class="maintenance-screwdriver" viewBox="0 0 120 190" aria-hidden="true">
+                <defs>
+                  <linearGradient id="screwdriver-handle" x1="0" x2="1" y1="0" y2="1">
+                    <stop offset="0" stop-color="#f4f4f4" />
+                    <stop offset="0.48" stop-color="#aeb6bc" />
+                    <stop offset="1" stop-color="#626c75" />
+                  </linearGradient>
+                  <linearGradient id="screwdriver-shaft" x1="0" x2="1">
+                    <stop offset="0" stop-color="#6f8995" />
+                    <stop offset="0.5" stop-color="#effaff" />
+                    <stop offset="1" stop-color="#607c88" />
+                  </linearGradient>
+                </defs>
+                <path d="M92 13 76 52" fill="none" stroke="#d7f5ff" stroke-linecap="round" stroke-width="4" />
+                <path d="m76 52-28 68" fill="none" stroke="url(#screwdriver-shaft)" stroke-linecap="round" stroke-width="8" />
+                <path d="m45 113 10 5-6 14-13-6z" fill="#a8dcec" stroke="#e9fbff" stroke-width="2" />
+                <path d="m42 127-7-3-15 35 17 10 19-33-10-6z" fill="url(#screwdriver-handle)" stroke="#effaff" stroke-width="2" />
+                <path d="m27 152 12 7m-17 1 11 7" fill="none" stroke="#657782" stroke-linecap="round" stroke-width="3" />
+                <path d="m92 13 4-9m-4 9 8 3" fill="none" stroke="#e8fbff" stroke-linecap="round" stroke-width="3" />
+                <path d="m50 116 6-14" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2" opacity=".8" />
+              </svg>
+              <span class="maintenance-glint" aria-hidden="true"></span>
               <span class="art-index">04 / 05</span>
             </div>
             <div class="product-info">
-              <div><h3>Mantenimiento</h3><p>Limpieza profunda, revisión térmica y optimización para laptops.</p></div>
-              <a class="round-link" href="#servicios" aria-label="Conocer el mantenimiento preventivo">↗</a>
+              <div><h3>Servicios</h3><p>Reparación y mantenimiento para tus equipos.</p></div>
+              <button class="round-link" type="button" data-open-services aria-label="Abrir el menú de servicios">↗</button>
             </div>
           </article>
           <article class="product-card program-card" data-category="programas">
             <div class="product-art product-art-program">
               <span class="product-badge">PROGRAMAS</span>
-              <div class="program-window" aria-hidden="true">
-                <div class="program-window-bar"><i></i><i></i><i></i></div>
+              <button class="program-window" id="open-programs-folder" type="button" aria-haspopup="dialog" aria-controls="programs-dialog" aria-label="Abrir carpeta de programas">
+                <span class="program-window-bar" aria-hidden="true"><i></i><i></i><i></i></span>
                 <div class="program-mark">
                   <img src="assets/logo.png" alt="" />
                 </div>
-                <span class="program-window-caption">SHEEP CENTER</span>
-              </div>
+                <span class="program-window-caption">PROGRAMAS</span>
+              </button>
               <span class="art-index">01 / 01</span>
             </div>
             <div class="product-info program-info">
-              <div><h3>SHEEP CENTER</h3><p>Tu nuevo programa de Sheep Store para Windows.</p></div>
-              <a class="program-download" href="assets/programs/SHEEP_CENTER.exe" download="SHEEP_CENTER.exe" aria-label="Descargar SHEEP CENTER para Windows">
-                <span class="program-download-label">Descargar</span>
-                <span class="program-platform" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" focusable="false">
-                    <path d="M1 4.5 10 3.2v8.1H1V4.5Zm10.2-1.5L23 1v10.3H11.2V3Zm-10.2 9.5h9v8.2L1 19v-6.5Zm10.2 0H23v10.2l-11.8-1.7v-8.5Z" fill="currentColor"/>
-                  </svg>
-                  <span>Windows</span>
-                </span>
-              </a>
+              <div><h3>PROGRAMAS</h3><p>Abre la carpeta para ver las aplicaciones disponibles.</p></div>
+              <button class="program-folder-open" type="button" aria-haspopup="dialog" aria-controls="programs-dialog">Abrir <span aria-hidden="true">↗</span></button>
             </div>
           </article>
         </div>
@@ -313,16 +322,15 @@
       <section class="services-section" id="servicios">
         <div class="section services-inner">
           <div class="services-copy">
-            <p class="eyebrow">Cuidado integral para tu laptop</p>
-            <h2>Mantenimiento<br />para que <span>siga dando lo mejor.</span></h2>
+            <p class="eyebrow">Reparación y cuidado integral</p>
+            <h2>Servicios<br />para que <span>siga dando lo mejor.</span></h2>
             <p>
-              Evaluamos el equipo antes y después del servicio, realizamos
-              limpieza interna y externa, revisamos la refrigeración y ayudamos
-              a optimizar el sistema para prolongar su vida útil.
+              Te ayudamos con reparaciones y mantenimiento preventivo. Cuéntanos
+              qué necesita tu equipo y un asesor te orientará.
             </p>
             <div class="services-actions">
-              <a class="button button-light" href="#contacto">Consulta por mantenimiento <span aria-hidden="true">↗</span></a>
-              <a class="button button-light" href="assets/docs/mantenimiento-sheep-store.pdf" target="_blank" rel="noopener">Conoce más detalles <span aria-hidden="true">↗</span></a>
+              <button class="button button-light" type="button" data-open-services data-service-view="repair">Solicitar reparación <span aria-hidden="true">↗</span></button>
+              <button class="button button-light" type="button" data-open-services data-service-view="maintenance">Ver mantenimiento <span aria-hidden="true">↗</span></button>
             </div>
           </div>
           <div class="service-list">
@@ -441,6 +449,294 @@
           <p class="sheep-game-score">Puntos: <span id="sheep-game-score">0</span></p>
           <button class="sheep-game-restart" id="sheep-game-restart" type="button" hidden>Volver a jugar</button>
         </div>
+      </div>
+    </dialog>
+    <dialog class="programs-dialog" id="programs-dialog" aria-labelledby="programs-dialog-title">
+      <div class="programs-panel">
+        <div class="programs-header">
+          <div>
+            <p class="eyebrow">Sheep Store / Carpeta</p>
+            <h2 id="programs-dialog-title">Programas</h2>
+          </div>
+          <button class="programs-close" type="button" aria-label="Cerrar carpeta de programas">×</button>
+        </div>
+        <p class="programs-intro">15 programas disponibles. Las descargas de terceros te llevan al sitio oficial de cada desarrollador.</p>
+        <div class="program-list">
+          <article class="program-entry">
+            <div class="program-entry-icon" aria-hidden="true"><img src="assets/logo.png" alt="" /></div>
+            <div class="program-entry-info">
+              <h3>SHEEP CENTER</h3>
+              <p>Aplicación para Windows · Sheep Store</p>
+            </div>
+            <a class="program-download" href="assets/programs/SHEEP_CENTER.exe" download="SHEEP_CENTER.exe" aria-label="Descargar SHEEP CENTER para Windows">
+              <span class="program-download-label">Descargar</span>
+              <span class="program-platform" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                  <path d="M1 4.5 10 3.2v8.1H1V4.5Zm10.2-1.5L23 1v10.3H11.2V3Zm-10.2 9.5h9v8.2L1 19v-6.5Zm10.2 0H23v10.2l-11.8-1.7v-8.5Z" fill="currentColor"/>
+                </svg>
+                <span>Windows</span>
+              </span>
+            </a>
+          </article>
+          <article class="program-entry">
+            <div class="program-entry-icon" aria-hidden="true"><img src="assets/program-logos/battle-net.svg" alt="" /></div>
+            <div class="program-entry-info"><h3>Battle.net</h3><p>Launcher de Blizzard Entertainment</p></div>
+            <a class="program-download" href="https://download.battle.net/en-us/desktop" target="_blank" rel="noopener noreferrer" aria-label="Descargar Battle.net desde el sitio oficial">
+              <span class="program-download-label">Descargar</span><span class="program-platform" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M1 4.5 10 3.2v8.1H1V4.5Zm10.2-1.5L23 1v10.3H11.2V3Zm-10.2 9.5h9v8.2L1 19v-6.5Zm10.2 0H23v10.2l-11.8-1.7v-8.5Z" fill="currentColor"/></svg><span>Windows</span></span>
+            </a>
+          </article>
+          <article class="program-entry">
+            <div class="program-entry-icon" aria-hidden="true"><img src="assets/program-logos/brave.svg" alt="" /></div>
+            <div class="program-entry-info"><h3>Brave</h3><p>Navegador web</p></div>
+            <a class="program-download" href="https://brave.com/download/" target="_blank" rel="noopener noreferrer" aria-label="Descargar Brave desde el sitio oficial">
+              <span class="program-download-label">Descargar</span><span class="program-platform" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M1 4.5 10 3.2v8.1H1V4.5Zm10.2-1.5L23 1v10.3H11.2V3Zm-10.2 9.5h9v8.2L1 19v-6.5Zm10.2 0H23v10.2l-11.8-1.7v-8.5Z" fill="currentColor"/></svg><span>Windows</span></span>
+            </a>
+          </article>
+          <article class="program-entry">
+            <div class="program-entry-icon" aria-hidden="true"><img src="assets/program-logos/chrome.svg" alt="" /></div>
+            <div class="program-entry-info"><h3>Google Chrome</h3><p>Navegador web</p></div>
+            <a class="program-download" href="https://www.google.com/chrome/" target="_blank" rel="noopener noreferrer" aria-label="Descargar Google Chrome desde el sitio oficial">
+              <span class="program-download-label">Descargar</span><span class="program-platform" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M1 4.5 10 3.2v8.1H1V4.5Zm10.2-1.5L23 1v10.3H11.2V3Zm-10.2 9.5h9v8.2L1 19v-6.5Zm10.2 0H23v10.2l-11.8-1.7v-8.5Z" fill="currentColor"/></svg><span>Windows</span></span>
+            </a>
+          </article>
+          <article class="program-entry">
+            <div class="program-entry-icon" aria-hidden="true"><img src="assets/program-logos/duckduckgo.svg" alt="" /></div>
+            <div class="program-entry-info"><h3>DuckDuckGo</h3><p>Navegador privado</p></div>
+            <a class="program-download" href="https://duckduckgo.com/app" target="_blank" rel="noopener noreferrer" aria-label="Descargar DuckDuckGo desde el sitio oficial">
+              <span class="program-download-label">Descargar</span><span class="program-platform" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M1 4.5 10 3.2v8.1H1V4.5Zm10.2-1.5L23 1v10.3H11.2V3Zm-10.2 9.5h9v8.2L1 19v-6.5Zm10.2 0H23v10.2l-11.8-1.7v-8.5Z" fill="currentColor"/></svg><span>Windows</span></span>
+            </a>
+          </article>
+          <article class="program-entry">
+            <div class="program-entry-icon" aria-hidden="true"><img src="assets/program-logos/epic-games.svg" alt="" /></div>
+            <div class="program-entry-info"><h3>Epic Games Launcher</h3><p>Juegos y tienda digital</p></div>
+            <a class="program-download" href="https://store.epicgames.com/en-US/download" target="_blank" rel="noopener noreferrer" aria-label="Descargar Epic Games Launcher desde el sitio oficial">
+              <span class="program-download-label">Descargar</span><span class="program-platform" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M1 4.5 10 3.2v8.1H1V4.5Zm10.2-1.5L23 1v10.3H11.2V3Zm-10.2 9.5h9v8.2L1 19v-6.5Zm10.2 0H23v10.2l-11.8-1.7v-8.5Z" fill="currentColor"/></svg><span>Windows</span></span>
+            </a>
+          </article>
+          <article class="program-entry">
+            <div class="program-entry-icon" aria-hidden="true"><img src="assets/program-logos/firefox.svg" alt="" /></div>
+            <div class="program-entry-info"><h3>Mozilla Firefox</h3><p>Navegador web</p></div>
+            <a class="program-download" href="https://www.mozilla.org/firefox/new/" target="_blank" rel="noopener noreferrer" aria-label="Descargar Mozilla Firefox desde el sitio oficial">
+              <span class="program-download-label">Descargar</span><span class="program-platform" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M1 4.5 10 3.2v8.1H1V4.5Zm10.2-1.5L23 1v10.3H11.2V3Zm-10.2 9.5h9v8.2L1 19v-6.5Zm10.2 0H23v10.2l-11.8-1.7v-8.5Z" fill="currentColor"/></svg><span>Windows</span></span>
+            </a>
+          </article>
+          <article class="program-entry">
+            <div class="program-entry-icon" aria-hidden="true"><img src="assets/program-logos/opera-gx.svg" alt="" /></div>
+            <div class="program-entry-info"><h3>Opera GX</h3><p>Navegador para gaming</p></div>
+            <a class="program-download" href="https://www.opera.com/gx" target="_blank" rel="noopener noreferrer" aria-label="Descargar Opera GX desde el sitio oficial">
+              <span class="program-download-label">Descargar</span><span class="program-platform" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M1 4.5 10 3.2v8.1H1V4.5Zm10.2-1.5L23 1v10.3H11.2V3Zm-10.2 9.5h9v8.2L1 19v-6.5Zm10.2 0H23v10.2l-11.8-1.7v-8.5Z" fill="currentColor"/></svg><span>Windows</span></span>
+            </a>
+          </article>
+          <article class="program-entry">
+            <div class="program-entry-icon" aria-hidden="true"><img src="assets/program-logos/opera.svg" alt="" /></div>
+            <div class="program-entry-info"><h3>Opera</h3><p>Navegador web</p></div>
+            <a class="program-download" href="https://www.opera.com/download" target="_blank" rel="noopener noreferrer" aria-label="Descargar Opera desde el sitio oficial">
+              <span class="program-download-label">Descargar</span><span class="program-platform" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M1 4.5 10 3.2v8.1H1V4.5Zm10.2-1.5L23 1v10.3H11.2V3Zm-10.2 9.5h9v8.2L1 19v-6.5Zm10.2 0H23v10.2l-11.8-1.7v-8.5Z" fill="currentColor"/></svg><span>Windows</span></span>
+            </a>
+          </article>
+          <article class="program-entry">
+            <div class="program-entry-icon" aria-hidden="true"><img src="assets/program-logos/pale-moon.ico" alt="" /></div>
+            <div class="program-entry-info"><h3>Pale Moon</h3><p>Navegador web</p></div>
+            <a class="program-download" href="https://www.palemoon.org/download.shtml" target="_blank" rel="noopener noreferrer" aria-label="Descargar Pale Moon desde el sitio oficial">
+              <span class="program-download-label">Descargar</span><span class="program-platform" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M1 4.5 10 3.2v8.1H1V4.5Zm10.2-1.5L23 1v10.3H11.2V3Zm-10.2 9.5h9v8.2L1 19v-6.5Zm10.2 0H23v10.2l-11.8-1.7v-8.5Z" fill="currentColor"/></svg><span>Windows</span></span>
+            </a>
+          </article>
+          <article class="program-entry">
+            <div class="program-entry-icon" aria-hidden="true"><img src="assets/program-logos/gunbound-peru.png" alt="" /></div>
+            <div class="program-entry-info"><h3>GunBound Perú</h3><p>Sitio oficial del editor Softnyx</p></div>
+            <a class="program-download" href="https://www.softnyx.com/" target="_blank" rel="noopener noreferrer" aria-label="Visitar el sitio oficial de Softnyx para GunBound Perú">
+              <span class="program-download-label">Visitar</span><span class="program-platform program-publisher" aria-hidden="true"><span>Softnyx ↗</span></span>
+            </a>
+          </article>
+          <article class="program-entry">
+            <div class="program-entry-icon" aria-hidden="true"><img src="assets/program-logos/spotify.svg" alt="" /></div>
+            <div class="program-entry-info"><h3>Spotify</h3><p>Música y podcasts</p></div>
+            <a class="program-download" href="https://www.spotify.com/download/windows/" target="_blank" rel="noopener noreferrer" aria-label="Descargar Spotify desde el sitio oficial">
+              <span class="program-download-label">Descargar</span><span class="program-platform" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M1 4.5 10 3.2v8.1H1V4.5Zm10.2-1.5L23 1v10.3H11.2V3Zm-10.2 9.5h9v8.2L1 19v-6.5Zm10.2 0H23v10.2l-11.8-1.7v-8.5Z" fill="currentColor"/></svg><span>Windows</span></span>
+            </a>
+          </article>
+          <article class="program-entry">
+            <div class="program-entry-icon" aria-hidden="true"><img src="assets/program-logos/steam.svg" alt="" /></div>
+            <div class="program-entry-info"><h3>Steam</h3><p>Plataforma de juegos</p></div>
+            <a class="program-download" href="https://store.steampowered.com/about/" target="_blank" rel="noopener noreferrer" aria-label="Descargar Steam desde el sitio oficial">
+              <span class="program-download-label">Descargar</span><span class="program-platform" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M1 4.5 10 3.2v8.1H1V4.5Zm10.2-1.5L23 1v10.3H11.2V3Zm-10.2 9.5h9v8.2L1 19v-6.5Zm10.2 0H23v10.2l-11.8-1.7v-8.5Z" fill="currentColor"/></svg><span>Windows</span></span>
+            </a>
+          </article>
+          <article class="program-entry">
+            <div class="program-entry-icon" aria-hidden="true"><img src="assets/program-logos/tor-browser.svg" alt="" /></div>
+            <div class="program-entry-info"><h3>Tor Browser</h3><p>Navegador de The Tor Project</p></div>
+            <a class="program-download" href="https://www.torproject.org/download/" target="_blank" rel="noopener noreferrer" aria-label="Descargar Tor Browser desde el sitio oficial">
+              <span class="program-download-label">Descargar</span><span class="program-platform" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M1 4.5 10 3.2v8.1H1V4.5Zm10.2-1.5L23 1v10.3H11.2V3Zm-10.2 9.5h9v8.2L1 19v-6.5Zm10.2 0H23v10.2l-11.8-1.7v-8.5Z" fill="currentColor"/></svg><span>Windows</span></span>
+            </a>
+          </article>
+          <article class="program-entry">
+            <div class="program-entry-icon" aria-hidden="true"><img src="assets/program-logos/iobit.ico" alt="" /></div>
+            <div class="program-entry-info"><h3>Driver Booster</h3><p>Herramienta de actualización de drivers · IObit</p></div>
+            <a class="program-download" href="https://www.iobit.com/downloadcenter.php?product=driver-booster-free-new&amp;insur=en_db" target="_blank" rel="noopener noreferrer" aria-label="Descargar Driver Booster desde el sitio oficial de IObit">
+              <span class="program-download-label">Descargar</span><span class="program-platform" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M1 4.5 10 3.2v8.1H1V4.5Zm10.2-1.5L23 1v10.3H11.2V3Zm-10.2 9.5h9v8.2L1 19v-6.5Zm10.2 0H23v10.2l-11.8-1.7v-8.5Z" fill="currentColor"/></svg><span>Windows</span></span>
+            </a>
+          </article>
+        </div>
+      </div>
+    </dialog>
+    <dialog class="services-dialog" id="services-dialog" aria-labelledby="services-dialog-title">
+      <div class="services-panel">
+        <div class="programs-header">
+          <div>
+            <p class="eyebrow">Sheep Store / Atención técnica</p>
+            <h2 id="services-dialog-title">Servicios</h2>
+          </div>
+          <button class="programs-close services-close" type="button" aria-label="Cerrar servicios">×</button>
+        </div>
+        <p class="programs-intro">Elige el servicio que necesita tu equipo.</p>
+        <div class="service-menu" role="group" aria-label="Tipo de servicio">
+          <button class="service-menu-button" type="button" data-service-tab="repair" aria-controls="service-repair-panel" aria-pressed="false">
+            <span>01</span><strong>Reparación</strong><span aria-hidden="true">↗</span>
+          </button>
+          <button class="service-menu-button" type="button" data-service-tab="maintenance" aria-controls="service-maintenance-panel" aria-pressed="false">
+            <span>02</span><strong>Mantenimiento</strong><span aria-hidden="true">↗</span>
+          </button>
+        </div>
+        <section class="service-form-panel" id="service-repair-panel" aria-labelledby="service-repair-title" hidden>
+          <h3 id="service-repair-title">Cuéntanos qué le sucede</h3>
+          <p>Déjanos los detalles y un número para que un asesor pueda contactarte.</p>
+          <form class="service-request-form" id="repair-request-form">
+            <label for="repair-problem">Describe el problema</label>
+            <textarea id="repair-problem" name="problema" rows="4" required placeholder="Cuéntanos qué falla y cuándo comenzó..."></textarea>
+            <label for="repair-phone">Número de contacto <span class="required-indicator">(obligatorio)</span></label>
+            <input id="repair-phone" name="telefono" type="tel" autocomplete="tel" required placeholder="+51 999 999 999" />
+            <label for="repair-email">Correo electrónico de contacto <span class="required-indicator">(obligatorio)</span></label>
+            <input id="repair-email" name="correo_contacto" type="email" autocomplete="email" required placeholder="tu@correo.com" />
+            <label class="service-consent">
+              <input name="consentimiento" type="checkbox" required />
+              <span>Acepto que FormSubmit procese mi solicitud y datos de contacto para enviarlos a Sheep Store.</span>
+            </label>
+            <button class="service-submit" type="submit">Contactarme con un asesor <span aria-hidden="true">↗</span></button>
+            <p class="service-form-status" data-form-status role="status" aria-live="polite" hidden></p>
+          </form>
+          <p class="service-email-note">La solicitud se enviará a ovejanegraservices@gmail.com mediante FormSubmit. La primera vez, revisa el correo del negocio y confirma la activación del servicio.</p>
+        </section>
+        <section class="service-form-panel" id="service-maintenance-panel" aria-labelledby="service-maintenance-title" hidden>
+          <h3 id="service-maintenance-title">Mantenimiento preventivo</h3>
+          <p>Indica por separado cuántas laptops, PC y tarjetas gráficas necesitas atender.</p>
+          <form class="service-request-form" id="maintenance-request-form">
+            <div class="maintenance-quantities">
+              <div class="maintenance-quantity-field">
+                <label for="maintenance-laptop-quantity">Laptops <span>S/ 100 c/u</span></label>
+                <input id="maintenance-laptop-quantity" name="laptops" type="number" min="0" step="1" value="0" required inputmode="numeric" />
+              </div>
+              <div class="maintenance-quantity-field">
+                <label for="maintenance-pc-quantity">PC <span>S/ 100 c/u</span></label>
+                <input id="maintenance-pc-quantity" name="pc" type="number" min="0" step="1" value="0" required inputmode="numeric" />
+              </div>
+              <div class="maintenance-quantity-field">
+                <label for="maintenance-graphics-quantity">Gráficas <span>S/ 75 c/u</span></label>
+                <input id="maintenance-graphics-quantity" name="graficas" type="number" min="0" step="1" value="0" required inputmode="numeric" />
+              </div>
+            </div>
+            <p class="maintenance-price" aria-live="polite">Total estimado: <strong id="maintenance-total">S/ 0</strong></p>
+            <label for="maintenance-phone">Número de contacto <span class="required-indicator">(obligatorio)</span></label>
+            <input id="maintenance-phone" name="telefono" type="tel" autocomplete="tel" required placeholder="+51 999 999 999" />
+            <label for="maintenance-email">Correo electrónico de contacto <span class="required-indicator">(obligatorio)</span></label>
+            <input id="maintenance-email" name="correo_contacto" type="email" autocomplete="email" required placeholder="tu@correo.com" />
+            <label class="service-consent">
+              <input name="consentimiento" type="checkbox" required />
+              <span>Acepto que FormSubmit procese mi solicitud y datos de contacto para enviarlos a Sheep Store.</span>
+            </label>
+            <button class="service-submit" type="submit">Contactarme con un asesor <span aria-hidden="true">↗</span></button>
+            <p class="service-form-status" data-form-status role="status" aria-live="polite" hidden></p>
+          </form>
+          <button class="business-maintenance-button" id="open-business-maintenance" type="button">Mantenimiento para empresas <span aria-hidden="true">↗</span></button>
+          <p class="service-email-note">La solicitud se enviará a ovejanegraservices@gmail.com mediante FormSubmit. La primera vez, revisa el correo del negocio y confirma la activación del servicio.</p>
+        </section>
+      </div>
+    </dialog>
+    <dialog class="services-dialog business-maintenance-dialog" id="business-maintenance-dialog" aria-labelledby="business-maintenance-title">
+      <div class="services-panel">
+        <div class="programs-header">
+          <div>
+            <p class="eyebrow">Sheep Store / Empresas</p>
+            <h2 id="business-maintenance-title">Mantenimiento para empresas</h2>
+          </div>
+          <button class="programs-close business-maintenance-close" type="button" aria-label="Cerrar mantenimiento para empresas">×</button>
+        </div>
+        <p class="programs-intro">Conoce lo que incluye cada plan, elige la frecuencia y selecciona la cantidad de equipos para ver el precio.</p>
+        <section class="business-plans" aria-labelledby="business-plans-title">
+          <h3 id="business-plans-title">¿Qué incluye cada plan?</h3>
+          <div class="business-plan-cards">
+            <article class="business-plan-card">
+              <p class="business-plan-duration">3 meses</p>
+              <h4>Plan Trimestral</h4>
+              <ul>
+                <li>1 mantenimiento preventivo por equipo.</li>
+                <li>Limpieza interna y externa.</li>
+                <li>Limpieza de ventiladores y sistema de refrigeración.</li>
+                <li>Revisión de temperaturas.</li>
+                <li>Optimización de Windows.</li>
+                <li>Informe técnico por equipo.</li>
+              </ul>
+            </article>
+            <article class="business-plan-card">
+              <p class="business-plan-duration">6 meses</p>
+              <h4>Plan Semestral</h4>
+              <ul>
+                <li>2 mantenimientos preventivos por equipo.</li>
+                <li>Todos los servicios del plan trimestral.</li>
+                <li>Seguimiento del estado de los equipos.</li>
+              </ul>
+            </article>
+            <article class="business-plan-card">
+              <p class="business-plan-duration">12 meses</p>
+              <h4>Plan Anual</h4>
+              <ul>
+                <li>4 mantenimientos preventivos por equipo.</li>
+                <li>Todos los servicios anteriores.</li>
+                <li>Prioridad de atención técnica.</li>
+                <li>Historial técnico de los equipos.</li>
+                <li>Reporte anual del estado del parque informático.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+        <section class="business-pricing" aria-labelledby="business-pricing-title">
+          <h3 id="business-pricing-title">Precios por cantidad de equipos</h3>
+          <div class="business-pricing-scroll" tabindex="0" role="region" aria-label="Tabla de precios por plan y cantidad de equipos">
+            <table class="business-pricing-table">
+              <thead>
+                <tr><th scope="col">Cantidad de equipos</th><th scope="col">Trimestral</th><th scope="col">Semestral</th><th scope="col">Anual</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">5 a 10 equipos</th><td>S/ 450</td><td>S/ 850</td><td>S/ 1,600</td></tr>
+                <tr><th scope="row">11 a 20 equipos</th><td>S/ 850</td><td>S/ 1,600</td><td>S/ 3,000</td></tr>
+                <tr><th scope="row">21 a 30 equipos</th><td>S/ 1,200</td><td>S/ 2,300</td><td>S/ 4,300</td></tr>
+                <tr><th scope="row">31 a 50 equipos</th><td>S/ 1,900</td><td>S/ 3,600</td><td>S/ 6,800</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <form class="service-request-form business-request-form" id="business-maintenance-form">
+          <label for="business-plan">Plan de mantenimiento</label>
+          <select id="business-plan" name="plan" required>
+            <option value="" selected disabled>Selecciona un plan</option>
+            <option value="Trimestral">Trimestral</option>
+            <option value="Semestral">Semestral</option>
+            <option value="Anual">Anual</option>
+          </select>
+          <label for="business-quantity">Cantidad de equipos (5 a 50)</label>
+          <input id="business-quantity" name="cantidad" type="number" min="5" max="50" step="1" required inputmode="numeric" placeholder="Ej.: 8" />
+          <p class="business-price-quote" id="business-price-quote" aria-live="polite">Selecciona un plan y la cantidad de equipos para ver el precio.</p>
+          <label for="business-phone">Número de contacto <span class="required-indicator">(obligatorio)</span></label>
+          <input id="business-phone" name="telefono" type="tel" autocomplete="tel" required placeholder="+51 999 999 999" />
+          <label for="business-email">Correo electrónico de contacto <span class="required-indicator">(obligatorio)</span></label>
+          <input id="business-email" name="correo_contacto" type="email" autocomplete="email" required placeholder="tu@correo.com" />
+          <label class="service-consent">
+            <input name="consentimiento" type="checkbox" required />
+            <span>Acepto que FormSubmit procese mi solicitud y datos de contacto para enviarlos a Sheep Store.</span>
+          </label>
+          <button class="service-submit" type="submit">Solicitar plan y contactar con un asesor <span aria-hidden="true">↗</span></button>
+          <p class="service-form-status" data-form-status role="status" aria-live="polite" hidden></p>
+        </form>
+        <p class="service-email-note">La solicitud se enviará a ovejanegraservices@gmail.com mediante FormSubmit. La primera vez, revisa el correo del negocio y confirma la activación del servicio.</p>
       </div>
     </dialog>
   </body>

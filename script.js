@@ -768,6 +768,292 @@ categoryTabs.forEach((tab) => {
   });
 });
 
+const programsDialog = document.querySelector("#programs-dialog");
+const programsFolderButtons = document.querySelectorAll("[aria-controls='programs-dialog']");
+const programsDialogClose = document.querySelector(".programs-close");
+
+if (
+  programsDialog instanceof HTMLDialogElement &&
+  programsFolderButtons.length &&
+  programsDialogClose instanceof HTMLButtonElement
+) {
+  programsFolderButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      if (!programsDialog.open) programsDialog.showModal();
+    });
+  });
+
+  programsDialogClose.addEventListener("click", () => programsDialog.close());
+  programsDialog.addEventListener("click", (event) => {
+    if (event.target === programsDialog) programsDialog.close();
+  });
+}
+
+const servicesDialog = document.querySelector("#services-dialog");
+const businessMaintenanceDialog = document.querySelector("#business-maintenance-dialog");
+const serviceOpenButtons = document.querySelectorAll("[data-open-services]");
+const serviceTabButtons = document.querySelectorAll("[data-service-tab]");
+const serviceRepairPanel = document.querySelector("#service-repair-panel");
+const serviceMaintenancePanel = document.querySelector("#service-maintenance-panel");
+const businessMaintenanceButton = document.querySelector("#open-business-maintenance");
+const serviceEmail = "ovejanegraservices@gmail.com";
+const serviceFormEndpoint = `https://formsubmit.co/ajax/${serviceEmail}`;
+
+const submitServiceRequest = async (form, subject, message, onSuccess = () => {}) => {
+  const status = form.querySelector("[data-form-status]");
+  const submitButton = form.querySelector("button[type='submit']");
+  if (!(status instanceof HTMLElement) || !(submitButton instanceof HTMLButtonElement)) {
+    throw new Error("No se encontró el estado del formulario o su botón de envío.");
+  }
+
+  status.hidden = false;
+  status.textContent = "Enviando tu solicitud…";
+  status.classList.remove("is-error");
+  submitButton.disabled = true;
+
+  try {
+    const response = await fetch(serviceFormEndpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ _subject: subject, message }),
+    });
+    const result = await response.json();
+
+    if (!response.ok || String(result.success).toLowerCase() !== "true") {
+      throw new Error(
+        typeof result.message === "string"
+          ? result.message
+          : "El servicio de correo no aceptó la solicitud."
+      );
+    }
+
+    status.textContent = "FormSubmit aceptó la solicitud. Si es el primer envío, confirma el correo de activación enviado al negocio.";
+    onSuccess();
+  } catch (error) {
+    status.classList.add("is-error");
+    status.textContent = error instanceof Error
+      ? `No se pudo enviar la solicitud: ${error.message} Revisa tu conexión e inténtalo nuevamente.`
+      : "No se pudo enviar la solicitud. Revisa tu conexión e inténtalo nuevamente.";
+  } finally {
+    submitButton.disabled = false;
+  }
+};
+
+if (
+  servicesDialog instanceof HTMLDialogElement &&
+  businessMaintenanceDialog instanceof HTMLDialogElement &&
+  serviceRepairPanel instanceof HTMLElement &&
+  serviceMaintenancePanel instanceof HTMLElement
+) {
+  const setServiceView = (view = "") => {
+    const showRepair = view === "repair";
+    const showMaintenance = view === "maintenance";
+    serviceRepairPanel.hidden = !showRepair;
+    serviceMaintenancePanel.hidden = !showMaintenance;
+    serviceTabButtons.forEach((button) => {
+      button.setAttribute("aria-pressed", String(button.dataset.serviceTab === view));
+    });
+  };
+
+  serviceOpenButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      setServiceView(button.dataset.serviceView || "");
+      if (!servicesDialog.open) servicesDialog.showModal();
+    });
+  });
+
+  serviceTabButtons.forEach((button) => {
+    button.addEventListener("click", () => setServiceView(button.dataset.serviceTab || ""));
+  });
+
+  const servicesClose = servicesDialog.querySelector(".services-close");
+  servicesClose?.addEventListener("click", () => servicesDialog.close());
+  servicesDialog.addEventListener("click", (event) => {
+    if (event.target === servicesDialog) servicesDialog.close();
+  });
+
+  if (businessMaintenanceButton instanceof HTMLButtonElement) {
+    businessMaintenanceButton.addEventListener("click", () => {
+      if (!businessMaintenanceDialog.open) businessMaintenanceDialog.showModal();
+    });
+  }
+
+  const businessMaintenanceClose = businessMaintenanceDialog.querySelector(".business-maintenance-close");
+  businessMaintenanceClose?.addEventListener("click", () => businessMaintenanceDialog.close());
+  businessMaintenanceDialog.addEventListener("click", (event) => {
+    if (event.target === businessMaintenanceDialog) businessMaintenanceDialog.close();
+  });
+
+  const repairForm = document.querySelector("#repair-request-form");
+  repairForm?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (!(repairForm instanceof HTMLFormElement)) return;
+    const formData = new FormData(repairForm);
+    const problem = String(formData.get("problema") || "").trim();
+    const phone = String(formData.get("telefono") || "").trim();
+    const email = String(formData.get("correo_contacto") || "").trim();
+    const body = [
+      "Solicitud de reparación",
+      "",
+      `Problema: ${problem}`,
+      `Número de contacto: ${phone}`,
+      `Correo electrónico de contacto: ${email}`,
+    ].join("\n");
+    void submitServiceRequest(repairForm, "Solicitud de reparación - Sheep Store", body);
+  });
+
+  const maintenanceQuantityInputs = [
+    document.querySelector("#maintenance-laptop-quantity"),
+    document.querySelector("#maintenance-pc-quantity"),
+    document.querySelector("#maintenance-graphics-quantity"),
+  ];
+  const maintenanceQuantityNames = ["laptops", "pc", "graficas"];
+  const maintenanceTotal = document.querySelector("#maintenance-total");
+  const maintenancePrices = [100, 100, 75];
+  const maintenanceLabels = ["Laptops", "PC", "Tarjetas gráficas"];
+  const updateMaintenanceTotal = () => {
+    if (
+      maintenanceQuantityInputs.some((input) => !(input instanceof HTMLInputElement)) ||
+      !maintenanceTotal
+    ) return;
+    const quantities = maintenanceQuantityInputs.map((input) =>
+      input instanceof HTMLInputElement ? Number(input.value) : Number.NaN
+    );
+    const lineTotals = quantities.map((quantity, index) => quantity * maintenancePrices[index]);
+    const total = lineTotals.reduce((sum, lineTotal) => sum + lineTotal, 0);
+    maintenanceQuantityInputs.forEach((input, index) => {
+      if (!(input instanceof HTMLInputElement)) return;
+      input.setCustomValidity(
+        Number.isSafeInteger(quantities[index]) && quantities[index] >= 0
+          ? ""
+          : "Ingresa un número entero igual o mayor que cero."
+      );
+    });
+    maintenanceTotal.textContent = Number.isSafeInteger(total)
+      ? `S/ ${total.toLocaleString("es-PE")}`
+      : "—";
+  };
+
+  maintenanceQuantityInputs.forEach((input) => input?.addEventListener("input", updateMaintenanceTotal));
+  updateMaintenanceTotal();
+
+  const maintenanceForm = document.querySelector("#maintenance-request-form");
+  maintenanceForm?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (!(maintenanceForm instanceof HTMLFormElement)) return;
+    const formData = new FormData(maintenanceForm);
+    const quantities = maintenanceQuantityNames.map((name) => Number(formData.get(name)));
+    const total = quantities.reduce((sum, quantity, index) => sum + quantity * maintenancePrices[index], 0);
+    const phone = String(formData.get("telefono") || "").trim();
+    const email = String(formData.get("correo_contacto") || "").trim();
+    const body = [
+      "Solicitud de mantenimiento preventivo",
+      "",
+      ...quantities.map((quantity, index) =>
+        `${maintenanceLabels[index]}: ${quantity} × S/ ${maintenancePrices[index]} = S/ ${(quantity * maintenancePrices[index]).toLocaleString("es-PE")}`
+      ),
+      `Total estimado: S/ ${total.toLocaleString("es-PE")}`,
+      `Número de contacto: ${phone}`,
+      `Correo electrónico de contacto: ${email}`,
+    ].join("\n");
+    void submitServiceRequest(
+      maintenanceForm,
+      "Solicitud de mantenimiento - Sheep Store",
+      body,
+      () => {
+        maintenanceForm.reset();
+        updateMaintenanceTotal();
+      }
+    );
+  });
+
+  const businessMaintenanceForm = document.querySelector("#business-maintenance-form");
+  const businessPlan = document.querySelector("#business-plan");
+  const businessQuantity = document.querySelector("#business-quantity");
+  const businessPriceQuote = document.querySelector("#business-price-quote");
+  const businessPlanPrices = {
+    Trimestral: [450, 850, 1200, 1900],
+    Semestral: [850, 1600, 2300, 3600],
+    Anual: [1600, 3000, 4300, 6800],
+  };
+  const businessQuantityRanges = [
+    { max: 10, label: "5 a 10 equipos", index: 0 },
+    { max: 20, label: "11 a 20 equipos", index: 1 },
+    { max: 30, label: "21 a 30 equipos", index: 2 },
+    { max: 50, label: "31 a 50 equipos", index: 3 },
+  ];
+  const updateBusinessQuote = () => {
+    if (
+      !(businessPlan instanceof HTMLSelectElement) ||
+      !(businessQuantity instanceof HTMLInputElement) ||
+      !businessPriceQuote
+    ) return;
+
+    const quantity = Number(businessQuantity.value);
+    const range = businessQuantityRanges.find((item) => quantity >= 5 && quantity <= item.max);
+    const prices = businessPlanPrices[businessPlan.value];
+    businessQuantity.setCustomValidity(
+      businessQuantity.value !== "" && Number.isSafeInteger(quantity) && range
+        ? ""
+        : "Ingresa una cantidad entera entre 5 y 50 equipos."
+    );
+
+    if (!businessPlan.value || !range || !prices) {
+      businessPriceQuote.textContent = businessQuantity.value && !range
+        ? "Los precios disponibles aplican de 5 a 50 equipos."
+        : "Selecciona un plan y la cantidad de equipos para ver el precio.";
+      return;
+    }
+
+    businessPriceQuote.textContent =
+      `${range.label} · Plan ${businessPlan.value}: S/ ${prices[range.index].toLocaleString("es-PE")}`;
+  };
+
+  businessPlan?.addEventListener("change", updateBusinessQuote);
+  businessQuantity?.addEventListener("input", updateBusinessQuote);
+  updateBusinessQuote();
+
+  businessMaintenanceForm?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (
+      !(businessMaintenanceForm instanceof HTMLFormElement) ||
+      !(businessPlan instanceof HTMLSelectElement) ||
+      !(businessQuantity instanceof HTMLInputElement)
+    ) return;
+    const formData = new FormData(businessMaintenanceForm);
+    const plan = String(formData.get("plan") || "");
+    const quantity = Number(formData.get("cantidad"));
+    const range = businessQuantityRanges.find((item) => quantity >= 5 && quantity <= item.max);
+    const prices = businessPlanPrices[plan];
+    if (!range || !prices) {
+      businessPriceQuote?.scrollIntoView({ behavior: "smooth", block: "center" });
+      businessPlan.focus();
+      return;
+    }
+    const price = prices[range.index];
+    const phone = String(formData.get("telefono") || "").trim();
+    const email = String(formData.get("correo_contacto") || "").trim();
+    const body = [
+      "Solicitud de mantenimiento por equipos para empresa",
+      "",
+      `Plan de interés: ${plan}`,
+      `Cantidad de equipos: ${quantity} (${range.label})`,
+      `Precio del plan: S/ ${price.toLocaleString("es-PE")}`,
+      "Solicito contactarme con un asesor para coordinar el pago del plan de mantenimiento.",
+      `Número de contacto: ${phone}`,
+      `Correo electrónico de contacto: ${email}`,
+    ].join("\n");
+    void submitServiceRequest(
+      businessMaintenanceForm,
+      "Mantenimiento por equipos para empresa - Sheep Store",
+      body
+    );
+  });
+}
+
 if (currentYear) {
   currentYear.textContent = String(new Date().getFullYear());
 }
