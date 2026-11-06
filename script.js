@@ -797,9 +797,9 @@ const serviceRepairPanel = document.querySelector("#service-repair-panel");
 const serviceMaintenancePanel = document.querySelector("#service-maintenance-panel");
 const businessMaintenanceButton = document.querySelector("#open-business-maintenance");
 const serviceEmail = "ovejanegraservices@gmail.com";
-const serviceFormEndpoint = `https://formsubmit.co/ajax/${serviceEmail}`;
+const serviceFormEndpoint = `https://formsubmit.co/${serviceEmail}`;
 
-const submitServiceRequest = async (form, subject, message, onSuccess = () => {}) => {
+const submitServiceRequest = (form, subject, message, replyTo) => {
   const status = form.querySelector("[data-form-status]");
   const submitButton = form.querySelector("button[type='submit']");
   if (!(status instanceof HTMLElement) || !(submitButton instanceof HTMLButtonElement)) {
@@ -807,37 +807,38 @@ const submitServiceRequest = async (form, subject, message, onSuccess = () => {}
   }
 
   status.hidden = false;
-  status.textContent = "Enviando tu solicitud…";
+  status.textContent = "Enviando tu solicitud a FormSubmit…";
   status.classList.remove("is-error");
   submitButton.disabled = true;
 
   try {
-    const response = await fetch(serviceFormEndpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({ _subject: subject, message }),
+    const submission = document.createElement("form");
+    submission.method = "POST";
+    submission.action = serviceFormEndpoint;
+    submission.target = "_self";
+    submission.hidden = true;
+
+    const fields = {
+      _subject: subject,
+      _replyto: replyTo,
+      message,
+    };
+
+    Object.entries(fields).forEach(([name, value]) => {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = name;
+      input.value = value;
+      submission.append(input);
     });
-    const result = await response.json();
 
-    if (!response.ok || String(result.success).toLowerCase() !== "true") {
-      throw new Error(
-        typeof result.message === "string"
-          ? result.message
-          : "El servicio de correo no aceptó la solicitud."
-      );
-    }
-
-    status.textContent = "FormSubmit aceptó la solicitud. Si es el primer envío, confirma el correo de activación enviado al negocio.";
-    onSuccess();
+    document.body.append(submission);
+    HTMLFormElement.prototype.submit.call(submission);
   } catch (error) {
     status.classList.add("is-error");
     status.textContent = error instanceof Error
       ? `No se pudo enviar la solicitud: ${error.message} Revisa tu conexión e inténtalo nuevamente.`
       : "No se pudo enviar la solicitud. Revisa tu conexión e inténtalo nuevamente.";
-  } finally {
     submitButton.disabled = false;
   }
 };
@@ -902,7 +903,12 @@ if (
       `Número de contacto: ${phone}`,
       `Correo electrónico de contacto: ${email}`,
     ].join("\n");
-    void submitServiceRequest(repairForm, "Solicitud de reparación - Sheep Store", body);
+    void submitServiceRequest(
+      repairForm,
+      "Solicitud de reparación - Sheep Store",
+      body,
+      String(formData.get("correo_contacto") || "").trim()
+    );
   });
 
   const maintenanceQuantityInputs = [
@@ -963,10 +969,7 @@ if (
       maintenanceForm,
       "Solicitud de mantenimiento - Sheep Store",
       body,
-      () => {
-        maintenanceForm.reset();
-        updateMaintenanceTotal();
-      }
+      String(formData.get("correo_contacto") || "").trim()
     );
   });
 
@@ -1049,7 +1052,8 @@ if (
     void submitServiceRequest(
       businessMaintenanceForm,
       "Mantenimiento por equipos para empresa - Sheep Store",
-      body
+      body,
+      email
     );
   });
 }
