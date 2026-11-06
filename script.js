@@ -327,6 +327,55 @@ if (mainNav) {
   });
 }
 
+const wallpaperMainImage = document.querySelector("#wallpaper-main-image");
+const wallpaperMainTitle = document.querySelector("#wallpaper-main-title");
+const wallpaperMainDescription = document.querySelector("#wallpaper-main-description");
+const wallpaperMainCount = document.querySelector("#wallpaper-main-count");
+const wallpaperMainDownload = document.querySelector("#wallpaper-main-download");
+const wallpaperThumbs = document.querySelectorAll("[data-wallpaper-thumb]");
+
+if (
+  wallpaperMainImage instanceof HTMLImageElement &&
+  wallpaperMainTitle &&
+  wallpaperMainDescription &&
+  wallpaperMainCount &&
+  wallpaperMainDownload instanceof HTMLAnchorElement &&
+  wallpaperThumbs.length
+) {
+  wallpaperThumbs.forEach((thumb, index) => {
+    thumb.addEventListener("click", () => {
+      const { src, alt, title, description, download } = thumb.dataset;
+      if (!src || !alt || !title || !description || !download) {
+        console.error("Faltan datos para mostrar el fondo seleccionado.");
+        return;
+      }
+
+      wallpaperThumbs.forEach((item) => {
+        const isSelected = item === thumb;
+        item.classList.toggle("is-active", isSelected);
+        item.setAttribute("aria-pressed", String(isSelected));
+      });
+
+      wallpaperMainImage.classList.remove("is-changing");
+      void wallpaperMainImage.offsetWidth;
+      wallpaperMainImage.src = src;
+      wallpaperMainImage.alt = alt;
+      wallpaperMainImage.classList.add("is-changing");
+      wallpaperMainTitle.textContent = title;
+      wallpaperMainDescription.textContent = description;
+      wallpaperMainCount.textContent = `FONDO ${String(index + 1).padStart(2, "0")} / ${String(wallpaperThumbs.length).padStart(2, "0")}`;
+      wallpaperMainDownload.href = src;
+      wallpaperMainDownload.download = download;
+      wallpaperMainDownload.setAttribute("aria-label", `Descargar fondo ${title}`);
+      thumb.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        block: "nearest",
+        inline: "center",
+      });
+    });
+  });
+}
+
 const gameLaunchers = document.querySelectorAll("[data-game-launch]");
 const gameDialog = document.querySelector("#sheep-game");
 const gameCanvas = document.querySelector("#sheep-game-canvas");

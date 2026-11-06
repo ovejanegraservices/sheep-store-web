@@ -9,6 +9,12 @@
       content="Sheep Store: tecnología, servicios y fondos de pantalla gratuitos para personalizar tus dispositivos."
     />
     <title>Sheep Store — Tecnología con propósito</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
   </head>
@@ -161,77 +167,54 @@
               para computadora o celular.
             </p>
           </div>
-          <div class="wallpaper-grid">
-            <article class="wallpaper-card wallpaper-card-featured">
-              <a class="wallpaper-preview" href="assets/wallpapers/sheep-gamer.gif" target="_blank" rel="noopener" aria-label="Ver fondo animado Sheep Gamer">
-                <img src="assets/wallpapers/sheep-gamer.gif" alt="Animación de Sheep Store jugando en una computadora" loading="lazy" decoding="async" />
-                <span class="wallpaper-open" aria-hidden="true">↗</span>
-              </a>
-              <div class="wallpaper-info">
-                <div><h3>Sheep Gamer</h3><p>Fondo animado · GIF</p></div>
-                <a class="wallpaper-download" href="assets/wallpapers/sheep-gamer.gif" download="sheep-store-gamer.gif" aria-label="Descargar fondo animado Sheep Gamer">↓</a>
+          <div class="wallpaper-gallery" id="wallpaper-gallery">
+            <div class="wallpaper-main">
+              <img
+                class="wallpaper-main-image"
+                id="wallpaper-main-image"
+                src="assets/wallpapers/sheep-gamer.gif"
+                alt="Animación de Sheep Store jugando en una computadora"
+                decoding="async"
+              />
+              <div class="wallpaper-main-shade" aria-hidden="true"></div>
+              <div class="wallpaper-main-info" aria-live="polite">
+                <div>
+                  <p class="wallpaper-main-count" id="wallpaper-main-count">FONDO 01 / 07</p>
+                  <h3 id="wallpaper-main-title">Sheep Gamer</h3>
+                  <p id="wallpaper-main-description">Fondo animado · GIF</p>
+                </div>
+                <a
+                  class="wallpaper-main-download"
+                  id="wallpaper-main-download"
+                  href="assets/wallpapers/sheep-gamer.gif"
+                  download="sheep-store-gamer.gif"
+                  aria-label="Descargar fondo Sheep Gamer"
+                >↓ <span>Descargar</span></a>
               </div>
-            </article>
-            <article class="wallpaper-card">
-              <a class="wallpaper-preview" href="assets/wallpapers/sheep-neon.png" target="_blank" rel="noopener" aria-label="Ver fondo Sheep Store Neón">
-                <img src="assets/wallpapers/sheep-neon.png" alt="Logo de Sheep Store con luces neón cian y violetas" loading="lazy" decoding="async" />
-                <span class="wallpaper-open" aria-hidden="true">↗</span>
-              </a>
-              <div class="wallpaper-info">
-                <div><h3>Neón</h3><p>Vibrante y futurista</p></div>
-                <a class="wallpaper-download" href="assets/wallpapers/sheep-neon.png" download="sheep-store-neon.png" aria-label="Descargar fondo Neón">↓</a>
-              </div>
-            </article>
-            <article class="wallpaper-card">
-              <a class="wallpaper-preview" href="assets/wallpapers/sheep-gold.jpg" target="_blank" rel="noopener" aria-label="Ver fondo Sheep Store Dorado">
-                <img src="assets/wallpapers/sheep-gold.jpg" alt="Logo de Sheep Store en dorado sobre fondo negro" loading="lazy" decoding="async" />
-                <span class="wallpaper-open" aria-hidden="true">↗</span>
-              </a>
-              <div class="wallpaper-info">
-                <div><h3>Dorado</h3><p>Un toque elegante</p></div>
-                <a class="wallpaper-download" href="assets/wallpapers/sheep-gold.jpg" download="sheep-store-dorado.jpg" aria-label="Descargar fondo Dorado">↓</a>
-              </div>
-            </article>
-            <article class="wallpaper-card">
-              <a class="wallpaper-preview" href="assets/wallpapers/sheep-dark.png" target="_blank" rel="noopener" aria-label="Ver fondo Sheep Store Oscuro">
-                <img src="assets/wallpapers/sheep-dark.png" alt="Logo de Sheep Store en un fondo oscuro con patrón tecnológico sutil" loading="lazy" decoding="async" />
-                <span class="wallpaper-open" aria-hidden="true">↗</span>
-              </a>
-              <div class="wallpaper-info">
-                <div><h3>Oscuro</h3><p>Discreto y minimalista</p></div>
-                <a class="wallpaper-download" href="assets/wallpapers/sheep-dark.png" download="sheep-store-oscuro.png" aria-label="Descargar fondo Oscuro">↓</a>
-              </div>
-            </article>
-            <article class="wallpaper-card">
-              <a class="wallpaper-preview" href="assets/wallpapers/sheep-neon-tech.png" target="_blank" rel="noopener" aria-label="Ver fondo Sheep Store Gamer">
-                <img src="assets/wallpapers/sheep-neon-tech.png" alt="Logo de Sheep Store con iluminación neón estilo gamer" loading="lazy" decoding="async" />
-                <span class="wallpaper-open" aria-hidden="true">↗</span>
-              </a>
-              <div class="wallpaper-info">
-                <div><h3>Gamer</h3><p>Color y energía</p></div>
-                <a class="wallpaper-download" href="assets/wallpapers/sheep-neon-tech.png" download="sheep-store-gamer.png" aria-label="Descargar fondo Gamer">↓</a>
-              </div>
-            </article>
-            <article class="wallpaper-card">
-              <a class="wallpaper-preview" href="assets/wallpapers/sheep-circuit.png" target="_blank" rel="noopener" aria-label="Ver fondo Sheep Store Circuitos">
-                <img src="assets/wallpapers/sheep-circuit.png" alt="Logo de Sheep Store rodeado de circuitos y detalles tecnológicos" loading="lazy" decoding="async" />
-                <span class="wallpaper-open" aria-hidden="true">↗</span>
-              </a>
-              <div class="wallpaper-info">
-                <div><h3>Circuitos</h3><p>Inspiración tecnológica</p></div>
-                <a class="wallpaper-download" href="assets/wallpapers/sheep-circuit.png" download="sheep-store-circuitos.png" aria-label="Descargar fondo Circuitos">↓</a>
-              </div>
-            </article>
-            <article class="wallpaper-card">
-              <a class="wallpaper-preview" href="assets/wallpapers/sheep-monochrome.png" target="_blank" rel="noopener" aria-label="Ver fondo Sheep Store Monocromo">
-                <img src="assets/wallpapers/sheep-monochrome.png" alt="Logo blanco de Sheep Store sobre fondo negro" loading="lazy" decoding="async" />
-                <span class="wallpaper-open" aria-hidden="true">↗</span>
-              </a>
-              <div class="wallpaper-info">
-                <div><h3>Monocromo</h3><p>Negro, blanco y Sheep</p></div>
-                <a class="wallpaper-download" href="assets/wallpapers/sheep-monochrome.png" download="sheep-store-monocromo.png" aria-label="Descargar fondo Monocromo">↓</a>
-              </div>
-            </article>
+            </div>
+            <div class="wallpaper-strip" role="group" aria-label="Elige un fondo de pantalla">
+              <button class="wallpaper-thumb is-active" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-gamer.gif" data-alt="Animación de Sheep Store jugando en una computadora" data-title="Sheep Gamer" data-description="Fondo animado · GIF" data-download="sheep-store-gamer.gif" aria-pressed="true" aria-label="Mostrar fondo Sheep Gamer">
+                <img src="assets/wallpapers/sheep-gamer.gif" alt="" loading="lazy" decoding="async" /><span>Sheep Gamer</span>
+              </button>
+              <button class="wallpaper-thumb" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-neon.png" data-alt="Logo de Sheep Store con luces neón cian y violetas" data-title="Neón" data-description="Vibrante y futurista" data-download="sheep-store-neon.png" aria-pressed="false" aria-label="Mostrar fondo Neón">
+                <img src="assets/wallpapers/sheep-neon.png" alt="" loading="lazy" decoding="async" /><span>Neón</span>
+              </button>
+              <button class="wallpaper-thumb" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-gold.jpg" data-alt="Logo de Sheep Store en dorado sobre fondo negro" data-title="Dorado" data-description="Un toque elegante" data-download="sheep-store-dorado.jpg" aria-pressed="false" aria-label="Mostrar fondo Dorado">
+                <img src="assets/wallpapers/sheep-gold.jpg" alt="" loading="lazy" decoding="async" /><span>Dorado</span>
+              </button>
+              <button class="wallpaper-thumb" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-dark.png" data-alt="Logo de Sheep Store en un fondo oscuro con patrón tecnológico sutil" data-title="Oscuro" data-description="Discreto y minimalista" data-download="sheep-store-oscuro.png" aria-pressed="false" aria-label="Mostrar fondo Oscuro">
+                <img src="assets/wallpapers/sheep-dark.png" alt="" loading="lazy" decoding="async" /><span>Oscuro</span>
+              </button>
+              <button class="wallpaper-thumb" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-neon-tech.png" data-alt="Logo de Sheep Store con iluminación neón estilo gamer" data-title="Gamer" data-description="Color y energía" data-download="sheep-store-gamer.png" aria-pressed="false" aria-label="Mostrar fondo Gamer">
+                <img src="assets/wallpapers/sheep-neon-tech.png" alt="" loading="lazy" decoding="async" /><span>Gamer</span>
+              </button>
+              <button class="wallpaper-thumb" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-circuit.png" data-alt="Logo de Sheep Store rodeado de circuitos y detalles tecnológicos" data-title="Circuitos" data-description="Inspiración tecnológica" data-download="sheep-store-circuitos.png" aria-pressed="false" aria-label="Mostrar fondo Circuitos">
+                <img src="assets/wallpapers/sheep-circuit.png" alt="" loading="lazy" decoding="async" /><span>Circuitos</span>
+              </button>
+              <button class="wallpaper-thumb" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-monochrome.png" data-alt="Logo blanco de Sheep Store sobre fondo negro" data-title="Monocromo" data-description="Negro, blanco y Sheep" data-download="sheep-store-monocromo.png" aria-pressed="false" aria-label="Mostrar fondo Monocromo">
+                <img src="assets/wallpapers/sheep-monochrome.png" alt="" loading="lazy" decoding="async" /><span>Monocromo</span>
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -246,7 +229,10 @@
               limpieza interna y externa, revisamos la refrigeración y ayudamos
               a optimizar el sistema para prolongar su vida útil.
             </p>
-            <a class="button button-light" href="#contacto">Consulta por mantenimiento <span aria-hidden="true">↗</span></a>
+            <div class="services-actions">
+              <a class="button button-light" href="#contacto">Consulta por mantenimiento <span aria-hidden="true">↗</span></a>
+              <a class="button button-light" href="assets/docs/mantenimiento-sheep-store.pdf" target="_blank" rel="noopener">Conoce más detalles <span aria-hidden="true">↗</span></a>
+            </div>
           </div>
           <div class="service-list">
             <article class="service-item">
