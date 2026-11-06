@@ -109,6 +109,7 @@
               <span class="product-badge">COMPUTACIÓN</span>
               <div class="mini-laptop"><div class="mini-screen"><span></span><i></i></div><div class="mini-base"></div></div>
               <span class="art-index">01 / 05</span>
+              <a class="product-art-action" href="#soluciones" aria-label="Consultar por computación"></a>
             </div>
             <div class="product-info">
               <div><h3>Computación</h3><p>Equipos listos para tus próximos proyectos.</p></div>
@@ -120,6 +121,7 @@
               <span class="product-badge">MÓVILES</span>
               <div class="mini-phone"><div class="mini-phone-screen"><span class="phone-orb"></span><i></i><i></i></div></div>
               <span class="art-index">02 / 05</span>
+              <a class="product-art-action" href="#soluciones" aria-label="Consultar por móviles"></a>
             </div>
             <div class="product-info">
               <div><h3>Móviles</h3><p>Conecta con tus ideas, estés donde estés.</p></div>
@@ -131,6 +133,7 @@
               <span class="product-badge">ACCESORIOS</span>
               <img class="accessories-cover" src="assets/headphones-sheep.png" alt="Audífonos negros con el logo de la oveja Sheep Store" loading="lazy" decoding="async" />
               <span class="art-index">03 / 05</span>
+              <a class="product-art-action" href="#soluciones" aria-label="Consultar por accesorios"></a>
             </div>
             <div class="product-info">
               <div><h3>Accesorios</h3><p>Detalles que elevan tu experiencia.</p></div>
@@ -164,6 +167,7 @@
               </svg>
               <span class="maintenance-glint" aria-hidden="true"></span>
               <span class="art-index">04 / 05</span>
+              <button class="product-art-action" type="button" data-open-services aria-haspopup="dialog" aria-controls="services-dialog" aria-label="Abrir servicios de reparación y mantenimiento"></button>
             </div>
             <div class="product-info">
               <div><h3>Servicios</h3><p>Reparación y mantenimiento para tus equipos.</p></div>
@@ -607,14 +611,9 @@
             <input id="repair-phone" name="telefono" type="tel" autocomplete="tel" required placeholder="+51 999 999 999" />
             <label for="repair-email">Correo electrónico de contacto <span class="required-indicator">(obligatorio)</span></label>
             <input id="repair-email" name="correo_contacto" type="email" autocomplete="email" required placeholder="tu@correo.com" />
-            <label class="service-consent">
-              <input name="consentimiento" type="checkbox" required />
-              <span>Acepto que FormSubmit procese mi solicitud y datos de contacto para enviarlos a Sheep Store.</span>
-            </label>
-            <button class="service-submit" type="submit">Contactarme con un asesor <span aria-hidden="true">↗</span></button>
-            <p class="service-form-status" data-form-status role="status" aria-live="polite" hidden></p>
+            <button class="service-submit" type="submit">Continuar por WhatsApp <span aria-hidden="true">↗</span></button>
           </form>
-          <p class="service-email-note">Al enviar, FormSubmit mostrará una confirmación. Usa el botón Atrás del navegador para volver a Sheep Store. La primera vez, confirma la activación desde el correo del negocio.</p>
+          <p class="service-email-note">Se abrirá WhatsApp con los detalles de tu solicitud listos para enviar. Revísalos y pulsa Enviar.</p>
         </section>
         <section class="service-form-panel" id="service-maintenance-panel" aria-labelledby="service-maintenance-title" hidden>
           <h3 id="service-maintenance-title">Mantenimiento preventivo</h3>
@@ -639,15 +638,10 @@
             <input id="maintenance-phone" name="telefono" type="tel" autocomplete="tel" required placeholder="+51 999 999 999" />
             <label for="maintenance-email">Correo electrónico de contacto <span class="required-indicator">(obligatorio)</span></label>
             <input id="maintenance-email" name="correo_contacto" type="email" autocomplete="email" required placeholder="tu@correo.com" />
-            <label class="service-consent">
-              <input name="consentimiento" type="checkbox" required />
-              <span>Acepto que FormSubmit procese mi solicitud y datos de contacto para enviarlos a Sheep Store.</span>
-            </label>
-            <button class="service-submit" type="submit">Contactarme con un asesor <span aria-hidden="true">↗</span></button>
-            <p class="service-form-status" data-form-status role="status" aria-live="polite" hidden></p>
+            <button class="service-submit" type="submit">Continuar por WhatsApp <span aria-hidden="true">↗</span></button>
           </form>
           <button class="business-maintenance-button" id="open-business-maintenance" type="button">Mantenimiento para empresas <span aria-hidden="true">↗</span></button>
-          <p class="service-email-note">Al enviar, FormSubmit mostrará una confirmación. Usa el botón Atrás del navegador para volver a Sheep Store. La primera vez, confirma la activación desde el correo del negocio.</p>
+          <p class="service-email-note">Se abrirá WhatsApp con los detalles y el total estimado listos para enviar. Revísalos y pulsa Enviar.</p>
         </section>
       </div>
     </dialog>
@@ -729,14 +723,9 @@
           <input id="business-phone" name="telefono" type="tel" autocomplete="tel" required placeholder="+51 999 999 999" />
           <label for="business-email">Correo electrónico de contacto <span class="required-indicator">(obligatorio)</span></label>
           <input id="business-email" name="correo_contacto" type="email" autocomplete="email" required placeholder="tu@correo.com" />
-          <label class="service-consent">
-            <input name="consentimiento" type="checkbox" required />
-            <span>Acepto que FormSubmit procese mi solicitud y datos de contacto para enviarlos a Sheep Store.</span>
-          </label>
-          <button class="service-submit" type="submit">Solicitar plan y contactar con un asesor <span aria-hidden="true">↗</span></button>
-          <p class="service-form-status" data-form-status role="status" aria-live="polite" hidden></p>
+          <button class="service-submit" type="submit">Continuar por WhatsApp <span aria-hidden="true">↗</span></button>
         </form>
-        <p class="service-email-note">Al enviar, FormSubmit mostrará una confirmación. Usa el botón Atrás del navegador para volver a Sheep Store. La primera vez, confirma la activación desde el correo del negocio.</p>
+        <p class="service-email-note">Se abrirá WhatsApp con el plan, sus características y el precio listos para enviar. Revísalos y pulsa Enviar.</p>
       </div>
     </dialog>
   </body>

@@ -796,51 +796,10 @@ const serviceTabButtons = document.querySelectorAll("[data-service-tab]");
 const serviceRepairPanel = document.querySelector("#service-repair-panel");
 const serviceMaintenancePanel = document.querySelector("#service-maintenance-panel");
 const businessMaintenanceButton = document.querySelector("#open-business-maintenance");
-const serviceEmail = "ovejanegraservices@gmail.com";
-const serviceFormEndpoint = `https://formsubmit.co/${serviceEmail}`;
-
-const submitServiceRequest = (form, subject, message, replyTo) => {
-  const status = form.querySelector("[data-form-status]");
-  const submitButton = form.querySelector("button[type='submit']");
-  if (!(status instanceof HTMLElement) || !(submitButton instanceof HTMLButtonElement)) {
-    throw new Error("No se encontró el estado del formulario o su botón de envío.");
-  }
-
-  status.hidden = false;
-  status.textContent = "Enviando tu solicitud a FormSubmit…";
-  status.classList.remove("is-error");
-  submitButton.disabled = true;
-
-  try {
-    const submission = document.createElement("form");
-    submission.method = "POST";
-    submission.action = serviceFormEndpoint;
-    submission.target = "_self";
-    submission.hidden = true;
-
-    const fields = {
-      _subject: subject,
-      _replyto: replyTo,
-      message,
-    };
-
-    Object.entries(fields).forEach(([name, value]) => {
-      const input = document.createElement("input");
-      input.type = "hidden";
-      input.name = name;
-      input.value = value;
-      submission.append(input);
-    });
-
-    document.body.append(submission);
-    HTMLFormElement.prototype.submit.call(submission);
-  } catch (error) {
-    status.classList.add("is-error");
-    status.textContent = error instanceof Error
-      ? `No se pudo enviar la solicitud: ${error.message} Revisa tu conexión e inténtalo nuevamente.`
-      : "No se pudo enviar la solicitud. Revisa tu conexión e inténtalo nuevamente.";
-    submitButton.disabled = false;
-  }
+const serviceWhatsApp = "51978561560";
+const openServiceWhatsApp = (message) => {
+  const url = `https://wa.me/${serviceWhatsApp}?text=${encodeURIComponent(message)}`;
+  window.open(url, "_blank", "noopener,noreferrer");
 };
 
 if (
@@ -897,18 +856,15 @@ if (
     const phone = String(formData.get("telefono") || "").trim();
     const email = String(formData.get("correo_contacto") || "").trim();
     const body = [
-      "Solicitud de reparación",
+      "SOLICITUD DE REPARACIÓN — SHEEP STORE",
       "",
-      `Problema: ${problem}`,
+      "Servicio que deseo:",
+      problem,
+      "",
       `Número de contacto: ${phone}`,
       `Correo electrónico de contacto: ${email}`,
     ].join("\n");
-    void submitServiceRequest(
-      repairForm,
-      "Solicitud de reparación - Sheep Store",
-      body,
-      String(formData.get("correo_contacto") || "").trim()
-    );
+    openServiceWhatsApp(body);
   });
 
   const maintenanceQuantityInputs = [
@@ -956,21 +912,19 @@ if (
     const phone = String(formData.get("telefono") || "").trim();
     const email = String(formData.get("correo_contacto") || "").trim();
     const body = [
-      "Solicitud de mantenimiento preventivo",
+      "SOLICITUD DE MANTENIMIENTO PREVENTIVO — SHEEP STORE",
       "",
+      "Equipos y servicios solicitados:",
       ...quantities.map((quantity, index) =>
         `${maintenanceLabels[index]}: ${quantity} × S/ ${maintenancePrices[index]} = S/ ${(quantity * maintenancePrices[index]).toLocaleString("es-PE")}`
       ),
+      "",
       `Total estimado: S/ ${total.toLocaleString("es-PE")}`,
+      "",
       `Número de contacto: ${phone}`,
       `Correo electrónico de contacto: ${email}`,
     ].join("\n");
-    void submitServiceRequest(
-      maintenanceForm,
-      "Solicitud de mantenimiento - Sheep Store",
-      body,
-      String(formData.get("correo_contacto") || "").trim()
-    );
+    openServiceWhatsApp(body);
   });
 
   const businessMaintenanceForm = document.querySelector("#business-maintenance-form");
@@ -981,6 +935,36 @@ if (
     Trimestral: [450, 850, 1200, 1900],
     Semestral: [850, 1600, 2300, 3600],
     Anual: [1600, 3000, 4300, 6800],
+  };
+  const businessPlanFeatures = {
+    Trimestral: [
+      "1 mantenimiento preventivo por equipo",
+      "Limpieza interna y externa",
+      "Limpieza de ventiladores y sistema de refrigeración",
+      "Revisión de temperaturas",
+      "Optimización de Windows",
+      "Informe técnico por equipo",
+    ],
+    Semestral: [
+      "2 mantenimientos preventivos por equipo",
+      "Limpieza interna y externa",
+      "Limpieza de ventiladores y sistema de refrigeración",
+      "Revisión de temperaturas",
+      "Optimización de Windows",
+      "Informe técnico por equipo",
+      "Seguimiento del estado de los equipos",
+    ],
+    Anual: [
+      "4 mantenimientos preventivos por equipo",
+      "Limpieza interna y externa",
+      "Limpieza de ventiladores y sistema de refrigeración",
+      "Revisión de temperaturas",
+      "Optimización de Windows",
+      "Informe técnico por equipo",
+      "Prioridad de atención técnica",
+      "Historial técnico de los equipos",
+      "Reporte anual del estado del parque informático",
+    ],
   };
   const businessQuantityRanges = [
     { max: 10, label: "5 a 10 equipos", index: 0 },
@@ -1040,21 +1024,21 @@ if (
     const phone = String(formData.get("telefono") || "").trim();
     const email = String(formData.get("correo_contacto") || "").trim();
     const body = [
-      "Solicitud de mantenimiento por equipos para empresa",
+      "SOLICITUD DE MANTENIMIENTO PARA EMPRESA — SHEEP STORE",
       "",
-      `Plan de interés: ${plan}`,
+      `Plan seleccionado: ${plan}`,
       `Cantidad de equipos: ${quantity} (${range.label})`,
-      `Precio del plan: S/ ${price.toLocaleString("es-PE")}`,
-      "Solicito contactarme con un asesor para coordinar el pago del plan de mantenimiento.",
+      `Precio del plan seleccionado: S/ ${price.toLocaleString("es-PE")}`,
+      "",
+      "Características incluidas en el plan:",
+      ...businessPlanFeatures[plan].map((feature) => `- ${feature}`),
+      "",
+      "Lo que solicito: que un asesor se comunique conmigo para coordinar el servicio y el pago del plan.",
+      "",
       `Número de contacto: ${phone}`,
       `Correo electrónico de contacto: ${email}`,
     ].join("\n");
-    void submitServiceRequest(
-      businessMaintenanceForm,
-      "Mantenimiento por equipos para empresa - Sheep Store",
-      body,
-      email
-    );
+    openServiceWhatsApp(body);
   });
 }
 
