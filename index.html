@@ -32,13 +32,13 @@
         <span></span><span></span>
       </button>
       <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
-        <a href="#catalogo">Catálogo</a>
+        <a href="#catalogo" data-hover-sound>Catálogo</a>
         <a href="#fondos" data-hover-sound>Fondos gratis</a>
         <a href="#servicios" data-hover-sound>Servicios</a>
         <a href="#nosotros" data-hover-sound>Nosotros</a>
-        <a href="#contacto">Contáctanos</a>
+        <a href="#contacto" data-hover-sound="contact">Contáctanos</a>
         <button class="nav-sound-toggle" type="button" aria-label="Silenciar sonido de navegación" aria-pressed="true" title="Silenciar sonido de navegación">
-          <span aria-hidden="true">♪</span>
+          <span class="nav-sound-icon" aria-hidden="true">♪</span>
         </button>
         <a class="nav-cta" href="#soluciones">Encuentra tu solución <span aria-hidden="true">↗</span></a>
       </nav>
@@ -91,8 +91,8 @@
             <h2>Descubre lo que<br />puedes <span>hacer.</span></h2>
           </div>
           <p class="section-intro">
-            Explora equipos, accesorios y servicios para que tu tecnología
-            te acompañe en cada etapa.
+            Explora equipos, accesorios, servicios y programas para que tu
+            tecnología te acompañe en cada etapa.
           </p>
         </div>
         <div class="category-tabs" role="group" aria-label="Filtrar el catálogo">
@@ -101,13 +101,14 @@
           <button class="category-tab" type="button" data-filter="moviles" aria-pressed="false">Móviles</button>
           <button class="category-tab" type="button" data-filter="accesorios" aria-pressed="false">Accesorios</button>
           <button class="category-tab" type="button" data-filter="servicios" aria-pressed="false">Servicios</button>
+          <button class="category-tab" type="button" data-filter="programas" aria-pressed="false">Programas</button>
         </div>
         <div class="product-grid">
           <article class="product-card" data-category="computacion">
             <div class="product-art product-art-laptop">
               <span class="product-badge">COMPUTACIÓN</span>
               <div class="mini-laptop"><div class="mini-screen"><span></span><i></i></div><div class="mini-base"></div></div>
-              <span class="art-index">01 / 04</span>
+              <span class="art-index">01 / 05</span>
             </div>
             <div class="product-info">
               <div><h3>Computación</h3><p>Equipos listos para tus próximos proyectos.</p></div>
@@ -118,7 +119,7 @@
             <div class="product-art product-art-phone">
               <span class="product-badge">MÓVILES</span>
               <div class="mini-phone"><div class="mini-phone-screen"><span class="phone-orb"></span><i></i><i></i></div></div>
-              <span class="art-index">02 / 04</span>
+              <span class="art-index">02 / 05</span>
             </div>
             <div class="product-info">
               <div><h3>Móviles</h3><p>Conecta con tus ideas, estés donde estés.</p></div>
@@ -129,7 +130,7 @@
             <div class="product-art product-art-audio">
               <span class="product-badge">ACCESORIOS</span>
               <div class="headphones"><span class="headphone-band"></span><span class="earcup earcup-left"></span><span class="earcup earcup-right"></span></div>
-              <span class="art-index">03 / 04</span>
+              <span class="art-index">03 / 05</span>
             </div>
             <div class="product-info">
               <div><h3>Accesorios</h3><p>Detalles que elevan tu experiencia.</p></div>
@@ -145,11 +146,36 @@
                 <span class="service-illustration-row"><i>✓</i>Revisión térmica</span>
                 <span class="service-illustration-row"><i>✓</i>Optimización</span>
               </div>
-              <span class="art-index">04 / 04</span>
+              <span class="art-index">04 / 05</span>
             </div>
             <div class="product-info">
               <div><h3>Mantenimiento</h3><p>Limpieza profunda, revisión térmica y optimización para laptops.</p></div>
               <a class="round-link" href="#servicios" aria-label="Conocer el mantenimiento preventivo">↗</a>
+            </div>
+          </article>
+          <article class="product-card program-card" data-category="programas">
+            <div class="product-art product-art-program">
+              <span class="product-badge">PROGRAMAS</span>
+              <div class="program-window" aria-hidden="true">
+                <div class="program-window-bar"><i></i><i></i><i></i></div>
+                <div class="program-mark">
+                  <span></span><span></span><span></span><span></span>
+                </div>
+                <span class="program-window-caption">SHEEP CENTER</span>
+              </div>
+              <span class="art-index">01 / 01</span>
+            </div>
+            <div class="product-info program-info">
+              <div><h3>SHEEP CENTER</h3><p>Tu nuevo programa de Sheep Store para Windows.</p></div>
+              <a class="program-download" href="assets/programs/SHEEP_CENTER.exe" download="SHEEP_CENTER.exe" aria-label="Descargar SHEEP CENTER para Windows">
+                <span class="program-download-label">Descargar</span>
+                <span class="program-platform" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="M1 4.5 10 3.2v8.1H1V4.5Zm10.2-1.5L23 1v10.3H11.2V3Zm-10.2 9.5h9v8.2L1 19v-6.5Zm10.2 0H23v10.2l-11.8-1.7v-8.5Z" fill="currentColor"/>
+                  </svg>
+                  <span>Windows</span>
+                </span>
+              </a>
             </div>
           </article>
         </div>
@@ -168,7 +194,7 @@
             </p>
           </div>
           <div class="wallpaper-gallery" id="wallpaper-gallery">
-            <div class="wallpaper-main">
+            <div class="wallpaper-main" role="group" tabindex="0" aria-label="Vista previa del fondo de pantalla">
               <img
                 class="wallpaper-main-image"
                 id="wallpaper-main-image"
@@ -177,9 +203,11 @@
                 decoding="async"
               />
               <div class="wallpaper-main-shade" aria-hidden="true"></div>
+              <button class="wallpaper-arrow wallpaper-arrow-previous" type="button" aria-label="Mostrar el fondo anterior">‹</button>
+              <button class="wallpaper-arrow wallpaper-arrow-next" type="button" aria-label="Mostrar el siguiente fondo">›</button>
               <div class="wallpaper-main-info" aria-live="polite">
                 <div>
-                  <p class="wallpaper-main-count" id="wallpaper-main-count">FONDO 01 / 07</p>
+                  <p class="wallpaper-main-count" id="wallpaper-main-count">FONDO 01 / 28</p>
                   <h3 id="wallpaper-main-title">Sheep Gamer</h3>
                   <p id="wallpaper-main-description">Fondo animado · GIF</p>
                 </div>
@@ -213,6 +241,69 @@
               </button>
               <button class="wallpaper-thumb" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-monochrome.png" data-alt="Logo blanco de Sheep Store sobre fondo negro" data-title="Monocromo" data-description="Negro, blanco y Sheep" data-download="sheep-store-monocromo.png" aria-pressed="false" aria-label="Mostrar fondo Monocromo">
                 <img src="assets/wallpapers/sheep-monochrome.png" alt="" loading="lazy" decoding="async" /><span>Monocromo</span>
+              </button>
+              <button class="wallpaper-thumb" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-wallpaper-08.jpeg" data-alt="Oveja tecnológica en blanco y negro sobre un paisaje cósmico" data-title="Oveja cósmica monocromo" data-description="Una oveja tecnológica entre estrellas" data-download="sheep-oveja-cosmica-monocromo.jpeg" aria-pressed="false" aria-label="Mostrar fondo Oveja cósmica monocromo">
+                <img src="assets/wallpapers/sheep-wallpaper-08.jpeg" alt="" loading="lazy" decoding="async" /><span>Oveja cósmica</span>
+              </button>
+              <button class="wallpaper-thumb" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-wallpaper-09.jpeg" data-alt="Emblema de Sheep Store en blanco y negro con circuitos" data-title="Emblema monocromo" data-description="Minimalista y tecnológico" data-download="sheep-emblema-monocromo.jpeg" aria-pressed="false" aria-label="Mostrar fondo Emblema monocromo">
+                <img src="assets/wallpapers/sheep-wallpaper-09.jpeg" alt="" loading="lazy" decoding="async" /><span>Emblema mono</span>
+              </button>
+              <button class="wallpaper-thumb" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-wallpaper-10.jpg" data-alt="Oveja tecnológica azul en un universo de circuitos y planetas" data-title="Cosmos azul" data-description="Un viaje tecnológico por el espacio" data-download="sheep-cosmos-azul.jpg" aria-pressed="false" aria-label="Mostrar fondo Cosmos azul">
+                <img src="assets/wallpapers/sheep-wallpaper-10.jpg" alt="" loading="lazy" decoding="async" /><span>Cosmos azul</span>
+              </button>
+              <button class="wallpaper-thumb" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-wallpaper-11.jpg" data-alt="Oveja tecnológica rodeada de luces cósmicas rosadas" data-title="Cosmos rosa" data-description="Brillo galáctico en tonos magenta" data-download="sheep-cosmos-rosa.jpg" aria-pressed="false" aria-label="Mostrar fondo Cosmos rosa">
+                <img src="assets/wallpapers/sheep-wallpaper-11.jpg" alt="" loading="lazy" decoding="async" /><span>Cosmos rosa</span>
+              </button>
+              <button class="wallpaper-thumb" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-wallpaper-12.jpg" data-alt="Insignia Cybersecurity for Women con la oveja de Sheep Store" data-title="Defensora digital" data-description="Una insignia de ciberseguridad para mujeres" data-download="sheep-defensora-digital.jpg" aria-pressed="false" aria-label="Mostrar fondo Defensora digital">
+                <img src="assets/wallpapers/sheep-wallpaper-12.jpg" alt="" loading="lazy" decoding="async" /><span>Defensora digital</span>
+              </button>
+              <button class="wallpaper-thumb" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-wallpaper-13.jpg" data-alt="Medallón tecnológico verde y dorado con una oveja" data-title="Medallón esmeralda" data-description="Detalles dorados sobre un cosmos verde" data-download="sheep-medallon-esmeralda.jpg" aria-pressed="false" aria-label="Mostrar fondo Medallón esmeralda">
+                <img src="assets/wallpapers/sheep-wallpaper-13.jpg" alt="" loading="lazy" decoding="async" /><span>Esmeralda</span>
+              </button>
+              <button class="wallpaper-thumb" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-wallpaper-14.jpg" data-alt="Insignia luminosa de ciberseguridad con oveja en tonos violeta y cian" data-title="Mujeres en ciber" data-description="Ciberseguridad con estilo neón" data-download="sheep-mujeres-en-ciber.jpg" aria-pressed="false" aria-label="Mostrar fondo Mujeres en ciber">
+                <img src="assets/wallpapers/sheep-wallpaper-14.jpg" alt="" loading="lazy" decoding="async" /><span>Mujeres en ciber</span>
+              </button>
+              <button class="wallpaper-thumb" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-wallpaper-15.jpg" data-alt="Insignia metálica plateada con la oveja tecnológica" data-title="Insignia plateada" data-description="Acabado metálico y luz azul" data-download="sheep-insignia-plateada.jpg" aria-pressed="false" aria-label="Mostrar fondo Insignia plateada">
+                <img src="assets/wallpapers/sheep-wallpaper-15.jpg" alt="" loading="lazy" decoding="async" /><span>Insignia plata</span>
+              </button>
+              <button class="wallpaper-thumb" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-wallpaper-16.jpg" data-alt="Insignia de ciberseguridad en tonos dorados y cobrizos" data-title="Insignia cobre" data-description="Reflejos cálidos con estilo tecnológico" data-download="sheep-insignia-cobre.jpg" aria-pressed="false" aria-label="Mostrar fondo Insignia cobre">
+                <img src="assets/wallpapers/sheep-wallpaper-16.jpg" alt="" loading="lazy" decoding="async" /><span>Insignia cobre</span>
+              </button>
+              <button class="wallpaper-thumb" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-wallpaper-17.jpg" data-alt="Panel de datos azul con gráficos y una oveja central" data-title="Neural Insights" data-description="Datos y gráficos con identidad Sheep Store" data-download="sheep-neural-insights.jpg" aria-pressed="false" aria-label="Mostrar fondo Neural Insights">
+                <img src="assets/wallpapers/sheep-wallpaper-17.jpg" alt="" loading="lazy" decoding="async" /><span>Neural Insights</span>
+              </button>
+              <button class="wallpaper-thumb" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-wallpaper-18.jpg" data-alt="Oveja de circuitos iluminada en verde" data-title="Red neuronal verde" data-description="Circuitos y destellos esmeralda" data-download="sheep-red-neuronal-verde.jpg" aria-pressed="false" aria-label="Mostrar fondo Red neuronal verde">
+                <img src="assets/wallpapers/sheep-wallpaper-18.jpg" alt="" loading="lazy" decoding="async" /><span>Red verde</span>
+              </button>
+              <button class="wallpaper-thumb" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-wallpaper-19.jpg" data-alt="Oveja tecnológica verde conectada con planetas y naturaleza" data-title="Cosmos natural" data-description="Tecnología, vida y universo" data-download="sheep-cosmos-natural.jpg" aria-pressed="false" aria-label="Mostrar fondo Cosmos natural">
+                <img src="assets/wallpapers/sheep-wallpaper-19.jpg" alt="" loading="lazy" decoding="async" /><span>Cosmos natural</span>
+              </button>
+              <button class="wallpaper-thumb" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-wallpaper-20.jpg" data-alt="Oveja pixel art rodeada de planetas y estrellas" data-title="Oveja pixel" data-description="Aventura retro entre galaxias" data-download="sheep-oveja-pixel.jpg" aria-pressed="false" aria-label="Mostrar fondo Oveja pixel">
+                <img src="assets/wallpapers/sheep-wallpaper-20.jpg" alt="" loading="lazy" decoding="async" /><span>Oveja pixel</span>
+              </button>
+              <button class="wallpaper-thumb" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-wallpaper-21.jpeg" data-alt="Oveja luminosa en un universo gamer de neón" data-title="Gamer galáctico" data-description="Luces de neón y energía gamer" data-download="sheep-gamer-galactico.jpeg" aria-pressed="false" aria-label="Mostrar fondo Gamer galáctico">
+                <img src="assets/wallpapers/sheep-wallpaper-21.jpeg" alt="" loading="lazy" decoding="async" /><span>Gamer galáctico</span>
+              </button>
+              <button class="wallpaper-thumb" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-wallpaper-22.jpeg" data-alt="Oveja blanca y azul en un remolino de galaxias" data-title="Galaxia azul" data-description="Un brillo azul entre las estrellas" data-download="sheep-galaxia-azul.jpeg" aria-pressed="false" aria-label="Mostrar fondo Galaxia azul">
+                <img src="assets/wallpapers/sheep-wallpaper-22.jpeg" alt="" loading="lazy" decoding="async" /><span>Galaxia azul</span>
+              </button>
+              <button class="wallpaper-thumb" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-wallpaper-23.jpeg" data-alt="Panel de análisis con gráficos azules y la oveja de Sheep Store" data-title="Centro de datos" data-description="Visualización futurista de datos" data-download="sheep-centro-de-datos.jpeg" aria-pressed="false" aria-label="Mostrar fondo Centro de datos">
+                <img src="assets/wallpapers/sheep-wallpaper-23.jpeg" alt="" loading="lazy" decoding="async" /><span>Centro de datos</span>
+              </button>
+              <button class="wallpaper-thumb" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-wallpaper-24.jpeg" data-alt="Oveja steampunk rodeada de engranajes dorados" data-title="Steampunk dorado" data-description="Engranajes, cobre y luz cálida" data-download="sheep-steampunk-dorado.jpeg" aria-pressed="false" aria-label="Mostrar fondo Steampunk dorado">
+                <img src="assets/wallpapers/sheep-wallpaper-24.jpeg" alt="" loading="lazy" decoding="async" /><span>Steampunk dorado</span>
+              </button>
+              <button class="wallpaper-thumb" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-wallpaper-25.jpeg" data-alt="Oveja tecnológica conectada a una red azul y violeta" data-title="Red conectada" data-description="Circuitos y conexiones luminosas" data-download="sheep-red-conectada.jpeg" aria-pressed="false" aria-label="Mostrar fondo Red conectada">
+                <img src="assets/wallpapers/sheep-wallpaper-25.jpeg" alt="" loading="lazy" decoding="async" /><span>Red conectada</span>
+              </button>
+              <button class="wallpaper-thumb" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-wallpaper-26.jpeg" data-alt="Emblema oscuro de ciberseguridad con escudos y una oveja" data-title="Escudo cibernético" data-description="Protección digital en tonos azules" data-download="sheep-escudo-cibernetico.jpeg" aria-pressed="false" aria-label="Mostrar fondo Escudo cibernético">
+                <img src="assets/wallpapers/sheep-wallpaper-26.jpeg" alt="" loading="lazy" decoding="async" /><span>Escudo cibernético</span>
+              </button>
+              <button class="wallpaper-thumb" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-wallpaper-27.jpeg" data-alt="Oveja cósmica rodeada de planetas y luces doradas" data-title="Cosmos dorado" data-description="Una galaxia cálida y luminosa" data-download="sheep-cosmos-dorado.jpeg" aria-pressed="false" aria-label="Mostrar fondo Cosmos dorado">
+                <img src="assets/wallpapers/sheep-wallpaper-27.jpeg" alt="" loading="lazy" decoding="async" /><span>Cosmos dorado</span>
+              </button>
+              <button class="wallpaper-thumb" type="button" data-wallpaper-thumb data-src="assets/wallpapers/sheep-wallpaper-28.jpeg" data-alt="Oveja mágica en un paisaje cósmico navideño iluminado" data-title="Navidad cósmica" data-description="Estrellas, nieve y espíritu festivo" data-download="sheep-navidad-cosmica.jpeg" aria-pressed="false" aria-label="Mostrar fondo Navidad cósmica">
+                <img src="assets/wallpapers/sheep-wallpaper-28.jpeg" alt="" loading="lazy" decoding="async" /><span>Navidad cósmica</span>
               </button>
             </div>
           </div>

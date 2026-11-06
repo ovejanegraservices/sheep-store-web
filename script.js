@@ -155,7 +155,7 @@ if (mainNav) {
   let lastHoverSound = 0;
   let soundResumePending = false;
 
-  const playHoverSound = () => {
+  const playHoverSound = (link = null) => {
     if (!hoverSoundEnabled || !audioContext || audioContext.state !== "running") return;
 
     const now = performance.now();
@@ -163,7 +163,8 @@ if (mainNav) {
     lastHoverSound = now;
 
     const start = audioContext.currentTime;
-    [740, 990].forEach((frequency, index) => {
+    const frequencies = link?.dataset.hoverSound === "contact" ? [587, 440] : [740, 990];
+    frequencies.forEach((frequency, index) => {
       const toneStart = start + index * 0.025;
       const oscillator = audioContext.createOscillator();
       const volume = audioContext.createGain();
@@ -172,7 +173,7 @@ if (mainNav) {
       oscillator.frequency.setValueAtTime(frequency, toneStart);
       oscillator.frequency.exponentialRampToValueAtTime(frequency * 1.08, toneStart + 0.075);
       volume.gain.setValueAtTime(0.0001, toneStart);
-      volume.gain.exponentialRampToValueAtTime(0.025, toneStart + 0.009);
+      volume.gain.exponentialRampToValueAtTime(0.07, toneStart + 0.009);
       volume.gain.exponentialRampToValueAtTime(0.0001, toneStart + 0.11);
 
       oscillator.connect(volume);
@@ -193,7 +194,7 @@ if (mainNav) {
     oscillator.frequency.setValueAtTime(1150, start);
     oscillator.frequency.exponentialRampToValueAtTime(760, start + 0.045);
     volume.gain.setValueAtTime(0.0001, start);
-    volume.gain.exponentialRampToValueAtTime(0.035, start + 0.004);
+    volume.gain.exponentialRampToValueAtTime(0.075, start + 0.004);
     volume.gain.exponentialRampToValueAtTime(0.0001, start + 0.055);
 
     oscillator.connect(volume);
@@ -234,7 +235,7 @@ if (mainNav) {
     soundToggle.title = label;
   };
 
-  const enableHoverSound = (playConfirmation = false) => {
+  const enableHoverSound = (playConfirmation = false, confirmationLink = null) => {
     if (typeof window.AudioContext !== "function") {
       console.warn("El navegador no admite el sonido de navegación.");
       return;
@@ -250,7 +251,7 @@ if (mainNav) {
     if (audioContext.state === "running") {
       hoverSoundEnabled = true;
       updateSoundToggle();
-      if (playConfirmation) playHoverSound();
+      if (playConfirmation) playHoverSound(confirmationLink);
       return;
     }
 
@@ -260,7 +261,7 @@ if (mainNav) {
       soundResumePending = false;
       hoverSoundEnabled = true;
       updateSoundToggle();
-      if (playConfirmation) playHoverSound();
+      if (playConfirmation) playHoverSound(confirmationLink);
     }).catch((error) => {
       soundResumePending = false;
       console.error("No se pudo activar el sonido de navegación.", error);
@@ -311,19 +312,20 @@ if (mainNav) {
     const link = getSoundLink(event.target);
     if (!link || (event.relatedTarget instanceof Node && link.contains(event.relatedTarget))) return;
     if (hoverSoundEnabled && audioContext?.state !== "running") {
-      enableHoverSound(true);
+      enableHoverSound(true, link);
       return;
     }
-    playHoverSound();
+    playHoverSound(link);
   });
 
   mainNav.addEventListener("focusin", (event) => {
-    if (!getSoundLink(event.target)) return;
+    const link = getSoundLink(event.target);
+    if (!link) return;
     if (hoverSoundEnabled && audioContext?.state !== "running") {
-      enableHoverSound(true);
+      enableHoverSound(true, link);
       return;
     }
-    playHoverSound();
+    playHoverSound(link);
   });
 }
 
@@ -333,6 +335,10 @@ const wallpaperMainDescription = document.querySelector("#wallpaper-main-descrip
 const wallpaperMainCount = document.querySelector("#wallpaper-main-count");
 const wallpaperMainDownload = document.querySelector("#wallpaper-main-download");
 const wallpaperThumbs = document.querySelectorAll("[data-wallpaper-thumb]");
+const wallpaperPrevious = document.querySelector(".wallpaper-arrow-previous");
+const wallpaperNext = document.querySelector(".wallpaper-arrow-next");
+const wallpaperStrip = document.querySelector(".wallpaper-strip");
+const wallpaperGallery = document.querySelector("#wallpaper-gallery");
 
 if (
   wallpaperMainImage instanceof HTMLImageElement &&
@@ -340,39 +346,82 @@ if (
   wallpaperMainDescription &&
   wallpaperMainCount &&
   wallpaperMainDownload instanceof HTMLAnchorElement &&
-  wallpaperThumbs.length
+  wallpaperThumbs.length &&
+  wallpaperPrevious instanceof HTMLButtonElement &&
+  wallpaperNext instanceof HTMLButtonElement &&
+  wallpaperStrip instanceof HTMLElement &&
+  wallpaperGallery instanceof HTMLElement
 ) {
+  const initialWallpaperIndex = Array.from(wallpaperThumbs).findIndex((thumb) => thumb.classList.contains("is-active"));
+  let activeWallpaperIndex = initialWallpaperIndex >= 0 ? initialWallpaperIndex : 0;
+  const wallpaperTrack = document.createElement("div");
+  const wallpaperGroup = document.createElement("div");
+  wallpaperTrack.className = "wallpaper-strip-track";
+  wallpaperGroup.className = "wallpaper-strip-group";
+
   wallpaperThumbs.forEach((thumb, index) => {
-    thumb.addEventListener("click", () => {
-      const { src, alt, title, description, download } = thumb.dataset;
-      if (!src || !alt || !title || !description || !download) {
-        console.error("Faltan datos para mostrar el fondo seleccionado.");
-        return;
-      }
+    thumb.dataset.wallpaperIndex = String(index);
+    wallpaperGroup.append(thumb);
+  });
 
-      wallpaperThumbs.forEach((item) => {
-        const isSelected = item === thumb;
-        item.classList.toggle("is-active", isSelected);
-        item.setAttribute("aria-pressed", String(isSelected));
-      });
-
-      wallpaperMainImage.classList.remove("is-changing");
-      void wallpaperMainImage.offsetWidth;
-      wallpaperMainImage.src = src;
-      wallpaperMainImage.alt = alt;
-      wallpaperMainImage.classList.add("is-changing");
-      wallpaperMainTitle.textContent = title;
-      wallpaperMainDescription.textContent = description;
-      wallpaperMainCount.textContent = `FONDO ${String(index + 1).padStart(2, "0")} / ${String(wallpaperThumbs.length).padStart(2, "0")}`;
-      wallpaperMainDownload.href = src;
-      wallpaperMainDownload.download = download;
-      wallpaperMainDownload.setAttribute("aria-label", `Descargar fondo ${title}`);
-      thumb.scrollIntoView({
-        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
-        block: "nearest",
-        inline: "center",
-      });
+  const duplicateGroup = wallpaperGroup.cloneNode(true);
+  if (duplicateGroup instanceof HTMLDivElement) {
+    duplicateGroup.setAttribute("aria-hidden", "true");
+    duplicateGroup.querySelectorAll("button").forEach((thumb) => {
+      thumb.tabIndex = -1;
     });
+    wallpaperTrack.append(wallpaperGroup, duplicateGroup);
+    wallpaperStrip.replaceChildren(wallpaperTrack);
+  }
+
+  const selectWallpaper = (index) => {
+    const normalizedIndex = (index + wallpaperThumbs.length) % wallpaperThumbs.length;
+    const thumb = wallpaperThumbs[normalizedIndex];
+    const { src, alt, title, description, download } = thumb.dataset;
+    if (!src || !alt || !title || !description || !download) {
+      console.error("Faltan datos para mostrar el fondo seleccionado.");
+      return;
+    }
+
+    activeWallpaperIndex = normalizedIndex;
+    wallpaperStrip.querySelectorAll("[data-wallpaper-index]").forEach((item) => {
+      const isSelected = Number(item.dataset.wallpaperIndex) === activeWallpaperIndex;
+      item.classList.toggle("is-active", isSelected);
+      item.setAttribute("aria-pressed", String(isSelected));
+    });
+
+    wallpaperMainImage.classList.remove("is-changing");
+    void wallpaperMainImage.offsetWidth;
+    wallpaperMainImage.src = src;
+    wallpaperMainImage.alt = alt;
+    wallpaperMainImage.classList.add("is-changing");
+    wallpaperMainTitle.textContent = title;
+    wallpaperMainDescription.textContent = description;
+    wallpaperMainCount.textContent = `FONDO ${String(activeWallpaperIndex + 1).padStart(2, "0")} / ${String(wallpaperThumbs.length).padStart(2, "0")}`;
+    wallpaperMainDownload.href = src;
+    wallpaperMainDownload.download = download;
+    wallpaperMainDownload.setAttribute("aria-label", `Descargar fondo ${title}`);
+  };
+
+  wallpaperStrip.addEventListener("click", (event) => {
+    if (!(event.target instanceof Element)) return;
+    const thumb = event.target.closest("[data-wallpaper-index]");
+    if (!(thumb instanceof HTMLButtonElement)) return;
+    const index = Number(thumb.dataset.wallpaperIndex);
+    if (Number.isInteger(index)) selectWallpaper(index);
+  });
+
+  wallpaperPrevious.addEventListener("click", () => selectWallpaper(activeWallpaperIndex - 1));
+  wallpaperNext.addEventListener("click", () => selectWallpaper(activeWallpaperIndex + 1));
+
+  wallpaperGallery.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      selectWallpaper(activeWallpaperIndex - 1);
+    } else if (event.key === "ArrowRight") {
+      event.preventDefault();
+      selectWallpaper(activeWallpaperIndex + 1);
+    }
   });
 }
 
