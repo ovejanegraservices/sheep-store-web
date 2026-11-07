@@ -329,6 +329,188 @@ if (mainNav) {
   });
 }
 
+const musicToggle = document.querySelector(".music-toggle");
+
+if (musicToggle instanceof HTMLButtonElement) {
+  const AudioContextConstructor = window.AudioContext;
+  const chords = [
+    [60, 64, 67, 71],
+    [57, 60, 64, 67],
+    [53, 57, 60, 64],
+    [55, 59, 62, 65],
+  ];
+  let musicContext = null;
+  let musicTimer = 0;
+  let musicEnabled = true;
+  let musicStartPending = false;
+  let nextMusicStepTime = 0;
+  let musicStep = 0;
+  let noiseBuffer = null;
+  let musicMasterGain = null;
+
+  const updateMusicToggle = () => {
+    const label = musicEnabled ? "Detener música lofi hip hop" : "Reproducir música lofi hip hop";
+    musicToggle.setAttribute("aria-pressed", String(musicEnabled));
+    musicToggle.setAttribute("aria-label", label);
+    musicToggle.title = label;
+    musicToggle.querySelector(".music-toggle-label").textContent = musicEnabled ? "Música lofi" : "Activar música";
+  };
+
+  const midiToFrequency = (note) => 440 * 2 ** ((note - 69) / 12);
+
+  const playNote = (note, time, duration, volume, type = "triangle") => {
+    const oscillator = musicContext.createOscillator();
+    const filter = musicContext.createBiquadFilter();
+    const gain = musicContext.createGain();
+
+    oscillator.type = type;
+    oscillator.frequency.setValueAtTime(midiToFrequency(note), time);
+    filter.type = "lowpass";
+    filter.frequency.setValueAtTime(1500, time);
+    gain.gain.setValueAtTime(0.0001, time);
+    gain.gain.exponentialRampToValueAtTime(volume, time + 0.12);
+    gain.gain.setValueAtTime(volume, time + duration * 0.72);
+    gain.gain.exponentialRampToValueAtTime(0.0001, time + duration);
+
+    oscillator.connect(filter);
+    filter.connect(gain);
+    gain.connect(musicMasterGain);
+    oscillator.start(time);
+    oscillator.stop(time + duration + 0.02);
+  };
+
+  const playKick = (time) => {
+    const oscillator = musicContext.createOscillator();
+    const gain = musicContext.createGain();
+
+    oscillator.type = "sine";
+    oscillator.frequency.setValueAtTime(105, time);
+    oscillator.frequency.exponentialRampToValueAtTime(48, time + 0.18);
+    gain.gain.setValueAtTime(0.0001, time);
+    gain.gain.exponentialRampToValueAtTime(0.28, time + 0.008);
+    gain.gain.exponentialRampToValueAtTime(0.0001, time + 0.22);
+    oscillator.connect(gain);
+    gain.connect(musicMasterGain);
+    oscillator.start(time);
+    oscillator.stop(time + 0.23);
+  };
+
+  const playNoise = (time, duration, volume, frequency) => {
+    const source = musicContext.createBufferSource();
+    const filter = musicContext.createBiquadFilter();
+    const gain = musicContext.createGain();
+
+    source.buffer = noiseBuffer;
+    filter.type = "highpass";
+    filter.frequency.setValueAtTime(frequency, time);
+    gain.gain.setValueAtTime(volume, time);
+    gain.gain.exponentialRampToValueAtTime(0.0001, time + duration);
+    source.connect(filter);
+    filter.connect(gain);
+    gain.connect(musicMasterGain);
+    source.start(time);
+    source.stop(time + duration + 0.01);
+  };
+
+  const scheduleMusicStep = (time) => {
+    const step = musicStep % 16;
+    const chord = chords[Math.floor(musicStep / 16) % chords.length];
+
+    if (step === 0 || step === 8) {
+      chord.forEach((note, index) => playNote(note, time, 2.4, index === 3 ? 0.012 : 0.02));
+    }
+    if (step === 0 || step === 10) playNote(chord[0] - 24, time, 0.45, 0.11, "sine");
+    if (step === 0 || step === 8) playKick(time);
+    if (step === 4 || step === 12) playNoise(time, 0.16, 0.055, 1200);
+    playNoise(time, 0.035, step % 4 === 0 ? 0.012 : 0.007, 6500);
+
+    musicStep = (musicStep + 1) % (chords.length * 16);
+  };
+
+  const startMusicScheduler = () => {
+    if (!musicEnabled || musicTimer || musicContext.state !== "running") return;
+    nextMusicStepTime = musicContext.currentTime + 0.05;
+    const stepDuration = 60 / 82 / 2;
+    const scheduleAhead = () => {
+      if (!musicEnabled || musicContext.state !== "running") return;
+      while (nextMusicStepTime < musicContext.currentTime + 0.18) {
+        scheduleMusicStep(nextMusicStepTime);
+        nextMusicStepTime += stepDuration;
+      }
+    };
+
+    scheduleAhead();
+    musicTimer = window.setInterval(scheduleAhead, 80);
+  };
+
+  const startMusic = () => {
+    if (!musicEnabled || musicStartPending) return;
+    if (typeof AudioContextConstructor !== "function") {
+      console.warn("El navegador no admite la música de fondo.");
+      musicEnabled = false;
+      updateMusicToggle();
+      return;
+    }
+
+    try {
+      if (!musicContext) {
+        musicContext = new AudioContextConstructor();
+        musicMasterGain = musicContext.createGain();
+        musicMasterGain.gain.value = 0.06;
+        musicMasterGain.connect(musicContext.destination);
+        noiseBuffer = musicContext.createBuffer(1, musicContext.sampleRate, musicContext.sampleRate);
+        const samples = noiseBuffer.getChannelData(0);
+        for (let index = 0; index < samples.length; index += 1) {
+          samples[index] = Math.random() * 2 - 1;
+        }
+      }
+    } catch (error) {
+      console.error("No se pudo preparar la música de fondo.", error);
+      musicEnabled = false;
+      updateMusicToggle();
+      return;
+    }
+
+    if (musicContext.state === "running") {
+      startMusicScheduler();
+      return;
+    }
+
+    musicStartPending = true;
+    musicContext.resume().then(() => {
+      musicStartPending = false;
+      startMusicScheduler();
+    }).catch((error) => {
+      musicStartPending = false;
+      console.error("No se pudo reproducir la música de fondo.", error);
+      musicEnabled = false;
+      updateMusicToggle();
+    });
+  };
+
+  updateMusicToggle();
+  document.addEventListener("pointerdown", startMusic, { once: true });
+  document.addEventListener("keydown", startMusic, { once: true });
+
+  musicToggle.addEventListener("click", () => {
+    musicEnabled = !musicEnabled;
+    updateMusicToggle();
+
+    if (!musicEnabled) {
+      window.clearInterval(musicTimer);
+      musicTimer = 0;
+      if (musicContext?.state === "running") {
+        musicContext.suspend().catch((error) => {
+          console.error("No se pudo detener la música de fondo.", error);
+        });
+      }
+      return;
+    }
+
+    startMusic();
+  });
+}
+
 const wallpaperMainImage = document.querySelector("#wallpaper-main-image");
 const wallpaperMainTitle = document.querySelector("#wallpaper-main-title");
 const wallpaperMainDescription = document.querySelector("#wallpaper-main-description");
@@ -432,6 +614,7 @@ const gameLaunchStatus = document.querySelector("#game-launch-status");
 const gameStatus = document.querySelector("#sheep-game-status");
 const gameScoreLabel = document.querySelector("#sheep-game-score");
 const gameRestart = document.querySelector("#sheep-game-restart");
+const gameSoundToggle = document.querySelector("#sheep-game-sound-toggle");
 const gameClose = document.querySelector(".sheep-game-close");
 
 if (
@@ -442,6 +625,7 @@ if (
   gameStatus &&
   gameScoreLabel &&
   gameRestart instanceof HTMLButtonElement &&
+  gameSoundToggle instanceof HTMLButtonElement &&
   gameClose instanceof HTMLButtonElement
 ) {
   const context = gameCanvas.getContext("2d");
@@ -469,8 +653,64 @@ if (
   let speed = 365;
   let launchPending = false;
   let gameRunning = false;
+  let jumpSoundEnabled = true;
   let audioContext = null;
   let bleatBuffer = null;
+
+  const updateGameSoundToggle = () => {
+    const label = jumpSoundEnabled ? "Silenciar sonido del salto" : "Activar sonido del salto";
+    gameSoundToggle.setAttribute("aria-pressed", String(jumpSoundEnabled));
+    gameSoundToggle.setAttribute("aria-label", label);
+    gameSoundToggle.title = label;
+    gameSoundToggle.textContent = jumpSoundEnabled ? "♪ Sonido del salto" : "× Sonido del salto";
+  };
+
+  const playJumpTone = () => {
+    if (!jumpSoundEnabled || audioContext?.state !== "running") return;
+
+    const start = audioContext.currentTime;
+    const oscillator = audioContext.createOscillator();
+    const volume = audioContext.createGain();
+    oscillator.type = "sine";
+    oscillator.frequency.setValueAtTime(540, start);
+    oscillator.frequency.exponentialRampToValueAtTime(360, start + 0.12);
+    volume.gain.setValueAtTime(0.0001, start);
+    volume.gain.exponentialRampToValueAtTime(0.12, start + 0.01);
+    volume.gain.exponentialRampToValueAtTime(0.0001, start + 0.14);
+    oscillator.connect(volume);
+    volume.connect(audioContext.destination);
+    oscillator.start(start);
+    oscillator.stop(start + 0.15);
+  };
+
+  const playJumpSound = () => {
+    if (!jumpSoundEnabled || audioContext?.state === "running") {
+      playJumpTone();
+      return;
+    }
+
+    if (typeof AudioContextConstructor !== "function") {
+      console.warn("El navegador no admite el sonido del salto.");
+      return;
+    }
+
+    try {
+      if (!audioContext) audioContext = new AudioContextConstructor();
+    } catch (error) {
+      console.error("No se pudo preparar el sonido del salto.", error);
+      return;
+    }
+
+    audioContext.resume().then(playJumpTone).catch((error) => {
+      console.error("No se pudo reproducir el sonido del salto.", error);
+    });
+  };
+
+  const jumpSheep = () => {
+    if (!gameRunning || sheep.y < groundY - sheepSize) return;
+    sheep.velocity = -650;
+    playJumpSound();
+  };
 
   const drawLaptop = (obstacle) => {
     const { x, y } = obstacle;
@@ -733,14 +973,20 @@ if (
 
   gameCanvas.addEventListener("pointerdown", (event) => {
     event.preventDefault();
-    if (gameRunning && sheep.y >= groundY - sheepSize) sheep.velocity = -650;
+    jumpSheep();
   });
 
   document.addEventListener("keydown", (event) => {
     if (!gameDialog.open || !["Space", "ArrowUp"].includes(event.code)) return;
     if (event.target instanceof HTMLElement && event.target.closest("button")) return;
     event.preventDefault();
-    if (gameRunning && sheep.y >= groundY - sheepSize) sheep.velocity = -650;
+    jumpSheep();
+  });
+
+  updateGameSoundToggle();
+  gameSoundToggle.addEventListener("click", () => {
+    jumpSoundEnabled = !jumpSoundEnabled;
+    updateGameSoundToggle();
   });
 
   gameRestart.addEventListener("click", startGame);
@@ -750,6 +996,10 @@ if (
     if (gameFrame) window.cancelAnimationFrame(gameFrame);
     gameFrame = 0;
   });
+
+  if (new URLSearchParams(window.location.search).get("play") === "game") {
+    openGame("¡A correr! Pulsa espacio, ↑ o toca para saltar.");
+  }
 }
 
 categoryTabs.forEach((tab) => {

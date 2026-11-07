@@ -40,6 +40,10 @@
         <button class="nav-sound-toggle" type="button" aria-label="Silenciar sonido de navegación" aria-pressed="true" title="Silenciar sonido de navegación">
           <span class="nav-sound-icon" aria-hidden="true">♪</span>
         </button>
+        <button class="music-toggle" type="button" aria-label="Detener música lofi hip hop" aria-pressed="true" title="Detener música lofi hip hop">
+          <span class="music-toggle-icon" aria-hidden="true">♫</span>
+          <span class="music-toggle-label">Música lofi</span>
+        </button>
         <a class="nav-cta" href="#soluciones">Encuentra tu solución <span aria-hidden="true">↗</span></a>
       </nav>
     </header>
@@ -335,6 +339,7 @@
             <div class="services-actions">
               <button class="button button-light" type="button" data-open-services data-service-view="repair">Solicitar reparación <span aria-hidden="true">↗</span></button>
               <button class="button button-light" type="button" data-open-services data-service-view="maintenance">Ver mantenimiento <span aria-hidden="true">↗</span></button>
+              <a class="button button-light" href="assets/docs/mantenimiento-sheep-store.pdf" target="_blank" rel="noopener noreferrer">Descargar PDF <span aria-hidden="true">↗</span></a>
             </div>
           </div>
           <div class="service-list">
@@ -451,6 +456,8 @@
         <div class="sheep-game-footer">
           <p id="sheep-game-status" aria-live="polite">¡A correr!</p>
           <p class="sheep-game-score">Puntos: <span id="sheep-game-score">0</span></p>
+          <button class="sheep-game-sound-toggle" id="sheep-game-sound-toggle" type="button" aria-pressed="true" aria-label="Silenciar sonido del salto" title="Silenciar sonido del salto">♪ Sonido del salto</button>
+          <a class="sheep-game-download" href="assets/programs/SHEEP_STORE_RUN.exe" download>Descargar juego para PC <span aria-hidden="true">↓</span></a>
           <button class="sheep-game-restart" id="sheep-game-restart" type="button" hidden>Volver a jugar</button>
         </div>
       </div>

@@ -113,6 +113,26 @@ h1, h2 { font-family: var(--font-display); }
 .nav-sound-toggle[aria-pressed="true"] { border-color: rgba(245, 245, 245, 0.65); background: rgba(245, 245, 245, 0.12); color: #fff; }
 .nav-sound-toggle:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 .nav-sound-icon { position: relative; display: grid; width: 18px; height: 20px; place-items: center; }
+.music-toggle {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 11px;
+  border: 1px solid rgba(220, 220, 220, 0.3);
+  border-radius: 18px;
+  background: transparent;
+  color: rgba(245, 245, 245, 0.66);
+  cursor: pointer;
+  font-size: 11px;
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+.music-toggle:hover,
+.music-toggle:focus-visible { transform: translateY(-2px); border-color: rgba(245, 245, 245, 0.65); color: #fff; }
+.music-toggle[aria-pressed="true"] { border-color: rgba(245, 245, 245, 0.65); background: rgba(245, 245, 245, 0.12); color: #fff; }
+.music-toggle:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.music-toggle-icon { font-size: 16px; }
 .nav-sound-toggle[aria-pressed="false"] .nav-sound-icon::after {
   position: absolute;
   top: -4px;
@@ -1068,6 +1088,31 @@ h1, h2 { font-family: var(--font-display); }
 }
 .sheep-game-restart:hover,
 .sheep-game-restart:focus-visible { background: transparent; color: #202020; }
+.sheep-game-sound-toggle,
+.sheep-game-download {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 11px;
+  border: 1px solid rgba(32, 32, 32, 0.35);
+  border-radius: 4px;
+  background: transparent;
+  color: #303030;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease;
+}
+.sheep-game-sound-toggle:hover,
+.sheep-game-sound-toggle:focus-visible,
+.sheep-game-download:hover,
+.sheep-game-download:focus-visible { border-color: #202020; background: #202020; color: #fff; }
+.sheep-game-sound-toggle:focus-visible,
+.sheep-game-download:focus-visible { outline: 2px solid #777; outline-offset: 3px; }
+.sheep-game-sound-toggle[aria-pressed="false"] { color: #777; }
 
 @media (prefers-reduced-motion: reduce) {
   .sheep-game-dialog,
@@ -1184,6 +1229,7 @@ h1, h2 { font-family: var(--font-display); }
   .main-nav.is-open { display: flex; flex-direction: column; }
   .main-nav > a:not(.nav-cta) { padding: 14px 0; border-bottom: 1px solid rgba(245, 245, 245, 0.1); font-size: 12px; }
   .main-nav > a[data-hover-sound]::after { bottom: 7px; right: auto; width: min(100%, 210px); }
+  .music-toggle { align-self: flex-start; margin-top: 12px; }
   .nav-cta { min-height: 43px; justify-content: space-between; margin-top: 13px; }
   .hero { min-height: 930px; grid-template-columns: 1fr; align-content: start; padding: 137px 7% 75px; }
   .hero-copy { max-width: 530px; }
