@@ -15,8 +15,8 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css?v=20261110-cart-quantity-pdf-spacing" />
+    <script src="script.js?v=20261110-cart-quantity-pdf-spacing-2" defer></script>
   </head>
   <body>
     <header class="site-header">
@@ -101,35 +101,37 @@
         </div>
         <div class="category-tabs" role="group" aria-label="Filtrar el catálogo">
           <button class="category-tab is-active" type="button" data-filter="todos" aria-pressed="true">Todo</button>
-          <button class="category-tab" type="button" data-filter="computacion" aria-pressed="false">Computación</button>
-          <button class="category-tab" type="button" data-filter="moviles" aria-pressed="false">Móviles</button>
+          <button class="category-tab" type="button" data-filter="computacion" aria-pressed="false">PC - Escritorio</button>
+          <button class="category-tab" type="button" data-filter="laptops" aria-pressed="false">Laptops</button>
           <button class="category-tab" type="button" data-filter="accesorios" aria-pressed="false">Accesorios</button>
           <button class="category-tab" type="button" data-filter="servicios" aria-pressed="false">Servicios</button>
           <button class="category-tab" type="button" data-filter="programas" aria-pressed="false">Programas</button>
         </div>
-        <div class="product-grid">
+        <div class="product-marquee" role="region" aria-label="Categorías de Sheep Store; arrastra o usa la rueda para desplazarte" tabindex="0">
+          <div class="product-marquee-track">
+            <div class="product-grid product-marquee-group">
           <article class="product-card" data-category="computacion">
-            <div class="product-art product-art-laptop">
-              <span class="product-badge">COMPUTACIÓN</span>
-              <div class="mini-laptop"><div class="mini-screen"><span></span><i></i></div><div class="mini-base"></div></div>
+            <div class="product-art product-art-laptop product-art-pc">
+              <span class="product-badge">PC - ESCRITORIO</span>
+              <img class="desktop-pc-image" src="assets/pc-sheep-office.png" alt="Gabinete negro de PC de oficina Sheep Store con iluminación frontal" loading="lazy" decoding="async" />
               <span class="art-index">01 / 05</span>
-              <a class="product-art-action" href="#soluciones" aria-label="Consultar por computación"></a>
+              <button class="product-art-action" type="button" data-open-store data-store-category="computacion" aria-haspopup="dialog" aria-controls="store-dialog" aria-label="Abrir la tienda de PC de escritorio"></button>
             </div>
             <div class="product-info">
-              <div><h3>Computación</h3><p>Equipos listos para tus próximos proyectos.</p></div>
-              <a class="round-link" href="#soluciones" aria-label="Consultar por computación">↗</a>
+              <div><h3>PC - Escritorio</h3><p>Equipos listos para tus próximos proyectos.</p></div>
+              <button class="round-link" type="button" data-open-store data-store-category="computacion" aria-haspopup="dialog" aria-controls="store-dialog" aria-label="Ver PC de escritorio en la tienda">↗</button>
             </div>
           </article>
-          <article class="product-card" data-category="moviles">
-            <div class="product-art product-art-phone">
-              <span class="product-badge">MÓVILES</span>
-              <div class="mini-phone"><div class="mini-phone-screen"><span class="phone-orb"></span><i></i><i></i></div></div>
+          <article class="product-card" data-category="laptops">
+            <div class="product-art product-art-laptop">
+              <span class="product-badge">LAPTOPS</span>
+              <div class="mini-laptop"><div class="mini-screen"><span></span><i></i></div><div class="mini-base"></div></div>
               <span class="art-index">02 / 05</span>
-              <a class="product-art-action" href="#soluciones" aria-label="Consultar por móviles"></a>
+              <button class="product-art-action" type="button" data-open-store data-store-category="laptops" aria-haspopup="dialog" aria-controls="store-dialog" aria-label="Abrir la tienda de laptops"></button>
             </div>
             <div class="product-info">
-              <div><h3>Móviles</h3><p>Conecta con tus ideas, estés donde estés.</p></div>
-              <a class="round-link" href="#soluciones" aria-label="Consultar por móviles">↗</a>
+              <div><h3>Laptops</h3><p>Equipos listos para trabajar, estudiar y crear donde estés.</p></div>
+              <button class="round-link" type="button" data-open-store data-store-category="laptops" aria-haspopup="dialog" aria-controls="store-dialog" aria-label="Ver laptops en la tienda">↗</button>
             </div>
           </article>
           <article class="product-card" data-category="accesorios">
@@ -137,11 +139,11 @@
               <span class="product-badge">ACCESORIOS</span>
               <img class="accessories-cover" src="assets/headphones-sheep.png" alt="Audífonos negros con el logo de la oveja Sheep Store" loading="lazy" decoding="async" />
               <span class="art-index">03 / 05</span>
-              <a class="product-art-action" href="#soluciones" aria-label="Consultar por accesorios"></a>
+              <button class="product-art-action" type="button" data-open-store data-store-category="accesorios" aria-haspopup="dialog" aria-controls="store-dialog" aria-label="Abrir la tienda de accesorios"></button>
             </div>
             <div class="product-info">
               <div><h3>Accesorios</h3><p>Detalles que elevan tu experiencia.</p></div>
-              <a class="round-link" href="#soluciones" aria-label="Consultar por accesorios">↗</a>
+              <button class="round-link" type="button" data-open-store data-store-category="accesorios" aria-haspopup="dialog" aria-controls="store-dialog" aria-label="Ver accesorios en la tienda">↗</button>
             </div>
           </article>
           <article class="product-card" data-category="servicios">
@@ -195,6 +197,8 @@
               <button class="program-folder-open" type="button" aria-haspopup="dialog" aria-controls="programs-dialog">Abrir <span aria-hidden="true">↗</span></button>
             </div>
           </article>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -411,6 +415,15 @@
               <span><small>WHATSAPP</small><strong>+51 978 561 560</strong></span>
               <span class="contact-arrow" aria-hidden="true">↗</span>
             </a>
+            <a class="contact-option" href="#inicio" aria-label="Registro de la empresa: RUC 10749414443">
+              <span class="contact-icon contact-company-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" focusable="false">
+                  <path d="M4 26.5V9.2h7.8V5.5h8.4v3.7H28v17.3H4Zm2.8-2.8h18.4v-11H6.8v11Zm2.8-2.8h3.2v-3.2H9.6v3.2Zm7.6 0h3.2v-3.2h-3.2v3.2Zm-7.6-7.2h3.2V9.9H9.6v3.2Zm7.6 0h3.2V9.9h-3.2v3.2Z" fill="currentColor"/>
+                </svg>
+              </span>
+              <span><small>RUC</small><strong>10749414443</strong></span>
+              <span class="contact-arrow" aria-hidden="true">↗</span>
+            </a>
           </div>
         </div>
       </section>
@@ -426,12 +439,15 @@
 
     <footer class="site-footer">
       <div class="brand footer-brand">
-        <button class="brand-game-trigger" type="button" data-game-launch aria-label="Escuchar el balido y jugar con Sheep Store" title="Juega con Sheep Store">
-          <img class="brand-mark" src="assets/logo.png" alt="" />
-        </button>
-        <a class="brand-home" href="#inicio" aria-label="Sheep Store, volver al inicio">
-          <span class="brand-name">sheep<span>store</span></span>
-        </a>
+        <div class="footer-brand-main">
+          <button class="brand-game-trigger" type="button" data-game-launch aria-label="Escuchar el balido y jugar con Sheep Store" title="Juega con Sheep Store">
+            <img class="brand-mark" src="assets/logo.png" alt="" />
+          </button>
+          <a class="brand-home" href="#inicio" aria-label="Sheep Store, volver al inicio">
+            <span class="brand-name">sheep<span>store</span></span>
+          </a>
+        </div>
+        <small class="footer-ruc">RUC: 10749414443</small>
       </div>
       <p>Tecnología con propósito. Hecha para ti.</p>
       <a class="footer-top" href="#inicio">Volver arriba ↑</a>
@@ -734,6 +750,223 @@
         </form>
         <p class="service-email-note">Se abrirá WhatsApp con el plan, sus características y el precio listos para enviar. Revísalos y pulsa Enviar.</p>
       </div>
+    </dialog>
+    <dialog class="store-dialog" id="store-dialog" aria-labelledby="store-dialog-title">
+      <div class="store-panel">
+        <div class="programs-header store-header">
+          <div>
+            <p class="eyebrow">Sheep Store / Tienda</p>
+            <h2 id="store-dialog-title">Tienda de tecnología</h2>
+            <p class="store-intro">PC de escritorio, laptops y accesorios en una sola tienda. Explora productos nuevos y de segunda mano, y agrega tus favoritos al carrito.</p>
+          </div>
+          <button class="programs-close store-close" type="button" aria-label="Cerrar tienda de PC">×</button>
+        </div>
+        <div class="store-toolbar">
+          <div class="store-category-filters" role="group" aria-label="Filtrar productos por categoría">
+            <button class="store-filter is-active" type="button" data-store-category-filter="todos" aria-pressed="true">Todo</button>
+            <button class="store-filter" type="button" data-store-category-filter="computacion" aria-pressed="false">PC - Escritorio</button>
+            <button class="store-filter" type="button" data-store-category-filter="laptops" aria-pressed="false">Laptops</button>
+            <button class="store-filter" type="button" data-store-category-filter="accesorios" aria-pressed="false">Accesorios</button>
+          </div>
+          <div class="store-distribution-filters" role="group" aria-label="Filtrar PC por distribución" hidden>
+            <span>Distribución:</span>
+            <button class="store-filter is-active" type="button" data-store-distribution-filter="todos" aria-pressed="true">Todo</button>
+            <button class="store-filter" type="button" data-store-distribution-filter="gamer" aria-pressed="false">Gamer</button>
+            <button class="store-filter" type="button" data-store-distribution-filter="oficina" aria-pressed="false">Oficina</button>
+          </div>
+          <div class="store-toolbar-options">
+          <div class="store-filters" role="group" aria-label="Filtrar productos por condición">
+            <button class="store-filter is-active" type="button" data-store-filter="todos" aria-pressed="true">Todos</button>
+            <button class="store-filter" type="button" data-store-filter="nuevo" aria-pressed="false">Nuevos</button>
+            <button class="store-filter" type="button" data-store-filter="segunda-mano" aria-pressed="false">Segunda mano</button>
+          </div>
+          <p class="store-demo-note">Precios referenciales; confirma disponibilidad al enviar tu pedido.</p>
+          </div>
+        </div>
+        <div class="store-layout">
+          <div class="store-product-grid" aria-label="Productos disponibles">
+            <article class="store-product-card store-configurable-product" data-store-category="computacion" data-store-distribution="oficina" data-store-condition="nuevo" data-product-id="sheep-office-i3" data-product-name="Core i3 tercera generación">
+              <div class="store-product-art store-art-office" aria-hidden="true">
+                <span class="store-product-tag">OFICINA</span>
+                <img class="store-pc-image store-office-image" src="assets/pc-sheep-office.png" alt="" loading="eager" decoding="async" />
+              </div>
+              <div class="store-product-info">
+                <p class="store-product-kind">PC DE OFICINA</p>
+                <h3>Core i3 tercera generación</h3>
+                <p class="store-product-description">Intel Core i3 de tercera generación: para ofimática, navegación, clases y tareas diarias. Con gráficos integrados compatibles.</p>
+                <div class="store-product-purchase"><span class="store-starting-price">Desde <strong>S/ 400</strong></span><button class="store-add-button" type="button" data-configure-office="sheep-office-i3">Personalizar equipo</button></div>
+              </div>
+            </article>
+            <article class="store-product-card store-configurable-product" data-store-category="computacion" data-store-distribution="oficina" data-store-condition="nuevo" data-product-id="sheep-office-i5" data-product-name="Core i5 tercera generación">
+              <div class="store-product-art store-art-office" aria-hidden="true">
+                <span class="store-product-tag">OFICINA</span>
+                <img class="store-pc-image store-office-image" src="assets/pc-sheep-office.png" alt="" loading="eager" decoding="async" />
+              </div>
+              <div class="store-product-info">
+                <p class="store-product-kind">PC DE OFICINA</p>
+                <h3>Core i5 tercera generación</h3>
+                <p class="store-product-description">Intel Core i5 de tercera generación: adecuado para ofimática, estudio, navegación y multitarea moderada. Con gráficos integrados compatibles.</p>
+                <div class="store-product-purchase"><span class="store-starting-price">Desde <strong>S/ 450</strong></span><button class="store-add-button" type="button" data-configure-office="sheep-office-i5">Personalizar equipo</button></div>
+              </div>
+            </article>
+            <article class="store-product-card store-configurable-product" data-store-category="computacion" data-store-distribution="oficina" data-store-condition="nuevo" data-product-id="sheep-office-i7" data-product-name="Core i7 tercera generación">
+              <div class="store-product-art store-art-office" aria-hidden="true">
+                <span class="store-product-tag">OFICINA</span>
+                <img class="store-pc-image store-office-image" src="assets/pc-sheep-office.png" alt="" loading="eager" decoding="async" />
+              </div>
+              <div class="store-product-info">
+                <p class="store-product-kind">PC DE OFICINA</p>
+                <h3>Core i7 tercera generación</h3>
+                <p class="store-product-description">Intel Core i7 de tercera generación: pensado para multitarea, trabajo y aplicaciones de oficina exigentes. Con gráficos integrados compatibles.</p>
+                <div class="store-product-purchase"><span class="store-starting-price">Desde <strong>S/ 550</strong></span><button class="store-add-button" type="button" data-configure-office="sheep-office-i7">Personalizar equipo</button></div>
+              </div>
+            </article>
+            <article class="store-product-card" data-store-category="accesorios" data-store-condition="nuevo" data-product-id="mic-havit-gk65-pro" data-product-name="Micrófono Havit Gamenote GK65 PRO" data-product-price="155">
+              <div class="store-product-art store-art-accessory"><img class="store-accessory-image" src="assets/mic-havit-gk65-pro.jpg" alt="Micrófono Havit Gamenote GK65 PRO" loading="lazy" decoding="async" /></div>
+              <div class="store-product-info"><p class="store-product-kind">ACCESORIO</p><h3>Micrófono Havit Gamenote GK65 PRO</h3><div class="store-product-purchase"><span class="store-starting-price">Precio referencial<strong>S/ 155.00</strong></span><button class="store-add-button" type="button" data-add-to-cart>Agregar</button></div></div>
+            </article>
+            <article class="store-product-card" data-store-category="accesorios" data-store-condition="nuevo" data-product-id="parlante-halion-ha-s259" data-product-name="Parlante Gamer RGB Halion HA-S259" data-product-price="80">
+              <div class="store-product-art store-art-accessory"><img class="store-accessory-image" src="assets/parlante-halion-ha-s259.jpg" alt="Parlantes Gamer RGB Halion HA-S259" loading="lazy" decoding="async" /></div>
+              <div class="store-product-info"><p class="store-product-kind">ACCESORIO</p><h3>Parlante Gamer RGB Halion HA-S259</h3><div class="store-product-purchase"><span class="store-starting-price">Precio referencial<strong>S/ 80.00</strong></span><button class="store-add-button" type="button" data-add-to-cart>Agregar</button></div></div>
+            </article>
+            <article class="store-product-card" data-store-category="accesorios" data-store-condition="nuevo" data-product-id="audifono-movisun-urban-buds-2-anc" data-product-name="Audífono Movisun Urban Buds 2 ANC Negro" data-product-price="150.5">
+              <div class="store-product-art store-art-accessory"><img class="store-accessory-image" src="assets/audifono-movisun-urban-buds-2-anc.jpg" alt="Audífono Movisun Urban Buds 2 ANC Negro" loading="lazy" decoding="async" /></div>
+              <div class="store-product-info"><p class="store-product-kind">ACCESORIO</p><h3>Audífono Movisun Urban Buds 2 ANC Negro</h3><div class="store-product-purchase"><span class="store-starting-price">Precio referencial<strong>S/ 150.50</strong></span><button class="store-add-button" type="button" data-add-to-cart>Agregar</button></div></div>
+            </article>
+            <article class="store-product-card" data-store-category="accesorios" data-store-condition="nuevo" data-product-id="audifono-halion-h908" data-product-name="Audífono Vincha Tri-Mode Halion H908" data-product-price="140">
+              <div class="store-product-art store-art-accessory"><img class="store-accessory-image" src="assets/audifono-halion-h908.jpg" alt="Audífono Vincha Tri-Mode Halion H908" loading="lazy" decoding="async" /></div>
+              <div class="store-product-info"><p class="store-product-kind">ACCESORIO</p><h3>Audífono Vincha Tri-Mode Halion H908</h3><div class="store-product-purchase"><span class="store-starting-price">Precio referencial<strong>S/ 140.00</strong></span><button class="store-add-button" type="button" data-add-to-cart>Agregar</button></div></div>
+            </article>
+            <article class="store-product-card" data-store-category="accesorios" data-store-condition="nuevo" data-product-id="parlante-bristol-80w" data-product-name="Parlante Bristol 80W (Halion)" data-product-price="250">
+              <div class="store-product-art store-art-accessory"><img class="store-accessory-image" src="assets/parlante-bristol-80w.webp" alt="Parlante Bristol 80W Halion" loading="lazy" decoding="async" /></div>
+              <div class="store-product-info"><p class="store-product-kind">ACCESORIO</p><h3>Parlante Bristol 80W (Halion)</h3><div class="store-product-purchase"><span class="store-starting-price">Precio referencial<strong>S/ 250.00</strong></span><button class="store-add-button" type="button" data-add-to-cart>Agregar</button></div></div>
+            </article>
+            <article class="store-product-card" data-store-category="accesorios" data-store-condition="nuevo" data-product-id="audifono-havit-h2038u" data-product-name="Audífonos Havit Gamenote H2038U USB 7.1" data-product-price="115">
+              <div class="store-product-art store-art-accessory"><img class="store-accessory-image" src="assets/audifono-havit-h2038u.jpg" alt="Audífonos Havit Gamenote H2038U USB 7.1" loading="lazy" decoding="async" /></div>
+              <div class="store-product-info"><p class="store-product-kind">ACCESORIO</p><h3>Audífonos Havit Gamenote H2038U USB 7.1</h3><div class="store-product-purchase"><span class="store-starting-price">Precio referencial<strong>S/ 115.00</strong></span><button class="store-add-button" type="button" data-add-to-cart>Agregar</button></div></div>
+            </article>
+            <article class="store-product-card" data-store-category="accesorios" data-store-condition="nuevo" data-product-id="auriculares-ewtto-et-a4031b" data-product-name="Auriculares ewtto ET-A4031B" data-product-price="69">
+              <div class="store-product-art store-art-accessory"><img class="store-accessory-image" src="assets/auriculares-ewtto-et-a4031b.jpg" alt="Auriculares ewtto ET-A4031B" loading="lazy" decoding="async" /></div>
+              <div class="store-product-info"><p class="store-product-kind">ACCESORIO</p><h3>Auriculares ewtto ET-A4031B</h3><div class="store-product-purchase"><span class="store-starting-price">Precio referencial<strong>S/ 69.00</strong></span><button class="store-add-button" type="button" data-add-to-cart>Agregar</button></div></div>
+            </article>
+            <article class="store-product-card" data-store-category="accesorios" data-store-condition="nuevo" data-product-id="audifono-movisun-urban-buds-3-anc" data-product-name="Audífonos Movisun Urban Buds 3 ANC" data-product-price="195">
+              <div class="store-product-art store-art-accessory"><img class="store-accessory-image" src="assets/audifono-movisun-urban-buds-3-anc.jpg" alt="Audífonos Movisun Urban Buds 3 ANC" loading="lazy" decoding="async" /></div>
+              <div class="store-product-info"><p class="store-product-kind">ACCESORIO</p><h3>Audífonos Movisun Urban Buds 3 ANC</h3><div class="store-product-purchase"><span class="store-starting-price">Precio referencial<strong>S/ 195.00</strong></span><button class="store-add-button" type="button" data-add-to-cart>Agregar</button></div></div>
+            </article>
+            <article class="store-product-card" data-store-category="accesorios" data-store-condition="nuevo" data-product-id="parlante-halion-ha-s228" data-product-name="Parlante Stereo Gaming Halion HA-S228" data-product-price="39">
+              <div class="store-product-art store-art-accessory"><img class="store-accessory-image" src="assets/parlante-halion-ha-s228.webp" alt="Parlante Stereo Gaming Halion HA-S228" loading="lazy" decoding="async" /></div>
+              <div class="store-product-info"><p class="store-product-kind">ACCESORIO</p><h3>Parlante Stereo Gaming Halion HA-S228</h3><div class="store-product-purchase"><span class="store-starting-price">Precio referencial<strong>S/ 39.00</strong></span><button class="store-add-button" type="button" data-add-to-cart>Agregar</button></div></div>
+            </article>
+            <article class="store-product-card" data-store-category="accesorios" data-store-condition="nuevo" data-product-id="mouse-romax-bluetooth" data-product-name="Mouse Romax Inalámbrico/Bluetooth" data-product-price="35">
+              <div class="store-product-art store-art-accessory"><img class="store-accessory-image" src="assets/mouse-romax-bluetooth.jpg" alt="Mouse Romax inalámbrico y Bluetooth" loading="lazy" decoding="async" /></div>
+              <div class="store-product-info"><p class="store-product-kind">ACCESORIO</p><h3>Mouse Romax Inalámbrico/Bluetooth</h3><div class="store-product-purchase"><span class="store-starting-price">Precio referencial<strong>S/ 35.00</strong></span><button class="store-add-button" type="button" data-add-to-cart>Agregar</button></div></div>
+            </article>
+            <article class="store-product-card" data-store-category="accesorios" data-store-condition="nuevo" data-product-id="combo-icecool-ha-k431c" data-product-name="Combo 3 en 1 Icecool (Halion HA-K431C)" data-product-price="259.9">
+              <div class="store-product-art store-art-accessory"><img class="store-accessory-image" src="assets/combo-icecool-ha-k431c.jpg" alt="Combo Icecool de teclado, mouse y audífonos Halion HA-K431C" loading="lazy" decoding="async" /></div>
+              <div class="store-product-info"><p class="store-product-kind">ACCESORIO</p><h3>Combo 3 en 1 Icecool (Halion HA-K431C)</h3><div class="store-product-purchase"><span class="store-starting-price">Precio referencial<strong>S/ 259.90</strong></span><button class="store-add-button" type="button" data-add-to-cart>Agregar</button></div></div>
+            </article>
+            <article class="store-product-card" data-store-category="accesorios" data-store-condition="nuevo" data-product-id="teclado-redragon-kumara" data-product-name="Teclado Mecánico Redragon Kumara" data-product-price="284.9">
+              <div class="store-product-art store-art-accessory"><img class="store-accessory-image" src="assets/teclado-redragon-kumara.jpg" alt="Teclado mecánico Redragon Kumara" loading="lazy" decoding="async" /></div>
+              <div class="store-product-info"><p class="store-product-kind">ACCESORIO</p><h3>Teclado Mecánico Redragon Kumara</h3><div class="store-product-purchase"><span class="store-starting-price">Precio referencial<strong>S/ 284.90</strong></span><button class="store-add-button" type="button" data-add-to-cart>Agregar</button></div></div>
+            </article>
+            <article class="store-product-card" data-store-category="accesorios" data-store-condition="nuevo" data-product-id="mouse-seisa-ha-m200" data-product-name="Mouse Inalámbrico 2.4GHz Seisa (HA-M200)" data-product-price="47.9">
+              <div class="store-product-art store-art-accessory"><img class="store-accessory-image" src="assets/mouse-seisa-ha-m200.jpg" alt="Mouse inalámbrico Seisa HA-M200" loading="lazy" decoding="async" /></div>
+              <div class="store-product-info"><p class="store-product-kind">ACCESORIO</p><h3>Mouse Inalámbrico 2.4GHz Seisa (HA-M200)</h3><div class="store-product-purchase"><span class="store-starting-price">Precio referencial<strong>S/ 47.90</strong></span><button class="store-add-button" type="button" data-add-to-cart>Agregar</button></div></div>
+            </article>
+            <article class="store-product-card" data-store-category="accesorios" data-store-condition="nuevo" data-product-id="mouse-1-hora-24ghz" data-product-name="Mouse Inalámbrico 1 Hora 2.4 GHz" data-product-price="35">
+              <div class="store-product-art store-art-accessory"><img class="store-accessory-image" src="assets/mouse-1-hora-24ghz.jpg" alt="Mouse inalámbrico 1 Hora 2.4 GHz" loading="lazy" decoding="async" /></div>
+              <div class="store-product-info"><p class="store-product-kind">ACCESORIO</p><h3>Mouse Inalámbrico 1 Hora 2.4 GHz</h3><div class="store-product-purchase"><span class="store-starting-price">Precio referencial<strong>S/ 35.00</strong></span><button class="store-add-button" type="button" data-add-to-cart>Agregar</button></div></div>
+            </article>
+            <article class="store-product-card" data-store-category="accesorios" data-store-condition="nuevo" data-product-id="mouse-seisa-dn-k501" data-product-name="Mouse Inalámbrico Seisa (DN K501)" data-product-price="30">
+              <div class="store-product-art store-art-accessory"><img class="store-accessory-image" src="assets/mouse-seisa-dn-k501.jpg" alt="Mouse inalámbrico Seisa DN K501" loading="lazy" decoding="async" /></div>
+              <div class="store-product-info"><p class="store-product-kind">ACCESORIO</p><h3>Mouse Inalámbrico Seisa (DN K501)</h3><div class="store-product-purchase"><span class="store-starting-price">Precio referencial<strong>S/ 30.00</strong></span><button class="store-add-button" type="button" data-add-to-cart>Agregar</button></div></div>
+            </article>
+            <article class="store-product-card" data-store-category="accesorios" data-store-condition="nuevo" data-product-id="teclado-seisa-dn-k61-tc" data-product-name="Teclado Mecánico Seisa DN-K61-TC" data-product-price="95">
+              <div class="store-product-art store-art-accessory"><img class="store-accessory-image" src="assets/teclado-seisa-dn-k61-tc.jpg" alt="Teclado mecánico Seisa DN-K61-TC" loading="lazy" decoding="async" /></div>
+              <div class="store-product-info"><p class="store-product-kind">ACCESORIO</p><h3>Teclado Mecánico Seisa DN-K61-TC</h3><div class="store-product-purchase"><span class="store-starting-price">Precio referencial<strong>S/ 95.00</strong></span><button class="store-add-button" type="button" data-add-to-cart>Agregar</button></div></div>
+            </article>
+            <article class="store-product-card" data-store-category="accesorios" data-store-condition="nuevo" data-product-id="webcam-halion-ha-w04" data-product-name="Cámara Web Halion HA-W04" data-product-price="75">
+              <div class="store-product-art store-art-accessory"><img class="store-accessory-image" src="assets/webcam-halion-ha-w04.jpg" alt="Cámara web Halion HA-W04" loading="lazy" decoding="async" /></div>
+              <div class="store-product-info"><p class="store-product-kind">ACCESORIO</p><h3>Cámara Web Halion HA-W04</h3><div class="store-product-purchase"><span class="store-starting-price">Precio referencial<strong>S/ 75.00</strong></span><button class="store-add-button" type="button" data-add-to-cart>Agregar</button></div></div>
+            </article>
+            <article class="store-product-card" data-store-category="accesorios" data-store-condition="nuevo" data-product-id="mouse-halion-ha-m425r-t-rex" data-product-name="Mouse Gamer Halion HA-M425R T-Rex" data-product-price="55.9">
+              <div class="store-product-art store-art-accessory"><img class="store-accessory-image" src="assets/mouse-halion-ha-m425r-t-rex.jpg" alt="Mouse gamer Halion HA-M425R T-Rex" loading="lazy" decoding="async" /></div>
+              <div class="store-product-info"><p class="store-product-kind">ACCESORIO</p><h3>Mouse Gamer Halion HA-M425R T-Rex</h3><div class="store-product-purchase"><span class="store-starting-price">Precio referencial<strong>S/ 55.90</strong></span><button class="store-add-button" type="button" data-add-to-cart>Agregar</button></div></div>
+            </article>
+            <article class="store-product-card" data-store-category="accesorios" data-store-condition="nuevo" data-product-id="mouse-halion-m703-mantis-m705" data-product-name="Mouse Halion M703 Blanco" data-product-price="79">
+              <div class="store-product-art store-art-accessory"><img class="store-accessory-image" src="assets/mouse-halion-m703-mantis-m705.png" alt="Mouse Halion M703 blanco" loading="lazy" decoding="async" /></div>
+              <div class="store-product-info"><p class="store-product-kind">ACCESORIO</p><h3>Mouse Halion M703 Blanco</h3><div class="store-product-purchase"><span class="store-starting-price">Precio referencial<strong>S/ 79.00</strong></span><button class="store-add-button" type="button" data-add-to-cart>Agregar</button></div></div>
+            </article>
+            <article class="store-product-card" data-store-category="accesorios" data-store-condition="nuevo" data-product-id="parlantes-halion-ha-s270" data-product-name="Parlantes Gamer Halion HA-S270" data-product-price="45">
+              <div class="store-product-art store-art-accessory"><img class="store-accessory-image" src="assets/parlantes-halion-ha-s270.jpg" alt="Parlantes Gamer Halion HA-S270" loading="lazy" decoding="async" /></div>
+              <div class="store-product-info"><p class="store-product-kind">ACCESORIO</p><h3>Parlantes Gamer Halion HA-S270</h3><div class="store-product-purchase"><span class="store-starting-price">Precio referencial<strong>S/ 45.00</strong></span><button class="store-add-button" type="button" data-add-to-cart>Agregar</button></div></div>
+            </article>
+            <p class="store-empty-state" id="store-empty-state" hidden>No hay productos agregados para esta selección.</p>
+          </div>
+          <aside class="store-cart" aria-labelledby="store-cart-title">
+            <div class="store-cart-heading">
+              <div><p class="store-product-kind">TU SELECCIÓN</p><h3 id="store-cart-title">Carrito</h3></div>
+              <span class="store-cart-count" id="store-cart-count" aria-label="0 productos">0</span>
+            </div>
+            <p class="store-cart-empty" id="store-cart-empty">Aún no agregas equipos.</p>
+            <ul class="store-cart-items" id="store-cart-items" aria-live="polite"></ul>
+            <div class="store-cart-total"><span>Subtotal de muestra</span><strong id="store-cart-total">S/ 0</strong></div>
+            <a class="store-order-button store-order-whatsapp" id="store-whatsapp-order" href="#" aria-disabled="true" tabindex="-1" target="_blank" rel="noopener noreferrer">Comprar por WhatsApp <span aria-hidden="true">↗</span></a>
+            <a class="store-order-button" id="store-email-order" href="#" aria-disabled="true" tabindex="-1" target="_blank" rel="noopener noreferrer">Comprar por Gmail <span aria-hidden="true">↗</span></a>
+            <p class="store-cart-disclaimer">Al elegir un canal se descargará el resumen PDF y se abrirá el mensaje listo para enviar. En WhatsApp podrás adjuntar el PDF descargado. Precios referenciales; no se realizan pagos en línea.</p>
+          </aside>
+        </div>
+        <p class="visually-hidden" id="store-status" role="status" aria-live="polite"></p>
+      </div>
+      <dialog class="office-config-dialog" id="office-config-dialog" aria-labelledby="office-config-title">
+        <div class="office-config-panel">
+          <div class="office-config-image">
+            <img src="assets/pc-sheep-office.png" alt="Gabinete de PC de oficina Sheep Store" />
+            <span class="office-config-tag">PC DE OFICINA</span>
+          </div>
+          <div class="office-config-content">
+            <div class="office-config-heading">
+              <div>
+                <p class="store-product-kind">ARMA TU CONFIGURACIÓN</p>
+                <h2 id="office-config-title">Core i3 tercera generación</h2>
+                <p id="office-config-description">Procesador Intel Core i3 de tercera generación. Para juegos ligeros el rendimiento depende de los gráficos integrados del modelo exacto.</p>
+                <p class="office-config-psu">Fuente de poder <strong>600 W Halion</strong></p>
+                <p>Elige RAM y almacenamiento para ver el precio actualizado.</p>
+              </div>
+              <button class="office-config-close" type="button" aria-label="Cerrar personalización">×</button>
+            </div>
+            <fieldset class="office-choice-group">
+              <legend>Memoria RAM</legend>
+              <div class="office-choice-options" role="group" aria-label="Selecciona memoria RAM">
+                <button class="office-choice-button is-selected" type="button" data-config-ram-option="8" aria-pressed="true"><strong>8 GB</strong></button>
+                <button class="office-choice-button" type="button" data-config-ram-option="12" aria-pressed="false"><strong>12 GB</strong></button>
+                <button class="office-choice-button" type="button" data-config-ram-option="16" aria-pressed="false"><strong>16 GB</strong></button>
+              </div>
+            </fieldset>
+            <fieldset class="office-choice-group">
+              <legend>Almacenamiento</legend>
+              <div class="office-storage-options" role="group" aria-label="Selecciona almacenamiento">
+                <button class="office-storage-button is-selected" type="button" data-config-storage-option="hdd500" aria-pressed="true">
+                  <span class="office-storage-icon" aria-hidden="true">HDD</span>
+                  <span><strong>500 GB HDD</strong><small>Disco mecánico</small></span>
+                  <span class="office-storage-check" aria-hidden="true">✓</span>
+                </button>
+                <button class="office-storage-button" type="button" data-config-storage-option="ssd240" aria-pressed="false">
+                  <span class="office-storage-icon office-ssd-icon" aria-hidden="true">SSD</span>
+                  <span><strong>240 GB SSD</strong><small>Sólido · alta velocidad</small></span>
+                  <span class="office-storage-check" aria-hidden="true">✓</span>
+                </button>
+              </div>
+            </fieldset>
+            <div class="office-config-summary">
+              <div><small>Tu configuración</small><p id="office-config-summary-text">Core i3 · 8 GB RAM · 500 GB HDD mecánico</p></div>
+              <strong id="office-config-price">S/ 400</strong>
+            </div>
+            <button class="office-config-add" type="button" data-add-configured-product>Agregar configuración al carrito <span aria-hidden="true">↗</span></button>
+            <p class="office-config-note">Precio referencial de esta simulación.</p>
+          </div>
+        </div>
+      </dialog>
     </dialog>
   </body>
 </html>
