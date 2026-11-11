@@ -416,6 +416,7 @@ h1, h2 { font-family: var(--font-display); }
 .product-marquee.is-manual.is-dragging { cursor: grabbing; user-select: none; }
 @keyframes product-marquee-advance { to { transform: translateX(-50%); } }
 .product-grid { display: flex; gap: 20px; }
+.product-marquee-group[hidden] { display: none; }
 .product-card {
   position: relative;
   width: clamp(270px, 28vw, 350px);

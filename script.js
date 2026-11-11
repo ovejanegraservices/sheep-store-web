@@ -1374,7 +1374,7 @@ categoryTabs.forEach((tab) => {
       categoryTab.setAttribute("aria-pressed", String(isSelected));
     });
 
-    document.querySelectorAll(".product-marquee-group:not(.product-marquee-group-copy) .product-card").forEach((card) => {
+    document.querySelectorAll(".product-marquee-group .product-card").forEach((card) => {
       card.hidden = selectedCategory !== "todos" && card.dataset.category !== selectedCategory;
     });
 
