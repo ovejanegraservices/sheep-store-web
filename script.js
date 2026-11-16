@@ -1349,6 +1349,11 @@ if (
     event.preventDefault();
     jumpSheep();
   });
+  gameDialog.addEventListener("pointerdown", (event) => {
+    if (!(event.target instanceof Element) || event.target.closest("button, a, input, select, textarea, canvas")) return;
+    event.preventDefault();
+    jumpSheep();
+  });
   gameJump.addEventListener("click", jumpSheep);
 
   document.addEventListener("keydown", (event) => {

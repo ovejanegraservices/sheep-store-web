@@ -1183,17 +1183,14 @@ h1, h2 { font-family: var(--font-display); }
   .sheep-game-header h2 { font-size: clamp(24px, 7vw, 32px); letter-spacing: -1px; }
   .sheep-game-close { width: 44px; height: 44px; }
   .sheep-game-instructions { margin: 8px 0 12px; font-size: 13px; }
-  .sheep-game-screen { overflow: visible; }
   .sheep-game-jump {
-    position: absolute;
-    right: 12px;
-    bottom: 12px;
-    display: inline-flex;
-    min-width: 112px;
+    display: flex;
+    width: min(100%, 240px);
     min-height: 54px;
     align-items: center;
     justify-content: center;
     gap: 7px;
+    margin: 12px auto 0;
     border: 1px solid #ffffffa8;
     border-radius: 8px;
     background: #f4f4f4;
