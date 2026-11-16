@@ -86,6 +86,114 @@
       .game-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .hero::before { right: 2%; width: 260px; height: 260px; }
     }
+    :root {
+      color-scheme: dark;
+      font-family: "Segoe UI", sans-serif;
+      color: #eef2ea;
+      background: #0c100e;
+      font-synthesis: none;
+      --panel: #151a17;
+      --panel-raised: #1b211d;
+      --line: #ffffff14;
+      --muted: #9aa69c;
+      --lime: #c9ef68;
+      --mint: #7ce0c2;
+    }
+    body { min-width: 0; background: radial-gradient(ellipse at 75% 0, #26342a 0, #111713 38%, #0c100e 75%); color: #eef2ea; }
+    button { cursor: pointer; }
+    button:focus-visible, [role="button"]:focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; }
+    .launcher { max-width: 1600px; margin: 0 auto; grid-template-columns: 232px minmax(0, 1fr); background: #0e120f; }
+    .sidebar { position: sticky; top: 0; height: 100vh; padding: 25px 15px 18px; border-right-color: var(--line); background: #111612; }
+    .brand { gap: 11px; padding: 0 8px 40px; }
+    .brand img { width: 38px; height: 38px; border: 1px solid #ffffff20; border-radius: 11px; }
+    .brand-name { color: #f2f5ef; font-size: 17px; letter-spacing: 0; }
+    .brand-name span { color: var(--lime); }
+    .side-label { margin-bottom: 9px; color: #758178; font-size: 9px; letter-spacing: 1.4px; }
+    .nav { gap: 3px; }
+    .nav button { min-height: 40px; gap: 11px; border-radius: 6px; color: #aab4aa; font-size: 11px; transition: background 150ms ease, color 150ms ease; }
+    .nav button:hover { background: #1a211b; color: #f4f6f0; }
+    .nav button.active { background: #202820; color: #f4f6f0; box-shadow: inset 3px 0 var(--lime); }
+    .nav-icon { color: var(--lime); }
+    .profile { border-color: var(--line); }
+    .avatar { border-radius: 9px; background: #293524; color: var(--lime); }
+    .profile small { color: var(--muted); }
+    main { padding: 24px clamp(22px, 4vw, 58px) 40px; }
+    .topbar { margin-bottom: 24px; }
+    .breadcrumbs { color: #8d9990; font-size: 11px; }
+    .breadcrumbs strong { color: #e8eee7; }
+    .top-actions { gap: 8px; }
+    .search { width: 220px; padding: 10px 12px; border-color: var(--line); border-radius: 6px; background: #151a17; color: #d7dfd6; }
+    .icon-button { border-color: var(--line); border-radius: 6px; background: #151a17; color: #d7dfd6; }
+    .hero { min-height: 326px; padding: 30px clamp(22px, 4vw, 40px); border: 1px solid #ffffff18; border-radius: 8px; background: linear-gradient(90deg, #0d130fee 0%, #0d130fd9 43%, #0d130f58 100%), url("wallpapers/sheep-neon-tech.png") 63% center / cover; box-shadow: 0 20px 55px #0005; }
+    .hero::before, .hero::after { display: none; }
+    .hero-copy { max-width: 520px; }
+    .eyebrow { margin-bottom: 13px; color: var(--lime); font-size: 9px; letter-spacing: 1.8px; }
+    .hero h1 { max-width: 520px; margin-bottom: 12px; color: #f6f8f3; font-size: clamp(32px, 4vw, 46px); font-weight: 750; letter-spacing: 0; line-height: 1.02; }
+    .hero p:not(.eyebrow) { max-width: 440px; min-height: 42px; color: #c1ccc1; font-size: 12px; line-height: 1.7; }
+    .hero-meta { gap: 7px; margin: 15px 0 18px; }
+    .pill { padding: 6px 9px; border: 1px solid #ffffff28; border-radius: 4px; background: #1017137a; color: #e0e9df; font-size: 9px; }
+    .buttons { gap: 8px; }
+    .primary, .secondary { min-height: 37px; padding: 0 14px; border-radius: 4px; font-size: 10px; }
+    .primary { background: #fff; color: #171815; box-shadow: 0 5px 20px #ffffff22; }
+    .primary:hover { background: #e8e9e5; }
+    .secondary { border-color: #ffffff35; background: #0e130f80; color: #edf2eb; }
+    .secondary:hover { background: #ffffff16; }
+    .section-heading { align-items: center; margin: 27px 0 13px; }
+    .section-heading h2 { color: #eef2ea; font-size: 17px; font-weight: 650; letter-spacing: 0; }
+    .section-heading p { color: var(--muted); font-size: 10px; }
+    .text-link { color: var(--lime); font-size: 10px; }
+    .game-grid { gap: 12px; }
+    .game-card { position: relative; min-width: 0; padding: 0; border: 1px solid #ffffff16; border-radius: 6px; background: var(--panel); color: inherit; text-align: left; cursor: pointer; box-shadow: 0 8px 20px #0003; transition: transform 160ms ease, border-color 160ms ease, background 160ms ease; }
+    .game-card:hover { transform: translateY(-3px); border-color: #ffffff36; background: var(--panel-raised); }
+    .game-card[aria-pressed="true"] { border-color: var(--lime); box-shadow: 0 0 0 1px #c9ef6833, 0 9px 24px #0005; }
+    .cover { height: auto; aspect-ratio: 1.55; }
+    .cover-label { bottom: 10px; left: 11px; font-size: 12px; font-weight: 800; letter-spacing: 0; }
+    .card-info { min-height: 55px; padding: 10px 11px; }
+    .card-info strong { color: #edf2ea; font-size: 10px; }
+    .card-info small { color: var(--muted); font-size: 8px; }
+    .status { color: var(--mint); font-size: 7px; }
+    .bottom-row { gap: 11px; margin-top: 20px; }
+    .info-panel { min-height: 66px; padding: 13px 15px; border-color: var(--line); border-radius: 6px; background: var(--panel); }
+    .info-panel strong { color: #e7eee6; font-size: 10px; }
+    .info-panel small { color: var(--muted); font-size: 8px; }
+    .progress { background: #353c34; }
+    .progress i { background: var(--lime); }
+    @media (max-width: 760px) {
+      .launcher { display: block; }
+      .sidebar { position: static; display: flex; height: auto; min-height: 0; flex-direction: row; align-items: center; gap: 12px; padding: 11px 15px; border-right: 0; border-bottom: 1px solid var(--line); }
+      .brand { flex: 0 0 auto; padding: 0; }
+      .brand img { width: 33px; height: 33px; }
+      .brand-name { font-size: 14px; }
+      .side-label, .sidebar-bottom nav { display: none; }
+      .nav { display: flex; gap: 2px; }
+      .nav button { min-height: 34px; padding: 0 9px; font-size: 9px; }
+      .nav-icon { width: auto; font-size: 13px; }
+      .sidebar-bottom { margin: 0 0 0 auto; }
+      .profile { margin: 0; padding: 0; border: 0; }
+      .profile small { display: none; }
+      main { padding: 17px 16px 30px; }
+      .hero { min-height: 290px; background-position: center, 61% center; }
+      .game-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .bottom-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 520px) {
+      .sidebar { flex-wrap: wrap; gap: 8px; }
+      .sidebar > .nav { order: 3; width: 100%; overflow-x: auto; }
+      .sidebar > .nav button { flex: 0 0 auto; }
+      .topbar { align-items: flex-start; flex-direction: column; gap: 12px; }
+      .top-actions { width: 100%; }
+      .search { width: 100%; }
+      .hero { min-height: 310px; padding: 22px 18px; background-position: center, 59% center; }
+      .hero h1 { font-size: 32px; }
+      .section-heading h2 { font-size: 15px; }
+      .game-grid { gap: 9px; }
+      .cover { aspect-ratio: 1.2; }
+      .card-info { align-items: flex-start; flex-direction: column; gap: 4px; }
+      .status { font-size: 7px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
   </style>
 </head>
 <body>
@@ -118,21 +226,21 @@
         <div class="breadcrumbs">Sheep Store <span aria-hidden="true">/</span> <strong>Launcher de juegos</strong></div>
         <div class="top-actions"><div class="search">⌕ &nbsp; Buscar en mi biblioteca</div><button class="icon-button" aria-label="Notificaciones">♧</button><button class="icon-button" aria-label="Perfil">S</button></div>
       </header>
-      <section class="hero" aria-label="Juego destacado">
-        <div class="hero-copy">
+      <section class="hero" aria-label="Juego seleccionado">
+        <div class="hero-copy" aria-live="polite">
           <p class="eyebrow">JUEGO DESTACADO · ESTA SEMANA</p>
-          <h1>ÓRBITA 9</h1>
-          <p>Explora mundos desconocidos, descubre los secretos de una galaxia lejana y escribe tu propia historia entre las estrellas.</p>
-          <div class="hero-meta"><span class="pill">Aventura</span><span class="pill">Un jugador</span><span class="pill">Español</span></div>
+          <h1 id="hero-title">ÓRBITA 9</h1>
+          <p id="hero-description">Explora mundos desconocidos, descubre los secretos de una galaxia lejana y escribe tu propia historia entre las estrellas.</p>
+          <div class="hero-meta" id="hero-meta"><span class="pill">Aventura</span><span class="pill">Un jugador</span><span class="pill">Español</span></div>
           <div class="buttons"><button class="primary">▶ &nbsp; Jugar ahora</button><button class="secondary">Ver detalles</button></div>
         </div>
       </section>
-      <div class="section-heading"><div><h2>Continuar jugando</h2><p>Vuelve a tus aventuras recientes</p></div><span class="text-link">Ver biblioteca &nbsp; →</span></div>
+      <div class="section-heading"><div><h2>Tu biblioteca</h2><p>Juegos instalados y aventuras por descubrir</p></div><span class="text-link">4 juegos &nbsp; · &nbsp; Ver todo</span></div>
       <section class="game-grid" aria-label="Juegos">
-        <article class="game-card"><div class="cover cover-orbit"><span class="cover-label">ÓRBITA 9</span></div><div class="card-info"><div><strong>Órbita 9</strong><small>Jugado recientemente</small></div><span class="status">● INSTALADO</span></div></article>
-        <article class="game-card"><div class="cover cover-ember"><span class="cover-label">REINO DE CENIZA</span></div><div class="card-info"><div><strong>Reino de Ceniza</strong><small>Última partida · ayer</small></div><span class="status">● INSTALADO</span></div></article>
-        <article class="game-card"><div class="cover cover-neon"><span class="cover-label">CIRCUITO CERO</span></div><div class="card-info"><div><strong>Circuito Cero</strong><small>Listo para jugar</small></div><span class="status">● INSTALADO</span></div></article>
-        <article class="game-card"><div class="cover cover-forest"><span class="cover-label">TIERRAS VIVAS</span></div><div class="card-info"><div><strong>Tierras Vivas</strong><small>Disponible en tienda</small></div><span class="status" style="color:#c3b0ef">＋ INSTALAR</span></div></article>
+        <article class="game-card" role="button" tabindex="0" aria-pressed="true" data-title="Órbita 9" data-description="Explora mundos desconocidos, descubre los secretos de una galaxia lejana y escribe tu propia historia entre las estrellas." data-genres="Aventura|Un jugador|Español"><div class="cover cover-orbit"><span class="cover-label">ÓRBITA 9</span></div><div class="card-info"><div><strong>Órbita 9</strong><small>Jugado recientemente</small></div><span class="status">● INSTALADO</span></div></article>
+        <article class="game-card" role="button" tabindex="0" aria-pressed="false" data-title="Reino de Ceniza" data-description="Atraviesa un reino al borde de la guerra, reúne aliados y decide qué leyendas sobrevivirán al fuego." data-genres="Rol|Acción|Un jugador"><div class="cover cover-ember"><span class="cover-label">REINO DE CENIZA</span></div><div class="card-info"><div><strong>Reino de Ceniza</strong><small>Última partida · ayer</small></div><span class="status">● INSTALADO</span></div></article>
+        <article class="game-card" role="button" tabindex="0" aria-pressed="false" data-title="Circuito Cero" data-description="Domina circuitos imposibles en una ciudad nocturna. Ajusta tu vehículo y compite por el primer puesto." data-genres="Carreras|Multijugador|Neón"><div class="cover cover-neon"><span class="cover-label">CIRCUITO CERO</span></div><div class="card-info"><div><strong>Circuito Cero</strong><small>Listo para jugar</small></div><span class="status">● INSTALADO</span></div></article>
+        <article class="game-card" role="button" tabindex="0" aria-pressed="false" data-title="Tierras Vivas" data-description="Recorre un valle indómito, encuentra sus secretos y reconstruye el vínculo entre sus habitantes y la naturaleza." data-genres="Aventura|Exploración|Un jugador"><div class="cover cover-forest"><span class="cover-label">TIERRAS VIVAS</span></div><div class="card-info"><div><strong>Tierras Vivas</strong><small>Disponible en tienda</small></div><span class="status" style="color:#c9ef68">＋ INSTALAR</span></div></article>
       </section>
       <section class="bottom-row" aria-label="Actividad del launcher">
         <div class="info-panel"><div><strong>Descargando actualización</strong><small>Reino de Ceniza · 4.2 GB de 6.8 GB</small></div><div class="progress" aria-label="62 por ciento"><i></i></div></div>
@@ -140,5 +248,36 @@
       </section>
     </main>
   </div>
+  <script>
+    const gameCards = [...document.querySelectorAll(".game-card")];
+    const heroTitle = document.querySelector("#hero-title");
+    const heroDescription = document.querySelector("#hero-description");
+    const heroMeta = document.querySelector("#hero-meta");
+
+    function selectGame(card) {
+      heroTitle.textContent = card.dataset.title;
+      heroDescription.textContent = card.dataset.description;
+      heroMeta.replaceChildren(...card.dataset.genres.split("|").map((genre) => {
+        const pill = document.createElement("span");
+        pill.className = "pill";
+        pill.textContent = genre;
+        return pill;
+      }));
+      gameCards.forEach((gameCard) => {
+        const selected = gameCard === card;
+        gameCard.setAttribute("aria-pressed", selected);
+      });
+    }
+
+    gameCards.forEach((card) => {
+      card.addEventListener("click", () => selectGame(card));
+      card.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          selectGame(card);
+        }
+      });
+    });
+  </script>
 </body>
 </html>

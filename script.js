@@ -1398,6 +1398,33 @@ categoryTabs.forEach((tab) => {
   });
 });
 
+const gameCategoryLink = document.querySelector("[data-game-category-link]");
+const gameCategoryTab = document.querySelector('.category-tab[data-filter="juegos"]');
+
+if (gameCategoryLink instanceof HTMLAnchorElement && gameCategoryTab instanceof HTMLButtonElement) {
+  const gameStoreDialog = document.querySelector("#game-store-dialog");
+  const gameStoreClose = document.querySelector(".game-store-window-close");
+  const openGameStore = () => {
+    if (gameStoreDialog instanceof HTMLDialogElement && !gameStoreDialog.open) {
+      gameStoreDialog.showModal();
+    }
+  };
+
+  gameCategoryLink.addEventListener("click", () => {
+    gameCategoryTab.click();
+    openGameStore();
+  });
+  document.querySelectorAll("[data-open-game-store]").forEach((button) => {
+    button.addEventListener("click", openGameStore);
+  });
+  if (gameStoreDialog instanceof HTMLDialogElement && gameStoreClose instanceof HTMLButtonElement) {
+    gameStoreClose.addEventListener("click", () => gameStoreDialog.close());
+    gameStoreDialog.addEventListener("click", (event) => {
+      if (event.target === gameStoreDialog) gameStoreDialog.close();
+    });
+  }
+}
+
 const programsDialog = document.querySelector("#programs-dialog");
 const programsFolderButtons = document.querySelectorAll("[aria-controls='programs-dialog']");
 const programsDialogClose = document.querySelector(".programs-close");

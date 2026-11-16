@@ -15,8 +15,8 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css?v=20261111-category-filters" />
-    <script src="script.js?v=20261111-category-filters" defer></script>
+    <link rel="stylesheet" href="style.css?v=20261111-game-store-window" />
+    <script src="script.js?v=20261111-game-store-window" defer></script>
   </head>
   <body>
     <header class="site-header">
@@ -33,6 +33,7 @@
       </button>
       <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
         <a href="#catalogo" data-hover-sound>Catálogo</a>
+        <a href="#catalogo" data-hover-sound data-game-category-link>Juegos</a>
         <a href="#fondos" data-hover-sound>Fondos gratis</a>
         <a href="#servicios" data-hover-sound>Servicios</a>
         <a href="#nosotros" data-hover-sound>Nosotros</a>
@@ -102,6 +103,7 @@
         <div class="category-tabs" role="group" aria-label="Filtrar el catálogo">
           <button class="category-tab is-active" type="button" data-filter="todos" aria-pressed="true">Todo</button>
           <button class="category-tab" type="button" data-filter="computacion" aria-pressed="false">PC - Escritorio</button>
+          <button class="category-tab" type="button" data-filter="juegos" aria-pressed="false">Juegos</button>
           <button class="category-tab" type="button" data-filter="laptops" aria-pressed="false">Laptops</button>
           <button class="category-tab" type="button" data-filter="accesorios" aria-pressed="false">Accesorios</button>
           <button class="category-tab" type="button" data-filter="servicios" aria-pressed="false">Servicios</button>
@@ -114,7 +116,7 @@
             <div class="product-art product-art-laptop product-art-pc">
               <span class="product-badge">PC - ESCRITORIO</span>
               <img class="desktop-pc-image" src="assets/pc-sheep-office.png" alt="Gabinete negro de PC de oficina Sheep Store con iluminación frontal" loading="lazy" decoding="async" />
-              <span class="art-index">01 / 05</span>
+              <span class="art-index">01 / 06</span>
               <button class="product-art-action" type="button" data-open-store data-store-category="computacion" aria-haspopup="dialog" aria-controls="store-dialog" aria-label="Abrir la tienda de PC de escritorio"></button>
             </div>
             <div class="product-info">
@@ -126,7 +128,7 @@
             <div class="product-art product-art-laptop">
               <span class="product-badge">LAPTOPS</span>
               <div class="mini-laptop"><div class="mini-screen"><span></span><i></i></div><div class="mini-base"></div></div>
-              <span class="art-index">02 / 05</span>
+              <span class="art-index">02 / 06</span>
               <button class="product-art-action" type="button" data-open-store data-store-category="laptops" aria-haspopup="dialog" aria-controls="store-dialog" aria-label="Abrir la tienda de laptops"></button>
             </div>
             <div class="product-info">
@@ -138,7 +140,7 @@
             <div class="product-art product-art-audio">
               <span class="product-badge">ACCESORIOS</span>
               <img class="accessories-cover" src="assets/headphones-sheep.png" alt="Audífonos negros con el logo de la oveja Sheep Store" loading="lazy" decoding="async" />
-              <span class="art-index">03 / 05</span>
+              <span class="art-index">03 / 06</span>
               <button class="product-art-action" type="button" data-open-store data-store-category="accesorios" aria-haspopup="dialog" aria-controls="store-dialog" aria-label="Abrir la tienda de accesorios"></button>
             </div>
             <div class="product-info">
@@ -172,7 +174,7 @@
                 <path d="m50 116 6-14" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2" opacity=".8" />
               </svg>
               <span class="maintenance-glint" aria-hidden="true"></span>
-              <span class="art-index">04 / 05</span>
+              <span class="art-index">04 / 06</span>
               <button class="product-art-action" type="button" data-open-services aria-haspopup="dialog" aria-controls="services-dialog" aria-label="Abrir servicios de reparación y mantenimiento"></button>
             </div>
             <div class="product-info">
@@ -190,11 +192,23 @@
                 </div>
                 <span class="program-window-caption">PROGRAMAS</span>
               </button>
-              <span class="art-index">01 / 01</span>
+              <span class="art-index">05 / 06</span>
             </div>
             <div class="product-info program-info">
               <div><h3>PROGRAMAS</h3><p>Abre la carpeta para ver las aplicaciones disponibles.</p></div>
               <button class="program-folder-open" type="button" aria-haspopup="dialog" aria-controls="programs-dialog">Abrir <span aria-hidden="true">↗</span></button>
+            </div>
+          </article>
+          <article class="product-card game-product-card" data-category="juegos">
+            <div class="product-art product-art-game">
+              <span class="product-badge">JUEGOS</span>
+              <img class="sheep-game-cover" src="assets/wallpapers/sheep-gamer.gif" alt="Sheep Store en su juego de carrera" loading="lazy" decoding="async" />
+              <span class="art-index">06 / 06</span>
+              <button class="product-art-action" type="button" data-open-game-store aria-label="Abrir la tienda de juegos Sheep Store"></button>
+            </div>
+            <div class="product-info">
+              <div><h3>Sheep Game</h3><p>Un mini juego para poner a prueba tus reflejos.</p></div>
+              <button class="round-link" type="button" data-open-game-store aria-label="Abrir la tienda de juegos Sheep Store">▶</button>
             </div>
           </article>
             </div>
@@ -967,6 +981,13 @@
           </div>
         </div>
       </dialog>
+    </dialog>
+    <dialog class="game-store-dialog" id="game-store-dialog" aria-labelledby="game-store-window-title">
+      <header class="game-store-window-header">
+        <strong id="game-store-window-title">Sheep Store · Juegos</strong>
+        <button class="game-store-window-close" type="button" aria-label="Cerrar la tienda de juegos">×</button>
+      </header>
+      <iframe class="game-store-frame" src="assets/game-store-preview.html" title="Tienda de juegos Sheep Store"></iframe>
     </dialog>
   </body>
 </html>

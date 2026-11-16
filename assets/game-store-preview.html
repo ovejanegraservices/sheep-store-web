@@ -1,0 +1,1082 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sheep Store / Tienda de juegos</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: #24222a;
+      background: #17151c;
+      font-synthesis: none;
+    }
+
+    * { box-sizing: border-box; }
+    body { min-width: 760px; min-height: 100vh; margin: 0; background: radial-gradient(ellipse at 52% 0, #3c3746, #17151c 58%); }
+    button { font: inherit; }
+    .page-context { width: min(1120px, 94vw); margin: 46px auto; color: #fff; opacity: .42; }
+    .context-nav { display: flex; justify-content: space-between; padding: 18px; border: 1px solid #ffffff20; border-radius: 12px; }
+    .context-hero { height: 190px; margin-top: 15px; padding: 36px; border: 1px solid #ffffff20; border-radius: 15px; background: linear-gradient(110deg, #282330, #59446f); }
+    .context-hero h1 { margin: 0; font-size: 32px; }
+    .context-hero p { color: #ded8e8; }
+    .store-dialog { position: fixed; inset: 14px; display: flex; width: auto; max-width: 1440px; max-height: calc(100vh - 28px); flex-direction: column; margin: auto; padding: 0; overflow: hidden; border: 0; border-radius: 20px; background: #fbfafc; box-shadow: 0 32px 100px #0008; }
+    .store-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; padding: 24px 30px 19px; border-bottom: 1px solid #24222a12; }
+    .eyebrow { margin: 0 0 9px; color: #8d829e; font-size: 10px; font-weight: 800; letter-spacing: 1.8px; }
+    h1 { margin: 0; font-size: 30px; letter-spacing: -1.1px; }
+    .intro { margin: 7px 0 0; color: #77727e; font-size: 12px; }
+    .close { display: grid; width: 38px; height: 38px; flex: 0 0 auto; place-items: center; border: 1px solid #28253118; border-radius: 50%; background: #fff; color: #322e39; font-size: 22px; }
+    .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 13px 30px; border-bottom: 1px solid #24222a12; }
+    .tabs, .filters { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tab, .filter { min-height: 33px; padding: 0 12px; border: 1px solid #26232d20; border-radius: 22px; background: #fff; color: #5d5864; font-size: 10px; }
+    .tab.active { border-color: #29262f; background: #29262f; color: white; }
+    .filter.active { border-color: #cfc3e6; background: #f0ebf8; color: #55436f; }
+    .content { display: grid; min-height: 0; flex: 1; grid-template-columns: minmax(0, 1fr) 248px; gap: 19px; padding: 18px 24px 23px 30px; overflow: auto; }
+    .catalog { min-width: 0; }
+    .catalog-heading { display: flex; align-items: end; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+    .catalog-heading h2 { margin: 0; font-size: 16px; }
+    .catalog-heading p { margin: 4px 0 0; color: #86818e; font-size: 10px; }
+    .sort { color: #6f6976; font-size: 10px; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .game { min-width: 0; overflow: hidden; border: 1px solid #29253116; border-radius: 12px; background: #fff; box-shadow: 0 9px 24px #2925310d; }
+    .cover { position: relative; display: flex; height: 126px; align-items: end; overflow: hidden; padding: 12px; color: white; }
+    .cover::after { position: absolute; inset: 38% 0 0; background: linear-gradient(transparent, #11101acc); content: ""; }
+    .cover-title { position: relative; z-index: 1; font-size: 14px; font-weight: 900; letter-spacing: -.5px; text-shadow: 0 2px 8px #0008; }
+    .cover small { display: block; margin-top: 3px; font-size: 8px; font-weight: 600; letter-spacing: 1.5px; opacity: .83; }
+    .astral { background: radial-gradient(circle at 70% 33%, #f5d6ff 0 2%, #bb87ea 5%, #633d8e 14%, transparent 15%), radial-gradient(ellipse at 72% 55%, #78529e, transparent 46%), linear-gradient(145deg, #1d2340, #171520); }
+    .astral::before { position: absolute; top: 21px; right: 7%; width: 152px; height: 60px; border: 1px solid #e6d3ff8c; border-radius: 50%; content: ""; transform: rotate(-23deg); }
+    .embers { background: radial-gradient(ellipse at 68% 76%, #ffbc68, #da583e 11%, #5e2938 32%, transparent 33%), linear-gradient(140deg, #362232, #17151b); }
+    .embers::before { position: absolute; right: 14%; bottom: -27px; width: 0; height: 0; border-right: 75px solid transparent; border-bottom: 107px solid #28202b; border-left: 75px solid transparent; content: ""; filter: drop-shadow(64px 14px 0 #211a26); }
+    .neon { background: radial-gradient(ellipse at 49% 110%, #188f9a, transparent 47%), linear-gradient(145deg, #242741, #11141b); }
+    .neon::before { position: absolute; top: 20px; left: 36%; width: 82px; height: 69px; border: 2px solid #7af2eb; border-bottom: 0; border-radius: 55px 55px 0 0; box-shadow: 0 0 20px #28cfdb7d; content: ""; }
+    .wild { background: radial-gradient(ellipse at 49% 82%, #b4dc82 0, #578454 17%, transparent 47%), linear-gradient(145deg, #1c3735, #10171b); }
+    .wild::before { position: absolute; bottom: -9px; left: 16%; width: 0; height: 0; border-right: 66px solid transparent; border-bottom: 91px solid #1c2a2b; border-left: 66px solid transparent; content: ""; filter: drop-shadow(73px 17px 0 #233334); }
+    .pixel { background: radial-gradient(circle at 50% 40%, #ffd772 0 5%, #ec776b 6% 14%, transparent 15%), linear-gradient(145deg, #573c69, #252744 62%, #10151d); }
+    .pixel::before { position: absolute; top: 25px; left: calc(50% - 22px); width: 44px; height: 45px; border: 3px solid #ffd783; background: #ec776b; box-shadow: 0 0 0 7px #141720, 0 0 30px #ffcf6a77; content: ""; image-rendering: pixelated; }
+    .racer { background: radial-gradient(ellipse at 55% 78%, #ff7b51, #73355c 25%, transparent 50%), linear-gradient(140deg, #201d38, #11131a); }
+    .racer::before { position: absolute; top: 37px; left: 42%; width: 85px; height: 30px; border: 2px solid #ffd581; border-radius: 50% 50% 18% 18%; background: linear-gradient(90deg, #fa685c, #9249be); box-shadow: 0 14px 15px #f16a7350; content: ""; transform: skew(-18deg); }
+    .details { padding: 10px 11px 11px; }
+    .details h3 { min-height: 28px; margin: 0; font-size: 11px; line-height: 1.35; }
+    .tags { display: flex; gap: 5px; margin-top: 5px; }
+    .tags span { padding: 4px 6px; border-radius: 20px; background: #f2f0f5; color: #77717f; font-size: 8px; }
+    .purchase { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 11px; padding-top: 9px; border-top: 1px solid #29253112; }
+    .price small { display: block; color: #86818e; font-size: 8px; }
+    .price strong { display: block; margin-top: 2px; font-size: 15px; }
+    .add { min-height: 31px; padding: 0 11px; border: 0; border-radius: 6px; background: #29262f; color: white; font-size: 9px; font-weight: 700; }
+    @media (max-width: 980px) {
+      .store-dialog { inset: 9px; max-height: calc(100vh - 18px); }
+      .content { grid-template-columns: minmax(0, 1fr) 210px; padding-right: 16px; padding-left: 20px; }
+      .store-header, .toolbar { padding-right: 20px; padding-left: 20px; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    body { min-width: 360px; background: #fff; color: #24222a; }
+    .store-dialog { position: relative; inset: auto; width: min(1440px, 100%); max-width: none; min-height: 100vh; max-height: none; margin: 0 auto; border-radius: 0; background: #fff; box-shadow: none; overflow: visible; }
+    .store-header { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 23px 20px; padding: 23px clamp(22px, 6vw, 82px) 24px; }
+    .store-brand { display: flex; grid-column: 1 / -1; align-items: center; gap: 9px; color: #77727e; font-size: 11px; }
+    .store-brand img { width: 30px; height: 30px; border-radius: 9px; object-fit: cover; }
+    .store-brand strong { color: #28252f; font-size: 15px; letter-spacing: -.5px; }
+    .store-brand > span:first-of-type { margin: 0 2px 0 4px; color: #d3ced9; }
+    .store-title .eyebrow { margin-bottom: 7px; color: #8c789f; font-size: 9px; letter-spacing: 1.5px; }
+    .store-title h1 { font-size: clamp(24px, 3vw, 34px); font-weight: 700; letter-spacing: -1.5px; }
+    .store-title .intro { margin-top: 6px; font-size: 11px; }
+    .close { display: flex; align-items: center; justify-content: center; align-self: center; width: auto; height: 38px; gap: 10px; padding: 0 12px; border-radius: 22px; color: #37333e; font-size: 10px; }
+    .close span { display: grid; width: 22px; height: 22px; place-items: center; border-radius: 50%; background: #eee9f5; color: #58456f; font-size: 9px; font-weight: 800; }
+    .toolbar { justify-content: flex-start; padding: 13px clamp(22px, 6vw, 82px); background: #fbfafc; }
+    .filters { gap: 5px; }
+    .filter { min-height: 30px; padding: 0 11px; border-color: transparent; background: transparent; font-size: 10px; }
+    .filter.active { border-color: #29262f; background: #29262f; color: #fff; }
+    .content { width: min(1440px, 100%); grid-template-columns: minmax(0, 1fr) 238px; gap: 34px; margin: 0 auto; padding: 29px clamp(22px, 6vw, 82px) 42px; overflow: visible; }
+    .catalog-heading { margin-bottom: 17px; }
+    .catalog-heading h2 { font-size: 16px; letter-spacing: -.3px; }
+    .catalog-heading p { font-size: 9px; }
+    .sort { color: #77727e; font-size: 9px; }
+    .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 23px 15px; }
+    .game { border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+    .cover { height: auto; aspect-ratio: 1.35; padding: 11px; border-radius: 9px; transition: transform 180ms ease; }
+    .game:hover .cover { transform: translateY(-2px); }
+    .cover-title { font-size: 12px; }
+    .cover small { font-size: 7px; }
+    .details { padding: 10px 1px 0; }
+    .details h3 { min-height: 0; font-size: 10px; font-weight: 650; }
+    .tags { gap: 4px; margin-top: 6px; }
+    .tags span { padding: 3px 6px; background: #f5f3f7; font-size: 7px; }
+    .purchase { margin-top: 9px; padding-top: 8px; border-color: #29253112; }
+    .price small { font-size: 7px; }
+    .price strong { font-size: 13px; }
+    .add { min-height: 29px; padding: 0 10px; border-radius: 5px; background: #29262f; font-size: 8px; }
+    @media (max-width: 980px) {
+      .store-header, .toolbar { padding-right: 24px; padding-left: 24px; }
+      .content { grid-template-columns: minmax(0, 1fr) 210px; gap: 20px; padding-right: 24px; padding-left: 24px; }
+      .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 19px 13px; }
+    }
+    @media (max-width: 700px) {
+      .store-header { gap: 18px 10px; padding: 17px 18px 19px; }
+      .store-brand { font-size: 10px; }
+      .store-title h1 { font-size: 25px; }
+      .store-title .intro { font-size: 10px; }
+      .close { height: 34px; gap: 6px; padding: 0 8px; font-size: 9px; }
+      .toolbar { padding: 10px 18px; overflow-x: auto; }
+      .filters { flex-wrap: nowrap; }
+      .filter { flex: 0 0 auto; padding: 0 9px; font-size: 9px; }
+      .content { grid-template-columns: minmax(0, 1fr); gap: 22px; padding: 22px 18px 30px; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 19px 13px; }
+    }
+    body { min-width: 360px; background: #101b25; color: #dce5ec; }
+    .store-dialog { width: min(1380px, 100%); background: #17212b; color: #dce5ec; }
+    .store-header { display: flex; min-height: 66px; align-items: center; gap: 30px; padding: 0 clamp(20px, 5vw, 72px); border: 0; background: #171f28; }
+    .store-brand { display: flex; flex: 0 0 auto; align-items: center; gap: 8px; color: #97a7b3; font-size: 11px; }
+    .store-brand img { width: 31px; height: 31px; border-radius: 50%; }
+    .store-brand strong { color: #fff; font-size: 14px; }
+    .store-brand > span:first-of-type { margin: 0 0 0 8px; }
+    .store-title { display: flex; flex: 1; align-items: center; gap: 24px; }
+    .store-title .eyebrow, .store-title .intro { display: none; }
+    .store-title h1 { font-size: 14px; font-weight: 500; letter-spacing: 0; }
+    .close { display: inline-flex; height: 32px; align-items: center; gap: 8px; padding: 0 10px; border-color: #ffffff19; background: #ffffff08; color: #dce5ec; }
+    .close span { background: #70a3bb; color: #12202b; }
+    .toolbar { min-height: 47px; gap: 20px; padding: 7px clamp(20px, 5vw, 72px); border: 0; background: linear-gradient(90deg, #1a6875, #236878 56%, #225b6a); }
+    .filters { flex: 1; gap: 4px; }
+    .filter { min-height: 32px; border: 0; border-radius: 2px; background: transparent; color: #d6e8ec; font-size: 10px; }
+    .filter.active, .filter:hover { background: #183e4d; color: #fff; }
+    .content { display: block; width: min(1180px, 100%); padding: 27px clamp(20px, 4vw, 45px) 40px; }
+    .catalog-heading { margin: 23px 0 13px; }
+    .catalog-heading h2 { color: #fff; font-size: 17px; font-weight: 500; }
+    .catalog-heading p, .sort { color: #9cabb7; font-size: 10px; }
+    .steam-feature { display: block; overflow: hidden; border-radius: 3px; background: #22303b; box-shadow: 0 10px 24px #0003; }
+    .feature-art { overflow: hidden; }
+    .feature-banner-image { display: block; width: 100%; aspect-ratio: 1.89; object-fit: cover; }
+    .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 11px; }
+    .game { border: 0; border-radius: 2px; background: #22303b; box-shadow: none; }
+    .cover { height: auto; aspect-ratio: 1.67; padding: 10px; }
+    .cover::after { inset: 30% 0 0; }
+    .cover-title { font-size: 11px; }
+    .details { padding: 10px; }
+    .details h3 { min-height: 25px; color: #e9f1f7; font-size: 10px; font-weight: 500; }
+    .tags { gap: 4px; margin-top: 5px; }
+    .tags span { border-radius: 2px; background: #344957; color: #b7c8d5; font-size: 7px; }
+    .purchase { margin-top: 9px; padding-top: 8px; border-color: #ffffff13; }
+    .price small { color: #96a9b5; font-size: 7px; }
+    .price strong { color: #c9d8e0; font-size: 12px; font-weight: 500; }
+    .add { min-height: 28px; border-radius: 2px; background: #304756; color: #dce8ee; font-size: 8px; }
+    .discount { display: flex; align-items: center; gap: 6px; color: #a4d76c; font-size: 8px; font-weight: 700; }
+    .discount del { color: #9aa8b2; font-weight: 400; }
+    @media (max-width: 980px) {
+      .store-header, .toolbar { padding-right: 22px; padding-left: 22px; }
+      .content { padding-right: 22px; padding-left: 22px; }
+      .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .news-section { grid-template-columns: minmax(0, 1fr) 220px; }
+    }
+    @media (max-width: 700px) {
+      .store-header { min-height: 57px; flex-wrap: wrap; gap: 11px; padding: 10px 16px; }
+      .store-title { order: 3; flex-basis: 100%; }
+      .store-title h1 { font-size: 13px; }
+      .close { margin-left: auto; }
+      .toolbar { padding: 6px 14px; }
+      .content { padding: 20px 14px 30px; }
+      .feature-art { min-height: 210px; padding: 18px; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px 9px; }
+    }
+
+    :root {
+      color-scheme: light;
+      font-family: "Segoe UI", sans-serif;
+      color: #1c2b23;
+      background: #f2f5ef;
+    }
+    body { min-width: 360px; background: #f2f5ef; color: #1c2b23; }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+    button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid #ee7558; outline-offset: 3px; }
+    .store-dialog { width: min(1320px, 100%); background: #f2f5ef; color: #1c2b23; }
+    .store-header { min-height: 76px; gap: 28px; padding: 0 clamp(20px, 5vw, 72px); border-bottom: 1px solid #1c2b2314; background: #fff; }
+    .store-brand { color: #718078; }
+    .store-brand img { width: 35px; height: 35px; border-radius: 10px; }
+    .store-brand strong { color: #1c2b23; font-size: 15px; letter-spacing: -.3px; }
+    .store-title { gap: 22px; }
+    .store-title h1 { color: #1b3929; font-size: 12px; font-weight: 800; letter-spacing: 1px; }
+    .store-title > span, .store-title > a { color: #6f7d74; font-size: 11px; }
+    .store-title > a { text-decoration: none; }
+    .close { min-height: 35px; border: 1px solid #dfe6df; border-radius: 4px; background: #fff; color: #263b2d; font-size: 10px; }
+    .close span { background: #fff; color: #171815; }
+    .toolbar { min-height: 52px; gap: 18px; padding: 8px clamp(20px, 5vw, 72px); border-bottom: 1px solid #1c2b2312; background: #e9eee7; }
+    .filters { flex: 1; gap: 4px; }
+    .filter { min-height: 32px; padding: 0 12px; border: 1px solid transparent; border-radius: 3px; color: #526257; font-size: 10px; }
+    .filter.active, .filter:hover { border-color: #1b3929; background: #1b3929; color: #fff; }
+    .search-box { display: flex; width: min(230px, 36vw); align-items: center; gap: 8px; padding: 0 10px; border: 1px solid #d4ddd4; border-radius: 3px; background: #fff; color: #64736a; }
+    .search-box span { font-size: 17px; }
+    .search-box input { width: 100%; min-width: 0; height: 34px; border: 0; outline: 0; background: transparent; color: #1c2b23; font-size: 10px; }
+    .search-box input:focus-visible { outline: 0; }
+    .content { display: block; width: min(1320px, 100%); padding: 28px clamp(20px, 5vw, 72px) 48px; }
+    .catalog-heading { margin: 26px 0 15px; }
+    .catalog-heading h2, .news-section h2 { color: #1c2b23; font-family: Georgia, serif; font-size: 20px; font-weight: 600; letter-spacing: 0; }
+    .catalog-heading p { color: #718078; font-size: 10px; }
+    .sort-select { min-height: 33px; padding: 0 28px 0 10px; border: 1px solid #d5ded5; border-radius: 3px; background: #fff; color: #526257; font-size: 10px; }
+    .steam-feature { border-radius: 5px; background: #dfe7df; box-shadow: 0 14px 28px #18261c12; }
+    .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px 16px; }
+    .game { border: 1px solid #e1e7df; border-radius: 4px; background: #fff; box-shadow: 0 5px 15px #1c2b2309; transition: transform 160ms ease, box-shadow 160ms ease; }
+    .game:hover { transform: translateY(-3px); box-shadow: 0 10px 22px #1c2b2316; }
+    .cover { aspect-ratio: 1.45; padding: 12px; border-radius: 0; }
+    .cover-title { font-family: Georgia, serif; font-size: 15px; letter-spacing: 0; }
+    .cover-sheep-run { justify-content: center; background: radial-gradient(ellipse at 50% 42%, #31634f, #1a3228 58%, #101714); }
+    .cover-sheep-run::after { z-index: 0; }
+    .game-cover-image { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+    .game-cover-video, .game-cover-animation { position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; pointer-events: none; transition: opacity 180ms ease; }
+    .game-preview-cover:hover .game-cover-video,
+    .game-preview-cover:focus-within .game-cover-video { opacity: 1; }
+    .game-preview-cover-run-sheep .game-cover-video { opacity: 1; }
+    .game-preview-cover-run-sheep:hover .game-cover-video,
+    .game-preview-cover-run-sheep:focus-within .game-cover-video { opacity: 0; }
+    .game-preview-cover-run-sheep .cover-title { transition: opacity 180ms ease; }
+    .game-preview-cover-run-sheep:hover .cover-title,
+    .game-preview-cover-run-sheep:focus-within .cover-title { opacity: 0; }
+    .game-preview-cover-doom .game-cover-animation { opacity: 1; }
+    .game-preview-cover-doom:hover .game-cover-animation,
+    .game-preview-cover-doom:focus-within .game-cover-animation { opacity: 0; }
+    .cover-sheep-run .cover-title { z-index: 2; }
+    .game-cover-open { position: absolute; z-index: 3; inset: 0; display: grid; width: 100%; height: 100%; place-items: center; padding: 0; border: 0; border-radius: 0; background: transparent; cursor: pointer; opacity: 0; transition: opacity 160ms ease, background 160ms ease; }
+    .game-cover-open::after { padding: 9px 13px; border: 1px solid #ffffff70; border-radius: 3px; background: #10130fd9; color: #fff; content: "Conoce más"; font-size: 11px; font-weight: 700; opacity: 0; transform: translateY(5px); transition: opacity 160ms ease, transform 160ms ease; }
+    .game-cover-open:hover, .game-cover-open:focus-visible { background: #06090738; opacity: 1; }
+    .game-cover-open:hover::after, .game-cover-open:focus-visible::after { opacity: 1; transform: translateY(0); }
+    .game-cover-open:focus-visible { outline: 3px solid #fff; outline-offset: -5px; }
+    .game-run-sheep { position: relative; z-index: 1; overflow: visible; }
+    .game-run-sheep:hover { transform: none; }
+    .details { padding: 11px 12px 12px; }
+    .details h3 { min-height: 30px; color: #25372a; font-size: 11px; font-weight: 650; }
+    .tags span { border-radius: 2px; background: #edf2e9; color: #607066; font-size: 8px; }
+    .purchase { margin-top: 10px; padding-top: 9px; border-color: #e7ece5; }
+    .discount { color: #b94d35; font-size: 9px; }
+    .discount del { color: #8c9890; }
+    .price small { color: #7d8981; font-size: 8px; }
+    .price strong { color: #1d3928; font-size: 14px; font-weight: 750; }
+    .add { min-height: 31px; border-radius: 3px; background: #1b3929; color: #fff; font-size: 9px; }
+    .add:hover { background: #315940; }
+    .empty-state { margin: 24px 0; padding: 32px 16px; border: 1px dashed #cbd6ca; color: #68766d; text-align: center; font-size: 12px; }
+    @media (max-width: 980px) {
+      .store-header { gap: 17px; }
+      .store-title { gap: 14px; }
+      .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 700px) {
+      .store-header { min-height: 62px; gap: 10px; padding: 8px 14px; }
+      .store-brand { gap: 6px; }
+      .store-brand img { width: 30px; height: 30px; }
+      .store-brand strong { font-size: 12px; }
+      .store-title { order: 0; flex: 1; flex-basis: auto; gap: 12px; }
+      .store-title > span { display: none; }
+      .close { display: none; }
+      .toolbar { flex-wrap: wrap; gap: 7px; padding: 8px 14px; }
+      .filters { flex-basis: 100%; overflow-x: auto; flex-wrap: nowrap; }
+      .filter { flex: 0 0 auto; }
+      .search-box { width: 100%; }
+      .content { padding: 18px 14px 30px; }
+      .catalog-heading { align-items: center; }
+      .catalog-heading h2 { font-size: 18px; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px 10px; }
+      .cover { aspect-ratio: 1.2; }
+      .details { padding: 9px; }
+      .details h3 { font-size: 10px; }
+      .purchase { flex-wrap: wrap; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+    :root { color-scheme: dark; color: #e8ece6; background: #10110f; }
+    body, .store-dialog { background: #10110f; color: #e8ece6; }
+    .store-header { border-color: #ffffff10; background: #171815; }
+    .store-brand { color: #9da69b; }
+    .store-brand strong, .store-title h1 { color: #f3f5ef; }
+    .store-title > span, .store-title > a { color: #9da69b; }
+    .close { border-color: #ffffff1b; background: #20221e; color: #e8ece6; }
+    .toolbar { border-color: #ffffff10; background: #1c1e1a; }
+    .filter { color: #aab2a7; }
+    .filter.active, .filter:hover { border-color: #fff; background: #fff; color: #171815; }
+    .search-box, .sort-select { border-color: #3a3e37; background: #171815; color: #dce2d8; }
+    .search-box input { color: #f3f5ef; }
+    .catalog-heading h2, .news-section h2 { color: #f0f2ec; }
+    .catalog-heading p, .sort { color: #9da69b; }
+    .steam-feature { background: #242720; box-shadow: 0 14px 28px #0005; }
+    .steam-feature { position: relative; overflow: visible; padding: 0 24px; background: transparent; box-shadow: none; }
+    .feature-carousel { position: relative; }
+    .feature-slides { display: grid; }
+    .feature-slide { display: grid; grid-area: 1 / 1; height: 360px; min-height: 360px; grid-template-columns: minmax(0, 2.2fr) minmax(250px, .9fr); overflow: hidden; background: #182431; box-shadow: 0 14px 28px #0005; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 500ms ease, visibility 500ms ease; }
+    .feature-slide.is-active { z-index: 1; opacity: 1; visibility: visible; pointer-events: auto; }
+    .feature-art { position: relative; min-width: 0; min-height: 0; padding: 0; overflow: hidden; background: #111a23; }
+    .feature-banner-image { display: block; width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; }
+    .feature-slide[aria-label="SHEEP DOOM DEMO"] .feature-banner-image { object-fit: contain; background: #210c0c; }
+    .feature-info { display: flex; flex-direction: column; align-items: flex-start; padding: 22px 18px 18px; background: linear-gradient(145deg, #203244, #17222e); color: #e4edf4; }
+    .feature-info .eyebrow { margin: 0 0 8px; color: #9bb9cb; font-size: 9px; font-weight: 800; letter-spacing: 1.1px; }
+    .feature-info h2 { margin: 0; color: #fff; font-size: clamp(18px, 2vw, 25px); line-height: 1.1; }
+    .feature-info p { margin: 9px 0 14px; color: #becbd4; font-size: 10px; line-height: 1.55; }
+    .feature-thumbs { display: grid; width: 100%; grid-template-columns: repeat(2, 1fr); gap: 6px; margin: 0 0 auto; }
+    .feature-thumbs img { display: block; width: 100%; height: 65px; object-fit: cover; }
+    .feature-thumbs img.doom-thumb { height: 65px; }
+    .feature-thumbs .doom-thumb:nth-child(2) { object-position: 25% center; }
+    .feature-thumbs .doom-thumb:nth-child(3) { object-position: 70% center; }
+    .feature-game-link { display: inline-flex; min-height: 35px; align-items: center; justify-content: center; margin-top: 15px; padding: 0 13px; border: 0; border-radius: 2px; background: #79b7d3; color: #11222d; cursor: pointer; font-size: 10px; font-weight: 800; text-decoration: none; }
+    .feature-arrow { position: absolute; z-index: 3; top: 50%; display: grid; width: 38px; height: 52px; place-items: center; padding: 0; border: 0; background: #07111acc; color: #fff; cursor: pointer; font-size: 34px; line-height: 1; transform: translateY(-50%); }
+    .feature-arrow:hover { background: #0c8fc9; }
+    .feature-arrow-prev { left: 0; }
+    .feature-arrow-next { right: 0; }
+    .feature-pagination { display: flex; justify-content: center; gap: 6px; padding-top: 10px; }
+    .feature-dot { width: 12px; height: 7px; padding: 0; border: 0; border-radius: 5px; background: #53606c; cursor: pointer; transition: width 160ms ease, background 160ms ease; }
+    .feature-dot[aria-pressed="true"] { width: 24px; background: #e8f0f7; }
+    @media (max-width: 700px) {
+      .steam-feature { padding: 0 16px; }
+      .feature-slide { height: auto; min-height: 0; grid-template-columns: 1fr; }
+      .feature-art { aspect-ratio: 1.55; }
+      .feature-thumbs img.doom-thumb { height: 54px; }
+      .feature-info { min-height: 245px; padding: 16px; }
+      .feature-thumbs img { height: 54px; }
+      .feature-arrow { width: 30px; height: 44px; }
+      .feature-arrow-prev { left: 0; }
+      .feature-arrow-next { right: 0; }
+    }
+    .game { border-color: #ffffff12; background: #1b1d19; box-shadow: 0 5px 15px #0003; }
+    .game:hover { box-shadow: 0 10px 22px #0007; }
+    .details h3, .price strong { color: #edf1e9; }
+    .tags span { background: #2a2e27; color: #bbc5b8; }
+    .purchase { border-color: #ffffff14; }
+    .discount { color: #ff9076; }
+    .discount del, .price small { color: #9da69b; }
+    .add { display: inline-flex; align-items: center; justify-content: center; background: #fff; color: #171815; text-decoration: none; }
+    .add:hover { background: #e8e9e5; }
+    .download-note { color: #aab4aa; font-size: 9px; font-weight: 700; }
+    .run-sheep-dialog { position: fixed; top: 50%; left: 50%; width: min(880px, calc(100vw - 32px)); max-width: none; max-height: 82vh; margin: 0; padding: 0; overflow: auto; border: 1px solid #ffffff20; border-radius: 6px; background: #141815; color: #e8ece6; box-shadow: 0 28px 90px #000b; transform: translate(-50%, -50%); }
+    .run-sheep-dialog::backdrop { background: #050705e8; backdrop-filter: blur(7px); }
+    .run-sheep-dialog-inner { padding: clamp(16px, 3vw, 28px); }
+    .run-sheep-dialog-header { display: flex; align-items: start; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+    .run-sheep-dialog-header .eyebrow { margin-bottom: 5px; }
+    .run-sheep-dialog-header h2 { margin: 0; color: #f3f5ef; font-family: Georgia, serif; font-size: clamp(24px, 4vw, 34px); font-weight: 500; }
+    .run-sheep-dialog-close { display: grid; width: 34px; height: 34px; flex: 0 0 auto; place-items: center; border: 1px solid #ffffff24; border-radius: 4px; background: #20241f; color: #f2f4ef; cursor: pointer; font-size: 20px; }
+    .run-sheep-overview { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(220px, .75fr); gap: 16px; }
+    .run-sheep-dialog-media { position: relative; overflow: hidden; border: 1px solid #ffffff18; border-radius: 4px; background: #0e100f; }
+    .run-sheep-dialog-media img, .run-sheep-dialog-media video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #080a09; }
+    .run-sheep-dialog-media span { position: absolute; right: 9px; bottom: 9px; padding: 5px 7px; border-radius: 2px; background: #10130fcc; color: #fff; font-size: 8px; font-weight: 700; letter-spacing: 1px; }
+    .run-sheep-dialog-media span { bottom: 48px; }
+    .run-sheep-repeat { position: absolute; z-index: 2; top: 50%; left: 50%; min-height: 38px; padding: 0 14px; border: 1px solid #fff; border-radius: 3px; background: #fff; color: #171815; cursor: pointer; font-size: 11px; font-weight: 700; transform: translate(-50%, -50%); }
+    .run-sheep-repeat[hidden] { display: none; }
+    .run-sheep-purchase { display: grid; align-content: start; gap: 10px; padding: 15px; border: 1px solid #ffffff14; border-radius: 4px; background: #1b1d19; }
+    .run-sheep-purchase .eyebrow { margin: 0; color: #aeb8ad; font-size: 8px; }
+    .run-sheep-purchase > strong { color: #f2f4ef; font-size: 21px; }
+    .run-sheep-purchase > p:not(.eyebrow) { margin: 0; color: #aab4aa; font-size: 10px; line-height: 1.6; }
+    .run-sheep-dialog-actions { display: grid; gap: 7px; margin-top: 4px; }
+    .run-sheep-dialog-actions a { display: flex; min-height: 38px; align-items: center; justify-content: space-between; gap: 8px; padding: 0 11px; border: 1px solid #ffffff24; border-radius: 3px; color: #f3f5ef; font-size: 10px; font-weight: 700; text-decoration: none; }
+    .run-sheep-dialog-actions .run-sheep-download { border-color: #fff; background: #fff; color: #171815; }
+    .run-sheep-dialog-actions a:hover { background: #e8e9e5; color: #171815; }
+    .run-sheep-copy { margin-top: 22px; }
+    .run-sheep-copy h3 { margin: 0 0 9px; color: #f2f4ef; font-family: Georgia, serif; font-size: 17px; font-weight: 500; }
+    .run-sheep-copy p { margin: 0 0 9px; color: #b6c0b5; font-size: 11px; line-height: 1.7; }
+    .run-sheep-tagline { color: #f2f4ef !important; font-weight: 700; }
+    .run-sheep-features { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 18px; margin: 0; padding: 0; list-style: none; }
+    .run-sheep-features li { color: #b6c0b5; font-size: 10px; line-height: 1.55; }
+    .run-sheep-requirements { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 18px; margin: 0; }
+    .run-sheep-requirements div { display: grid; grid-template-columns: 90px 1fr; gap: 8px; padding: 8px 0; border-top: 1px solid #ffffff12; font-size: 10px; line-height: 1.5; }
+    .run-sheep-requirements dt { color: #828e83; }
+    .run-sheep-requirements dd { margin: 0; color: #d7dfd5; }
+    @media (max-width: 700px) {
+      .run-sheep-overview, .run-sheep-features, .run-sheep-requirements { grid-template-columns: 1fr; }
+    }
+    .game-run-sheep .add { padding: 0 10px; border: 0; cursor: pointer; }
+    .run-sheep-dialog { width: min(980px, calc(100vw - 32px)); max-width: none; max-height: calc(100vh - 32px); padding: 0; overflow: auto; border: 1px solid #ffffff20; border-radius: 6px; background: #141815; color: #e8ece6; box-shadow: 0 28px 90px #000b; }
+    .run-sheep-dialog::backdrop { background: #050705d9; backdrop-filter: blur(6px); }
+    .run-sheep-dialog-inner { padding: clamp(16px, 3vw, 28px); }
+    .run-sheep-dialog-header { display: flex; align-items: start; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+    .run-sheep-dialog-header .eyebrow { margin-bottom: 5px; }
+    .run-sheep-dialog-header h2 { margin: 0; color: #f3f5ef; font-family: Georgia, serif; font-size: clamp(24px, 4vw, 34px); font-weight: 500; }
+    .run-sheep-dialog-close { display: grid; width: 34px; height: 34px; flex: 0 0 auto; place-items: center; border: 1px solid #ffffff24; border-radius: 4px; background: #20241f; color: #f2f4ef; cursor: pointer; font-size: 20px; }
+    .run-sheep-overview { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(220px, .75fr); gap: 16px; }
+    .run-sheep-dialog-media { position: relative; overflow: hidden; border: 1px solid #ffffff18; border-radius: 4px; background: #0e100f; }
+    .run-sheep-dialog-media img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+    .run-sheep-dialog-media span { position: absolute; right: 9px; bottom: 9px; padding: 5px 7px; border-radius: 2px; background: #10130fcc; color: #fff; font-size: 8px; font-weight: 700; letter-spacing: 1px; }
+    .run-sheep-purchase { display: grid; align-content: start; gap: 10px; padding: 15px; border: 1px solid #ffffff14; border-radius: 4px; background: #1b1d19; }
+    .run-sheep-purchase .eyebrow { margin: 0; color: #aeb8ad; font-size: 8px; }
+    .run-sheep-purchase strong { color: #f2f4ef; font-size: 21px; }
+    .run-sheep-purchase p { margin: 0; color: #aab4aa; font-size: 10px; line-height: 1.6; }
+    .run-sheep-dialog-actions { display: grid; gap: 7px; margin-top: 4px; }
+    .run-sheep-dialog-actions a { display: flex; min-height: 38px; align-items: center; justify-content: space-between; gap: 8px; padding: 0 11px; border: 1px solid #ffffff24; border-radius: 3px; color: #f3f5ef; font-size: 10px; font-weight: 700; text-decoration: none; }
+    .run-sheep-dialog-actions .run-sheep-download { border-color: #fff; background: #fff; color: #171815; }
+    .run-sheep-dialog-actions a:hover { background: #e8e9e5; color: #171815; }
+    .run-sheep-copy { margin-top: 22px; }
+    .run-sheep-copy h3 { margin: 0 0 9px; color: #f2f4ef; font-family: Georgia, serif; font-size: 17px; font-weight: 500; }
+    .run-sheep-copy p { margin: 0 0 9px; color: #b6c0b5; font-size: 11px; line-height: 1.7; }
+    .run-sheep-tagline { color: #f2f4ef !important; font-weight: 700; }
+    .run-sheep-features { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 18px; margin: 0; padding: 0; list-style: none; }
+    .run-sheep-features li { color: #b6c0b5; font-size: 10px; line-height: 1.55; }
+    .run-sheep-requirements { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 18px; margin: 0; }
+    .run-sheep-requirements div { display: grid; grid-template-columns: 90px 1fr; gap: 8px; padding: 8px 0; border-top: 1px solid #ffffff12; font-size: 10px; line-height: 1.5; }
+    .run-sheep-requirements dt { color: #828e83; }
+    .run-sheep-requirements dd { margin: 0; color: #d7dfd5; }
+    .sheep-doom-dialog-media video { aspect-ratio: 4 / 3; object-fit: contain; }
+    .sheep-pac-dialog-media img { aspect-ratio: 3 / 2; object-fit: contain; }
+    .empty-state { border-color: #454a40; color: #aab2a7; }
+    .view-tabs { display: flex; align-items: center; gap: 5px; }
+    .view-tab { min-height: 32px; padding: 0 11px; border: 1px solid transparent; border-radius: 3px; background: transparent; color: #526257; font-size: 10px; }
+    .view-tab.active, .view-tab:hover { border-color: #1b3929; background: #1b3929; color: #fff; }
+    .view-tab:focus-visible { outline: 2px solid #ee7558; outline-offset: 3px; }
+    .news-section { display: block; margin-top: 0; padding: 20px; border: 1px solid #ffffff12; background: #171815; }
+    .catalog[hidden], .news-section[hidden], .toolbar[hidden] { display: none !important; }
+    .news-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+    .news-heading h2 { margin: 0; color: #f0f2ec; font-size: 20px; }
+    .news-description { margin: 6px 0 0; color: #9da69b; font-size: 10px; }
+    .news-status { max-width: 360px; color: #a4d76c; font-size: 10px; text-align: right; }
+    .news-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .news-item { display: flex; min-width: 0; flex-direction: column; overflow: hidden; border: 1px solid #ffffff14; background: #1b1d19; }
+    .news-item-image { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #262820; }
+    .news-item-image-fallback { display: grid; place-items: center; color: #9da69b; font-size: 10px; }
+    .news-item-content { display: flex; min-height: 155px; flex: 1; flex-direction: column; padding: 14px; }
+    .news-item-source { color: #ff9076; font-size: 9px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; }
+    .news-item h3 { margin: 10px 0 14px; color: #e8ece6; font-size: 13px; line-height: 1.45; }
+    .news-item-meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; color: #9da69b; font-size: 9px; }
+    .news-item-link { color: #a4d76c; font-weight: 650; text-decoration: none; white-space: nowrap; }
+    .news-item-link:hover { text-decoration: underline; }
+    .news-projection-note { margin: 12px 0 0; color: #819084; font-size: 9px; }
+    @media (max-width: 980px) {
+      .news-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 700px) {
+      .news-section { padding: 15px; }
+      .news-heading { flex-direction: column; }
+      .news-status { text-align: left; }
+      .news-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <section class="store-dialog" aria-label="Vista de ejemplo de la tienda de juegos">
+    <header class="store-header">
+      <div class="store-brand"><img src="logo.png" alt="" /><strong>sheepstore</strong></div>
+      <div class="store-title"><h1 id="current-section-title">TIENDA</h1><nav class="view-tabs" aria-label="Secciones principales"><button class="view-tab active" type="button" data-view="store" aria-controls="store-view" aria-pressed="true">Tienda</button><button class="view-tab" type="button" data-view="news" aria-controls="news" aria-pressed="false">Noticias</button></nav></div>
+      <button class="close">Cuenta <span>S</span></button>
+    </header>
+    <nav class="toolbar" id="store-toolbar" aria-label="Filtros de la tienda">
+      <div class="filters" aria-label="Filtrar por género">
+        <button class="filter active" type="button" data-filter="Todos" aria-pressed="true">Todos</button>
+        <button class="filter" type="button" data-filter="Arcade" aria-pressed="false">Arcade</button>
+        <button class="filter" type="button" data-filter="Aventura" aria-pressed="false">Aventura</button>
+        <button class="filter" type="button" data-filter="Acción" aria-pressed="false">Acción</button>
+        <button class="filter" type="button" data-filter="Carreras" aria-pressed="false">Carreras</button>
+        <button class="filter" type="button" data-filter="Rol" aria-pressed="false">Rol</button>
+      </div>
+      <label class="search-box"><span aria-hidden="true">⌕</span><input id="game-search" type="search" placeholder="Buscar juegos" aria-label="Buscar juegos" /></label>
+    </nav>
+    <div class="content">
+      <section class="catalog" id="store-view" data-view-panel="store">
+        <section class="steam-feature" aria-label="Ofertas destacadas">
+          <div class="feature-carousel" aria-roledescription="carrusel" aria-label="Juegos destacados">
+            <div class="feature-slides" aria-live="off">
+              <article class="feature-slide is-active" data-feature-slide aria-label="Run Sheep" aria-hidden="false">
+                <div class="feature-art"><img class="feature-banner-image" src="run-sheep-cover.png" alt="Run Sheep: una oveja pixelada corre entre edificios y monedas" /></div>
+                <aside class="feature-info">
+                  <p class="eyebrow">JUEGO GRATIS · ARCADE</p>
+                  <h2>Run Sheep</h2>
+                  <p>Corre, salta y reúne monedas en el juego de plataformas de Sheep Store.</p>
+                  <div class="feature-thumbs" aria-hidden="true">
+                    <img src="download.gif" alt="" /><img src="wallpapers/sheep-gamer.gif" alt="" />
+                    <img src="run-sheep-cover.png" alt="" /><img src="download.gif" alt="" />
+                  </div>
+                  <button class="feature-game-link" type="button" data-open-run-sheep-details>Ver juego <span aria-hidden="true">↗</span></button>
+                </aside>
+              </article>
+              <article class="feature-slide" data-feature-slide aria-label="SHEEP DOOM DEMO" aria-hidden="true">
+                <div class="feature-art"><img class="feature-banner-image" src="sheep-doom-cover.webp" alt="Sheep Doom: una oveja armada lucha contra demonios en un paisaje de fuego" /></div>
+                <aside class="feature-info">
+                  <p class="eyebrow">DEMO GRATIS · WINDOWS</p>
+                  <h2>SHEEP DOOM DEMO</h2>
+                  <p>Enfréntate a la acción en la demo de Sheep Doom para Windows.</p>
+                  <div class="feature-thumbs feature-thumbs-doom" aria-hidden="true">
+                    <img class="doom-thumb" src="sheep-doom-cover.webp" alt="" />
+                    <img class="doom-thumb" src="sheep-doom-gameplay.webp" alt="" />
+                    <img class="doom-thumb" src="sheep-doom-keys.webp" alt="" />
+                    <img class="doom-thumb" src="sheep-doom-server.webp" alt="" />
+                  </div>
+                  <button class="feature-game-link" type="button" data-open-sheep-doom-details>Ver juego <span aria-hidden="true">↗</span></button>
+                </aside>
+              </article>
+            </div>
+            <button class="feature-arrow feature-arrow-prev" type="button" data-feature-prev aria-label="Juego destacado anterior">‹</button>
+            <button class="feature-arrow feature-arrow-next" type="button" data-feature-next aria-label="Siguiente juego destacado">›</button>
+            <div class="feature-pagination" aria-label="Seleccionar juego destacado">
+              <button class="feature-dot" type="button" data-feature-dot="0" aria-label="Mostrar Run Sheep" aria-pressed="true"></button>
+              <button class="feature-dot" type="button" data-feature-dot="1" aria-label="Mostrar SHEEP DOOM DEMO" aria-pressed="false"></button>
+            </div>
+          </div>
+        </section>
+        <div class="catalog-heading"><div><h2>Ofertas especiales</h2><p id="results-count">Juegos seleccionados y descargas gratuitas</p></div><label><span class="sort" style="margin-right:7px">Ordenar</span><select class="sort-select" id="game-sort" aria-label="Ordenar juegos"><option value="featured">Destacados</option><option value="price-low">Precio: menor primero</option><option value="price-high">Precio: mayor primero</option><option value="name">Nombre</option></select></label></div>
+        <div class="grid" id="game-grid">
+          <article class="game game-run-sheep" data-name="Run Sheep" data-genres="Arcade" data-price="0"><div class="cover cover-sheep-run game-preview-cover game-preview-cover-run-sheep"><img class="game-cover-image" src="run-sheep-cover.png" alt="Portada de Run Sheep: una oveja pixelada corre entre edificios y monedas" /><div class="cover-title">RUN SHEEP<small>MINIJUEGO SHEEP STORE</small></div><video class="game-cover-video" autoplay muted playsinline loop preload="none" poster="run-sheep-cover.png" data-always-play="true" aria-hidden="true"><source src="run-sheep-offers-preview.webm" type="video/webm" /></video><button class="game-cover-open" type="button" data-open-run-sheep-details aria-label="Conoce más sobre Run Sheep"></button></div><div class="details"><h3>Run Sheep</h3><div class="tags"><span>Arcade</span><span>Windows</span></div><div class="purchase"><span class="discount">-100%</span><strong class="price">Gratis</strong><button class="add" type="button" data-open-run-sheep-details aria-label="Ver detalles y descargar Run Sheep">Descargar</button></div></div></article>
+          <article class="game" data-name="SHEEP DOOM DEMO" data-genres="Acción Arcade FPS" data-price="0"><div class="cover cover-sheep-doom game-preview-cover game-preview-cover-doom"><img class="game-cover-image" src="sheep-doom-cover.webp" alt="Sheep Doom: una oveja armada lucha contra demonios" /><img class="game-cover-animation" src="sheep-doom-preview.gif" alt="" aria-hidden="true" /><button class="game-cover-open" type="button" data-open-sheep-doom-details aria-label="Conoce más sobre SHEEP DOOM DEMO"></button></div><div class="details"><h3>SHEEP DOOM DEMO</h3><div class="tags"><span>Acción</span><span>Windows</span><span>Arcade</span></div><div class="purchase"><span class="discount">-100%</span><strong class="price">Gratis</strong><button class="add" type="button" data-open-sheep-doom-details aria-label="Ver detalles y descargar SHEEP DOOM DEMO">Descargar</button></div></div></article>
+          <article class="game" data-name="SHEEP PAC" data-genres="Retro Arcade Aventura Acción Laberintos" data-price="0"><div class="cover game-preview-cover"><img class="game-cover-image" src="sheep-pac-cover.png" alt="Portada de SHEEP PAC: Sheep escapa de enemigos en un laberinto retro" /><button class="game-cover-open" type="button" data-open-sheep-pac-details aria-label="Conoce más sobre SHEEP PAC"></button></div><div class="details"><h3>SHEEP PAC</h3><div class="tags"><span>Retro</span><span>Arcade</span><span>Windows</span></div><div class="purchase"><span class="discount">-100%</span><strong class="price">Gratis</strong><button class="add" type="button" data-open-sheep-pac-details aria-label="Ver detalles y descargar SHEEP PAC">Descargar</button></div></div></article>
+        </div>
+        <p class="empty-state" id="empty-state" hidden>No encontramos juegos con esos filtros. Prueba otra búsqueda.</p>
+      </section>
+      <section class="news-section" id="news" data-view-panel="news" aria-labelledby="news-title" hidden>
+        <div class="news-heading">
+          <div><h2 id="news-title">Noticias gamer</h2><p class="news-description">Titulares recientes con imágenes de cada medio, actualizados automáticamente.</p></div>
+          <p class="news-status" id="news-status" role="status" aria-live="polite">Conectando con las fuentes de noticias…</p>
+        </div>
+        <div class="news-grid" id="news-grid"></div>
+        <p class="news-projection-note">Proyección de titulares y enlaces. El contenido completo pertenece a cada medio.</p>
+      </section>
+    </div>
+  </section>
+  <dialog class="run-sheep-dialog" id="run-sheep-details-dialog" aria-labelledby="run-sheep-dialog-title">
+    <div class="run-sheep-dialog-inner">
+      <header class="run-sheep-dialog-header">
+        <div><p class="eyebrow">SHEEP STORE · ARCADE</p><h2 id="run-sheep-dialog-title">Run Sheep</h2></div>
+        <button class="run-sheep-dialog-close" type="button" aria-label="Cerrar ficha de Run Sheep">×</button>
+      </header>
+      <div class="run-sheep-overview">
+        <div class="run-sheep-dialog-media"><video id="run-sheep-trailer" controls autoplay playsinline preload="metadata" poster="download.gif" aria-label="Tráiler completo de Run Sheep"><source src="run-sheep-trailer.webm" type="video/webm" /></video><span>TRÁILER COMPLETO · WEBM</span><button class="run-sheep-repeat" id="run-sheep-repeat" type="button" hidden>Repetir tráiler</button></div>
+        <aside class="run-sheep-purchase">
+          <p class="eyebrow">MINIJUEGO GRATUITO</p>
+          <strong>Run Sheep</strong>
+          <p>Arcade · Windows · Gratis</p>
+          <div class="run-sheep-dialog-actions">
+            <a href="../index.html?play=game" target="_top">Jugar en la web <span aria-hidden="true">↗</span></a>
+            <a class="run-sheep-download" href="programs/SHEEP_STORE_RUN.exe" download="Sheep Run.exe">Descargar para Windows <span aria-hidden="true">↓</span></a>
+          </div>
+          <p>Descarga: 5.8 MB · Sin conexión después de descargar.</p>
+        </aside>
+      </div>
+      <section class="run-sheep-copy" aria-labelledby="run-sheep-description-title">
+        <h3 id="run-sheep-description-title">Acerca de este juego</h3>
+        <p><strong>¡Corre, salta y supera tus propios límites!</strong></p>
+        <p>Sheep ha quedado atrapada en un mundo virtual lleno de circuitos, obstáculos y peligros digitales. Su única oportunidad es correr sin detenerse.</p>
+        <p>Ayúdala a esquivar obstáculos, saltar plataformas y sobrevivir todo el tiempo que puedas. Cuanto más avances, más rápido irá el mundo y más difícil será conseguir puntos.</p>
+        <p>¿Hasta dónde podrás llegar antes de que Sheep se detenga?</p>
+        <p>¡Corre por el récord, supera tu puntuación y demuestra que ninguna oveja se queda atrás!</p>
+        <p class="run-sheep-tagline">Run Sheep &mdash; Keep Running. Never Crash.</p>
+      </section>
+      <section class="run-sheep-copy" aria-labelledby="run-sheep-features-title">
+        <h3 id="run-sheep-features-title">Características del juego</h3>
+        <ul class="run-sheep-features">
+          <li>🐑 Controla a Sheep con saltos y movimientos sencillos.</li>
+          <li>⚡ Escapa de obstáculos dentro de un universo de circuitos electrónicos.</li>
+          <li>🏆 Consigue la mayor puntuación posible.</li>
+          <li>🚀 Supera tus récords mientras aumenta la velocidad.</li>
+          <li>💻 Estética digital minimalista inspirada en el mundo tecnológico.</li>
+        </ul>
+      </section>
+      <section class="run-sheep-copy" aria-labelledby="run-sheep-requirements-title">
+        <h3 id="run-sheep-requirements-title">Requisitos del sistema (estimados)</h3>
+        <dl class="run-sheep-requirements">
+          <div><dt>Sistema</dt><dd>Windows 7 SP1, 8, 10 u 11; .NET Framework 4.0 o posterior.</dd></div>
+          <div><dt>Procesador</dt><dd>1 GHz o superior.</dd></div>
+          <div><dt>Memoria</dt><dd>2 GB de RAM.</dd></div>
+          <div><dt>Gráficos</dt><dd>Gráficos integrados compatibles con Windows.</dd></div>
+          <div><dt>Almacenamiento</dt><dd>6 MB de espacio libre.</dd></div>
+          <div><dt>Pantalla</dt><dd>Resolución mínima de 820 × 500.</dd></div>
+          <div><dt>Internet</dt><dd>No es necesario para jugar la versión descargada.</dd></div>
+        </dl>
+      </section>
+    </div>
+  </dialog>
+  <dialog class="run-sheep-dialog" id="sheep-doom-details-dialog" aria-labelledby="sheep-doom-dialog-title">
+    <div class="run-sheep-dialog-inner">
+      <header class="run-sheep-dialog-header">
+        <div><p class="eyebrow">SHEEP STORE · ACCIÓN FPS</p><h2 id="sheep-doom-dialog-title">SHEEP DOOM — DEMO</h2></div>
+        <button class="run-sheep-dialog-close" id="sheep-doom-dialog-close" type="button" aria-label="Cerrar ficha de SHEEP DOOM DEMO">×</button>
+      </header>
+      <div class="run-sheep-overview">
+        <div class="run-sheep-dialog-media sheep-doom-dialog-media"><video id="sheep-doom-trailer" controls autoplay playsinline preload="metadata" poster="sheep-doom-cover.webp" aria-label="Tráiler completo de SHEEP DOOM"><source src="sheep-doom-trailer.mp4" type="video/mp4" /></video><span>TRÁILER COMPLETO · MP4</span><button class="run-sheep-repeat" id="sheep-doom-repeat" type="button" hidden>Repetir tráiler</button></div>
+        <aside class="run-sheep-purchase">
+          <p class="eyebrow">DEMO GRATUITA</p>
+          <strong>SHEEP DOOM DEMO</strong>
+          <p>Acción FPS · Windows · Arcade · Gratis</p>
+          <div class="run-sheep-dialog-actions">
+            <a class="run-sheep-download" href="programs/SHEEP%20DOOM%20DEMO.exe" download="SHEEP DOOM DEMO.exe">Descargar para Windows <span aria-hidden="true">↓</span></a>
+          </div>
+          <p>Descarga: 55,3 MB · No requiere conexión a internet.</p>
+        </aside>
+      </div>
+      <section class="run-sheep-copy" aria-labelledby="sheep-doom-description-title">
+        <h3 id="sheep-doom-description-title">Acerca de este juego</h3>
+        <p><strong>¡El virus ha escapado del mundo digital y ahora está infectando el mundo real!</strong></p>
+        <p>Un misterioso virus informático ha logrado cruzar al mundo real, corrompiendo todo a su paso y transformando seres vivos en criaturas monstruosas.</p>
+        <p>En medio del caos, Sheep deberá abrirse camino entre las amenazas, utilizar diferentes armas y luchar por sobrevivir en un mundo consumido por la infección.</p>
+        <p>¿Podrás sobrevivir a esta pesadilla?</p>
+        <p class="run-sheep-tagline">SHEEP DOOM &mdash; Infection Has No Limits.</p>
+      </section>
+      <section class="run-sheep-copy" aria-labelledby="sheep-doom-features-title">
+        <h3 id="sheep-doom-features-title">Características de la demo</h3>
+        <ul class="run-sheep-features">
+          <li>🐑 Controla a Sheep en una aventura de acción.</li>
+          <li>🦠 Enfréntate a las consecuencias de una infección digital.</li>
+          <li>👹 Combate contra criaturas monstruosas.</li>
+          <li>🔫 Utiliza armas para sobrevivir.</li>
+          <li>🎮 Experimenta una primera parte del universo SHEEP DOOM.</li>
+        </ul>
+      </section>
+      <section class="run-sheep-copy" aria-labelledby="sheep-doom-notice-title">
+        <h3 id="sheep-doom-notice-title">Información importante</h3>
+        <p>Esta es una versión demo. El contenido, los escenarios y las características pueden cambiar en la versión completa.</p>
+      </section>
+      <section class="run-sheep-copy" aria-labelledby="sheep-doom-requirements-title">
+        <h3 id="sheep-doom-requirements-title">Requisitos del sistema</h3>
+        <dl class="run-sheep-requirements">
+          <div><dt>Sistema</dt><dd>Windows 7, 8, 10 u 11.</dd></div>
+          <div><dt>Procesador</dt><dd>Doble núcleo a 1.5 GHz.</dd></div>
+          <div><dt>Memoria</dt><dd>2 GB de RAM.</dd></div>
+          <div><dt>Gráficos</dt><dd>Compatibles con DirectX 9.</dd></div>
+          <div><dt>Almacenamiento</dt><dd>75 MB de espacio libre.</dd></div>
+          <div><dt>Internet</dt><dd>No necesario.</dd></div>
+        </dl>
+      </section>
+    </div>
+  </dialog>
+  <dialog class="run-sheep-dialog" id="sheep-pac-details-dialog" aria-labelledby="sheep-pac-dialog-title">
+    <div class="run-sheep-dialog-inner">
+      <header class="run-sheep-dialog-header">
+        <div><p class="eyebrow">SHEEP STORE · RETRO ARCADE</p><h2 id="sheep-pac-dialog-title">SHEEP PAC</h2></div>
+        <button class="run-sheep-dialog-close" id="sheep-pac-dialog-close" type="button" aria-label="Cerrar ficha de SHEEP PAC">×</button>
+      </header>
+      <div class="run-sheep-overview">
+        <div class="run-sheep-dialog-media sheep-pac-dialog-media"><img src="sheep-pac-gameplay.png" alt="SHEEP PAC: Sheep recorre un laberinto mientras evita enemigos" /><span>CAPTURA DEL JUEGO</span></div>
+        <aside class="run-sheep-purchase">
+          <p class="eyebrow">JUEGO GRATIS</p>
+          <strong>SHEEP PAC</strong>
+          <p>Retro · Arcade · Aventura · Acción · Laberintos · Un jugador · Windows</p>
+          <div class="run-sheep-dialog-actions">
+            <a class="run-sheep-download" href="programs/SHEEP%20PAC.exe" download="SHEEP PAC.exe">Descargar para Windows <span aria-hidden="true">↓</span></a>
+          </div>
+          <p>Descarga: 12,5 MB · No requiere conexión a internet.</p>
+        </aside>
+      </div>
+      <section class="run-sheep-copy" aria-labelledby="sheep-pac-description-title">
+        <h3 id="sheep-pac-description-title">Acerca de este juego</h3>
+        <p><strong>¡Entra al laberinto con Sheep!</strong></p>
+        <p>Recolecta puntos, explora los escenarios y evita a los enemigos que intentarán atraparte. Una experiencia arcade retro inspirada en los clásicos de los videojuegos, con Sheep como protagonista.</p>
+        <p class="run-sheep-tagline">¡Corre, recoge y sobrevive!</p>
+      </section>
+      <section class="run-sheep-copy" aria-labelledby="sheep-pac-genres-title">
+        <h3 id="sheep-pac-genres-title">Géneros</h3>
+        <ul class="run-sheep-features">
+          <li>Retro</li><li>Arcade</li><li>Aventura</li><li>Acción</li><li>Laberintos</li><li>Un jugador</li>
+        </ul>
+      </section>
+      <section class="run-sheep-copy" aria-labelledby="sheep-pac-requirements-title">
+        <h3 id="sheep-pac-requirements-title">Requisitos mínimos (Windows)</h3>
+        <dl class="run-sheep-requirements">
+          <div><dt>Sistema</dt><dd>Windows 7 / 8 / 10 / 11.</dd></div>
+          <div><dt>Procesador</dt><dd>Intel o AMD de 1 GHz.</dd></div>
+          <div><dt>Memoria</dt><dd>512 MB de RAM.</dd></div>
+          <div><dt>Gráficos</dt><dd>Compatible con DirectX 9.0.</dd></div>
+          <div><dt>Almacenamiento</dt><dd>10 MB disponibles.</dd></div>
+          <div><dt>DirectX</dt><dd>Versión 9.0.</dd></div>
+        </dl>
+      </section>
+      <section class="run-sheep-copy" aria-labelledby="sheep-pac-recommended-title">
+        <h3 id="sheep-pac-recommended-title">Requisitos recomendados</h3>
+        <dl class="run-sheep-requirements">
+          <div><dt>Sistema</dt><dd>Windows 10 / 11.</dd></div>
+          <div><dt>Procesador</dt><dd>Intel o AMD de doble núcleo.</dd></div>
+          <div><dt>Memoria</dt><dd>1 GB de RAM.</dd></div>
+          <div><dt>Gráficos</dt><dd>Compatible con DirectX 9.0.</dd></div>
+          <div><dt>Almacenamiento</dt><dd>10 MB disponibles.</dd></div>
+        </dl>
+      </section>
+    </div>
+  </dialog>
+  <script>
+    const gameCards = [...document.querySelectorAll(".game")];
+    const filterButtons = [...document.querySelectorAll("[data-filter]")];
+    const searchInput = document.querySelector("#game-search");
+    const sortSelect = document.querySelector("#game-sort");
+    const gameGrid = document.querySelector("#game-grid");
+    const emptyState = document.querySelector("#empty-state");
+    let activeFilter = "Todos";
+
+    function updateCatalog() {
+      const query = searchInput.value.trim().toLocaleLowerCase("es");
+      const visibleCards = gameCards.filter((card) => {
+        const matchesText = card.dataset.name.toLocaleLowerCase("es").includes(query);
+        const matchesGenre = activeFilter === "Todos" || card.dataset.genres.split(" ").includes(activeFilter);
+        card.hidden = !matchesText || !matchesGenre;
+        return !card.hidden;
+      });
+      visibleCards.sort((first, second) => {
+        if (sortSelect.value === "price-low") return Number(first.dataset.price) - Number(second.dataset.price);
+        if (sortSelect.value === "price-high") return Number(second.dataset.price) - Number(first.dataset.price);
+        if (sortSelect.value === "name") return first.dataset.name.localeCompare(second.dataset.name, "es");
+        return gameCards.indexOf(first) - gameCards.indexOf(second);
+      }).forEach((card) => gameGrid.append(card));
+      emptyState.hidden = visibleCards.length > 0;
+      document.querySelector("#results-count").textContent = `${visibleCards.length} ${visibleCards.length === 1 ? "juego disponible" : "juegos disponibles"}`;
+    }
+
+    filterButtons.forEach((button) => button.addEventListener("click", () => {
+      activeFilter = button.dataset.filter;
+      filterButtons.forEach((filter) => {
+        const selected = filter === button;
+        filter.classList.toggle("active", selected);
+        filter.setAttribute("aria-pressed", selected);
+      });
+      updateCatalog();
+    }));
+    searchInput.addEventListener("input", updateCatalog);
+    sortSelect.addEventListener("change", updateCatalog);
+    const featureCarousel = document.querySelector(".feature-carousel");
+    if (featureCarousel instanceof HTMLElement) {
+      const featureSlides = [...featureCarousel.querySelectorAll("[data-feature-slide]")];
+      const featureDots = [...featureCarousel.querySelectorAll("[data-feature-dot]")];
+      const previousFeature = featureCarousel.querySelector("[data-feature-prev]");
+      const nextFeature = featureCarousel.querySelector("[data-feature-next]");
+      let activeFeature = 0;
+      let featureTimer;
+
+      const showFeature = (index) => {
+        activeFeature = (index + featureSlides.length) % featureSlides.length;
+        featureSlides.forEach((slide, slideIndex) => {
+          const isActive = slideIndex === activeFeature;
+          slide.classList.toggle("is-active", isActive);
+          slide.setAttribute("aria-hidden", String(!isActive));
+        });
+        featureDots.forEach((dot, dotIndex) => dot.setAttribute("aria-pressed", dotIndex === activeFeature));
+      };
+      const stopFeatureTimer = () => {
+        window.clearInterval(featureTimer);
+        featureTimer = undefined;
+      };
+      const startFeatureTimer = () => {
+        stopFeatureTimer();
+        if (document.hidden || featureCarousel.matches(":hover") || featureCarousel.contains(document.activeElement)) return;
+        featureTimer = window.setInterval(() => showFeature(activeFeature + 1), 2500);
+      };
+
+      showFeature(0);
+      previousFeature?.addEventListener("click", () => { showFeature(activeFeature - 1); });
+      nextFeature?.addEventListener("click", () => { showFeature(activeFeature + 1); });
+      featureDots.forEach((dot) => dot.addEventListener("click", () => {
+        const index = Number(dot.dataset.featureDot);
+        if (Number.isInteger(index)) showFeature(index);
+      }));
+      featureCarousel.addEventListener("pointerenter", stopFeatureTimer);
+      featureCarousel.addEventListener("pointerleave", startFeatureTimer);
+      featureCarousel.addEventListener("focusin", stopFeatureTimer);
+      featureCarousel.addEventListener("focusout", startFeatureTimer);
+      document.addEventListener("visibilitychange", startFeatureTimer);
+      startFeatureTimer();
+    }
+
+    document.querySelectorAll(".game-preview-cover").forEach((previewCover) => {
+      const previewVideo = previewCover.querySelector(".game-cover-video");
+      if (!(previewCover instanceof HTMLElement) || !(previewVideo instanceof HTMLVideoElement)) return;
+      const loopStart = Number(previewVideo.dataset.loopStart);
+      const loopEnd = Number(previewVideo.dataset.loopEnd);
+      const hasLoopSegment = Number.isFinite(loopStart) && Number.isFinite(loopEnd) && loopEnd > loopStart;
+      const alwaysPlay = previewVideo.dataset.alwaysPlay === "true";
+      let previewRequested = alwaysPlay;
+      const startCoverVideo = () => {
+        if (!previewRequested) return;
+        if (hasLoopSegment && (previewVideo.currentTime < loopStart || previewVideo.currentTime >= loopEnd)) {
+          previewVideo.currentTime = loopStart;
+        }
+        previewVideo.play().catch((error) => {
+          if (error.name !== "AbortError") console.error("No se pudo reproducir la vista previa del juego.", error);
+        });
+      };
+      const onPreviewMetadata = () => {
+        if (previewRequested) startCoverVideo();
+      };
+      const playCoverVideo = () => {
+        previewRequested = true;
+        if (hasLoopSegment && previewVideo.readyState < HTMLMediaElement.HAVE_METADATA) {
+          previewVideo.load();
+          return;
+        }
+        startCoverVideo();
+      };
+      const stopCoverVideo = () => {
+        if (alwaysPlay) return;
+        previewRequested = false;
+        previewVideo.pause();
+        previewVideo.currentTime = hasLoopSegment ? loopStart : 0;
+      };
+      if (hasLoopSegment) {
+        previewVideo.addEventListener("loadedmetadata", onPreviewMetadata);
+        previewVideo.addEventListener("timeupdate", () => {
+          if (previewVideo.currentTime >= loopEnd) previewVideo.currentTime = loopStart;
+        });
+      }
+      previewCover.addEventListener("pointerenter", playCoverVideo);
+      previewCover.addEventListener("pointerleave", stopCoverVideo);
+      previewCover.addEventListener("focusin", playCoverVideo);
+      previewCover.addEventListener("focusout", (event) => {
+        if (!previewCover.contains(event.relatedTarget)) stopCoverVideo();
+      });
+      if (alwaysPlay) playCoverVideo();
+    });
+
+    const runSheepDetailsDialog = document.querySelector("#run-sheep-details-dialog");
+    const runSheepDetailsClose = document.querySelector(".run-sheep-dialog-close");
+    const runSheepTrailer = document.querySelector("#run-sheep-trailer");
+    const runSheepRepeat = document.querySelector("#run-sheep-repeat");
+    if (runSheepTrailer instanceof HTMLVideoElement) runSheepTrailer.volume = 0.5;
+    if (runSheepTrailer instanceof HTMLVideoElement && runSheepRepeat instanceof HTMLButtonElement) {
+      runSheepTrailer.addEventListener("ended", () => { runSheepRepeat.hidden = false; });
+      runSheepTrailer.addEventListener("play", () => { runSheepRepeat.hidden = true; });
+      runSheepRepeat.addEventListener("click", () => {
+        runSheepTrailer.currentTime = 0;
+        runSheepTrailer.play().catch(() => {});
+      });
+    }
+    document.querySelectorAll("[data-open-run-sheep-details]").forEach((button) => {
+      button.addEventListener("click", () => {
+        if (runSheepDetailsDialog instanceof HTMLDialogElement && !runSheepDetailsDialog.open) {
+          runSheepDetailsDialog.showModal();
+          if (runSheepTrailer instanceof HTMLVideoElement) {
+            runSheepTrailer.play().catch(() => {});
+          }
+        }
+      });
+    });
+    if (runSheepDetailsDialog instanceof HTMLDialogElement && runSheepDetailsClose instanceof HTMLButtonElement) {
+      runSheepDetailsClose.addEventListener("click", () => runSheepDetailsDialog.close());
+      runSheepDetailsDialog.addEventListener("click", (event) => {
+        if (event.target === runSheepDetailsDialog) runSheepDetailsDialog.close();
+      });
+      runSheepDetailsDialog.addEventListener("close", () => {
+        if (runSheepTrailer instanceof HTMLVideoElement) {
+          runSheepTrailer.pause();
+          runSheepTrailer.currentTime = 0;
+        }
+        if (runSheepRepeat instanceof HTMLButtonElement) runSheepRepeat.hidden = true;
+      });
+    }
+
+    const sheepDoomDetailsDialog = document.querySelector("#sheep-doom-details-dialog");
+    const sheepDoomDetailsClose = document.querySelector("#sheep-doom-dialog-close");
+    const sheepDoomTrailer = document.querySelector("#sheep-doom-trailer");
+    const sheepDoomRepeat = document.querySelector("#sheep-doom-repeat");
+    if (sheepDoomTrailer instanceof HTMLVideoElement) sheepDoomTrailer.volume = 0.5;
+    if (sheepDoomTrailer instanceof HTMLVideoElement && sheepDoomRepeat instanceof HTMLButtonElement) {
+      sheepDoomTrailer.addEventListener("ended", () => { sheepDoomRepeat.hidden = false; });
+      sheepDoomTrailer.addEventListener("play", () => { sheepDoomRepeat.hidden = true; });
+      sheepDoomRepeat.addEventListener("click", () => {
+        sheepDoomTrailer.currentTime = 0;
+        sheepDoomTrailer.play().catch((error) => {
+          if (error.name !== "AbortError") console.error("No se pudo reproducir el tráiler de SHEEP DOOM.", error);
+        });
+      });
+    }
+    document.querySelectorAll("[data-open-sheep-doom-details]").forEach((button) => {
+      button.addEventListener("click", () => {
+        if (sheepDoomDetailsDialog instanceof HTMLDialogElement && !sheepDoomDetailsDialog.open) {
+          sheepDoomDetailsDialog.showModal();
+          if (sheepDoomTrailer instanceof HTMLVideoElement) {
+            sheepDoomTrailer.play().catch((error) => {
+              if (error.name !== "AbortError") console.error("No se pudo reproducir el tráiler de SHEEP DOOM.", error);
+            });
+          }
+        }
+      });
+    });
+    if (sheepDoomDetailsDialog instanceof HTMLDialogElement && sheepDoomDetailsClose instanceof HTMLButtonElement) {
+      sheepDoomDetailsClose.addEventListener("click", () => sheepDoomDetailsDialog.close());
+      sheepDoomDetailsDialog.addEventListener("click", (event) => {
+        if (event.target === sheepDoomDetailsDialog) sheepDoomDetailsDialog.close();
+      });
+      sheepDoomDetailsDialog.addEventListener("close", () => {
+        if (sheepDoomTrailer instanceof HTMLVideoElement) {
+          sheepDoomTrailer.pause();
+          sheepDoomTrailer.currentTime = 0;
+        }
+        if (sheepDoomRepeat instanceof HTMLButtonElement) sheepDoomRepeat.hidden = true;
+      });
+    }
+
+    const sheepPacDetailsDialog = document.querySelector("#sheep-pac-details-dialog");
+    const sheepPacDetailsClose = document.querySelector("#sheep-pac-dialog-close");
+    document.querySelectorAll("[data-open-sheep-pac-details]").forEach((button) => {
+      button.addEventListener("click", () => {
+        if (sheepPacDetailsDialog instanceof HTMLDialogElement && !sheepPacDetailsDialog.open) {
+          sheepPacDetailsDialog.showModal();
+        }
+      });
+    });
+    if (sheepPacDetailsDialog instanceof HTMLDialogElement && sheepPacDetailsClose instanceof HTMLButtonElement) {
+      sheepPacDetailsClose.addEventListener("click", () => sheepPacDetailsDialog.close());
+      sheepPacDetailsDialog.addEventListener("click", (event) => {
+        if (event.target === sheepPacDetailsDialog) sheepPacDetailsDialog.close();
+      });
+    }
+
+    const newsGrid = document.querySelector("#news-grid");
+    const newsStatus = document.querySelector("#news-status");
+    const storeView = document.querySelector("#store-view");
+    const newsView = document.querySelector("#news");
+    const storeToolbar = document.querySelector("#store-toolbar");
+    const currentSectionTitle = document.querySelector("#current-section-title");
+    const viewButtons = Array.from(document.querySelectorAll("[data-view]"));
+    function setActiveView(view) {
+      const showingNews = view === "news";
+      storeView.hidden = showingNews;
+      newsView.hidden = !showingNews;
+      storeToolbar.hidden = showingNews;
+      currentSectionTitle.textContent = showingNews ? "NOTICIAS" : "TIENDA";
+      viewButtons.forEach((button) => {
+        const isActive = button.dataset.view === view;
+        button.classList.toggle("active", isActive);
+        button.setAttribute("aria-pressed", String(isActive));
+      });
+    }
+
+    viewButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const view = button.dataset.view;
+        if (view !== "store" && view !== "news") return;
+        setActiveView(view);
+        window.history.replaceState(null, "", view === "news" ? "#news" : "#store");
+      });
+    });
+    setActiveView(window.location.hash === "#news" ? "news" : "store");
+
+    const newsSources = [
+      { name: "Vandal", url: "https://vandal.elespanol.com/xml.cgi" },
+      { name: "PC Gamer", url: "https://www.pcgamer.com/rss/" },
+      { name: "GameSpot", url: "https://www.gamespot.com/feeds/news/" },
+    ];
+    let newsRefreshInProgress = false;
+
+    async function fetchNewsSource(source) {
+      const endpoint = new URL("https://api.rss2json.com/v1/api.json");
+      endpoint.searchParams.set("rss_url", source.url);
+      const response = await fetch(endpoint, { cache: "no-store" });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const data = await response.json();
+      if (data.status !== "ok" || !Array.isArray(data.items)) {
+        throw new Error(data.message || "Respuesta RSS inválida");
+      }
+      return data.items.map((item) => {
+        const title = typeof item.title === "string" ? item.title.trim() : "";
+        const publication = source.name;
+        const headline = title;
+        let link;
+        try {
+          const parsedLink = new URL(item.link);
+          if (parsedLink.protocol !== "https:" && parsedLink.protocol !== "http:") return null;
+          link = parsedLink.href;
+        } catch {
+          return null;
+        }
+        const enclosure = item.enclosure && typeof item.enclosure === "object" ? item.enclosure : {};
+        const image = [item.thumbnail, enclosure.thumbnail, enclosure.link, enclosure.url]
+          .map((candidate) => {
+            if (typeof candidate !== "string") return "";
+            try {
+              const parsedImage = new URL(candidate);
+              return parsedImage.protocol === "https:" ? parsedImage.href : "";
+            } catch {
+              return "";
+            }
+          })
+          .find(Boolean);
+        if (!headline || !image) return null;
+        const timestamp = Date.parse(item.pubDate || "");
+        return {
+          title: headline,
+          publication,
+          link,
+          image,
+          timestamp: Number.isFinite(timestamp) ? timestamp : 0,
+        };
+      }).filter(Boolean);
+    }
+
+    function createNewsCard(item) {
+      const card = document.createElement("article");
+      card.className = "news-item";
+      const image = document.createElement("img");
+      image.className = "news-item-image";
+      image.src = item.image;
+      image.alt = item.title;
+      image.loading = "lazy";
+      image.decoding = "async";
+      image.addEventListener("error", () => {
+        const fallback = document.createElement("div");
+        fallback.className = "news-item-image news-item-image-fallback";
+        fallback.setAttribute("aria-hidden", "true");
+        fallback.textContent = "Imagen no disponible";
+        image.replaceWith(fallback);
+      }, { once: true });
+      const publication = document.createElement("small");
+      publication.className = "news-item-source";
+      publication.textContent = item.publication;
+      const title = document.createElement("h3");
+      title.textContent = item.title;
+      const metadata = document.createElement("div");
+      metadata.className = "news-item-meta";
+      const date = document.createElement("time");
+      if (item.timestamp) {
+        date.dateTime = new Date(item.timestamp).toISOString();
+        date.textContent = new Intl.DateTimeFormat("es-PE", { dateStyle: "medium", timeStyle: "short" }).format(item.timestamp);
+      } else {
+        date.textContent = "Fecha no disponible";
+      }
+      const link = document.createElement("a");
+      link.className = "news-item-link";
+      link.href = item.link;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = "Leer noticia ↗";
+      metadata.append(date, link);
+      const content = document.createElement("div");
+      content.className = "news-item-content";
+      content.append(publication, title, metadata);
+      card.append(image, content);
+      return card;
+    }
+
+    async function refreshNews() {
+      if (newsRefreshInProgress) return;
+      newsRefreshInProgress = true;
+      newsStatus.textContent = "Actualizando titulares…";
+      const results = await Promise.allSettled(newsSources.map(fetchNewsSource));
+      const unavailableSources = [];
+      const sourceArticles = results.map((result, index) => {
+        if (result.status === "rejected") {
+          unavailableSources.push(newsSources[index].name);
+          console.error(`No se pudieron cargar noticias de ${newsSources[index].name}.`, result.reason);
+          return [];
+        }
+        return result.value.sort((first, second) => second.timestamp - first.timestamp);
+      });
+      const selectedArticles = [];
+      const seenLinks = new Set();
+      const seenTitles = new Set();
+      const addArticle = (article) => {
+        if (!article) return;
+        const titleKey = `${article.publication.toLocaleLowerCase("es")}|${article.title.toLocaleLowerCase("es")}`;
+        if (selectedArticles.length >= 9 || seenLinks.has(article.link) || seenTitles.has(titleKey)) return;
+        selectedArticles.push(article);
+        seenLinks.add(article.link);
+        seenTitles.add(titleKey);
+      };
+      sourceArticles.forEach((articles) => addArticle(articles[0]));
+      sourceArticles.forEach((articles) => articles.slice(1, 3).forEach(addArticle));
+      sourceArticles.flat().sort((first, second) => second.timestamp - first.timestamp).forEach(addArticle);
+      const uniqueArticles = selectedArticles.sort((first, second) => second.timestamp - first.timestamp);
+      newsGrid.replaceChildren(...uniqueArticles.map(createNewsCard));
+      if (!uniqueArticles.length) {
+        newsStatus.textContent = unavailableSources.length
+          ? `Noticias no disponibles. No se pudo conectar con: ${unavailableSources.join(", ")}.`
+          : "Las fuentes aún no publicaron titulares disponibles.";
+      } else {
+        const updatedAt = new Intl.DateTimeFormat("es-PE", { hour: "2-digit", minute: "2-digit" }).format(new Date());
+        newsStatus.textContent = unavailableSources.length
+          ? `Actualización parcial · ${unavailableSources.join(", ")} no disponible · ${updatedAt}`
+          : `${uniqueArticles.length} titulares · Actualizado ${updatedAt}`;
+      }
+      newsRefreshInProgress = false;
+    }
+
+    refreshNews();
+    window.setInterval(() => {
+      if (!document.hidden) refreshNews();
+    }, 15 * 60 * 1000);
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) refreshNews();
+    });
+  </script>
+</body>
+</html>
