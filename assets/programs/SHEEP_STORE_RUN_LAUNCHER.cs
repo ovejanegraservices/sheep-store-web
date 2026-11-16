@@ -65,7 +65,7 @@ internal sealed class SheepStoreGameForm : Form
         jumpStream = new MemoryStream(CreateJumpWave());
         jumpPlayer = new SoundPlayer(jumpStream);
         jumpPlayer.Load();
-        musicStream = LoadMusicTrack();
+        musicStream = new MemoryStream(CreateMusicWave());
 
         Shown += StartBackgroundMusic;
         KeyDown += HandleGameKey;
@@ -108,23 +108,6 @@ internal sealed class SheepStoreGameForm : Form
         using (stream)
         {
             return new Icon(stream);
-        }
-    }
-
-    private static MemoryStream LoadMusicTrack()
-    {
-        Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("assets/audio/corre-ovejita-theme.wav");
-        if (stream == null)
-        {
-            throw new InvalidOperationException("No se encontró la banda sonora del juego.");
-        }
-
-        using (stream)
-        {
-            MemoryStream music = new MemoryStream();
-            stream.CopyTo(music);
-            music.Position = 0;
-            return music;
         }
     }
 
@@ -242,6 +225,58 @@ internal sealed class SheepStoreGameForm : Form
             samples[index] = (short)(Math.Sin(2 * Math.PI * frequency * time) * envelope * 5500);
         }
         return CreateWave(samples, sampleRate);
+    }
+
+    private static byte[] CreateMusicWave()
+    {
+        const int sampleRate = 22050;
+        const double tempo = 82;
+        const int beats = 16;
+        double duration = beats * 60 / tempo;
+        short[] samples = new short[(int)(duration * sampleRate)];
+        int[][] chords =
+        {
+            new int[] { 60, 64, 67, 71 },
+            new int[] { 57, 60, 64, 67 },
+            new int[] { 53, 57, 60, 64 },
+            new int[] { 55, 59, 62, 65 }
+        };
+
+        for (int index = 0; index < samples.Length; index++)
+        {
+            double time = (double)index / sampleRate;
+            double beat = time * tempo / 60;
+            int chord = ((int)(beat / 4)) % chords.Length;
+            double fraction = beat - Math.Floor(beat);
+            double envelope = Math.Min(1, time / 0.35) * Math.Min(1, (duration - time) / 0.35);
+            double value = 0;
+            for (int note = 0; note < 4; note++)
+            {
+                value += Math.Sin(2 * Math.PI * MidiToFrequency(chords[chord][note]) * time) * 0.0030;
+            }
+
+            value += Math.Sin(2 * Math.PI * MidiToFrequency(chords[chord][0] - 24) * time) * 0.0040;
+            if (fraction < 0.20 && ((int)beat % 4 == 0 || (int)beat % 4 == 2))
+            {
+                value += Math.Sin(2 * Math.PI * (92 - fraction * 190) * time) * Math.Exp(-18 * fraction) * 0.008;
+            }
+
+            double halfBeat = Math.Abs(beat - Math.Round(beat * 2) / 2);
+            if (halfBeat < 0.035)
+            {
+                value += Math.Sin(2 * Math.PI * 7600 * time) * (1 - halfBeat / 0.035) * 0.0015;
+            }
+
+            double warmth = 1 + 0.07 * Math.Sin(2 * Math.PI * 0.18 * time);
+            samples[index] = (short)(Math.Max(-0.02, Math.Min(0.02, value * envelope * warmth)) * 32767);
+        }
+
+        return CreateWave(samples, sampleRate);
+    }
+
+    private static double MidiToFrequency(int note)
+    {
+        return 440 * Math.Pow(2, (note - 69) / 12.0);
     }
 
     private static byte[] CreateWave(short[] samples, int sampleRate)
@@ -987,7 +1022,6 @@ internal sealed class SheepStoreGameSurface : Control
         {
             running = false;
             timer.Stop();
-            SystemSounds.Hand.Play();
         }
 
         Invalidate();

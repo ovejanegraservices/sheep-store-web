@@ -1175,7 +1175,7 @@ h1, h2 { font-family: var(--font-display); }
 .sheep-game-download:focus-visible { outline: 2px solid #777; outline-offset: 3px; }
 .sheep-game-sound-toggle[aria-pressed="false"] { color: #777; }
 
-@media (max-width: 800px) {
+@media (max-width: 700px) {
   .game-store-dialog { width: 100vw; height: 100dvh; border: 0; border-radius: 0; }
 }
 
