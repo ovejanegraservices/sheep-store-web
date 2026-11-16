@@ -216,6 +216,7 @@ if (threadsCanvas instanceof HTMLCanvasElement) {
   }
 
   const hero = threadsCanvas.closest(".hero");
+  const gameDialog = document.querySelector("#sheep-game");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const threadCount = 64;
   const segments = 72;
@@ -291,7 +292,12 @@ if (threadsCanvas instanceof HTMLCanvasElement) {
 
   const animateThreads = (timestamp) => {
     frameId = 0;
-    if (!visible || document.hidden || reducedMotion.matches) return;
+    if (
+      !visible ||
+      document.hidden ||
+      reducedMotion.matches ||
+      (gameDialog instanceof HTMLDialogElement && gameDialog.open)
+    ) return;
 
     if (timestamp - previousFrame >= 1000 / 30) {
       elapsed += timestamp - previousFrame;
@@ -308,7 +314,12 @@ if (threadsCanvas instanceof HTMLCanvasElement) {
       frameId = 0;
     }
 
-    if (visible && !document.hidden && !reducedMotion.matches) {
+    if (
+      visible &&
+      !document.hidden &&
+      !reducedMotion.matches &&
+      !(gameDialog instanceof HTMLDialogElement && gameDialog.open)
+    ) {
       previousFrame = performance.now();
       frameId = window.requestAnimationFrame(animateThreads);
     } else {
@@ -316,6 +327,7 @@ if (threadsCanvas instanceof HTMLCanvasElement) {
     }
   };
 
+  document.addEventListener("sheep-game-statechange", updateAnimation);
   const resizeObserver = new ResizeObserver(resizeCanvas);
   resizeObserver.observe(threadsCanvas);
 
@@ -1014,6 +1026,23 @@ if (
   let jumpSoundEnabled = true;
   let audioContext = null;
   let bleatBuffer = null;
+  let gameGlow = null;
+  let lastDisplayedScore = -1;
+  const groundDash = [18, 19];
+
+  const createGameGlow = () => {
+    const glow = context.createRadialGradient(
+      gameCanvas.width * 0.26,
+      groundY,
+      8,
+      gameCanvas.width * 0.26,
+      groundY,
+      290
+    );
+    glow.addColorStop(0, "rgba(220,220,220,.13)");
+    glow.addColorStop(1, "rgba(220,220,220,0)");
+    return glow;
+  };
 
   const updateGameSoundToggle = () => {
     const label = jumpSoundEnabled ? "Silenciar sonido del salto" : "Activar sonido del salto";
@@ -1077,6 +1106,7 @@ if (
     if (gameCanvas.width === canvasWidth) return;
     const scale = canvasWidth / gameCanvas.width;
     gameCanvas.width = canvasWidth;
+    gameGlow = null;
     obstacles.forEach((obstacle) => { obstacle.x *= scale; });
     nextObstacleX *= scale;
     if (gameRunning) drawScene(0);
@@ -1102,8 +1132,6 @@ if (
     context.fill();
     context.fillStyle = "rgba(255,255,255,.7)";
     context.fillRect(x + 20, y + 16, 29, 2);
-    obstacle.width = 68;
-    obstacle.height = 47;
   };
 
   const drawPhone = (obstacle) => {
@@ -1120,8 +1148,6 @@ if (
     context.beginPath();
     context.arc(x + 20, y + 31, 5, 0, Math.PI * 2);
     context.fill();
-    obstacle.width = 41;
-    obstacle.height = 67;
   };
 
   const drawHeadphones = (obstacle) => {
@@ -1136,19 +1162,9 @@ if (
     context.roundRect(x + 2, y + 26, 15, 29, 6);
     context.roundRect(x + 51, y + 26, 15, 29, 6);
     context.fill();
-    obstacle.width = 68;
-    obstacle.height = 55;
   };
 
   const drawObstacle = (obstacle) => {
-    const dimensions = obstacle.type === "phone"
-      ? { width: 41, height: 67 }
-      : { width: 68, height: obstacle.type === "laptop" ? 47 : 55 };
-
-    obstacle.width = dimensions.width;
-    obstacle.height = dimensions.height;
-    obstacle.y = groundY - dimensions.height;
-
     if (obstacle.type === "laptop") drawLaptop(obstacle);
     else if (obstacle.type === "phone") drawPhone(obstacle);
     else drawHeadphones(obstacle);
@@ -1160,10 +1176,8 @@ if (
     context.fillStyle = "#151515";
     context.fillRect(0, 0, width, height);
 
-    const glow = context.createRadialGradient(width * 0.26, groundY, 8, width * 0.26, groundY, 290);
-    glow.addColorStop(0, "rgba(220,220,220,.13)");
-    glow.addColorStop(1, "rgba(220,220,220,0)");
-    context.fillStyle = glow;
+    if (!gameGlow) gameGlow = createGameGlow();
+    context.fillStyle = gameGlow;
     context.fillRect(0, 0, width, height);
 
     context.strokeStyle = "rgba(235,235,235,.16)";
@@ -1174,7 +1188,7 @@ if (
     context.stroke();
 
     context.strokeStyle = "rgba(235,235,235,.25)";
-    context.setLineDash([18, 19]);
+    context.setLineDash(groundDash);
     context.lineDashOffset = -(distance % 37);
     context.beginPath();
     context.moveTo(0, groundY + 19);
@@ -1248,16 +1262,26 @@ if (
       nextObstacleX += 390 + Math.random() * 250;
     }
 
-    const sheepHitbox = { x: sheepX + 13, y: sheep.y + 9, width: sheepSize - 24, height: sheepSize - 15 };
+    const sheepLeft = sheepX + 13;
+    const sheepRight = sheepLeft + sheepSize - 24;
+    const sheepTop = sheep.y + 9;
+    const sheepBottom = sheepTop + sheepSize - 15;
     const hasCollision = obstacles.some((obstacle) => {
-      const obstacleHitbox = { x: obstacle.x + 5, y: obstacle.y + 4, width: obstacle.width - 10, height: obstacle.height - 4 };
-      return sheepHitbox.x < obstacleHitbox.x + obstacleHitbox.width &&
-        sheepHitbox.x + sheepHitbox.width > obstacleHitbox.x &&
-        sheepHitbox.y < obstacleHitbox.y + obstacleHitbox.height &&
-        sheepHitbox.y + sheepHitbox.height > obstacleHitbox.y;
+      const obstacleLeft = obstacle.x + 5;
+      const obstacleRight = obstacleLeft + obstacle.width - 10;
+      const obstacleTop = obstacle.y + 4;
+      const obstacleBottom = obstacleTop + obstacle.height - 4;
+      return sheepLeft < obstacleRight &&
+        sheepRight > obstacleLeft &&
+        sheepTop < obstacleBottom &&
+        sheepBottom > obstacleTop;
     });
 
-    gameScoreLabel.textContent = String(Math.floor(distance / 10));
+    const currentScore = Math.floor(distance / 10);
+    if (currentScore !== lastDisplayedScore) {
+      lastDisplayedScore = currentScore;
+      gameScoreLabel.textContent = String(currentScore);
+    }
     drawScene(timestamp);
 
     if (hasCollision) {
@@ -1275,6 +1299,7 @@ if (
     previousFrame = 0;
     distance = 0;
     speed = 365;
+    lastDisplayedScore = 0;
     nextObstacleX = gameCanvas.width + 80;
     sheep.y = groundY - sheepSize;
     sheep.velocity = 0;
@@ -1291,6 +1316,8 @@ if (
     gameLaunchStatus.textContent = "";
     gameLaunchStatus.classList.remove("is-visible");
     if (!gameDialog.open) gameDialog.showModal();
+    document.body.classList.add("is-playing-sheep-game");
+    document.dispatchEvent(new Event("sheep-game-statechange"));
     startGame();
     if (message) gameStatus.textContent = message;
     gameCanvas.focus();
@@ -1372,6 +1399,8 @@ if (
   gameRestart.addEventListener("click", startGame);
   gameClose.addEventListener("click", () => gameDialog.close());
   gameDialog.addEventListener("close", () => {
+    document.body.classList.remove("is-playing-sheep-game");
+    document.dispatchEvent(new Event("sheep-game-statechange"));
     gameRunning = false;
     if (gameFrame) window.cancelAnimationFrame(gameFrame);
     gameFrame = 0;

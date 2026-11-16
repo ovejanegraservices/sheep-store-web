@@ -1087,6 +1087,10 @@ h1, h2 { font-family: var(--font-display); }
 @starting-style {
   .sheep-game-dialog[open]::backdrop { opacity: 0; }
 }
+body.is-playing-sheep-game > :not(.sheep-game-dialog),
+body.is-playing-sheep-game > :not(.sheep-game-dialog) * {
+  animation-play-state: paused !important;
+}
 .game-store-dialog {
   width: min(1440px, calc(100vw - 32px));
   height: min(920px, calc(100dvh - 32px));
@@ -1178,6 +1182,7 @@ h1, h2 { font-family: var(--font-display); }
 
 @media (max-width: 680px) {
   .sheep-game-dialog { width: calc(100vw - 16px); max-height: calc(100dvh - 16px); border-radius: 10px; }
+  .sheep-game-dialog::backdrop { backdrop-filter: none; }
   .sheep-game-panel { padding: 16px; }
   .sheep-game-header { gap: 10px; }
   .sheep-game-header h2 { font-size: clamp(24px, 7vw, 32px); letter-spacing: -1px; }
@@ -1209,7 +1214,7 @@ h1, h2 { font-family: var(--font-display); }
   .sheep-game-restart { margin: 0; }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
   .game-store-dialog { width: 100vw; height: 100dvh; border: 0; border-radius: 0; }
 }
 
