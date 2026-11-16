@@ -578,7 +578,7 @@
         <button class="run-sheep-dialog-close" id="sheep-doom-dialog-close" type="button" aria-label="Cerrar ficha de SHEEP DOOM DEMO">×</button>
       </header>
       <div class="run-sheep-overview">
-        <div class="run-sheep-dialog-media sheep-doom-dialog-media"><video id="sheep-doom-trailer" controls autoplay playsinline preload="metadata" poster="sheep-doom-cover.webp" aria-label="Tráiler completo de SHEEP DOOM"><source src="sheep-doom-trailer.mp4" type="video/mp4" /></video><span>TRÁILER COMPLETO · MP4</span><button class="run-sheep-repeat" id="sheep-doom-repeat" type="button" hidden>Repetir tráiler</button></div>
+        <div class="run-sheep-dialog-media sheep-doom-dialog-media"><video id="sheep-doom-trailer" controls playsinline preload="metadata" poster="sheep-doom-cover.webp" aria-label="Tráiler completo de SHEEP DOOM"><source src="sheep-doom-trailer.mp4" type="video/mp4" /></video><span>TRÁILER COMPLETO · MP4</span><button class="run-sheep-repeat" id="sheep-doom-repeat" type="button" hidden>Repetir tráiler</button></div>
         <aside class="run-sheep-purchase">
           <p class="eyebrow">DEMO GRATUITA</p>
           <strong>SHEEP DOOM DEMO</strong>
@@ -863,11 +863,6 @@
       button.addEventListener("click", () => {
         if (sheepDoomDetailsDialog instanceof HTMLDialogElement && !sheepDoomDetailsDialog.open) {
           sheepDoomDetailsDialog.showModal();
-          if (sheepDoomTrailer instanceof HTMLVideoElement) {
-            sheepDoomTrailer.play().catch((error) => {
-              if (error.name !== "AbortError") console.error("No se pudo reproducir el tráiler de SHEEP DOOM.", error);
-            });
-          }
         }
       });
     });
