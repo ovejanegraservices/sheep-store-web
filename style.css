@@ -1130,9 +1130,10 @@ h1, h2 { font-family: var(--font-display); }
 .sheep-game-close:hover,
 .sheep-game-close:focus-visible { background: #202020; color: #fff; }
 .sheep-game-instructions { margin: 12px 0 20px; color: #666; font-size: 14px; line-height: 1.6; }
-.sheep-game-screen { overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 7px; background: #151515; }
+.sheep-game-screen { position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 7px; background: #151515; }
 #sheep-game-canvas { display: block; width: 100%; height: auto; touch-action: manipulation; }
 #sheep-game-canvas:focus-visible { outline: 2px solid #999; outline-offset: -3px; }
+.sheep-game-jump { display: none; }
 .sheep-game-footer { display: flex; min-height: 50px; align-items: center; justify-content: space-between; gap: 16px; padding-top: 15px; }
 .sheep-game-footer p { margin: 0; color: #555; font-size: 14px; }
 .sheep-game-restart {
@@ -1174,6 +1175,42 @@ h1, h2 { font-family: var(--font-display); }
 .sheep-game-sound-toggle:focus-visible,
 .sheep-game-download:focus-visible { outline: 2px solid #777; outline-offset: 3px; }
 .sheep-game-sound-toggle[aria-pressed="false"] { color: #777; }
+
+@media (max-width: 680px) {
+  .sheep-game-dialog { width: calc(100vw - 16px); max-height: calc(100dvh - 16px); border-radius: 10px; }
+  .sheep-game-panel { padding: 16px; }
+  .sheep-game-header { gap: 10px; }
+  .sheep-game-header h2 { font-size: clamp(24px, 7vw, 32px); letter-spacing: -1px; }
+  .sheep-game-close { width: 44px; height: 44px; }
+  .sheep-game-instructions { margin: 8px 0 12px; font-size: 13px; }
+  .sheep-game-screen { overflow: visible; }
+  .sheep-game-jump {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    display: inline-flex;
+    min-width: 112px;
+    min-height: 54px;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    border: 1px solid #ffffffa8;
+    border-radius: 8px;
+    background: #f4f4f4;
+    color: #171717;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 700;
+    touch-action: manipulation;
+    box-shadow: 0 4px 14px #0008;
+  }
+  .sheep-game-jump span { font-size: 14px; }
+  .sheep-game-jump:focus-visible { outline: 3px solid #79b7d3; outline-offset: 3px; }
+  .sheep-game-footer { display: grid; min-height: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; padding-top: 12px; }
+  .sheep-game-footer p { align-self: center; font-size: 13px; }
+  .sheep-game-sound-toggle, .sheep-game-download, .sheep-game-restart { width: 100%; min-height: 44px; padding: 0 8px; font-size: 11px; }
+  .sheep-game-restart { margin: 0; }
+}
 
 @media (max-width: 700px) {
   .game-store-dialog { width: 100vw; height: 100dvh; border: 0; border-radius: 0; }

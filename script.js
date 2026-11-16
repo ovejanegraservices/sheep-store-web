@@ -971,6 +971,7 @@ const gameStatus = document.querySelector("#sheep-game-status");
 const gameScoreLabel = document.querySelector("#sheep-game-score");
 const gameRestart = document.querySelector("#sheep-game-restart");
 const gameSoundToggle = document.querySelector("#sheep-game-sound-toggle");
+const gameJump = document.querySelector("#sheep-game-jump");
 const gameClose = document.querySelector(".sheep-game-close");
 
 if (
@@ -982,6 +983,7 @@ if (
   gameScoreLabel &&
   gameRestart instanceof HTMLButtonElement &&
   gameSoundToggle instanceof HTMLButtonElement &&
+  gameJump instanceof HTMLButtonElement &&
   gameClose instanceof HTMLButtonElement
 ) {
   const context = gameCanvas.getContext("2d");
@@ -1066,6 +1068,18 @@ if (
     if (!gameRunning || sheep.y < groundY - sheepSize) return;
     sheep.velocity = -650;
     playJumpSound();
+  };
+
+  const resizeGameCanvas = () => {
+    const canvasWidth = window.matchMedia("(max-width: 680px)").matches
+      ? Math.max(540, Math.min(900, Math.round(gameCanvas.clientWidth * 1.5)))
+      : 900;
+    if (gameCanvas.width === canvasWidth) return;
+    const scale = canvasWidth / gameCanvas.width;
+    gameCanvas.width = canvasWidth;
+    obstacles.forEach((obstacle) => { obstacle.x *= scale; });
+    nextObstacleX *= scale;
+    if (gameRunning) drawScene(0);
   };
 
   const drawLaptop = (obstacle) => {
@@ -1256,6 +1270,7 @@ if (
 
   const startGame = () => {
     if (gameFrame) window.cancelAnimationFrame(gameFrame);
+    resizeGameCanvas();
     gameRunning = true;
     previousFrame = 0;
     distance = 0;
@@ -1326,11 +1341,15 @@ if (
   };
 
   gameLaunchers.forEach((launcher) => launcher.addEventListener("click", launchGame));
+  window.addEventListener("resize", () => {
+    if (gameDialog.open) resizeGameCanvas();
+  });
 
   gameCanvas.addEventListener("pointerdown", (event) => {
     event.preventDefault();
     jumpSheep();
   });
+  gameJump.addEventListener("click", jumpSheep);
 
   document.addEventListener("keydown", (event) => {
     if (!gameDialog.open || !["Space", "ArrowUp"].includes(event.code)) return;

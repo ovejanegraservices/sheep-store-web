@@ -439,6 +439,33 @@
       .news-status { text-align: left; }
       .news-grid { grid-template-columns: 1fr; }
     }
+    @media (max-width: 600px) {
+      .store-header { min-height: 58px; padding: 7px 12px; }
+      .toolbar { gap: 10px; padding: 10px 12px; }
+      .filter { min-height: 40px; padding: 0 12px; }
+      .sort-select { min-height: 40px; }
+      .content { padding: 16px 12px 26px; }
+      .steam-feature { padding: 0; }
+      .feature-art { aspect-ratio: 16 / 9; }
+      .feature-info { min-height: 0; padding: 14px; }
+      .feature-info h2 { font-size: 20px; }
+      .feature-info p { margin: 8px 0 10px; font-size: 11px; }
+      .feature-thumbs { gap: 8px; margin-bottom: 0; }
+      .feature-thumbs img, .feature-thumbs img.doom-thumb { height: 58px; }
+      .feature-game-link { min-height: 42px; margin-top: 12px; font-size: 11px; }
+      .feature-pagination { padding: 12px 0 2px; }
+      .grid { width: min(100%, 430px); grid-template-columns: 1fr; gap: 16px; margin: 0 auto; }
+      .cover { aspect-ratio: 1.35; }
+      .details { padding: 14px; }
+      .details h3 { min-height: 0; font-size: 14px; }
+      .tags { gap: 6px; }
+      .tags span { padding: 5px 7px; font-size: 9px; }
+      .purchase { align-items: center; gap: 10px; }
+      .add { min-height: 42px; padding: 0 14px; font-size: 11px; }
+      .news-grid { width: min(100%, 430px); margin: 0 auto; }
+      .game-store-window-close { width: 40px; height: 40px; }
+      .filter:focus-visible, .sort-select:focus-visible, .add:focus-visible, .feature-arrow:focus-visible, .feature-dot:focus-visible { outline: 3px solid #79b7d3; outline-offset: 2px; }
+    }
   </style>
 </head>
 <body>
