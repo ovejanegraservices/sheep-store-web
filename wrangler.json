@@ -11,7 +11,7 @@
     {
       "binding": "DB",
       "database_name": "sheep-store-ratings",
-      "database_id": "57d89ff593fcc9ec8f549c7509494876",
+      "database_id": "6adaa776-c9c6-497f-9c4e-ae571536b30a",
       "migrations_dir": "migrations"
     }
   ]
