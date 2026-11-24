@@ -3,3 +3,4 @@ wrangler.json
 .assetsignore
 worker.js
 migrations/
+.git/
