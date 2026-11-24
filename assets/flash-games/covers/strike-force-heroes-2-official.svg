@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+<title id="title">strike force heroes 2 official</title><desc id="desc">Ilustración original de acción y disparos para strike force heroes 2 official.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#28364c"/><stop offset="1" stop-color="#111714"/></linearGradient><linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#10130f00"/><stop offset="1" stop-color="#10130feF"/></linearGradient><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".09"/></pattern></defs>
+<rect width="640" height="360" fill="url(#bg)"/><rect width="640" height="280" fill="url(#grid)"/>
+<circle cx="320" cy="150" r="128" fill="#f27457" opacity=".09"/>
+<path d="M0 220h640v50H0z" fill="#121b29"/><path d="m114 209 58-82 40 24 33 67m216-9 46-73 44 31 24 42" fill="none" stroke="#f27457" stroke-width="11" stroke-linecap="round"/><circle cx="315" cy="107" r="23" fill="#e1e9f2"/><path d="M290 136h51l26 77h-93z" fill="#121923"/><path d="m291 153-55 34m105-35 54 28" stroke="#e1e9f2" stroke-width="10" stroke-linecap="round"/><path d="m113 83 11 28 30 2-23 18 8 29-26-16-26 16 8-29-23-18 30-2z" fill="#f27457"/>
+<rect y="258" width="640" height="102" fill="url(#shade)"/>
+<path d="M26 278h52" stroke="#f27457" stroke-width="5" stroke-linecap="round"/>
+<text x="26" y="316" fill="#f6f5e9" font-family="Arial,sans-serif" font-size="32" font-weight="700">strike force heroes 2 official</text>
+<text x="27" y="341" fill="#e1e9f2" font-family="Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="2">ACCIÓN Y DISPAROS</text>
+</svg>

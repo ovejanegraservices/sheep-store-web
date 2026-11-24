@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+<title id="title">Desquitate (pacman)</title><desc id="desc">Ilustración original de laberinto para Desquitate (pacman).</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#202b59"/><stop offset="1" stop-color="#111714"/></linearGradient><linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#10130f00"/><stop offset="1" stop-color="#10130feF"/></linearGradient><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".09"/></pattern></defs>
+<rect width="640" height="360" fill="url(#bg)"/><rect width="640" height="280" fill="url(#grid)"/>
+<circle cx="320" cy="150" r="128" fill="#f6d54b" opacity=".09"/>
+<g fill="none" stroke="#dbe4ff" stroke-width="8" opacity=".8"><path d="M104 84h165v48h-82v47h150v-80h176v60h-89v72H154v-65h60v-47h-80z"/><path d="M353 84v44m-79 51v38m-92-78h-43m300 44h75"/></g><circle cx="474" cy="204" r="24" fill="#f6d54b"/><circle cx="474" cy="204" r="8" fill="#fff7c5"/><circle cx="215" cy="108" r="6" fill="#f6d54b"/>
+<rect y="258" width="640" height="102" fill="url(#shade)"/>
+<path d="M26 278h52" stroke="#f6d54b" stroke-width="5" stroke-linecap="round"/>
+<text x="26" y="316" fill="#f6f5e9" font-family="Arial,sans-serif" font-size="32" font-weight="700">Desquitate (pacman)</text>
+<text x="27" y="341" fill="#dbe4ff" font-family="Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="2">LABERINTO</text>
+</svg>

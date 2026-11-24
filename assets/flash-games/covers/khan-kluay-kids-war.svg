@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+<title id="title">khan kluay kids war</title><desc id="desc">Ilustración original de estrategia para khan kluay kids war.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#46543c"/><stop offset="1" stop-color="#111714"/></linearGradient><linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#10130f00"/><stop offset="1" stop-color="#10130feF"/></linearGradient><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".09"/></pattern></defs>
+<rect width="640" height="360" fill="url(#bg)"/><rect width="640" height="280" fill="url(#grid)"/>
+<circle cx="320" cy="150" r="128" fill="#daaa63" opacity=".09"/>
+<path d="M0 220h640v50H0z" fill="#24372f"/><path d="M176 185q-14-67 28-93 65-42 123 0 42 27 27 97l-15 33h-28l4-42h-77l-3 42h-29l-15-41z" fill="#64776a" stroke="#e8e2c7" stroke-width="5"/><path d="M351 154q42 20 21 74-9 22-27 11" fill="none" stroke="#64776a" stroke-width="20" stroke-linecap="round"/><circle cx="223" cy="130" r="5" fill="#daaa63"/><path d="M95 223h450" stroke="#daaa63" stroke-width="7"/>
+<rect y="258" width="640" height="102" fill="url(#shade)"/>
+<path d="M26 278h52" stroke="#daaa63" stroke-width="5" stroke-linecap="round"/>
+<text x="26" y="316" fill="#f6f5e9" font-family="Arial,sans-serif" font-size="32" font-weight="700">khan kluay kids war</text>
+<text x="27" y="341" fill="#e8e2c7" font-family="Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="2">ESTRATEGIA</text>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+<title id="title">AGE OF WAR</title><desc id="desc">Ilustración original de estrategia para AGE OF WAR.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#293d35"/><stop offset="1" stop-color="#111714"/></linearGradient><linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#10130f00"/><stop offset="1" stop-color="#10130feF"/></linearGradient><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".09"/></pattern></defs>
+<rect width="640" height="360" fill="url(#bg)"/><rect width="640" height="280" fill="url(#grid)"/>
+<circle cx="320" cy="150" r="128" fill="#d2a35c" opacity=".09"/>
+<path d="M0 218 150 100l128 118 114-86 159 88v40H0z" fill="#101b23" opacity=".75"/><path d="M250 213V132h105v81M290 132V80h25v52M530 220V130h55v90" fill="none" stroke="#dce4c5" stroke-width="8" opacity=".8"/><path d="M305 75v-40" stroke="#d2a35c" stroke-width="7"/><path d="M305 35h46l-17 17h-29" fill="#d2a35c"/>
+<rect y="258" width="640" height="102" fill="url(#shade)"/>
+<path d="M26 278h52" stroke="#d2a35c" stroke-width="5" stroke-linecap="round"/>
+<text x="26" y="316" fill="#f6f5e9" font-family="Arial,sans-serif" font-size="32" font-weight="700">AGE OF WAR</text>
+<text x="27" y="341" fill="#dce4c5" font-family="Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="2">ESTRATEGIA</text>
+</svg>

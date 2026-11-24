@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+<title id="title">papaspastaria</title><desc id="desc">Ilustración original de cocina para papaspastaria.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#563342"/><stop offset="1" stop-color="#111714"/></linearGradient><linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#10130f00"/><stop offset="1" stop-color="#10130feF"/></linearGradient><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".09"/></pattern></defs>
+<rect width="640" height="360" fill="url(#bg)"/><rect width="640" height="280" fill="url(#grid)"/>
+<circle cx="320" cy="150" r="128" fill="#f0a343" opacity=".09"/>
+<circle cx="318" cy="166" r="92" fill="#10191d" stroke="#f7e7c7" stroke-width="7"/><circle cx="318" cy="166" r="66" fill="#f2e7d4"/><path d="M264 159q55-43 110 0v18q-55 43-110 0z" fill="#f0a343"/><path d="M270 148q48-30 96 0" fill="none" stroke="#60a85a" stroke-width="12" stroke-linecap="round"/><circle cx="304" cy="189" r="8" fill="#d74f47"/><circle cx="339" cy="189" r="8" fill="#d74f47"/><path d="M117 93v42m-14-42v23m28-23v23m-14 19v39m390-71v78m-18-78v37m36-37v37" stroke="#f7e7c7" stroke-width="6" stroke-linecap="round"/>
+<rect y="258" width="640" height="102" fill="url(#shade)"/>
+<path d="M26 278h52" stroke="#f0a343" stroke-width="5" stroke-linecap="round"/>
+<text x="26" y="316" fill="#f6f5e9" font-family="Arial,sans-serif" font-size="32" font-weight="700">papaspastaria</text>
+<text x="27" y="341" fill="#f7e7c7" font-family="Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="2">COCINA</text>
+</svg>

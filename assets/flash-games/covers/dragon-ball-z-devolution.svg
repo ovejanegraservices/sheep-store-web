@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+<title id="title">Dragon Ball Z Devolution</title><desc id="desc">Ilustración original de peleas para Dragon Ball Z Devolution.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#34215f"/><stop offset="1" stop-color="#111714"/></linearGradient><linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#10130f00"/><stop offset="1" stop-color="#10130feF"/></linearGradient><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".09"/></pattern></defs>
+<rect width="640" height="360" fill="url(#bg)"/><rect width="640" height="280" fill="url(#grid)"/>
+<circle cx="320" cy="150" r="128" fill="#f16d85" opacity=".09"/>
+<circle cx="324" cy="153" r="95" fill="#f16d85" opacity=".22"/><path d="M130 185 280 130m-92 112 131-91m196-1-150-36m94 127-119-83" stroke="#f16d85" stroke-width="12" stroke-linecap="round" opacity=".65"/><path d="M280 111q41-38 78 0l-5 48q-35 42-69 0z" fill="#121525"/><path d="M269 157q48-23 95 0l33 82H237z" fill="#121525"/><path d="m264 154 30 9m47-9-30 9" stroke="#f6dcaa" stroke-width="7"/>
+<rect y="258" width="640" height="102" fill="url(#shade)"/>
+<path d="M26 278h52" stroke="#f16d85" stroke-width="5" stroke-linecap="round"/>
+<text x="26" y="316" fill="#f6f5e9" font-family="Arial,sans-serif" font-size="32" font-weight="700">Dragon Ball Z Devolution</text>
+<text x="27" y="341" fill="#f6dcaa" font-family="Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="2">PELEAS</text>
+</svg>

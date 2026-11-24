@@ -626,6 +626,56 @@
     .game-rating-submit:disabled { cursor: default; opacity: .65; }
     .game-rating-status { flex-basis: 100%; margin: 0; color: #a7d9bb; font-size: 10px; }
     .game-rating-status.is-error { color: #ff9076; }
+    .web-games-toggle[aria-pressed="true"] { border-color: #1b3929; background: #1b3929; color: #fff; }
+    .toolbar.web-games-mode .filters > :not(.web-games-toggle),
+    .toolbar.web-games-mode .search-box { display: none !important; }
+    .web-games-view { min-height: 420px; }
+    .web-games-view[hidden] { display: none !important; }
+    .web-games-heading { margin: 5px 0 20px; }
+    .web-games-heading .eyebrow { margin-bottom: 8px; color: #a4d76c; }
+    .web-games-heading h2 { margin: 0; color: #f0f2ec; font-family: Georgia, serif; font-size: 24px; font-weight: 600; }
+    .web-games-heading p:last-child { margin: 8px 0 0; color: #9da69b; font-size: 11px; }
+    .flash-catalog-controls { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 16px; flex-wrap: wrap; }
+    .flash-catalog-status { flex: 1 1 420px; margin: 0; color: #aab4a8; font-size: 10px; line-height: 1.5; text-align: right; }
+    .flash-catalog-status.is-error { flex-basis: 100%; color: #ffb092; text-align: left; }
+    .flash-game-search { width: min(320px, 100%); min-height: 36px; padding: 0 10px; border: 1px solid #ffffff24; border-radius: 3px; background: #20231d; color: #f0f2ec; font-size: 11px; }
+    .web-games-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    .web-game-card { min-width: 0; overflow: hidden; border: 1px solid #ffffff16; border-radius: 5px; background: #20231d; transition: border-color 160ms ease, transform 160ms ease; }
+    .web-game-card:hover { border-color: #a4d76c88; transform: translateY(-2px); }
+    .flash-game-cover-button { display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: pointer; }
+    .flash-game-cover-button:focus-visible { outline: 3px solid #a4d76c; outline-offset: -3px; }
+    .flash-game-art { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: radial-gradient(ellipse at 50% 40%, #315940, #20231d 75%); }
+    .web-game-card-info { display: flex; min-height: 156px; flex-direction: column; padding: 12px; }
+    .web-game-label { margin: 0 0 7px; color: #a4d76c; font-size: 8px; font-weight: 700; letter-spacing: 1.2px; }
+    .web-game-card-info h3 { margin: 0 0 10px; color: #f0f2ec; font-size: 12px; line-height: 1.4; overflow-wrap: anywhere; }
+    .flash-game-card-description { margin: 0 0 10px; color: #aab4a8; font-size: 9px; line-height: 1.5; }
+    .web-game-play, .web-game-back { min-height: 35px; padding: 0 12px; border: 1px solid #ffffff25; border-radius: 3px; background: #1b3929; color: #fff; cursor: pointer; font-size: 10px; font-weight: 700; }
+    .web-game-play { width: 100%; margin-top: auto; }
+    .web-game-play:hover, .web-game-back:hover { background: #315940; }
+    .flash-game-dialog { width: min(1120px, calc(100vw - 24px)); max-width: none; max-height: calc(100vh - 24px); margin: auto; padding: 0; overflow: auto; border: 1px solid #ffffff24; border-radius: 7px; background: #141815; color: #e8ece6; box-shadow: 0 28px 90px #000b; }
+    .flash-game-dialog::backdrop { background: #050705e8; backdrop-filter: blur(7px); }
+    .flash-game-dialog-inner { padding: clamp(12px, 2vw, 22px); }
+    .flash-game-dialog-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin-bottom: 8px; }
+    .flash-game-dialog-header .eyebrow { margin-bottom: 5px; }
+    .flash-game-dialog-header h2 { margin: 0; color: #f0f2ec; font-family: Georgia, serif; font-size: clamp(18px, 3vw, 26px); font-weight: 600; }
+    .flash-game-dialog-close { display: grid; width: 38px; height: 38px; flex: 0 0 auto; place-items: center; border: 1px solid #ffffff24; border-radius: 4px; background: #20241f; color: #f2f4ef; cursor: pointer; font-size: 22px; }
+    .flash-game-dialog-close:hover { background: #315940; }
+    .flash-game-description { margin: 0 0 8px; color: #aab4a8; font-size: 11px; line-height: 1.5; }
+    .web-game-status { min-height: 20px; margin: 0 0 8px; color: #c9d6c6; font-size: 11px; }
+    .flash-player-container { min-height: 260px; overflow: hidden; border: 1px solid #ffffff16; border-radius: 5px; background: #090b09; }
+    .flash-player-container ruffle-player { display: block; width: 100%; height: min(68vh, 760px); min-height: 260px; }
+    @media (max-width: 900px) {
+      .web-games-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 700px) {
+      .web-games-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .flash-catalog-controls { align-items: stretch; flex-direction: column; }
+    }
+    @media (max-width: 520px) {
+      .web-games-grid { grid-template-columns: 1fr; }
+      .web-game-card-info { min-height: 144px; }
+      .flash-player-container ruffle-player { height: 60vh; min-height: 220px; }
+    }
     @media (max-width: 700px) {
       .toolbar { overflow: visible; }
       .category-menu { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -654,6 +704,7 @@
             <div class="category-menu-heading"><strong>Explorar categorías</strong><span>Filtra por género</span></div>
           </div>
         </div>
+        <button class="category-toggle web-games-toggle" id="web-games-toggle" type="button" aria-controls="web-games-view" aria-pressed="false">Juegos web</button>
       </div>
       <div class="search-box" role="search">
         <span aria-hidden="true">⌕</span>
@@ -801,6 +852,29 @@
         </div>
         <p class="empty-state" id="empty-state" hidden>No encontramos juegos con esos filtros. Prueba otra búsqueda.</p>
       </section>
+      <section class="web-games-view" id="web-games-view" aria-labelledby="web-games-title" hidden>
+        <div class="web-games-heading">
+          <p class="eyebrow">JUEGOS FLASH · RUFFLE</p>
+          <h2 id="web-games-title">Juega los juegos de tu carpeta</h2>
+          <p>Los 55 juegos SWF se ejecutan con Ruffle en el navegador; no requieren Adobe Flash ni otro complemento. Necesitas un navegador moderno compatible con WebAssembly. Algunos juegos dependen de servicios externos que ya no están disponibles; los 2 ejecutables no se incluyen.</p>
+        </div>
+        <div class="flash-catalog-controls">
+          <input class="flash-game-search" id="flash-game-search" type="search" placeholder="Buscar juego Flash" aria-label="Buscar juego Flash" autocomplete="off" />
+          <p class="flash-catalog-status" id="flash-catalog-status" role="status" aria-live="polite">Cargando catálogo…</p>
+        </div>
+        <div class="web-games-grid" id="web-games-catalog" aria-label="Catálogo de juegos Flash"></div>
+      </section>
+      <dialog class="flash-game-dialog" id="flash-game-dialog" aria-labelledby="flash-game-title" aria-describedby="flash-game-description">
+        <div class="flash-game-dialog-inner">
+          <header class="flash-game-dialog-header">
+            <div><p class="eyebrow">JUEGO WEB · RUFFLE</p><h2 id="flash-game-title"></h2></div>
+            <button class="flash-game-dialog-close" id="flash-game-close" type="button" aria-label="Cerrar juego">×</button>
+          </header>
+          <p class="flash-game-description" id="flash-game-description"></p>
+          <p class="web-game-status" id="flash-game-status" role="status" aria-live="polite"></p>
+          <div class="flash-player-container" id="flash-player-container" aria-label="Reproductor Flash"></div>
+        </div>
+      </dialog>
       <section class="news-section" id="news" data-view-panel="news" aria-labelledby="news-title" hidden>
         <div class="news-heading">
           <div><h2 id="news-title">Noticias gamer</h2><p class="news-description">Titulares recientes con imágenes de cada medio, actualizados automáticamente.</p></div>
@@ -1269,6 +1343,11 @@
       <span class="image-lightbox-counter" id="image-lightbox-counter">1 / 1</span>
     </div>
   </dialog>
+  <script>
+    window.RufflePlayer = window.RufflePlayer || {};
+    window.RufflePlayer.config = { autoplay: "on", unmuteOverlay: "hidden" };
+  </script>
+  <script src="ruffle/ruffle.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js"></script>
   <script>
     const gameCards = [...document.querySelectorAll(".game")];
@@ -1276,12 +1355,27 @@
     const categoryPicker = document.querySelector(".category-picker");
     const categoryToggle = document.querySelector("#category-toggle");
     const categoryMenu = document.querySelector("#category-menu");
+    const webGamesToggle = document.querySelector("#web-games-toggle");
+    const webGamesView = document.querySelector("#web-games-view");
+    const webGamesToolbar = document.querySelector("#store-toolbar");
+    const storeCatalogView = document.querySelector("#store-view");
     const searchInput = document.querySelector("#game-search");
     const sortSelect = document.querySelector("#game-sort");
     const gameGrid = document.querySelector("#game-grid");
     const emptyState = document.querySelector("#empty-state");
     const searchSuggestions = document.querySelector("#game-search-suggestions");
+    const webGamesCatalog = document.querySelector("#web-games-catalog");
+    const flashGameSearch = document.querySelector("#flash-game-search");
+    const flashCatalogStatus = document.querySelector("#flash-catalog-status");
+    const flashGameDialog = document.querySelector("#flash-game-dialog");
+    const flashGameTitle = document.querySelector("#flash-game-title");
+    const flashGameDescription = document.querySelector("#flash-game-description");
+    const flashGameStatus = document.querySelector("#flash-game-status");
+    const flashPlayerContainer = document.querySelector("#flash-player-container");
+    const flashGameClose = document.querySelector("#flash-game-close");
     let activeFilter = "Todos";
+    let flashGames = [];
+    let activeFlashPlayer = null;
 
     const categoryNames = new Set(["Carreras", "Rol"]);
     const multiWordCategories = ["Mundo abierto"];
@@ -1312,8 +1406,21 @@
       categoryToggle.setAttribute("aria-expanded", String(open));
     }
 
+    function setWebGamesMode(show) {
+      if (!(webGamesView instanceof HTMLElement) || !(webGamesToggle instanceof HTMLButtonElement)) return;
+      if (!show) closeWebGame();
+      webGamesView.hidden = !show;
+      if (storeCatalogView instanceof HTMLElement) storeCatalogView.hidden = show;
+      webGamesToolbar?.classList.toggle("web-games-mode", show);
+      webGamesToggle.setAttribute("aria-pressed", String(show));
+    }
+
+    webGamesToggle?.addEventListener("click", () => {
+      setWebGamesMode(webGamesView instanceof HTMLElement && webGamesView.hidden);
+    });
     categoryToggle?.addEventListener("click", () => {
       if (!(categoryMenu instanceof HTMLElement)) return;
+      setWebGamesMode(false);
       setCategoryMenuOpen(categoryMenu.hidden);
     });
     categoryToggle?.addEventListener("keydown", (event) => {
@@ -1418,6 +1525,7 @@
     }
 
     filterButtons.forEach((button) => button.addEventListener("click", () => {
+      setWebGamesMode(false);
       activeFilter = button.dataset.filter;
       filterButtons.forEach((filter) => {
         const selected = filter === button;
@@ -1428,7 +1536,10 @@
       setCategoryMenuOpen(false);
       updateCatalog();
     }));
-    searchInput.addEventListener("input", updateCatalog);
+    searchInput.addEventListener("input", () => {
+      setWebGamesMode(false);
+      updateCatalog();
+    });
     searchInput.addEventListener("focus", () => {
       if (searchInput.value.trim()) updateCatalog();
     });
@@ -1452,6 +1563,152 @@
       }
     });
     sortSelect.addEventListener("change", updateCatalog);
+    async function loadFlashCatalog() {
+      if (location.protocol === "file:") {
+        if (flashCatalogStatus instanceof HTMLElement) {
+          flashCatalogStatus.classList.add("is-error");
+          flashCatalogStatus.textContent = "Abriste el proyecto con file://. El navegador bloquea los juegos por seguridad. En PowerShell, dentro de la carpeta del proyecto, ejecuta python -m http.server 8765 --bind 127.0.0.1 y abre http://127.0.0.1:8765/.";
+        }
+        return;
+      }
+      const response = await fetch("flash-games/catalog.json?v=20261124-flash-covers");
+      if (!response.ok) throw new Error(`HTTP ${response.status} al cargar el catálogo Flash`);
+      const catalog = await response.json();
+      const isValidGame = (game) =>
+        game &&
+        typeof game.id === "string" &&
+        /^[a-z0-9-]+$/.test(game.id) &&
+        typeof game.title === "string" &&
+        game.src === `flash-games/${game.id}.swf` &&
+        typeof game.genre === "string" &&
+        typeof game.description === "string" &&
+        game.cover === `flash-games/covers/${game.id}.svg`;
+      if (!Array.isArray(catalog) || catalog.length !== 55 || catalog.some((game) => !isValidGame(game))) {
+        throw new Error("El catálogo Flash no contiene los 55 juegos esperados");
+      }
+      flashGames = catalog;
+      renderFlashCatalog();
+    }
+
+    function renderFlashCatalog() {
+      if (!(webGamesCatalog instanceof HTMLElement) || !(flashCatalogStatus instanceof HTMLElement) || !(flashGameSearch instanceof HTMLInputElement)) return;
+      const query = flashGameSearch.value.trim().toLocaleLowerCase("es");
+      const matches = flashGames.filter((game) => game.title.toLocaleLowerCase("es").includes(query));
+      webGamesCatalog.replaceChildren();
+      matches.forEach((game) => {
+        const card = document.createElement("article");
+        card.className = "web-game-card";
+        const art = document.createElement("img");
+        art.className = "flash-game-art";
+        art.src = `${game.cover}?v=20261124-flash-covers`;
+        art.alt = `${game.title}: ${game.description}`;
+        art.loading = "lazy";
+        art.decoding = "async";
+        const coverButton = document.createElement("button");
+        coverButton.className = "flash-game-cover-button";
+        coverButton.type = "button";
+        coverButton.dataset.flashGameId = game.id;
+        coverButton.setAttribute("aria-label", `Jugar ${game.title}`);
+        coverButton.append(art);
+        const info = document.createElement("div");
+        info.className = "web-game-card-info";
+        const label = document.createElement("p");
+        label.className = "web-game-label";
+        label.textContent = `${game.genre.toLocaleUpperCase("es")} · FLASH`;
+        const title = document.createElement("h3");
+        title.textContent = game.title;
+        const description = document.createElement("p");
+        description.className = "flash-game-card-description";
+        description.textContent = game.description;
+        const button = document.createElement("button");
+        button.className = "web-game-play";
+        button.type = "button";
+        button.dataset.flashGameId = game.id;
+        button.textContent = "Jugar ahora";
+        info.append(label, title, description, button);
+        card.append(coverButton, info);
+        card.addEventListener("click", (event) => {
+          if (event.target instanceof Element && event.target.closest("button")) return;
+          openFlashGame(game);
+        });
+        webGamesCatalog.append(card);
+      });
+      flashCatalogStatus.textContent = `${matches.length} de ${flashGames.length} juegos`;
+    }
+
+    function openFlashGame(game) {
+      if (
+        !(webGamesCatalog instanceof HTMLElement) ||
+        !(flashGameDialog instanceof HTMLDialogElement) ||
+        !(flashGameTitle instanceof HTMLElement) ||
+        !(flashGameDescription instanceof HTMLElement) ||
+        !(flashGameStatus instanceof HTMLElement) ||
+        !(flashPlayerContainer instanceof HTMLElement)
+      ) return;
+      flashGameTitle.textContent = game.title;
+      flashGameDescription.textContent = game.description;
+      flashGameStatus.textContent = "Cargando juego…";
+      if (!flashGameDialog.open) flashGameDialog.showModal();
+      if (!window.RufflePlayer || typeof window.RufflePlayer.newest !== "function") {
+        const error = new Error("No se pudo cargar Ruffle. Recarga la página e inténtalo de nuevo.");
+        console.error(error);
+        flashGameStatus.textContent = error.message;
+        return;
+      }
+      flashPlayerContainer.replaceChildren();
+      const player = window.RufflePlayer.newest().createPlayer();
+      player.setAttribute("aria-label", `Juego Flash: ${game.title}`);
+      flashPlayerContainer.append(player);
+      activeFlashPlayer = player;
+      player.ruffle().load(game.src).then(() => {
+        if (activeFlashPlayer === player) {
+          flashGameStatus.textContent = `${game.title} se cargó en Ruffle. Si no inicia, puede depender de un servicio externo antiguo o de una función no compatible.`;
+        }
+      }).catch((error) => {
+        console.error(`No se pudo cargar el juego Flash ${game.title}.`, error);
+        if (activeFlashPlayer === player) flashGameStatus.textContent = `No se pudo cargar ${game.title}. Prueba otro juego.`;
+      });
+    }
+
+    function closeWebGame() {
+      if (flashGameDialog instanceof HTMLDialogElement && flashGameDialog.open) flashGameDialog.close();
+      activeFlashPlayer = null;
+      flashPlayerContainer?.replaceChildren();
+      if (flashGameStatus instanceof HTMLElement) flashGameStatus.textContent = "";
+    }
+
+    webGamesCatalog?.addEventListener("click", (event) => {
+      if (!(event.target instanceof Element)) return;
+      const button = event.target.closest("[data-flash-game-id]");
+      if (!(button instanceof HTMLButtonElement)) return;
+      const game = flashGames.find((entry) => entry.id === button.dataset.flashGameId);
+      if (!game) {
+        console.error(`No se encontró el juego Flash ${button.dataset.flashGameId}.`);
+        flashCatalogStatus.textContent = "No se pudo encontrar ese juego. Recarga el catálogo.";
+        return;
+      }
+      openFlashGame(game);
+    });
+    flashGameSearch?.addEventListener("input", renderFlashCatalog);
+    flashGameClose?.addEventListener("click", closeWebGame);
+    flashGameDialog?.addEventListener("click", (event) => {
+      if (event.target === flashGameDialog) closeWebGame();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape" || !(flashGameDialog instanceof HTMLDialogElement) || !flashGameDialog.open) return;
+      event.preventDefault();
+      closeWebGame();
+    }, true);
+    flashGameDialog?.addEventListener("close", () => {
+      activeFlashPlayer = null;
+      flashPlayerContainer?.replaceChildren();
+      if (flashGameStatus instanceof HTMLElement) flashGameStatus.textContent = "";
+    });
+    void loadFlashCatalog().catch((error) => {
+      console.error("No se pudo cargar el catálogo de juegos Flash.", error);
+      if (flashCatalogStatus instanceof HTMLElement) flashCatalogStatus.textContent = "No se pudo cargar el catálogo. Recarga la página.";
+    });
+
     const featureCarousel = document.querySelector(".feature-carousel");
     if (featureCarousel instanceof HTMLElement) {
       const featureSlides = [...featureCarousel.querySelectorAll("[data-feature-slide]")];
@@ -1981,6 +2238,7 @@
     const viewButtons = Array.from(document.querySelectorAll("[data-view]"));
     function setActiveView(view) {
       const showingNews = view === "news";
+      setWebGamesMode(false);
       storeView.hidden = showingNews;
       newsView.hidden = !showingNews;
       storeToolbar.hidden = showingNews;

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+<title id="title">ben10ninjaspirit</title><desc id="desc">Ilustración original de acción y plataformas para ben10ninjaspirit.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#242b4c"/><stop offset="1" stop-color="#111714"/></linearGradient><linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#10130f00"/><stop offset="1" stop-color="#10130feF"/></linearGradient><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".09"/></pattern></defs>
+<rect width="640" height="360" fill="url(#bg)"/><rect width="640" height="280" fill="url(#grid)"/>
+<circle cx="320" cy="150" r="128" fill="#db5c61" opacity=".09"/>
+<circle cx="315" cy="151" r="75" fill="#db5c61" opacity=".16"/><path d="m488 65 15 38 40 3-31 25 10 39-34-22-34 22 10-39-31-25 40-3z" fill="#db5c61"/><circle cx="275" cy="133" r="30" fill="#111722"/><path d="M247 131q28-20 58 0l-4 14h-51z" fill="#f3e7d2"/><path d="M253 169q46-14 76 25l28 69H215l21-67z" fill="#101722"/><path d="m224 204-52 28 12 13 61-20M326 202l50-28 12 14-50 42" fill="none" stroke="#f3e7d2" stroke-width="13" stroke-linecap="round"/>
+<rect y="258" width="640" height="102" fill="url(#shade)"/>
+<path d="M26 278h52" stroke="#db5c61" stroke-width="5" stroke-linecap="round"/>
+<text x="26" y="316" fill="#f6f5e9" font-family="Arial,sans-serif" font-size="32" font-weight="700">ben10ninjaspirit</text>
+<text x="27" y="341" fill="#f3e7d2" font-family="Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="2">ACCIÓN Y PLATAFORMAS</text>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+<title id="title">the king of fighters vs dnf</title><desc id="desc">Ilustración original de peleas para the king of fighters vs dnf.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#462b48"/><stop offset="1" stop-color="#111714"/></linearGradient><linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#10130f00"/><stop offset="1" stop-color="#10130feF"/></linearGradient><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".09"/></pattern></defs>
+<rect width="640" height="360" fill="url(#bg)"/><rect width="640" height="280" fill="url(#grid)"/>
+<circle cx="320" cy="150" r="128" fill="#f08c53" opacity=".09"/>
+<path d="M0 225h640v44H0z" fill="#211727"/><circle cx="320" cy="148" r="83" fill="#f08c53" opacity=".16"/><path d="M176 154q8-46 42-46t42 46l25 74h-125zM382 154q8-46 42-46t42 46l25 74H357z" fill="#12151d"/><circle cx="218" cy="100" r="24" fill="#f7d8bd"/><circle cx="424" cy="100" r="24" fill="#f08c53"/><path d="M252 156 323 130l59 26" fill="none" stroke="#f7d8bd" stroke-width="9" stroke-linecap="round"/>
+<rect y="258" width="640" height="102" fill="url(#shade)"/>
+<path d="M26 278h52" stroke="#f08c53" stroke-width="5" stroke-linecap="round"/>
+<text x="26" y="316" fill="#f6f5e9" font-family="Arial,sans-serif" font-size="32" font-weight="700">the king of fighters vs dnf</text>
+<text x="27" y="341" fill="#f7d8bd" font-family="Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="2">PELEAS</text>
+</svg>

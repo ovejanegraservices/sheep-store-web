@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+<title id="title">tomjerryrigbridge</title><desc id="desc">Ilustración original de rompecabezas para tomjerryrigbridge.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#37445b"/><stop offset="1" stop-color="#111714"/></linearGradient><linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#10130f00"/><stop offset="1" stop-color="#10130feF"/></linearGradient><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".09"/></pattern></defs>
+<rect width="640" height="360" fill="url(#bg)"/><rect width="640" height="280" fill="url(#grid)"/>
+<circle cx="320" cy="150" r="128" fill="#f0ba5c" opacity=".09"/>
+<path d="M0 215h640v55H0z" fill="#1a2734"/><path d="M86 218q234-171 468 0" fill="none" stroke="#e8eaf0" stroke-width="11"/><path d="M110 219h420M165 183v36m68-62v62m68-81v81m68-81v81m68-62v62m68-36v36" fill="none" stroke="#f0ba5c" stroke-width="7"/><circle cx="258" cy="199" r="13" fill="#df9b44"/><path d="m247 199 11-11 11 11-11 11z" fill="#e8eaf0"/>
+<rect y="258" width="640" height="102" fill="url(#shade)"/>
+<path d="M26 278h52" stroke="#f0ba5c" stroke-width="5" stroke-linecap="round"/>
+<text x="26" y="316" fill="#f6f5e9" font-family="Arial,sans-serif" font-size="32" font-weight="700">tomjerryrigbridge</text>
+<text x="27" y="341" fill="#e8eaf0" font-family="Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="2">ROMPECABEZAS</text>
+</svg>

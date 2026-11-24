@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+<title id="title">Cactus Mccoy</title><desc id="desc">Ilustración original de plataformas y acción para Cactus Mccoy.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#694434"/><stop offset="1" stop-color="#111714"/></linearGradient><linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#10130f00"/><stop offset="1" stop-color="#10130feF"/></linearGradient><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".09"/></pattern></defs>
+<rect width="640" height="360" fill="url(#bg)"/><rect width="640" height="280" fill="url(#grid)"/>
+<circle cx="320" cy="150" r="128" fill="#efb95f" opacity=".09"/>
+<path d="M0 215 150 133l115 64 115-112 174 130v54H0z" fill="#3a2b28"/><circle cx="504" cy="87" r="42" fill="#efb95f" opacity=".75"/><path d="M92 218V157m0 22-24-21m24 37 26-23m-26 7 1-42 20-17 18 17-2 42" fill="none" stroke="#f7e5b6" stroke-width="8" stroke-linecap="round"/><path d="M370 224h170" stroke="#efb95f" stroke-width="7"/>
+<rect y="258" width="640" height="102" fill="url(#shade)"/>
+<path d="M26 278h52" stroke="#efb95f" stroke-width="5" stroke-linecap="round"/>
+<text x="26" y="316" fill="#f6f5e9" font-family="Arial,sans-serif" font-size="32" font-weight="700">Cactus Mccoy</text>
+<text x="27" y="341" fill="#f7e5b6" font-family="Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="2">PLATAFORMAS Y ACCIÓN</text>
+</svg>

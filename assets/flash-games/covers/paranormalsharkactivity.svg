@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+<title id="title">paranormalsharkactivity</title><desc id="desc">Ilustración original de acción acuática para paranormalsharkactivity.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#133e5a"/><stop offset="1" stop-color="#111714"/></linearGradient><linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#10130f00"/><stop offset="1" stop-color="#10130feF"/></linearGradient><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".09"/></pattern></defs>
+<rect width="640" height="360" fill="url(#bg)"/><rect width="640" height="280" fill="url(#grid)"/>
+<circle cx="320" cy="150" r="128" fill="#61d1e0" opacity=".09"/>
+<path d="M0 197q80-36 160 0t160 0 160 0 160 0v73H0z" fill="#0e3c56"/><path d="M0 229q80-36 160 0t160 0 160 0 160 0" fill="none" stroke="#ddf7f4" stroke-width="8" opacity=".7"/><path d="M289 192q23-56 57-68 5 31 40 45l42 19q-54 44-125 21z" fill="#1a2934" stroke="#61d1e0" stroke-width="5"/><circle cx="327" cy="175" r="4" fill="#ddf7f4"/><path d="m386 187 26 8-29 5" fill="#ddf7f4"/>
+<rect y="258" width="640" height="102" fill="url(#shade)"/>
+<path d="M26 278h52" stroke="#61d1e0" stroke-width="5" stroke-linecap="round"/>
+<text x="26" y="316" fill="#f6f5e9" font-family="Arial,sans-serif" font-size="32" font-weight="700">paranormalsharkactivity</text>
+<text x="27" y="341" fill="#ddf7f4" font-family="Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="2">ACCIÓN ACUÁTICA</text>
+</svg>

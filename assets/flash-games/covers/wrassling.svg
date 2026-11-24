@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+<title id="title">wrassling</title><desc id="desc">Ilustración original de lucha libre para wrassling.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#4a2641"/><stop offset="1" stop-color="#111714"/></linearGradient><linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#10130f00"/><stop offset="1" stop-color="#10130feF"/></linearGradient><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".09"/></pattern></defs>
+<rect width="640" height="360" fill="url(#bg)"/><rect width="640" height="280" fill="url(#grid)"/>
+<circle cx="320" cy="150" r="128" fill="#f5c64c" opacity=".09"/>
+<path d="M110 205h420v64H110z" fill="#1b1722" stroke="#f5c64c" stroke-width="7"/><path d="M110 220h420m-420 20h420" stroke="#ffe8d6" stroke-width="5"/><path d="M130 205v-72m380 72v-72m-380 25h380m-380 25h380" stroke="#f5c64c" stroke-width="7"/><circle cx="277" cy="133" r="22" fill="#ffe8d6"/><circle cx="369" cy="133" r="22" fill="#f5c64c"/><path d="M246 160h65l21 49h-96zm92 0h65l21 49h-96z" fill="#171923"/>
+<rect y="258" width="640" height="102" fill="url(#shade)"/>
+<path d="M26 278h52" stroke="#f5c64c" stroke-width="5" stroke-linecap="round"/>
+<text x="26" y="316" fill="#f6f5e9" font-family="Arial,sans-serif" font-size="32" font-weight="700">wrassling</text>
+<text x="27" y="341" fill="#ffe8d6" font-family="Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="2">LUCHA LIBRE</text>
+</svg>

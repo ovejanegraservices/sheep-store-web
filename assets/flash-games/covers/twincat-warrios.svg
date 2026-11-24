@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+<title id="title">twincat warrios</title><desc id="desc">Ilustración original de plataformas cooperativas para twincat warrios.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#224b5b"/><stop offset="1" stop-color="#111714"/></linearGradient><linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#10130f00"/><stop offset="1" stop-color="#10130feF"/></linearGradient><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".09"/></pattern></defs>
+<rect width="640" height="360" fill="url(#bg)"/><rect width="640" height="280" fill="url(#grid)"/>
+<circle cx="320" cy="150" r="128" fill="#e8a84c" opacity=".09"/>
+<path d="M0 221h640v49H0z" fill="#16313a"/><path d="M82 220v-63h127v63m232 0v-94h114v94" fill="none" stroke="#e8a84c" stroke-width="12"/><circle cx="245" cy="137" r="23" fill="#def2ef"/><path d="M222 164h48l15 57h-78z" fill="#16242c"/><circle cx="367" cy="137" r="23" fill="#e8a84c"/><path d="M344 164h48l15 57h-78z" fill="#16242c"/><path d="m278 177 55-4" stroke="#def2ef" stroke-width="7" stroke-linecap="round"/>
+<rect y="258" width="640" height="102" fill="url(#shade)"/>
+<path d="M26 278h52" stroke="#e8a84c" stroke-width="5" stroke-linecap="round"/>
+<text x="26" y="316" fill="#f6f5e9" font-family="Arial,sans-serif" font-size="32" font-weight="700">twincat warrios</text>
+<text x="27" y="341" fill="#def2ef" font-family="Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="2">PLATAFORMAS COOPERATIVAS</text>
+</svg>

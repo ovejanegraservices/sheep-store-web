@@ -1,0 +1,442 @@
+[
+  {
+    "id": "ace-gangster",
+    "title": "Ace Gangster",
+    "src": "flash-games/ace-gangster.swf",
+    "genre": "Acción y ciudad",
+    "description": "Explora una ciudad abierta entre misiones, vehículos y enfrentamientos.",
+    "cover": "flash-games/covers/ace-gangster.svg"
+  },
+  {
+    "id": "age-of-war-2",
+    "title": "AGE OF WAR 2",
+    "src": "flash-games/age-of-war-2.swf",
+    "genre": "Estrategia",
+    "description": "Dirige tropas y avanza por distintas épocas en batallas de estrategia.",
+    "cover": "flash-games/covers/age-of-war-2.svg"
+  },
+  {
+    "id": "age-of-war",
+    "title": "AGE OF WAR",
+    "src": "flash-games/age-of-war.swf",
+    "genre": "Estrategia",
+    "description": "Defiende tu base y envía unidades para superar al ejército rival.",
+    "cover": "flash-games/covers/age-of-war.svg"
+  },
+  {
+    "id": "battlecity",
+    "title": "BattleCity",
+    "src": "flash-games/battlecity.swf",
+    "genre": "Tanques",
+    "description": "Maneja un tanque, protege tu base y elimina los vehículos enemigos.",
+    "cover": "flash-games/covers/battlecity.svg"
+  },
+  {
+    "id": "ben10ninjaspirit",
+    "title": "ben10ninjaspirit",
+    "src": "flash-games/ben10ninjaspirit.swf",
+    "genre": "Acción y plataformas",
+    "description": "Acompaña a Ben en una aventura de acción con temática ninja.",
+    "cover": "flash-games/covers/ben10ninjaspirit.svg"
+  },
+  {
+    "id": "bomb-it-5",
+    "title": "Bomb It 5",
+    "src": "flash-games/bomb-it-5.swf",
+    "genre": "Acción y estrategia",
+    "description": "Coloca bombas, rompe bloques y supera a tus rivales en arenas.",
+    "cover": "flash-games/covers/bomb-it-5.svg"
+  },
+  {
+    "id": "box-head-2play",
+    "title": "box head 2play",
+    "src": "flash-games/box-head-2play.swf",
+    "genre": "Supervivencia",
+    "description": "Resiste oleadas de zombis y busca sobrevivir en una arena.",
+    "cover": "flash-games/covers/box-head-2play.svg"
+  },
+  {
+    "id": "cactus-mccoy-2",
+    "title": "Cactus Mccoy 2",
+    "src": "flash-games/cactus-mccoy-2.swf",
+    "genre": "Plataformas y acción",
+    "description": "Recorre escenarios del oeste, combate enemigos y recoge tesoros.",
+    "cover": "flash-games/covers/cactus-mccoy-2.svg"
+  },
+  {
+    "id": "cactus-mccoy",
+    "title": "Cactus Mccoy",
+    "src": "flash-games/cactus-mccoy.swf",
+    "genre": "Plataformas y acción",
+    "description": "Atraviesa niveles del oeste y enfréntate a enemigos en el camino.",
+    "cover": "flash-games/covers/cactus-mccoy.svg"
+  },
+  {
+    "id": "conquerantartica",
+    "title": "conquerantartica",
+    "src": "flash-games/conquerantartica.swf",
+    "genre": "Acción por turnos",
+    "description": "Lanza pingüinos y objetos para derribar al equipo rival.",
+    "cover": "flash-games/covers/conquerantartica.svg"
+  },
+  {
+    "id": "dead-zed-2",
+    "title": "dead-zed-2",
+    "src": "flash-games/dead-zed-2.swf",
+    "genre": "Zombis y supervivencia",
+    "description": "Defiende refugios y sobrevive a una invasión de zombis.",
+    "cover": "flash-games/covers/dead-zed-2.svg"
+  },
+  {
+    "id": "desquitate-pacman",
+    "title": "Desquitate (pacman)",
+    "src": "flash-games/desquitate-pacman.swf",
+    "genre": "Laberinto",
+    "description": "Recorre laberintos, recoge puntos y esquiva a tus perseguidores.",
+    "cover": "flash-games/covers/desquitate-pacman.svg"
+  },
+  {
+    "id": "dragon-ball-z-devolution",
+    "title": "Dragon Ball Z Devolution",
+    "src": "flash-games/dragon-ball-z-devolution.swf",
+    "genre": "Peleas",
+    "description": "Enfrenta personajes en combates de acción inspirados en Dragon Ball.",
+    "cover": "flash-games/covers/dragon-ball-z-devolution.svg"
+  },
+  {
+    "id": "dragon-ball-futboll",
+    "title": "Dragon ball(futboll)",
+    "src": "flash-games/dragon-ball-futboll.swf",
+    "genre": "Fútbol",
+    "description": "Juega partidos de fútbol protagonizados por personajes de Dragon Ball.",
+    "cover": "flash-games/covers/dragon-ball-futboll.svg"
+  },
+  {
+    "id": "dragonballfiercefighting-2-7",
+    "title": "dragonballfiercefighting 2.7",
+    "src": "flash-games/dragonballfiercefighting-2-7.swf",
+    "genre": "Peleas",
+    "description": "Combate en duelos de acción con personajes de Dragon Ball.",
+    "cover": "flash-games/covers/dragonballfiercefighting-2-7.svg"
+  },
+  {
+    "id": "electricman2",
+    "title": "electricman2",
+    "src": "flash-games/electricman2.swf",
+    "genre": "Peleas",
+    "description": "Elige movimientos y lucha contra rivales en un torneo de stickman.",
+    "cover": "flash-games/covers/electricman2.svg"
+  },
+  {
+    "id": "fancypantsadventureworld",
+    "title": "fancypantsadventureworld",
+    "src": "flash-games/fancypantsadventureworld.swf",
+    "genre": "Plataformas",
+    "description": "Corre y salta por niveles de plataformas mientras recoges objetos.",
+    "cover": "flash-games/covers/fancypantsadventureworld.svg"
+  },
+  {
+    "id": "footballkicks",
+    "title": "footballkicks",
+    "src": "flash-games/footballkicks.swf",
+    "genre": "Fútbol",
+    "description": "Practica tiros libres y apunta al arco en retos de precisión.",
+    "cover": "flash-games/covers/footballkicks.svg"
+  },
+  {
+    "id": "gun-mayhem",
+    "title": "gun mayhem",
+    "src": "flash-games/gun-mayhem.swf",
+    "genre": "Acción",
+    "description": "Enfrenta rivales en arenas con armas, plataformas y movimiento rápido.",
+    "cover": "flash-games/covers/gun-mayhem.svg"
+  },
+  {
+    "id": "intrusion-2",
+    "title": "intrusion 2",
+    "src": "flash-games/intrusion-2.swf",
+    "genre": "Acción",
+    "description": "Avanza por escenarios de combate y supera sus desafíos de acción.",
+    "cover": "flash-games/covers/intrusion-2.svg"
+  },
+  {
+    "id": "juega-digital-baby-kung-fu-v2-0",
+    "title": "Digital Baby Kung Fu V2.0",
+    "src": "flash-games/juega-digital-baby-kung-fu-v2-0.swf",
+    "genre": "Peleas",
+    "description": "Participa en duelos de artes marciales uno contra uno.",
+    "cover": "flash-games/covers/juega-digital-baby-kung-fu-v2-0.svg"
+  },
+  {
+    "id": "juega-fireboy-watergirl-ep-1",
+    "title": "Fireboy & Watergirl ep. 1",
+    "src": "flash-games/juega-fireboy-watergirl-ep-1.swf",
+    "genre": "Rompecabezas cooperativo",
+    "description": "Guía a dos personajes por templos y resuelve acertijos en equipo.",
+    "cover": "flash-games/covers/juega-fireboy-watergirl-ep-1.svg"
+  },
+  {
+    "id": "juega-mutant-fighting-arena",
+    "title": "Mutant Fighting Arena",
+    "src": "flash-games/juega-mutant-fighting-arena.swf",
+    "genre": "Peleas",
+    "description": "Prepara criaturas para competir en combates de arena.",
+    "cover": "flash-games/covers/juega-mutant-fighting-arena.svg"
+  },
+  {
+    "id": "juega-strike-force-heroes-3",
+    "title": "Strike Force Heroes 3",
+    "src": "flash-games/juega-strike-force-heroes-3.swf",
+    "genre": "Acción y disparos",
+    "description": "Completa misiones de combate con un equipo de héroes.",
+    "cover": "flash-games/covers/juega-strike-force-heroes-3.svg"
+  },
+  {
+    "id": "kawairun",
+    "title": "kawairun",
+    "src": "flash-games/kawairun.swf",
+    "genre": "Carrera y plataformas",
+    "description": "Corre, salta y esquiva obstáculos en un recorrido de plataformas.",
+    "cover": "flash-games/covers/kawairun.svg"
+  },
+  {
+    "id": "khan-kluay-kids-war",
+    "title": "khan kluay kids war",
+    "src": "flash-games/khan-kluay-kids-war.swf",
+    "genre": "Estrategia",
+    "description": "Envía elefantes al campo de batalla para superar al ejército rival.",
+    "cover": "flash-games/covers/khan-kluay-kids-war.svg"
+  },
+  {
+    "id": "kickbuttowski",
+    "title": "kickbuttowski",
+    "src": "flash-games/kickbuttowski.swf",
+    "genre": "Deportes extremos",
+    "description": "Completa trucos y desafíos de deportes extremos con Kick Buttowski.",
+    "cover": "flash-games/covers/kickbuttowski.svg"
+  },
+  {
+    "id": "monkey-fu",
+    "title": "Monkey Fu",
+    "src": "flash-games/monkey-fu.swf",
+    "genre": "Plataformas y acción",
+    "description": "Acompaña a un mono en una aventura de plataformas y combate.",
+    "cover": "flash-games/covers/monkey-fu.svg"
+  },
+  {
+    "id": "mutantfightingcup",
+    "title": "mutantfightingcup",
+    "src": "flash-games/mutantfightingcup.swf",
+    "genre": "Peleas",
+    "description": "Entrena criaturas mutantes y compite en combates de arena.",
+    "cover": "flash-games/covers/mutantfightingcup.svg"
+  },
+  {
+    "id": "my-dolphin-show",
+    "title": "my dolphin show",
+    "src": "flash-games/my-dolphin-show.swf",
+    "genre": "Espectáculo",
+    "description": "Realiza saltos y acrobacias para entretener al público con un delfín.",
+    "cover": "flash-games/covers/my-dolphin-show.svg"
+  },
+  {
+    "id": "papasburgeria-v2",
+    "title": "papasburgeria v2",
+    "src": "flash-games/papasburgeria-v2.swf",
+    "genre": "Cocina",
+    "description": "Prepara hamburguesas y atiende pedidos en un restaurante.",
+    "cover": "flash-games/covers/papasburgeria-v2.svg"
+  },
+  {
+    "id": "papascupcakeria-v2",
+    "title": "papascupcakeria v2",
+    "src": "flash-games/papascupcakeria-v2.swf",
+    "genre": "Cocina",
+    "description": "Decora cupcakes y completa los pedidos de tus clientes.",
+    "cover": "flash-games/covers/papascupcakeria-v2.svg"
+  },
+  {
+    "id": "papasfreezeria",
+    "title": "papasfreezeria",
+    "src": "flash-games/papasfreezeria.swf",
+    "genre": "Cocina",
+    "description": "Mezcla y sirve postres helados siguiendo los pedidos.",
+    "cover": "flash-games/covers/papasfreezeria.svg"
+  },
+  {
+    "id": "papashotdoggeria",
+    "title": "papashotdoggeria",
+    "src": "flash-games/papashotdoggeria.swf",
+    "genre": "Cocina",
+    "description": "Cocina y sirve hot dogs mientras atiendes a tus clientes.",
+    "cover": "flash-games/covers/papashotdoggeria.svg"
+  },
+  {
+    "id": "papaspancakeria-v2",
+    "title": "papaspancakeria v2",
+    "src": "flash-games/papaspancakeria-v2.swf",
+    "genre": "Cocina",
+    "description": "Prepara panqueques y acompáñalos con los ingredientes pedidos.",
+    "cover": "flash-games/covers/papaspancakeria-v2.svg"
+  },
+  {
+    "id": "papaspastaria",
+    "title": "papaspastaria",
+    "src": "flash-games/papaspastaria.swf",
+    "genre": "Cocina",
+    "description": "Prepara platos de pasta y atiende pedidos en el restaurante.",
+    "cover": "flash-games/covers/papaspastaria.svg"
+  },
+  {
+    "id": "papaspizzeria-v2",
+    "title": "papaspizzeria v2",
+    "src": "flash-games/papaspizzeria-v2.swf",
+    "genre": "Cocina",
+    "description": "Arma, hornea y sirve pizzas según cada pedido.",
+    "cover": "flash-games/covers/papaspizzeria-v2.svg"
+  },
+  {
+    "id": "papaspolleria",
+    "title": "papaspolleria",
+    "src": "flash-games/papaspolleria.swf",
+    "genre": "Cocina",
+    "description": "Prepara pollo y guarniciones para completar los pedidos.",
+    "cover": "flash-games/covers/papaspolleria.svg"
+  },
+  {
+    "id": "papastacomia",
+    "title": "papastacomia",
+    "src": "flash-games/papastacomia.swf",
+    "genre": "Cocina",
+    "description": "Prepara tacos a medida y atiende a los clientes.",
+    "cover": "flash-games/covers/papastacomia.svg"
+  },
+  {
+    "id": "paranormalsharkactivity",
+    "title": "paranormalsharkactivity",
+    "src": "flash-games/paranormalsharkactivity.swf",
+    "genre": "Acción acuática",
+    "description": "Enfrenta desafíos de acción en un entorno dominado por un tiburón.",
+    "cover": "flash-games/covers/paranormalsharkactivity.svg"
+  },
+  {
+    "id": "play-age-of-war-3-age-of-war",
+    "title": "Age of War 3",
+    "src": "flash-games/play-age-of-war-3-age-of-war.swf",
+    "genre": "Estrategia",
+    "description": "Despliega unidades y combate a través de diferentes épocas.",
+    "cover": "flash-games/covers/play-age-of-war-3-age-of-war.svg"
+  },
+  {
+    "id": "rockrynders",
+    "title": "rockrynders",
+    "src": "flash-games/rockrynders.swf",
+    "genre": "Aventura",
+    "description": "Explora escenarios y supera obstáculos en una aventura de acción.",
+    "cover": "flash-games/covers/rockrynders.svg"
+  },
+  {
+    "id": "savagepursuit",
+    "title": "savagepursuit",
+    "src": "flash-games/savagepursuit.swf",
+    "genre": "Plataformas y acción",
+    "description": "Explora niveles y supera enemigos y obstáculos en una aventura.",
+    "cover": "flash-games/covers/savagepursuit.svg"
+  },
+  {
+    "id": "sleepwalk",
+    "title": "sleepwalk",
+    "src": "flash-games/sleepwalk.swf",
+    "genre": "Aventura y rompecabezas",
+    "description": "Ayuda a un sonámbulo a avanzar por escenarios llenos de obstáculos.",
+    "cover": "flash-games/covers/sleepwalk.svg"
+  },
+  {
+    "id": "strike-forces-heroes-1",
+    "title": "Strike Forces Heroes 1",
+    "src": "flash-games/strike-forces-heroes-1.swf",
+    "genre": "Acción y disparos",
+    "description": "Completa misiones de combate y mejora a tu equipo de héroes.",
+    "cover": "flash-games/covers/strike-forces-heroes-1.svg"
+  },
+  {
+    "id": "strike-force-heroes-2-official",
+    "title": "strike force heroes 2 official",
+    "src": "flash-games/strike-force-heroes-2-official.swf",
+    "genre": "Acción y disparos",
+    "description": "Enfrenta misiones de acción con distintos héroes y armamento.",
+    "cover": "flash-games/covers/strike-force-heroes-2-official.svg"
+  },
+  {
+    "id": "stuntmaster",
+    "title": "stuntmaster",
+    "src": "flash-games/stuntmaster.swf",
+    "genre": "Acrobacias",
+    "description": "Supera recorridos y desafíos de acrobacias sobre ruedas.",
+    "cover": "flash-games/covers/stuntmaster.svg"
+  },
+  {
+    "id": "super-mario-crossover-2",
+    "title": "SUPER MARIO CROSSOVER 2",
+    "src": "flash-games/super-mario-crossover-2.swf",
+    "genre": "Plataformas",
+    "description": "Atraviesa niveles de plataformas con héroes de distintas aventuras.",
+    "cover": "flash-games/covers/super-mario-crossover-2.svg"
+  },
+  {
+    "id": "super-mario-crossover",
+    "title": "SUPER MARIO CROSSOVER",
+    "src": "flash-games/super-mario-crossover.swf",
+    "genre": "Plataformas",
+    "description": "Explora niveles de plataformas con personajes de diferentes juegos.",
+    "cover": "flash-games/covers/super-mario-crossover.svg"
+  },
+  {
+    "id": "tanks-wars",
+    "title": "tanks wars!",
+    "src": "flash-games/tanks-wars.swf",
+    "genre": "Tanques",
+    "description": "Controla un tanque y enfréntate a vehículos rivales.",
+    "cover": "flash-games/covers/tanks-wars.svg"
+  },
+  {
+    "id": "the-king-of-fighters-vs-dnf",
+    "title": "the king of fighters vs dnf",
+    "src": "flash-games/the-king-of-fighters-vs-dnf.swf",
+    "genre": "Peleas",
+    "description": "Lucha en duelos uno contra uno con equipos de personajes.",
+    "cover": "flash-games/covers/the-king-of-fighters-vs-dnf.svg"
+  },
+  {
+    "id": "tomjerryrigbridge",
+    "title": "tomjerryrigbridge",
+    "src": "flash-games/tomjerryrigbridge.swf",
+    "genre": "Rompecabezas",
+    "description": "Construye puentes para guiar al ratón por cada nivel.",
+    "cover": "flash-games/covers/tomjerryrigbridge.svg"
+  },
+  {
+    "id": "twincat-warrios",
+    "title": "twincat warrios",
+    "src": "flash-games/twincat-warrios.swf",
+    "genre": "Plataformas cooperativas",
+    "description": "Guía a dos gatos por niveles de plataformas y retos cooperativos.",
+    "cover": "flash-games/covers/twincat-warrios.svg"
+  },
+  {
+    "id": "wrassling",
+    "title": "wrassling",
+    "src": "flash-games/wrassling.swf",
+    "genre": "Lucha libre",
+    "description": "Agarra a tus oponentes y trata de sacarlos del ring.",
+    "cover": "flash-games/covers/wrassling.svg"
+  },
+  {
+    "id": "zombie",
+    "title": "zombie",
+    "src": "flash-games/zombie.swf",
+    "genre": "Zombis y acción",
+    "description": "Sobrevive a los zombis y supera desafíos de acción.",
+    "cover": "flash-games/covers/zombie.svg"
+  }
+]
