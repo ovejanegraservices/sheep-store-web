@@ -645,6 +645,7 @@
     .flash-game-cover-button { display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: pointer; }
     .flash-game-cover-button:focus-visible { outline: 3px solid #a4d76c; outline-offset: -3px; }
     .flash-game-art { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: radial-gradient(ellipse at 50% 40%, #315940, #20231d 75%); }
+    .flash-game-art--contain { object-fit: contain; background: #10130f; }
     .web-game-card-info { display: flex; min-height: 156px; flex-direction: column; padding: 12px; }
     .web-game-label { margin: 0 0 7px; color: #a4d76c; font-size: 8px; font-weight: 700; letter-spacing: 1.2px; }
     .web-game-card-info h3 { margin: 0 0 10px; color: #f0f2ec; font-size: 12px; line-height: 1.4; overflow-wrap: anywhere; }
@@ -1571,7 +1572,7 @@
         }
         return;
       }
-      const response = await fetch("flash-games/catalog.json?v=20261124-flash-covers");
+      const response = await fetch("flash-games/catalog.json?v=20261124-game-covers");
       if (!response.ok) throw new Error(`HTTP ${response.status} al cargar el catálogo Flash`);
       const catalog = await response.json();
       const isValidGame = (game) =>
@@ -1582,7 +1583,9 @@
         game.src === `flash-games/${game.id}.swf` &&
         typeof game.genre === "string" &&
         typeof game.description === "string" &&
-        game.cover === `flash-games/covers/${game.id}.svg`;
+        (game.cover === `flash-games/covers/${game.id}.svg` ||
+          game.cover === `flash-games/covers/${game.id}.jpg` ||
+          game.cover === `flash-games/covers/${game.id}.png`);
       if (!Array.isArray(catalog) || catalog.length !== 55 || catalog.some((game) => !isValidGame(game))) {
         throw new Error("El catálogo Flash no contiene los 55 juegos esperados");
       }
@@ -1600,7 +1603,8 @@
         card.className = "web-game-card";
         const art = document.createElement("img");
         art.className = "flash-game-art";
-        art.src = `${game.cover}?v=20261124-flash-covers`;
+        if (/\.(?:jpg|png)$/.test(game.cover)) art.classList.add("flash-game-art--contain");
+        art.src = `${game.cover}?v=20261124-game-covers`;
         art.alt = `${game.title}: ${game.description}`;
         art.loading = "lazy";
         art.decoding = "async";

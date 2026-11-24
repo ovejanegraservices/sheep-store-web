@@ -5,7 +5,7 @@
     "src": "flash-games/ace-gangster.swf",
     "genre": "Acción y ciudad",
     "description": "Explora una ciudad abierta entre misiones, vehículos y enfrentamientos.",
-    "cover": "flash-games/covers/ace-gangster.svg"
+    "cover": "flash-games/covers/ace-gangster.jpg"
   },
   {
     "id": "age-of-war-2",
@@ -13,7 +13,7 @@
     "src": "flash-games/age-of-war-2.swf",
     "genre": "Estrategia",
     "description": "Dirige tropas y avanza por distintas épocas en batallas de estrategia.",
-    "cover": "flash-games/covers/age-of-war-2.svg"
+    "cover": "flash-games/covers/age-of-war-2.png"
   },
   {
     "id": "age-of-war",
@@ -21,7 +21,7 @@
     "src": "flash-games/age-of-war.swf",
     "genre": "Estrategia",
     "description": "Defiende tu base y envía unidades para superar al ejército rival.",
-    "cover": "flash-games/covers/age-of-war.svg"
+    "cover": "flash-games/covers/age-of-war.png"
   },
   {
     "id": "battlecity",
@@ -29,7 +29,7 @@
     "src": "flash-games/battlecity.swf",
     "genre": "Tanques",
     "description": "Maneja un tanque, protege tu base y elimina los vehículos enemigos.",
-    "cover": "flash-games/covers/battlecity.svg"
+    "cover": "flash-games/covers/battlecity.png"
   },
   {
     "id": "ben10ninjaspirit",
@@ -37,7 +37,7 @@
     "src": "flash-games/ben10ninjaspirit.swf",
     "genre": "Acción y plataformas",
     "description": "Acompaña a Ben en una aventura de acción con temática ninja.",
-    "cover": "flash-games/covers/ben10ninjaspirit.svg"
+    "cover": "flash-games/covers/ben10ninjaspirit.png"
   },
   {
     "id": "bomb-it-5",
@@ -45,7 +45,7 @@
     "src": "flash-games/bomb-it-5.swf",
     "genre": "Acción y estrategia",
     "description": "Coloca bombas, rompe bloques y supera a tus rivales en arenas.",
-    "cover": "flash-games/covers/bomb-it-5.svg"
+    "cover": "flash-games/covers/bomb-it-5.png"
   },
   {
     "id": "box-head-2play",
@@ -53,7 +53,7 @@
     "src": "flash-games/box-head-2play.swf",
     "genre": "Supervivencia",
     "description": "Resiste oleadas de zombis y busca sobrevivir en una arena.",
-    "cover": "flash-games/covers/box-head-2play.svg"
+    "cover": "flash-games/covers/box-head-2play.png"
   },
   {
     "id": "cactus-mccoy-2",
@@ -61,7 +61,7 @@
     "src": "flash-games/cactus-mccoy-2.swf",
     "genre": "Plataformas y acción",
     "description": "Recorre escenarios del oeste, combate enemigos y recoge tesoros.",
-    "cover": "flash-games/covers/cactus-mccoy-2.svg"
+    "cover": "flash-games/covers/cactus-mccoy-2.png"
   },
   {
     "id": "cactus-mccoy",
@@ -69,7 +69,7 @@
     "src": "flash-games/cactus-mccoy.swf",
     "genre": "Plataformas y acción",
     "description": "Atraviesa niveles del oeste y enfréntate a enemigos en el camino.",
-    "cover": "flash-games/covers/cactus-mccoy.svg"
+    "cover": "flash-games/covers/cactus-mccoy.png"
   },
   {
     "id": "conquerantartica",
