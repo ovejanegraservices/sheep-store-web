@@ -612,9 +612,18 @@ h1, h2 { font-family: var(--font-display); }
   .services-dialog[open]::backdrop { opacity: 0; }
 }
 .business-maintenance-dialog { width: min(760px, calc(100% - 32px)); max-width: 760px; }
+.web-development-dialog { width: min(920px, calc(100% - 32px)); max-width: 920px; }
 .services-panel { padding: clamp(22px, 5vw, 36px); }
 .services-panel .programs-header h2 { max-width: 540px; }
-.service-menu { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.web-development-back,
+.service-detail-back { display: inline-flex; min-height: 40px; align-items: center; justify-content: center; gap: 8px; padding: 0 12px; border: 1px solid rgba(37, 31, 48, 0.18); border-radius: 5px; background: #fff; color: #242328; cursor: pointer; font-size: 11px; font-weight: 700; white-space: nowrap; }
+.web-development-back:hover,
+.web-development-back:focus-visible,
+.service-detail-back:hover,
+.service-detail-back:focus-visible { background: #242328; color: #fff; }
+.web-development-back:focus-visible,
+.service-detail-back:focus-visible { outline: 2px solid #8f79b8; outline-offset: 3px; }
+.service-menu { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .service-menu-button {
   display: grid;
   min-height: 76px;
@@ -710,6 +719,7 @@ h1, h2 { font-family: var(--font-display); }
 .business-pricing-scroll { overflow-x: auto; border: 1px solid rgba(37, 31, 48, 0.12); border-radius: 8px; background: rgba(255, 255, 255, 0.82); scrollbar-width: thin; }
 .business-pricing-scroll:focus-visible { outline: 2px solid #8f79b8; outline-offset: 2px; }
 .business-pricing-table { width: 100%; min-width: 470px; border-collapse: collapse; text-align: left; font-size: 11px; }
+.web-development-pricing-table { min-width: 650px; }
 .business-pricing-table th,
 .business-pricing-table td { padding: 10px 12px; border-bottom: 1px solid rgba(37, 31, 48, 0.09); white-space: nowrap; }
 .business-pricing-table thead th { background: #eeebf3; color: #403553; font-size: 10px; }
@@ -717,6 +727,7 @@ h1, h2 { font-family: var(--font-display); }
 .business-pricing-table tbody tr:last-child th,
 .business-pricing-table tbody tr:last-child td { border-bottom: 0; }
 .business-price-quote { margin: 0 !important; padding: 12px 14px; border-radius: 6px; background: #eeebf3; color: #403553 !important; font-size: 12px !important; font-weight: 700; }
+.service-price-note { margin: 8px 0 0 !important; padding: 10px 12px; border-radius: 6px; background: #eeebf3; color: #5e5b62 !important; font-size: 10px !important; line-height: 1.6 !important; }
 .business-request-form { grid-template-columns: 1fr; }
 .business-request-form .service-submit { margin-top: 5px; }
 .service-illustration {
@@ -1181,6 +1192,7 @@ body.is-playing-sheep-game > :not(.sheep-game-dialog) * {
 .sheep-game-sound-toggle[aria-pressed="false"] { color: #777; }
 
 @media (max-width: 680px) {
+  .service-menu { grid-template-columns: 1fr; }
   .sheep-game-dialog { width: calc(100vw - 16px); max-height: calc(100dvh - 16px); border-radius: 10px; }
   .sheep-game-dialog::backdrop { backdrop-filter: none; }
   .sheep-game-panel { padding: 16px; }

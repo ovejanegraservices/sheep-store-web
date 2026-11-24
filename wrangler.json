@@ -1,0 +1,18 @@
+{
+  "name": "sheep-store-web",
+  "main": "./worker.js",
+  "compatibility_date": "2026-11-16",
+  "assets": {
+    "directory": "./",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "sheep-store-ratings",
+      "database_id": "57d89ff593fcc9ec8f549c7509494876",
+      "migrations_dir": "migrations"
+    }
+  ]
+}

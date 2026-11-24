@@ -135,7 +135,7 @@
     .close { display: inline-flex; height: 32px; align-items: center; gap: 8px; padding: 0 10px; border-color: #ffffff19; background: #ffffff08; color: #dce5ec; }
     .close span { background: #70a3bb; color: #12202b; }
     .toolbar { min-height: 47px; gap: 20px; padding: 7px clamp(20px, 5vw, 72px); border: 0; background: linear-gradient(90deg, #1a6875, #236878 56%, #225b6a); }
-    .filters { flex: 1; gap: 4px; }
+    .filters { position: relative; flex: 1; gap: 4px; }
     .filter { min-height: 32px; border: 0; border-radius: 2px; background: transparent; color: #d6e8ec; font-size: 10px; }
     .filter.active, .filter:hover { background: #183e4d; color: #fff; }
     .content { display: block; width: min(1180px, 100%); padding: 27px clamp(20px, 4vw, 45px) 40px; }
@@ -202,6 +202,16 @@
     .filters { flex: 1; gap: 4px; }
     .filter { min-height: 32px; padding: 0 12px; border: 1px solid transparent; border-radius: 3px; color: #526257; font-size: 10px; }
     .filter.active, .filter:hover { border-color: #1b3929; background: #1b3929; color: #fff; }
+    .category-picker { position: relative; z-index: 20; flex: 0 0 auto; }
+    .category-toggle { display: flex; min-height: 32px; align-items: center; gap: 8px; padding: 0 12px; border: 1px solid transparent; border-radius: 4px; background: transparent; color: #526257; cursor: pointer; font-family: "Bahnschrift", "Segoe UI", sans-serif; font-size: 11px; font-weight: 650; letter-spacing: .03em; }
+    .category-toggle:hover, .category-toggle[aria-expanded="true"], .category-toggle.active { border-color: #1b3929; background: #1b3929; color: #fff; }
+    .category-menu { position: absolute; z-index: 30; top: calc(100% + 7px); left: 0; display: grid; width: min(1020px, calc(100vw - 80px)); max-height: min(170px, calc(100vh - 120px)); grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; overflow-y: auto; padding: 9px; border: 1px solid #3b6b78; border-radius: 8px; background: radial-gradient(ellipse at 0 0, #263d49, #17212b 62%); box-shadow: 0 18px 48px #000b, 0 0 0 1px #75d8c21c; color: #dce5ec; font-family: "Bahnschrift", "Segoe UI", sans-serif; scrollbar-color: #426e7a #17212b; }
+    .category-menu[hidden] { display: none; }
+    .category-menu-heading { display: flex; grid-column: 1 / -1; align-items: center; justify-content: space-between; gap: 12px; padding: 2px 8px 7px; border-bottom: 1px solid #ffffff20; }
+    .category-menu-heading strong { color: #eef7f7; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .category-menu-heading span { color: #8fabb5; font-size: 9px; letter-spacing: .04em; }
+    .category-option { min-height: 34px; padding: 0 10px; border: 1px solid transparent; border-radius: 5px; background: #ffffff06; color: #dce5ec; cursor: pointer; font-family: inherit; font-size: 11px; font-weight: 550; letter-spacing: .01em; text-align: left; transition: background 140ms ease, border-color 140ms ease, color 140ms ease, transform 140ms ease; }
+    .category-option:hover, .category-option:focus-visible, .category-option.active { border-color: #5da9a7; outline: 0; background: linear-gradient(110deg, #1d484e, #263b4e); color: #c5ffe8; box-shadow: inset 0 0 0 1px #8ce2c51a; transform: translateY(-1px); }
     .search-box { display: flex; width: min(230px, 36vw); align-items: center; gap: 8px; padding: 0 10px; border: 1px solid #d4ddd4; border-radius: 3px; background: #fff; color: #64736a; }
     .search-box span { font-size: 17px; }
     .search-box input { width: 100%; min-width: 0; height: 34px; border: 0; outline: 0; background: transparent; color: #1c2b23; font-size: 10px; }
@@ -220,6 +230,121 @@
     .cover-sheep-run { justify-content: center; background: radial-gradient(ellipse at 50% 42%, #31634f, #1a3228 58%, #101714); }
     .cover-sheep-run::after { z-index: 0; }
     .game-cover-image { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+    .pvz-cover-image { object-fit: contain; background: #74bced; }
+    .pvz-feature-cover { object-fit: contain; background: #74bced; }
+    .pvz-dialog-cover { object-fit: contain !important; background: #74bced; }
+    .pvz-dialog-media { aspect-ratio: 16 / 9; }
+    .pvz-dialog-media video { display: block; width: 100%; height: 100%; border: 0; object-fit: contain; background: #0b0d0c; }
+    .pvz-dialog-media .pvz-repeat { position: absolute; z-index: 2; top: 50%; left: 50%; min-height: 38px; padding: 0 14px; border: 1px solid #fff; border-radius: 3px; background: #fff; color: #171815; cursor: pointer; font-size: 11px; font-weight: 700; transform: translate(-50%, -50%); }
+    .pvz-dialog-media .pvz-repeat[hidden] { display: none; }
+    .gta-sa-cover-image { object-fit: contain; background: #182018; }
+    .gta-sa-feature-cover { object-fit: contain; background: #182018; }
+    .gta-sa-dialog-media { aspect-ratio: 16 / 9; }
+    .gta-sa-dialog-media video { display: block; width: 100%; height: 100%; border: 0; object-fit: contain; background: #0b0d0c; }
+    .gta-sa-dialog-media .gta-sa-repeat { position: absolute; z-index: 2; top: 50%; left: 50%; min-height: 38px; padding: 0 14px; border: 1px solid #fff; border-radius: 3px; background: #fff; color: #171815; cursor: pointer; font-size: 11px; font-weight: 700; transform: translate(-50%, -50%); }
+    .gta-sa-dialog-media .gta-sa-repeat[hidden] { display: none; }
+    .run-sheep-dialog-actions .run-sheep-download { display: flex; min-height: 38px; align-items: center; justify-content: space-between; gap: 8px; }
+    .fnaf-cover-image,
+    .fnaf-feature-cover,
+    .fnaf-dialog-media video { object-fit: contain; background: #090909; }
+    .fnaf-dialog-media { aspect-ratio: 16 / 9; }
+    .image-lightbox {
+      width: min(1100px, calc(100vw - 32px));
+      max-width: none;
+      max-height: calc(100vh - 32px);
+      margin: auto;
+      padding: 0;
+      overflow: hidden;
+      border: 1px solid #ffffff20;
+      border-radius: 6px;
+      background: #10110f;
+      color: #fff;
+      box-shadow: 0 28px 90px #000b;
+    }
+    .image-lightbox::backdrop { background: #050705dc; backdrop-filter: blur(8px); }
+    .image-lightbox-header {
+      display: flex;
+      height: 48px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 0 10px 0 16px;
+      border-bottom: 1px solid #ffffff16;
+    }
+    .image-lightbox-header strong { min-width: 0; overflow: hidden; font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+    .image-lightbox-close {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border: 1px solid #ffffff24;
+      border-radius: 4px;
+      background: #20241f;
+      color: #fff;
+      cursor: pointer;
+      font-size: 20px;
+    }
+    .image-lightbox-body {
+      display: grid;
+      min-height: 320px;
+      max-height: calc(100vh - 80px);
+      place-items: center;
+      padding: 12px;
+      background: #090a09;
+    }
+    .image-lightbox-body img {
+      display: block;
+      width: 100%;
+      max-height: calc(100vh - 104px);
+      object-fit: contain;
+    }
+    .image-lightbox-body img.is-changing { animation: lightbox-image-fade 200ms ease-out; }
+    @keyframes lightbox-image-fade {
+      from { opacity: .62; }
+      to { opacity: 1; }
+    }
+    .image-lightbox-nav {
+      position: absolute;
+      z-index: 2;
+      top: 50%;
+      display: grid;
+      width: 44px;
+      height: 58px;
+      place-items: center;
+      border: 1px solid #ffffff24;
+      border-radius: 4px;
+      background: #10130fe8;
+      color: #fff;
+      cursor: pointer;
+      font-size: 34px;
+      line-height: 1;
+      transform: translateY(-50%);
+      transition: background 160ms ease, transform 160ms ease;
+    }
+    .image-lightbox-nav:hover,
+    .image-lightbox-nav:focus-visible { background: #fff; color: #171815; transform: translateY(-50%) scale(1.04); }
+    .image-lightbox-prev { left: 18px; }
+    .image-lightbox-next { right: 18px; }
+    .image-lightbox-body { position: relative; }
+    .image-lightbox-counter {
+      position: absolute;
+      z-index: 3;
+      right: 18px;
+      bottom: 18px;
+      min-width: 54px;
+      padding: 7px 9px;
+      border: 1px solid #ffffff24;
+      border-radius: 20px;
+      background: #10130fd9;
+      color: #fff;
+      font-size: 10px;
+      text-align: center;
+    }
+    .feature-banner-image,
+    .feature-thumbs img,
+    .game-cover-image,
+    .run-sheep-dialog-media img { cursor: zoom-in; }
+    .fnaf-dialog-media video { display: block; width: 100%; height: 100%; border: 0; }
     .game-cover-video, .game-cover-animation { position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; pointer-events: none; transition: opacity 180ms ease; }
     .game-preview-cover:hover .game-cover-video,
     .game-preview-cover:focus-within .game-cover-video { opacity: 1; }
@@ -256,7 +381,7 @@
       .store-title { gap: 14px; }
       .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
-    @media (max-width: 700px) {
+    @media (max-width: 800px) {
       .store-header { min-height: 62px; gap: 10px; padding: 8px 14px; }
       .store-brand { gap: 6px; }
       .store-brand img { width: 30px; height: 30px; }
@@ -265,7 +390,7 @@
       .store-title > span { display: none; }
       .close { display: none; }
       .toolbar { flex-wrap: wrap; gap: 7px; padding: 8px 14px; }
-      .filters { flex-basis: 100%; overflow-x: auto; flex-wrap: nowrap; }
+      .filters { flex-basis: 100%; flex-wrap: nowrap; }
       .filter { flex: 0 0 auto; }
       .search-box { width: 100%; }
       .content { padding: 18px 14px 30px; }
@@ -290,8 +415,23 @@
     .toolbar { border-color: #ffffff10; background: #1c1e1a; }
     .filter { color: #aab2a7; }
     .filter.active, .filter:hover { border-color: #fff; background: #fff; color: #171815; }
+    .category-toggle { color: #dce5ec; }
+    .category-toggle:hover, .category-toggle[aria-expanded="true"], .category-toggle.active { border-color: #58a7a5; background: #193840; color: #c5ffe8; }
     .search-box, .sort-select { border-color: #3a3e37; background: #171815; color: #dce2d8; }
     .search-box input { color: #f3f5ef; }
+    .search-box { position: relative; z-index: 10; }
+    .search-suggestions { position: absolute; z-index: 20; top: calc(100% + 7px); right: 0; width: max(100%, 280px); padding: 6px; border: 1px solid #3a4a54; border-radius: 4px; background: #17212b; box-shadow: 0 12px 30px #0008; color: #dce5ec; }
+    .search-suggestions[hidden] { display: none; }
+    .search-suggestion { display: flex; width: 100%; align-items: center; gap: 9px; padding: 7px; border: 0; border-radius: 3px; background: transparent; color: inherit; cursor: pointer; text-align: left; }
+    .search-suggestion:hover, .search-suggestion:focus-visible { outline: 0; background: #263945; }
+    .search-suggestion img { width: 48px; height: 34px; flex: 0 0 auto; border-radius: 2px; object-fit: cover; background: #0e171d; }
+    .search-suggestion span { min-width: 0; }
+    .search-suggestion strong, .search-suggestion small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .search-suggestion strong { font-size: 11px; }
+    .search-suggestion small { margin-top: 3px; color: #9cabb7; font-size: 9px; }
+    .search-suggestions-empty { padding: 10px 8px; color: #9cabb7; font-size: 10px; }
+    .search-suggestions-more { width: 100%; margin-top: 4px; padding: 9px 7px 5px; border: 0; border-top: 1px solid #ffffff20; background: transparent; color: #a4d76c; cursor: pointer; font-size: 10px; font-weight: 700; text-align: left; }
+    .search-suggestions-more:hover, .search-suggestions-more:focus-visible { color: #c5ee92; }
     .catalog-heading h2, .news-section h2 { color: #f0f2ec; }
     .catalog-heading p, .sort { color: #9da69b; }
     .steam-feature { background: #242720; box-shadow: 0 14px 28px #0005; }
@@ -320,7 +460,7 @@
     .feature-pagination { display: flex; justify-content: center; gap: 6px; padding-top: 10px; }
     .feature-dot { width: 12px; height: 7px; padding: 0; border: 0; border-radius: 5px; background: #53606c; cursor: pointer; transition: width 160ms ease, background 160ms ease; }
     .feature-dot[aria-pressed="true"] { width: 24px; background: #e8f0f7; }
-    @media (max-width: 700px) {
+    @media (max-width: 800px) {
       .steam-feature { padding: 0 16px; }
       .feature-slide { height: auto; min-height: 0; grid-template-columns: 1fr; }
       .feature-art { aspect-ratio: 1.55; }
@@ -466,6 +606,34 @@
       .game-store-window-close { width: 40px; height: 40px; }
       .filter:focus-visible, .sort-select:focus-visible, .add:focus-visible, .feature-arrow:focus-visible, .feature-dot:focus-visible { outline: 3px solid #79b7d3; outline-offset: 2px; }
     }
+    .game-rating-panel { margin-top: 28px; padding: clamp(14px, 2vw, 20px); border: 1px solid #ffffff18; border-radius: 7px; background: linear-gradient(145deg, #1a2420, #151a18); }
+    .game-rating-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .game-rating-panel h3 { margin: 0; color: #f2f4ef; font-family: "Bahnschrift", "Segoe UI", sans-serif; font-size: 19px; font-weight: 650; letter-spacing: .02em; }
+    .game-rating-note { margin: 5px 0 0; color: #97a396; font-size: 10px; }
+    .game-rating-summary { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+    .game-rating-percent { color: #89e0bd; font-family: "Bahnschrift", "Segoe UI", sans-serif; font-size: 30px; font-weight: 750; line-height: 1; }
+    .game-rating-average { color: #ffce63; font-size: 10px; font-weight: 700; }
+    .game-rating-votes { color: #9da99e; font-size: 9px; }
+    .game-rating-stars { display: inline-flex; align-items: center; gap: 1px; white-space: nowrap; }
+    .game-rating-star { display: inline-block; padding: 0; background: linear-gradient(90deg, #ffca55 var(--fill, 0%), #59636a var(--fill, 0%)); background-clip: text; color: transparent; font-size: 19px; line-height: 1; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .game-rating-actions { display: flex; align-items: center; gap: 11px; flex-wrap: wrap; margin-top: 17px; padding-top: 13px; border-top: 1px solid #ffffff14; }
+    .game-rating-actions > span { color: #b7c1b6; font-size: 10px; }
+    .game-rating-picker { display: inline-flex; align-items: center; gap: 2px; }
+    .game-rating-picker .game-rating-star { width: 27px; height: 30px; border: 0; background-color: transparent; cursor: pointer; font-size: 26px; }
+    .game-rating-picker .game-rating-star:hover { transform: scale(1.12); }
+    .game-rating-submit { min-height: 33px; margin-left: auto; padding: 0 13px; border: 1px solid #4e9a83; border-radius: 4px; background: linear-gradient(110deg, #1e584e, #23483e); color: #d8fff0; cursor: pointer; font: 650 10px "Bahnschrift", "Segoe UI", sans-serif; letter-spacing: .02em; }
+    .game-rating-submit:hover:not(:disabled) { border-color: #80d5b8; background: linear-gradient(110deg, #287565, #2b5b4e); }
+    .game-rating-submit:disabled { cursor: default; opacity: .65; }
+    .game-rating-status { flex-basis: 100%; margin: 0; color: #a7d9bb; font-size: 10px; }
+    .game-rating-status.is-error { color: #ff9076; }
+    @media (max-width: 700px) {
+      .toolbar { overflow: visible; }
+      .category-menu { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 600px) {
+      .game-rating-header { align-items: start; flex-direction: column; }
+      .game-rating-picker .game-rating-star { width: 25px; }
+    }
   </style>
 </head>
 <body>
@@ -478,13 +646,20 @@
     <nav class="toolbar" id="store-toolbar" aria-label="Filtros de la tienda">
       <div class="filters" aria-label="Filtrar por género">
         <button class="filter active" type="button" data-filter="Todos" aria-pressed="true">Todos</button>
-        <button class="filter" type="button" data-filter="Arcade" aria-pressed="false">Arcade</button>
-        <button class="filter" type="button" data-filter="Aventura" aria-pressed="false">Aventura</button>
-        <button class="filter" type="button" data-filter="Acción" aria-pressed="false">Acción</button>
-        <button class="filter" type="button" data-filter="Carreras" aria-pressed="false">Carreras</button>
-        <button class="filter" type="button" data-filter="Rol" aria-pressed="false">Rol</button>
+        <div class="category-picker">
+          <button class="category-toggle" id="category-toggle" type="button" aria-controls="category-menu" aria-expanded="false" aria-haspopup="true">
+            Categorías <span aria-hidden="true">▾</span>
+          </button>
+          <div class="category-menu" id="category-menu" role="group" aria-label="Categorías de juegos" hidden>
+            <div class="category-menu-heading"><strong>Explorar categorías</strong><span>Filtra por género</span></div>
+          </div>
+        </div>
       </div>
-      <label class="search-box"><span aria-hidden="true">⌕</span><input id="game-search" type="search" placeholder="Buscar juegos" aria-label="Buscar juegos" /></label>
+      <div class="search-box" role="search">
+        <span aria-hidden="true">⌕</span>
+        <input id="game-search" type="search" placeholder="Buscar juegos" aria-label="Buscar juegos" aria-controls="game-search-suggestions" aria-expanded="false" autocomplete="off" />
+        <div class="search-suggestions" id="game-search-suggestions" role="group" aria-label="Juegos que coinciden" hidden></div>
+      </div>
     </nav>
     <div class="content">
       <section class="catalog" id="store-view" data-view-panel="store">
@@ -519,12 +694,96 @@
                   <button class="feature-game-link" type="button" data-open-sheep-doom-details>Ver juego <span aria-hidden="true">↗</span></button>
                 </aside>
               </article>
+              <article class="feature-slide" data-feature-slide aria-label="Plantas vs Zombies" aria-hidden="true">
+                <div class="feature-art"><img class="feature-banner-image pvz-feature-cover" src="pvz-cover.webp" alt="Portada de Plantas vs Zombies con plantas y zombis" /></div>
+                <aside class="feature-info">
+                  <p class="eyebrow">ESTRATEGIA · DEFENSA</p>
+                  <h2>Plantas vs Zombies</h2>
+                  <p>Prepara tus plantas, defiende tu jardín y acaba con los zombis.</p>
+                  <div class="feature-thumbs" aria-hidden="true">
+                    <img src="pvz-screen-1.jpg" alt="" /><img src="pvz-screen-2.jpg" alt="" />
+                    <img src="pvz-screen-3.jpg" alt="" /><img src="pvz-cover.webp" alt="" />
+                  </div>
+                  <button class="feature-game-link" type="button" data-open-pvz-details>Ver juego <span aria-hidden="true">↗</span></button>
+                </aside>
+              </article>
+              <article class="feature-slide" data-feature-slide aria-label="Grand Theft Auto San Andreas" aria-hidden="true">
+                <div class="feature-art"><img class="feature-banner-image gta-sa-feature-cover" src="gta-sa-cover.jpg" alt="Portada de Grand Theft Auto San Andreas" /></div>
+                <aside class="feature-info">
+                  <p class="eyebrow">ACCIÓN · MUNDO ABIERTO</p>
+                  <h2>Grand Theft Auto: San Andreas</h2>
+                  <p>Explora Los Santos, San Fierro y Las Venturas en una historia de acción y supervivencia.</p>
+                  <div class="feature-thumbs" aria-hidden="true">
+                    <img src="gta-sa-screen-1.jpg" alt="" /><img src="gta-sa-screen-2.jpg" alt="" />
+                    <img src="gta-sa-screen-3.jpg" alt="" /><img src="gta-sa-cover.jpg" alt="" />
+                  </div>
+                  <button class="feature-game-link" type="button" data-open-gta-sa-details>Ver juego <span aria-hidden="true">↗</span></button>
+                </aside>
+              </article>
+              <article class="feature-slide" data-feature-slide aria-label="Five Nights at Freddy's" aria-hidden="true">
+                <div class="feature-art"><img class="feature-banner-image fnaf-feature-cover" src="fnaf1-cover.jpg" alt="Portada de Five Nights at Freddy's" /></div>
+                <aside class="feature-info">
+                  <p class="eyebrow">TERROR · SUPERVIVENCIA</p>
+                  <h2>Five Nights at Freddy's</h2>
+                  <p>Supervisa las cámaras y conserva la energía hasta las seis de la mañana.</p>
+                  <div class="feature-thumbs" aria-hidden="true">
+                    <img src="fnaf1-screen-1.jpg" alt="" /><img src="fnaf1-screen-2.jpg" alt="" />
+                    <img src="fnaf1-screen-3.jpg" alt="" /><img src="fnaf1-screen-4.jpg" alt="" />
+                  </div>
+                  <button class="feature-game-link" type="button" data-open-fnaf1-details>Ver juego <span aria-hidden="true">↗</span></button>
+                </aside>
+              </article>
+              <article class="feature-slide" data-feature-slide aria-label="Five Nights at Freddy's 2" aria-hidden="true">
+                <div class="feature-art"><img class="feature-banner-image fnaf-feature-cover" src="fnaf2-cover.jpg" alt="Portada de Five Nights at Freddy's 2" /></div>
+                <aside class="feature-info">
+                  <p class="eyebrow">TERROR · SUPERVIVENCIA</p>
+                  <h2>Five Nights at Freddy's 2</h2>
+                  <p>Enfrenta nuevos animatrónicos sin puertas ni luz de oficina.</p>
+                  <div class="feature-thumbs" aria-hidden="true">
+                    <img src="fnaf2-screen-1.jpg" alt="" /><img src="fnaf2-screen-2.jpg" alt="" />
+                    <img src="fnaf2-screen-3.jpg" alt="" /><img src="fnaf2-screen-4.jpg" alt="" />
+                  </div>
+                  <button class="feature-game-link" type="button" data-open-fnaf2-details>Ver juego <span aria-hidden="true">↗</span></button>
+                </aside>
+              </article>
+              <article class="feature-slide" data-feature-slide aria-label="Five Nights at Freddy's 3" aria-hidden="true">
+                <div class="feature-art"><img class="feature-banner-image fnaf-feature-cover" src="fnaf3-cover.jpg" alt="Portada de Five Nights at Freddy's 3" /></div>
+                <aside class="feature-info">
+                  <p class="eyebrow">TERROR · SUPERVIVENCIA</p>
+                  <h2>Five Nights at Freddy's 3</h2>
+                  <p>Sobrevive treinta años después en Fazbear's Fright.</p>
+                  <div class="feature-thumbs" aria-hidden="true">
+                    <img src="fnaf3-screen-1.jpg" alt="" /><img src="fnaf3-screen-2.jpg" alt="" />
+                    <img src="fnaf3-screen-3.jpg" alt="" /><img src="fnaf3-screen-4.jpg" alt="" />
+                  </div>
+                  <button class="feature-game-link" type="button" data-open-fnaf3-details>Ver juego <span aria-hidden="true">↗</span></button>
+                </aside>
+              </article>
+              <article class="feature-slide" data-feature-slide aria-label="Five Nights at Freddy's 4" aria-hidden="true">
+                <div class="feature-art"><img class="feature-banner-image fnaf-feature-cover" src="fnaf4-cover.jpg" alt="Portada de Five Nights at Freddy's 4" /></div>
+                <aside class="feature-info">
+                  <p class="eyebrow">TERROR · SUPERVIVENCIA</p>
+                  <h2>Five Nights at Freddy's 4</h2>
+                  <p>Esta vez, el terror ha llegado a tu casa.</p>
+                  <div class="feature-thumbs" aria-hidden="true">
+                    <img src="fnaf4-screen-1.jpg" alt="" /><img src="fnaf4-screen-2.jpg" alt="" />
+                    <img src="fnaf4-screen-3.jpg" alt="" /><img src="fnaf4-screen-4.jpg" alt="" />
+                  </div>
+                  <button class="feature-game-link" type="button" data-open-fnaf4-details>Ver juego <span aria-hidden="true">↗</span></button>
+                </aside>
+              </article>
             </div>
             <button class="feature-arrow feature-arrow-prev" type="button" data-feature-prev aria-label="Juego destacado anterior">‹</button>
             <button class="feature-arrow feature-arrow-next" type="button" data-feature-next aria-label="Siguiente juego destacado">›</button>
             <div class="feature-pagination" aria-label="Seleccionar juego destacado">
               <button class="feature-dot" type="button" data-feature-dot="0" aria-label="Mostrar Run Sheep" aria-pressed="true"></button>
               <button class="feature-dot" type="button" data-feature-dot="1" aria-label="Mostrar SHEEP DOOM DEMO" aria-pressed="false"></button>
+              <button class="feature-dot" type="button" data-feature-dot="2" aria-label="Mostrar Plantas vs Zombies" aria-pressed="false"></button>
+              <button class="feature-dot" type="button" data-feature-dot="3" aria-label="Mostrar Grand Theft Auto San Andreas" aria-pressed="false"></button>
+              <button class="feature-dot" type="button" data-feature-dot="4" aria-label="Mostrar Five Nights at Freddy's" aria-pressed="false"></button>
+              <button class="feature-dot" type="button" data-feature-dot="5" aria-label="Mostrar Five Nights at Freddy's 2" aria-pressed="false"></button>
+              <button class="feature-dot" type="button" data-feature-dot="6" aria-label="Mostrar Five Nights at Freddy's 3" aria-pressed="false"></button>
+              <button class="feature-dot" type="button" data-feature-dot="7" aria-label="Mostrar Five Nights at Freddy's 4" aria-pressed="false"></button>
             </div>
           </div>
         </section>
@@ -533,6 +792,12 @@
           <article class="game game-run-sheep" data-name="Run Sheep" data-genres="Arcade" data-price="0"><div class="cover cover-sheep-run game-preview-cover game-preview-cover-run-sheep"><img class="game-cover-image" src="run-sheep-cover.png" alt="Portada de Run Sheep: una oveja pixelada corre entre edificios y monedas" /><div class="cover-title">RUN SHEEP<small>MINIJUEGO SHEEP STORE</small></div><video class="game-cover-video" autoplay muted playsinline loop preload="none" poster="run-sheep-cover.png" data-always-play="true" aria-hidden="true"><source src="run-sheep-offers-preview.webm" type="video/webm" /></video><button class="game-cover-open" type="button" data-open-run-sheep-details aria-label="Conoce más sobre Run Sheep"></button></div><div class="details"><h3>Run Sheep</h3><div class="tags"><span>Arcade</span><span>Windows</span></div><div class="purchase"><span class="discount">-100%</span><strong class="price">Gratis</strong><button class="add" type="button" data-open-run-sheep-details aria-label="Ver detalles y descargar Run Sheep">Descargar</button></div></div></article>
           <article class="game" data-name="SHEEP DOOM DEMO" data-genres="Acción Arcade FPS" data-price="0"><div class="cover cover-sheep-doom game-preview-cover game-preview-cover-doom"><img class="game-cover-image" src="sheep-doom-cover.webp" alt="Sheep Doom: una oveja armada lucha contra demonios" /><img class="game-cover-animation" src="sheep-doom-preview.gif" alt="" aria-hidden="true" /><button class="game-cover-open" type="button" data-open-sheep-doom-details aria-label="Conoce más sobre SHEEP DOOM DEMO"></button></div><div class="details"><h3>SHEEP DOOM DEMO</h3><div class="tags"><span>Acción</span><span>Windows</span><span>Arcade</span></div><div class="purchase"><span class="discount">-100%</span><strong class="price">Gratis</strong><button class="add" type="button" data-open-sheep-doom-details aria-label="Ver detalles y descargar SHEEP DOOM DEMO">Descargar</button></div></div></article>
           <article class="game" data-name="SHEEP PAC" data-genres="Retro Arcade Aventura Acción Laberintos" data-price="0"><div class="cover game-preview-cover"><img class="game-cover-image" src="sheep-pac-cover.png" alt="Portada de SHEEP PAC: Sheep escapa de enemigos en un laberinto retro" /><button class="game-cover-open" type="button" data-open-sheep-pac-details aria-label="Conoce más sobre SHEEP PAC"></button></div><div class="details"><h3>SHEEP PAC</h3><div class="tags"><span>Retro</span><span>Arcade</span><span>Windows</span></div><div class="purchase"><span class="discount">-100%</span><strong class="price">Gratis</strong><button class="add" type="button" data-open-sheep-pac-details aria-label="Ver detalles y descargar SHEEP PAC">Descargar</button></div></div></article>
+          <article class="game" data-name="Plants vs. Zombies" data-genres="Estrategia Defensa Zombie" data-price="0"><div class="cover game-preview-cover"><img class="game-cover-image pvz-cover-image" src="pvz-cover.webp" alt="Portada de Plants vs. Zombies con plantas y zombis" /><button class="game-cover-open" type="button" data-open-pvz-details aria-label="Conoce más sobre Plants vs. Zombies"></button></div><div class="details"><h3>Plants vs. Zombies</h3><div class="tags"><span>Estrategia</span><span>Torre de defensa</span><span>Windows</span></div><div class="purchase"><span class="discount">-100%</span><strong class="price">Gratis</strong><a class="add" href="https://drive.google.com/uc?export=download&amp;id=1eLTseyFozmDB83p5Y30rcv1XeLxqtikK" target="_blank" rel="noopener" aria-label="Descargar Plants vs. Zombies">Descargar</a></div></div></article>
+          <article class="game" data-name="Grand Theft Auto San Andreas" data-genres="Acción Aventura Mundo abierto" data-price="0"><div class="cover game-preview-cover"><img class="game-cover-image gta-sa-cover-image" src="gta-sa-cover.jpg" alt="Portada de Grand Theft Auto San Andreas" /><button class="game-cover-open" type="button" data-open-gta-sa-details aria-label="Conoce más sobre Grand Theft Auto San Andreas"></button></div><div class="details"><h3>Grand Theft Auto: San Andreas</h3><div class="tags"><span>Acción</span><span>Mundo abierto</span><span>Windows</span></div><div class="purchase"><span class="discount">-100%</span><strong class="price">Gratis</strong><a class="add" href="https://drive.google.com/drive/folders/16t3Mm2zH0s1kEWKcr6ANsJ8aTFjSm8xI?usp=sharing" target="_blank" rel="noopener" aria-label="Descargar Grand Theft Auto San Andreas">Descargar</a></div></div></article>
+          <article class="game" data-name="Five Nights at Freddy's" data-genres="Terror Supervivencia Indie" data-price="0"><div class="cover game-preview-cover"><img class="game-cover-image fnaf-cover-image" src="fnaf1-cover.jpg" alt="Portada de Five Nights at Freddy's" /><button class="game-cover-open" type="button" data-open-fnaf1-details aria-label="Conoce más sobre Five Nights at Freddy's"></button></div><div class="details"><h3>Five Nights at Freddy's</h3><div class="tags"><span>Terror</span><span>Supervivencia</span><span>Windows</span></div><div class="purchase"><span class="discount">-100%</span><strong class="price">Gratis</strong><a class="add" href="https://drive.google.com/uc?export=download&amp;id=1R6qhHL6FF95R60GQAKrKQ_QlOToCXdnp" target="_blank" rel="noopener" aria-label="Descargar Five Nights at Freddy's">Descargar</a></div></div></article>
+          <article class="game" data-name="Five Nights at Freddy's 2" data-genres="Terror Supervivencia Indie" data-price="0"><div class="cover game-preview-cover"><img class="game-cover-image fnaf-cover-image" src="fnaf2-cover.jpg" alt="Portada de Five Nights at Freddy's 2" /><button class="game-cover-open" type="button" data-open-fnaf2-details aria-label="Conoce más sobre Five Nights at Freddy's 2"></button></div><div class="details"><h3>Five Nights at Freddy's 2</h3><div class="tags"><span>Terror</span><span>Supervivencia</span><span>Windows</span></div><div class="purchase"><span class="discount">-100%</span><strong class="price">Gratis</strong><a class="add" href="https://drive.google.com/uc?export=download&amp;id=1vS4wQveQ2FBo0zkLv89tQFjPbBdoNyf4" target="_blank" rel="noopener" aria-label="Descargar Five Nights at Freddy's 2">Descargar</a></div></div></article>
+          <article class="game" data-name="Five Nights at Freddy's 3" data-genres="Terror Supervivencia Indie" data-price="0"><div class="cover game-preview-cover"><img class="game-cover-image fnaf-cover-image" src="fnaf3-cover.jpg" alt="Portada de Five Nights at Freddy's 3" /><button class="game-cover-open" type="button" data-open-fnaf3-details aria-label="Conoce más sobre Five Nights at Freddy's 3"></button></div><div class="details"><h3>Five Nights at Freddy's 3</h3><div class="tags"><span>Terror</span><span>Supervivencia</span><span>Windows</span></div><div class="purchase"><span class="discount">-100%</span><strong class="price">Gratis</strong><a class="add" href="https://drive.google.com/uc?export=download&amp;id=1Hnta6uOZdMuDUKnkSgVlxa9TZINFwEsN" target="_blank" rel="noopener" aria-label="Descargar Five Nights at Freddy's 3">Descargar</a></div></div></article>
+          <article class="game" data-name="Five Nights at Freddy's 4" data-genres="Terror Supervivencia Indie" data-price="0"><div class="cover game-preview-cover"><img class="game-cover-image fnaf-cover-image" src="fnaf4-cover.jpg" alt="Portada de Five Nights at Freddy's 4" /><button class="game-cover-open" type="button" data-open-fnaf4-details aria-label="Conoce más sobre Five Nights at Freddy's 4"></button></div><div class="details"><h3>Five Nights at Freddy's 4</h3><div class="tags"><span>Terror</span><span>Supervivencia</span><span>Windows</span></div><div class="purchase"><span class="discount">-100%</span><strong class="price">Gratis</strong><a class="add" href="https://drive.google.com/uc?export=download&amp;id=1r75e7xTtIyZX4EGCn-8isCgD1YBuO8qb" target="_blank" rel="noopener" aria-label="Descargar Five Nights at Freddy's 4">Descargar</a></div></div></article>
         </div>
         <p class="empty-state" id="empty-state" hidden>No encontramos juegos con esos filtros. Prueba otra búsqueda.</p>
       </section>
@@ -553,7 +818,7 @@
         <button class="run-sheep-dialog-close" type="button" aria-label="Cerrar ficha de Run Sheep">×</button>
       </header>
       <div class="run-sheep-overview">
-        <div class="run-sheep-dialog-media"><video id="run-sheep-trailer" controls autoplay playsinline preload="metadata" poster="download.gif" aria-label="Tráiler completo de Run Sheep"><source src="run-sheep-trailer.webm" type="video/webm" /></video><span>TRÁILER COMPLETO · WEBM</span><button class="run-sheep-repeat" id="run-sheep-repeat" type="button" hidden>Repetir tráiler</button></div>
+        <div class="run-sheep-dialog-media">        <video id="run-sheep-trailer" controls autoplay playsinline preload="metadata" poster="download.gif" aria-label="Tráiler completo de Run Sheep"><source src="run-sheep-trailer.webm" type="video/webm" /></video><span>TRÁILER COMPLETO · WEBM</span><button class="run-sheep-repeat" id="run-sheep-repeat" type="button" hidden>Repetir tráiler</button></div>
         <aside class="run-sheep-purchase">
           <p class="eyebrow">MINIJUEGO GRATUITO</p>
           <strong>Run Sheep</strong>
@@ -611,7 +876,7 @@
           <strong>SHEEP DOOM DEMO</strong>
           <p>Acción FPS · Windows · Arcade · Gratis</p>
           <div class="run-sheep-dialog-actions">
-            <a class="run-sheep-download" href="https://drive.google.com/uc?export=download&amp;id=1YfLyeFYVBxMfYTavIGzhh2fz7Nc5nTfO" target="_blank" rel="noopener noreferrer">Descargar para Windows <span aria-hidden="true">↓</span></a>
+            <a class="run-sheep-download" href="https://drive.google.com/uc?export=download&amp;id=1YfLyeFYVBxMfYTavIGzhh2fz7Nc5nTfO">Descargar para Windows <span aria-hidden="true">↓</span></a>
           </div>
           <p>Descarga: 55,3 MB · No requiere conexión a internet.</p>
         </aside>
@@ -704,20 +969,439 @@
       </section>
     </div>
   </dialog>
+  <dialog class="run-sheep-dialog" id="pvz-details-dialog" aria-labelledby="pvz-dialog-title">
+    <div class="run-sheep-dialog-inner">
+      <header class="run-sheep-dialog-header">
+        <div><p class="eyebrow">SHEEP STORE · ESTRATEGIA</p><h2 id="pvz-dialog-title">Plantas vs Zombies</h2></div>
+        <button class="run-sheep-dialog-close" id="pvz-dialog-close" type="button" aria-label="Cerrar ficha de Plantas vs Zombies">×</button>
+      </header>
+      <div class="run-sheep-overview">
+        <div class="run-sheep-dialog-media pvz-dialog-media">
+          <video id="pvz-trailer" autoplay playsinline controls preload="metadata" poster="pvz-cover.webp" aria-label="Tráiler oficial de Plantas vs Zombies"></video>
+          <span>TRÁILER COMPLETO</span>
+          <button class="pvz-repeat" id="pvz-repeat" type="button" hidden>Repetir tráiler</button>
+        </div>
+        <aside class="run-sheep-purchase">
+          <p class="eyebrow">JUEGO DE ESTRATEGIA</p>
+          <strong>Plantas vs Zombies</strong>
+          <p>Estrategia · Defensa · Zombis · Plantas · Windows</p>
+          <div class="run-sheep-dialog-actions">
+            <a class="run-sheep-download" href="https://drive.google.com/uc?export=download&amp;id=1eLTseyFozmDB83p5Y30rcv1XeLxqtikK" target="_blank" rel="noopener">Descargar para Windows <span aria-hidden="true">↓</span></a>
+          </div>
+          <p>Versión instalada en PC · Sin necesidad de internet.</p>
+        </aside>
+      </div>
+      <section class="run-sheep-copy" aria-labelledby="pvz-description-title">
+        <h3 id="pvz-description-title">Acerca de este juego</h3>
+        <p><strong>¡Prepara tus plantas, defiende tu jardín y acaba con los zombis!</strong></p>
+        <p>Tu casa está siendo amenazada por una horda de zombis hambrientos que intentan entrar por tu jardín. Tu única defensa será un ejército de plantas con habilidades especiales.</p>
+        <p>Planta girasoles para conseguir energía solar, utiliza lanzaguisantes para atacar y coloca defensas estratégicamente para detener a los enemigos. Cada nivel traerá nuevos zombis y desafíos que pondrán a prueba tu estrategia.</p>
+        <p>¿Podrás proteger tu casa de todos los zombis?</p>
+        <p>¡Prepara tu jardín, organiza tus defensas y demuestra que los zombis no pasarán!</p>
+        <p class="run-sheep-tagline">Plants vs. Zombies — The Zombies Are Coming!</p>
+      </section>
+      <section class="run-sheep-copy" aria-labelledby="pvz-features-title">
+        <h3 id="pvz-features-title">Características del juego</h3>
+        <ul class="run-sheep-features">
+          <li>🌻 Utiliza diferentes plantas con habilidades únicas.</li>
+          <li>🧟 Enfréntate a distintos tipos de zombis con habilidades especiales.</li>
+          <li>☀️ Recoge energía solar para construir tu defensa.</li>
+          <li>🏆 Supera niveles y desbloquea nuevas plantas.</li>
+          <li>🌙 Defiende tu jardín en diferentes escenarios.</li>
+          <li>🎮 Disfruta de modos de aventura, supervivencia y minijuegos.</li>
+          <li>💻 Estilo visual colorido con una jugabilidad sencilla y estratégica.</li>
+        </ul>
+      </section>
+      <section class="run-sheep-copy" aria-labelledby="pvz-requirements-title">
+        <h3 id="pvz-requirements-title">Requisitos del sistema (estimados)</h3>
+        <dl class="run-sheep-requirements">
+          <div><dt>Sistema</dt><dd>Windows XP, Vista, 7, 8, 10 u 11.</dd></div>
+          <div><dt>Procesador</dt><dd>1.2 GHz o superior.</dd></div>
+          <div><dt>Memoria</dt><dd>1 GB de RAM.</dd></div>
+          <div><dt>Gráficos</dt><dd>Tarjeta gráfica compatible con DirectX 8 o superior.</dd></div>
+          <div><dt>Almacenamiento</dt><dd>100 MB de espacio libre aproximadamente.</dd></div>
+          <div><dt>Pantalla</dt><dd>Resolución mínima de 800 × 600.</dd></div>
+          <div><dt>Internet</dt><dd>No es necesario para jugar la versión instalada en PC.</dd></div>
+        </dl>
+      </section>
+    </div>
+  </dialog>
+  <dialog class="run-sheep-dialog" id="gta-sa-details-dialog" aria-labelledby="gta-sa-dialog-title">
+    <div class="run-sheep-dialog-inner">
+      <header class="run-sheep-dialog-header">
+        <div><p class="eyebrow">SHEEP STORE · ACCIÓN Y MUNDO ABIERTO</p><h2 id="gta-sa-dialog-title">Grand Theft Auto: San Andreas</h2></div>
+        <button class="run-sheep-dialog-close" id="gta-sa-dialog-close" type="button" aria-label="Cerrar ficha de Grand Theft Auto San Andreas">×</button>
+      </header>
+      <div class="run-sheep-overview">
+        <div class="run-sheep-dialog-media gta-sa-dialog-media">
+          <video id="gta-sa-trailer" playsinline controls preload="none" poster="gta-sa-cover.jpg" aria-label="Tráiler de Grand Theft Auto San Andreas">
+            <source src="https://archive.org/download/gta-san-andreas-the-introduction-jpn/GTA%20San%20Andreas%20-%20The%20Introduction%20JPN.mp4" type="video/mp4" />
+          </video>
+          <span>TRÁILER COMPLETO</span>
+          <button class="gta-sa-repeat" id="gta-sa-repeat" type="button" hidden>Repetir tráiler</button>
+        </div>
+        <aside class="run-sheep-purchase">
+          <p class="eyebrow">JUEGO GRATIS</p>
+          <strong>Grand Theft Auto: San Andreas</strong>
+          <p>Acción · Aventura · Mundo abierto · Windows</p>
+          <div class="run-sheep-dialog-actions">
+            <a class="run-sheep-download" href="https://drive.google.com/drive/folders/16t3Mm2zH0s1kEWKcr6ANsJ8aTFjSm8xI?usp=sharing" target="_blank" rel="noopener">Descargar para Windows <span aria-hidden="true">↓</span></a>
+          </div>
+          <p>Versión clásica de PC (2004).</p>
+        </aside>
+      </div>
+      <section class="run-sheep-copy" aria-labelledby="gta-sa-description-title">
+        <h3 id="gta-sa-description-title">Acerca de este juego</h3>
+        <p><strong>¡Explora, conduce y conquista las calles de San Andreas!</strong></p>
+        <p>Carl Johnson, conocido como CJ, regresa a Los Santos después de varios años fuera de casa. Su ciudad está sumida en el crimen, las bandas callejeras y la corrupción. Tras descubrir que su familia está en peligro y que sus antiguos amigos necesitan ayuda, CJ deberá recuperar el control de su barrio y construir su propio camino.</p>
+        <p>Recorre ciudades, pueblos y zonas rurales, conduce vehículos, participa en misiones, enfréntate a bandas rivales y explora un enorme mundo abierto lleno de posibilidades.</p>
+        <p>¿Podrás sobrevivir en las calles y convertirte en el dueño de San Andreas?</p>
+        <p>¡Construye tu historia, domina las calles y demuestra quién manda!</p>
+        <p class="run-sheep-tagline">GTA San Andreas — Welcome to the West Coast.</p>
+      </section>
+      <section class="run-sheep-copy" aria-labelledby="gta-sa-features-title">
+        <h3 id="gta-sa-features-title">Características del juego</h3>
+        <ul class="run-sheep-features">
+          <li>🚗 Explora un enorme mundo abierto con ciudades, pueblos y zonas rurales.</li>
+          <li>🔫 Completa misiones, enfrentamientos y actividades secundarias.</li>
+          <li>🏎️ Conduce autos, motocicletas, bicicletas, aviones y otros vehículos.</li>
+          <li>🏙️ Visita tres grandes ciudades: Los Santos, San Fierro y Las Venturas.</li>
+          <li>💪 Personaliza la apariencia, habilidades y condición física de CJ.</li>
+          <li>🎵 Disfruta de diferentes emisoras de radio y música mientras conduces.</li>
+          <li>🎮 Vive una historia llena de acción, libertad y exploración.</li>
+        </ul>
+      </section>
+      <section class="run-sheep-copy" aria-labelledby="gta-sa-requirements-title">
+        <h3 id="gta-sa-requirements-title">Requisitos del sistema (estimados)</h3>
+        <dl class="run-sheep-requirements">
+          <div><dt>Sistema</dt><dd>Windows XP, Vista, 7, 8, 10 u 11.</dd></div>
+          <div><dt>Procesador</dt><dd>Intel Pentium III de 1 GHz o AMD Athlon.</dd></div>
+          <div><dt>Memoria</dt><dd>256 MB de RAM como mínimo. Se recomiendan 384 MB o más.</dd></div>
+          <div><dt>Gráficos</dt><dd>Tarjeta gráfica de 64 MB compatible con DirectX 9.</dd></div>
+          <div><dt>Almacenamiento</dt><dd>4.7 GB de espacio libre.</dd></div>
+          <div><dt>Pantalla</dt><dd>Resolución mínima de 800 × 600.</dd></div>
+          <div><dt>Internet</dt><dd>No es necesario después de instalarlo. La activación puede depender de la edición utilizada.</dd></div>
+        </dl>
+      </section>
+    </div>
+  </dialog>
+  <dialog class="run-sheep-dialog" id="fnaf1-details-dialog" aria-labelledby="fnaf1-dialog-title">
+    <div class="run-sheep-dialog-inner">
+      <header class="run-sheep-dialog-header">
+        <div><p class="eyebrow">SHEEP STORE · TERROR Y SUPERVIVENCIA</p><h2 id="fnaf1-dialog-title">Five Nights at Freddy's</h2></div>
+        <button class="run-sheep-dialog-close" id="fnaf1-dialog-close" type="button" aria-label="Cerrar ficha de Five Nights at Freddy's">×</button>
+      </header>
+      <div class="run-sheep-overview">
+        <div class="run-sheep-dialog-media fnaf-dialog-media"><video id="fnaf1-trailer" autoplay playsinline controls preload="metadata" poster="fnaf1-cover.jpg" aria-label="Tráiler de Five Nights at Freddy's"></video><span>TRÁILER COMPLETO</span><button class="run-sheep-repeat" id="fnaf1-repeat" type="button" hidden>Repetir tráiler</button></div>
+        <aside class="run-sheep-purchase">
+          <p class="eyebrow">JUEGO DE TERROR</p><strong>Five Nights at Freddy's</strong><p>Terror · Supervivencia · Punto de vista en primera persona · Windows</p>
+          <div class="run-sheep-dialog-actions"><a class="run-sheep-download" href="https://drive.google.com/uc?export=download&amp;id=1R6qhHL6FF95R60GQAKrKQ_QlOToCXdnp" target="_blank" rel="noopener">Descargar para Windows <span aria-hidden="true">↓</span></a></div>
+          <p>Versión para PC · Requiere Windows.</p>
+        </aside>
+      </div>
+      <section class="run-sheep-copy" aria-labelledby="fnaf1-description-title">
+        <h3 id="fnaf1-description-title">Acerca de este juego</h3>
+        <p><strong>¡Supervisa la pizzería y sobrevive hasta el amanecer!</strong></p>
+        <p>Acabas de conseguir un nuevo trabajo como guardia de seguridad nocturno en Freddy Fazbear's Pizza. Desde una pequeña oficina deberás vigilar las cámaras, controlar las puertas y administrar la electricidad para evitar que los animatrónicos se acerquen a ti.</p>
+        <p>Los personajes parecen moverse por el lugar cuando nadie los observa. Durante cinco noches deberás descubrir sus patrones, mantener la calma y conservar suficiente energía para llegar a las seis de la mañana.</p>
+        <p>¿Podrás soportar las noches en Freddy Fazbear's Pizza?</p>
+        <p class="run-sheep-tagline">Five Nights at Freddy's — Watch the cameras. Save the power. Survive the night.</p>
+      </section>
+      <section class="run-sheep-copy" aria-labelledby="fnaf1-features-title">
+        <h3 id="fnaf1-features-title">Características del juego</h3>
+        <ul class="run-sheep-features">
+          <li>👁️ Vigila el movimiento de los animatrónicos por las cámaras.</li>
+          <li>🔋 Administra una cantidad limitada de electricidad.</li>
+          <li>🚪 Controla luces y puertas de seguridad.</li>
+          <li>🌙 Sobrevive cinco noches con dificultad creciente.</li>
+          <li>🎭 Descubre la historia oculta de Freddy Fazbear's Pizza.</li>
+          <li>🔊 Utiliza señales sonoras y visuales para anticipar ataques.</li>
+        </ul>
+      </section>
+      <section class="run-sheep-copy" aria-labelledby="fnaf1-requirements-title">
+        <h3 id="fnaf1-requirements-title">Requisitos del sistema</h3>
+        <dl class="run-sheep-requirements">
+          <div><dt>Sistema</dt><dd>Windows XP, Vista, 7, 8 u 10.</dd></div><div><dt>Procesador</dt><dd>Intel Pentium 4 o AMD Athlon de 2 GHz.</dd></div>
+          <div><dt>Memoria</dt><dd>1 GB de RAM.</dd></div><div><dt>Gráficos</dt><dd>Compatible con DirectX 9.</dd></div>
+          <div><dt>Almacenamiento</dt><dd>250 MB disponibles.</dd></div><div><dt>Internet</dt><dd>No necesario después de instalar.</dd></div>
+        </dl>
+      </section>
+    </div>
+  </dialog>
+  <dialog class="run-sheep-dialog" id="fnaf2-details-dialog" aria-labelledby="fnaf2-dialog-title">
+    <div class="run-sheep-dialog-inner">
+      <header class="run-sheep-dialog-header">
+        <div><p class="eyebrow">SHEEP STORE · TERROR Y SUPERVIVENCIA</p><h2 id="fnaf2-dialog-title">Five Nights at Freddy's 2</h2></div>
+        <button class="run-sheep-dialog-close" id="fnaf2-dialog-close" type="button" aria-label="Cerrar ficha de Five Nights at Freddy's 2">×</button>
+      </header>
+      <div class="run-sheep-overview">
+        <div class="run-sheep-dialog-media fnaf-dialog-media"><video id="fnaf2-trailer" autoplay playsinline controls preload="metadata" poster="fnaf2-cover.jpg" aria-label="Tráiler de Five Nights at Freddy's 2"></video><span>TRÁILER COMPLETO</span><button class="run-sheep-repeat" id="fnaf2-repeat" type="button" hidden>Repetir tráiler</button></div>
+        <aside class="run-sheep-purchase">
+          <p class="eyebrow">JUEGO DE TERROR</p><strong>Five Nights at Freddy's 2</strong><p>Terror · Supervivencia · Punto de vista en primera persona · Windows</p>
+          <div class="run-sheep-dialog-actions"><a class="run-sheep-download" href="https://drive.google.com/uc?export=download&amp;id=1vS4wQveQ2FBo0zkLv89tQFjPbBdoNyf4" target="_blank" rel="noopener">Descargar para Windows <span aria-hidden="true">↓</span></a></div>
+          <p>Versión para PC · Requiere Windows.</p>
+        </aside>
+      </div>
+      <section class="run-sheep-copy" aria-labelledby="fnaf2-description-title">
+        <h3 id="fnaf2-description-title">Acerca de este juego</h3>
+        <p><strong>¡La nueva versión de Freddy Fazbear's Pizza esconde secretos aún más peligrosos!</strong></p>
+        <p>Has comenzado a trabajar como guardia nocturno en una pizzería renovada. Un nuevo elenco de animatrónicos debe entretener a los visitantes, mientras los antiguos modelos permanecen averiados en los pasillos.</p>
+        <p>Esta vez no tienes puertas ni luz de seguridad en la oficina. Utiliza tu máscara vacía de Freddy para engañar a los personajes que intenten entrar, revisa las cámaras con rapidez y controla dos sistemas diferentes para sobrevivir.</p>
+        <p>¿Podrás descubrir qué ocurrió antes de que termine tu turno?</p>
+        <p class="run-sheep-tagline">Five Nights at Freddy's 2 — Watch closer. Listen carefully. They are always moving.</p>
+      </section>
+      <section class="run-sheep-copy" aria-labelledby="fnaf2-features-title">
+        <h3 id="fnaf2-features-title">Características del juego</h3>
+        <ul class="run-sheep-features">
+          <li>🎭 Enfréntate a nuevos animatrónicos y modelos antiguos.</li>
+          <li>📹 Supervisa pasillos y cámaras sin puertas de seguridad.</li>
+          <li>🐻 Usa una máscara de Freddy para evitar ataques cercanos.</li>
+          <li>🔦 Vigila con una linterna que consume energía.</li>
+          <li>📼 Descubre fragmentos de eventos y minijuegos ocultos.</li>
+          <li>🌙 Sobrevive noches cada vez más rápidas y agresivas.</li>
+        </ul>
+      </section>
+      <section class="run-sheep-copy" aria-labelledby="fnaf2-requirements-title">
+        <h3 id="fnaf2-requirements-title">Requisitos del sistema</h3>
+        <dl class="run-sheep-requirements">
+          <div><dt>Sistema</dt><dd>Windows XP, Vista, 7 u 8.</dd></div><div><dt>Procesador</dt><dd>2 GHz o equivalente.</dd></div>
+          <div><dt>Memoria</dt><dd>1 GB de RAM.</dd></div><div><dt>Gráficos</dt><dd>1 GB de memoria gráfica.</dd></div>
+          <div><dt>Almacenamiento</dt><dd>250 MB disponibles.</dd></div><div><dt>Internet</dt><dd>No necesario después de instalar.</dd></div>
+        </dl>
+      </section>
+    </div>
+  </dialog>
+  <dialog class="run-sheep-dialog" id="fnaf3-details-dialog" aria-labelledby="fnaf3-dialog-title">
+    <div class="run-sheep-dialog-inner">
+      <header class="run-sheep-dialog-header">
+        <div><p class="eyebrow">SHEEP STORE · TERROR Y SUPERVIVENCIA</p><h2 id="fnaf3-dialog-title">Five Nights at Freddy's 3</h2></div>
+        <button class="run-sheep-dialog-close" id="fnaf3-dialog-close" type="button" aria-label="Cerrar ficha de Five Nights at Freddy's 3">×</button>
+      </header>
+      <div class="run-sheep-overview">
+        <div class="run-sheep-dialog-media fnaf-dialog-media"><video id="fnaf3-trailer" autoplay playsinline controls preload="metadata" poster="fnaf3-cover.jpg" aria-label="Tráiler de Five Nights at Freddy's 3"></video><span>TRÁILER COMPLETO</span><button class="run-sheep-repeat" id="fnaf3-repeat" type="button" hidden>Repetir tráiler</button></div>
+        <aside class="run-sheep-purchase">
+          <p class="eyebrow">JUEGO DE TERROR</p><strong>Five Nights at Freddy's 3</strong><p>Terror · Supervivencia · Punto de vista en primera persona · Windows</p>
+          <div class="run-sheep-dialog-actions"><a class="run-sheep-download" href="https://drive.google.com/uc?export=download&amp;id=1Hnta6uOZdMuDUKnkSgVlxa9TZINFwEsN" target="_blank" rel="noopener">Descargar para Windows <span aria-hidden="true">↓</span></a></div>
+          <p>Versión para PC · Requiere Windows.</p>
+        </aside>
+      </div>
+      <section class="run-sheep-copy" aria-labelledby="fnaf3-description-title">
+        <h3 id="fnaf3-description-title">Acerca de este juego</h3>
+        <p><strong>¡Treinta años después, la leyenda vuelve a cobrar vida!</strong></p>
+        <p>Fazbear's Fright fue creado como una atracción de terror basada en los rumores y recuerdos de Freddy Fazbear's Pizza. Los propietarios creen haber encontrado restos auténticos de los antiguos animatrónicos, pero dentro del edificio queda una sola presencia activa.</p>
+        <p>Durante cinco noches deberás controlar cámaras, audio y sistemas internos para manipular la ruta de Springtrap y mantener el edificio operativo. Fallas, alucinaciones y errores pueden dejarte completamente vulnerable.</p>
+        <p>¿Podrás sobrevivir a las consecuencias de la historia que comenzó años atrás?</p>
+        <p class="run-sheep-tagline">Five Nights at Freddy's 3 — The story is over. Or is it?</p>
+      </section>
+      <section class="run-sheep-copy" aria-labelledby="fnaf3-features-title">
+        <h3 id="fnaf3-features-title">Características del juego</h3>
+        <ul class="run-sheep-features">
+          <li>🦊 Enfréntate a Springtrap dentro de Fazbear's Fright.</li>
+          <li>📺 Reinicia cámaras, audio y sistemas audiovisuales.</li>
+          <li>🔊 Usa sonidos para atraer o distraer al animatrónico.</li>
+          <li>👻 Supera alucinaciones basadas en antiguos personajes.</li>
+          <li>🧩 Descubre finales alternativos y secretos ocultos.</li>
+          <li>🌙 Sobrevive cinco noches en una atracción abandonada.</li>
+        </ul>
+      </section>
+      <section class="run-sheep-copy" aria-labelledby="fnaf3-requirements-title">
+        <h3 id="fnaf3-requirements-title">Requisitos del sistema</h3>
+        <dl class="run-sheep-requirements">
+          <div><dt>Sistema</dt><dd>Windows XP, Vista, 7, 8 u 10.</dd></div><div><dt>Procesador</dt><dd>2 GHz o equivalente.</dd></div>
+          <div><dt>Memoria</dt><dd>1 GB de RAM.</dd></div><div><dt>Gráficos</dt><dd>Compatible con DirectX 9.</dd></div>
+          <div><dt>Almacenamiento</dt><dd>250 MB disponibles.</dd></div><div><dt>Internet</dt><dd>No necesario después de instalar.</dd></div>
+        </dl>
+      </section>
+    </div>
+  </dialog>
+  <dialog class="run-sheep-dialog" id="fnaf4-details-dialog" aria-labelledby="fnaf4-dialog-title">
+    <div class="run-sheep-dialog-inner">
+      <header class="run-sheep-dialog-header">
+        <div><p class="eyebrow">SHEEP STORE · TERROR Y SUPERVIVENCIA</p><h2 id="fnaf4-dialog-title">Five Nights at Freddy's 4</h2></div>
+        <button class="run-sheep-dialog-close" id="fnaf4-dialog-close" type="button" aria-label="Cerrar ficha de Five Nights at Freddy's 4">×</button>
+      </header>
+      <div class="run-sheep-overview">
+        <div class="run-sheep-dialog-media fnaf-dialog-media"><video id="fnaf4-trailer" autoplay playsinline controls preload="metadata" poster="fnaf4-cover.jpg" aria-label="Tráiler de Five Nights at Freddy's 4"></video><span>TRÁILER COMPLETO</span><button class="run-sheep-repeat" id="fnaf4-repeat" type="button" hidden>Repetir tráiler</button></div>
+        <aside class="run-sheep-purchase">
+          <p class="eyebrow">JUEGO DE TERROR</p><strong>Five Nights at Freddy's 4</strong><p>Terror · Supervivencia · Punto de vista en primera persona · Windows</p>
+          <div class="run-sheep-dialog-actions"><a class="run-sheep-download" href="https://drive.google.com/uc?export=download&amp;id=1r75e7xTtIyZX4EGCn-8isCgD1YBuO8qb" target="_blank" rel="noopener">Descargar para Windows <span aria-hidden="true">↓</span></a></div>
+          <p>Versión para PC · Requiere Windows.</p>
+        </aside>
+      </div>
+      <section class="run-sheep-copy" aria-labelledby="fnaf4-description-title">
+        <h3 id="fnaf4-description-title">Acerca de este juego</h3>
+        <p><strong>¡Esta vez, el terror ha seguido tus pasos hasta tu hogar!</strong></p>
+        <p>En el último capítulo del relato original de Five Nights at Freddy's, deberás protegerte de Freddy Fazbear, Chica, Bonnie, Foxy y otras criaturas que acechan en la oscuridad.</p>
+        <p>Controlas a un niño cuya identidad todavía es un misterio. Deberás vigilar los pasillos, cerrar las puertas en el momento correcto y revisar el armario y la cama detrás de ti. Solo tendrás una linterna para alejar a las amenazas.</p>
+        <p>¿Podrás escuchar con atención y sobrevivir hasta las seis de la mañana?</p>
+        <p class="run-sheep-tagline">Five Nights at Freddy's 4 — The terror has followed you home.</p>
+      </section>
+      <section class="run-sheep-copy" aria-labelledby="fnaf4-features-title">
+        <h3 id="fnaf4-features-title">Características del juego</h3>
+        <ul class="run-sheep-features">
+          <li>🕯️ Utiliza una linterna para revisar pasillos y habitaciones.</li>
+          <li>🚪 Protege las entradas evitando movimientos demasiado tardíos.</li>
+          <li>👂 Escucha respiraciones y sonidos para identificar amenazas cercanas.</li>
+          <li>🛏️ Vigila el armario y la cama detrás de ti.</li>
+          <li>🧸 Enfrenta versiones pesadilla de los personajes originales.</li>
+          <li>🌙 Sobrevive las noches finales del capítulo original.</li>
+        </ul>
+      </section>
+      <section class="run-sheep-copy" aria-labelledby="fnaf4-requirements-title">
+        <h3 id="fnaf4-requirements-title">Requisitos del sistema</h3>
+        <dl class="run-sheep-requirements">
+          <div><dt>Sistema</dt><dd>Windows XP, Vista, 7, 8 u 10.</dd></div><div><dt>Procesador</dt><dd>2 GHz Intel Pentium 4 o AMD Athlon equivalente.</dd></div>
+          <div><dt>Memoria</dt><dd>2 GB de RAM.</dd></div><div><dt>Gráficos</dt><dd>No especificado por Steam en los requisitos mínimos.</dd></div>
+          <div><dt>Almacenamiento</dt><dd>1 GB disponible.</dd></div><div><dt>Internet</dt><dd>No necesario después de instalar.</dd></div>
+        </dl>
+      </section>
+    </div>
+  </dialog>
+  <dialog class="image-lightbox" id="image-lightbox" aria-labelledby="image-lightbox-title">
+    <header class="image-lightbox-header">
+      <strong id="image-lightbox-title">Vista ampliada</strong>
+      <button class="image-lightbox-close" type="button" aria-label="Cerrar imagen ampliada">×</button>
+    </header>
+    <div class="image-lightbox-body">
+      <button class="image-lightbox-nav image-lightbox-prev" type="button" aria-label="Imagen anterior">‹</button>
+      <img id="image-lightbox-preview" src="" alt="" />
+      <button class="image-lightbox-nav image-lightbox-next" type="button" aria-label="Imagen siguiente">›</button>
+      <span class="image-lightbox-counter" id="image-lightbox-counter">1 / 1</span>
+    </div>
+  </dialog>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js"></script>
   <script>
     const gameCards = [...document.querySelectorAll(".game")];
     const filterButtons = [...document.querySelectorAll("[data-filter]")];
+    const categoryPicker = document.querySelector(".category-picker");
+    const categoryToggle = document.querySelector("#category-toggle");
+    const categoryMenu = document.querySelector("#category-menu");
     const searchInput = document.querySelector("#game-search");
     const sortSelect = document.querySelector("#game-sort");
     const gameGrid = document.querySelector("#game-grid");
     const emptyState = document.querySelector("#empty-state");
+    const searchSuggestions = document.querySelector("#game-search-suggestions");
     let activeFilter = "Todos";
+
+    const categoryNames = new Set(["Carreras", "Rol"]);
+    const multiWordCategories = ["Mundo abierto"];
+    gameCards.forEach((card) => {
+      let genres = card.dataset.genres;
+      multiWordCategories.forEach((category) => {
+        if (genres.includes(category)) {
+          categoryNames.add(category);
+          genres = genres.replace(category, " ");
+        }
+      });
+      genres.split(/\s+/).filter(Boolean).forEach((category) => categoryNames.add(category));
+    });
+    [...categoryNames].sort((first, second) => first.localeCompare(second, "es")).forEach((category) => {
+      const option = document.createElement("button");
+      option.className = "category-option";
+      option.type = "button";
+      option.dataset.filter = category;
+      option.setAttribute("aria-pressed", "false");
+      option.textContent = category;
+      categoryMenu?.append(option);
+      filterButtons.push(option);
+    });
+
+    function setCategoryMenuOpen(open) {
+      if (!(categoryMenu instanceof HTMLElement) || !(categoryToggle instanceof HTMLButtonElement)) return;
+      categoryMenu.hidden = !open;
+      categoryToggle.setAttribute("aria-expanded", String(open));
+    }
+
+    categoryToggle?.addEventListener("click", () => {
+      if (!(categoryMenu instanceof HTMLElement)) return;
+      setCategoryMenuOpen(categoryMenu.hidden);
+    });
+    categoryToggle?.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowDown" && categoryMenu instanceof HTMLElement && categoryMenu.hidden) {
+        event.preventDefault();
+        setCategoryMenuOpen(true);
+        categoryMenu.querySelector("button")?.focus();
+      }
+    });
+    categoryMenu?.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        setCategoryMenuOpen(false);
+        categoryToggle?.focus();
+      }
+    });
+    document.addEventListener("pointerdown", (event) => {
+      if (event.target instanceof Node && !categoryPicker?.contains(event.target)) {
+        setCategoryMenuOpen(false);
+      }
+    });
+
+    function setSearchSuggestionsOpen(open) {
+      if (!(searchSuggestions instanceof HTMLElement)) return;
+      searchSuggestions.hidden = !open;
+      searchInput.setAttribute("aria-expanded", String(open));
+    }
+
+    function renderSearchSuggestions(matches, query) {
+      if (!(searchSuggestions instanceof HTMLElement)) return;
+      searchSuggestions.replaceChildren();
+      if (!query) {
+        setSearchSuggestionsOpen(false);
+        return;
+      }
+
+      if (matches.length === 0) {
+        const emptyMessage = document.createElement("div");
+        emptyMessage.className = "search-suggestions-empty";
+        emptyMessage.textContent = "No se encontraron juegos";
+        searchSuggestions.append(emptyMessage);
+        setSearchSuggestionsOpen(true);
+        return;
+      }
+
+      matches.slice(0, 3).forEach((card) => {
+        const suggestion = document.createElement("button");
+        suggestion.className = "search-suggestion";
+        suggestion.type = "button";
+        suggestion.setAttribute("aria-label", `Abrir ${card.dataset.name}`);
+        const cover = card.querySelector(".game-cover-image");
+        if (cover instanceof HTMLImageElement) {
+          const image = document.createElement("img");
+          image.src = cover.currentSrc || cover.src;
+          image.alt = "";
+          suggestion.append(image);
+        }
+        const text = document.createElement("span");
+        const title = document.createElement("strong");
+        title.textContent = card.dataset.name;
+        const details = document.createElement("small");
+        details.textContent = card.dataset.genres.split(" ").join(" · ");
+        text.append(title, details);
+        suggestion.append(text);
+        suggestion.addEventListener("click", () => {
+          setSearchSuggestionsOpen(false);
+          card.querySelector(".game-cover-open")?.click();
+        });
+        searchSuggestions.append(suggestion);
+      });
+
+      const moreButton = document.createElement("button");
+      moreButton.className = "search-suggestions-more";
+      moreButton.type = "button";
+      moreButton.textContent = `Ver más (${matches.length})`;
+      moreButton.setAttribute("aria-label", `Ver los ${matches.length} juegos encontrados`);
+      moreButton.addEventListener("click", () => {
+        setSearchSuggestionsOpen(false);
+        document.querySelector(".catalog-heading")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+      searchSuggestions.append(moreButton);
+      setSearchSuggestionsOpen(true);
+    }
 
     function updateCatalog() {
       const query = searchInput.value.trim().toLocaleLowerCase("es");
       const visibleCards = gameCards.filter((card) => {
         const matchesText = card.dataset.name.toLocaleLowerCase("es").includes(query);
-        const matchesGenre = activeFilter === "Todos" || card.dataset.genres.split(" ").includes(activeFilter);
+        const matchesGenre = activeFilter === "Todos" || card.dataset.genres.split(" ").includes(activeFilter) || (activeFilter.includes(" ") && card.dataset.genres.includes(activeFilter));
         card.hidden = !matchesText || !matchesGenre;
         return !card.hidden;
       });
@@ -726,7 +1410,9 @@
         if (sortSelect.value === "price-high") return Number(second.dataset.price) - Number(first.dataset.price);
         if (sortSelect.value === "name") return first.dataset.name.localeCompare(second.dataset.name, "es");
         return gameCards.indexOf(first) - gameCards.indexOf(second);
-      }).forEach((card) => gameGrid.append(card));
+      });
+      visibleCards.forEach((card) => gameGrid.append(card));
+      renderSearchSuggestions(visibleCards, query);
       emptyState.hidden = visibleCards.length > 0;
       document.querySelector("#results-count").textContent = `${visibleCards.length} ${visibleCards.length === 1 ? "juego disponible" : "juegos disponibles"}`;
     }
@@ -738,9 +1424,33 @@
         filter.classList.toggle("active", selected);
         filter.setAttribute("aria-pressed", selected);
       });
+      categoryToggle?.classList.toggle("active", activeFilter !== "Todos");
+      setCategoryMenuOpen(false);
       updateCatalog();
     }));
     searchInput.addEventListener("input", updateCatalog);
+    searchInput.addEventListener("focus", () => {
+      if (searchInput.value.trim()) updateCatalog();
+    });
+    searchInput.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowDown" && searchSuggestions instanceof HTMLElement && !searchSuggestions.hidden) {
+        event.preventDefault();
+        searchSuggestions.querySelector("button")?.focus();
+      } else if (event.key === "Escape") {
+        setSearchSuggestionsOpen(false);
+      }
+    });
+    searchSuggestions?.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        setSearchSuggestionsOpen(false);
+        searchInput.focus();
+      }
+    });
+    document.addEventListener("pointerdown", (event) => {
+      if (event.target instanceof Node && !searchInput.parentElement?.contains(event.target)) {
+        setSearchSuggestionsOpen(false);
+      }
+    });
     sortSelect.addEventListener("change", updateCatalog);
     const featureCarousel = document.querySelector(".feature-carousel");
     if (featureCarousel instanceof HTMLElement) {
@@ -782,6 +1492,10 @@
       featureCarousel.addEventListener("focusin", stopFeatureTimer);
       featureCarousel.addEventListener("focusout", startFeatureTimer);
       document.addEventListener("visibilitychange", startFeatureTimer);
+      featureCarousel.addEventListener("lightbox-open", stopFeatureTimer);
+      featureCarousel.addEventListener("lightbox-close", () => {
+        if (!document.hidden) startFeatureTimer();
+      });
       startFeatureTimer();
     }
 
@@ -838,7 +1552,7 @@
     const runSheepDetailsClose = document.querySelector(".run-sheep-dialog-close");
     const runSheepTrailer = document.querySelector("#run-sheep-trailer");
     const runSheepRepeat = document.querySelector("#run-sheep-repeat");
-    if (runSheepTrailer instanceof HTMLVideoElement) runSheepTrailer.volume = 0.5;
+    if (runSheepTrailer instanceof HTMLVideoElement) runSheepTrailer.volume = 0.3;
     if (runSheepTrailer instanceof HTMLVideoElement && runSheepRepeat instanceof HTMLButtonElement) {
       runSheepTrailer.addEventListener("ended", () => { runSheepRepeat.hidden = false; });
       runSheepTrailer.addEventListener("play", () => { runSheepRepeat.hidden = true; });
@@ -875,7 +1589,7 @@
     const sheepDoomDetailsClose = document.querySelector("#sheep-doom-dialog-close");
     const sheepDoomTrailer = document.querySelector("#sheep-doom-trailer");
     const sheepDoomRepeat = document.querySelector("#sheep-doom-repeat");
-    if (sheepDoomTrailer instanceof HTMLVideoElement) sheepDoomTrailer.volume = 0.5;
+    if (sheepDoomTrailer instanceof HTMLVideoElement) sheepDoomTrailer.volume = 0.3;
     if (sheepDoomTrailer instanceof HTMLVideoElement && sheepDoomRepeat instanceof HTMLButtonElement) {
       sheepDoomTrailer.addEventListener("ended", () => { sheepDoomRepeat.hidden = false; });
       sheepDoomTrailer.addEventListener("play", () => { sheepDoomRepeat.hidden = true; });
@@ -890,6 +1604,10 @@
       button.addEventListener("click", () => {
         if (sheepDoomDetailsDialog instanceof HTMLDialogElement && !sheepDoomDetailsDialog.open) {
           sheepDoomDetailsDialog.showModal();
+          if (sheepDoomTrailer instanceof HTMLVideoElement) {
+            sheepDoomTrailer.currentTime = 0;
+            sheepDoomTrailer.play().catch(() => {});
+          }
         }
       });
     });
@@ -923,6 +1641,337 @@
       });
     }
 
+    const pvzDetailsDialog = document.querySelector("#pvz-details-dialog");
+    const pvzDetailsClose = document.querySelector("#pvz-dialog-close");
+    const pvzTrailer = document.querySelector("#pvz-trailer");
+    const pvzRepeat = document.querySelector("#pvz-repeat");
+    const pvzTrailerUrl = "https://video.akamai.steamstatic.com/store_trailers/3590/1872/82d45bb1a27d4352d0d0dc2c360c790e6d396b1e/1750483994/hls_264_master.m3u8";
+    let pvzHls = null;
+    const stopPvzTrailer = () => {
+      if (pvzTrailer instanceof HTMLVideoElement) {
+        pvzTrailer.pause();
+        pvzTrailer.removeAttribute("src");
+        pvzTrailer.load();
+      }
+      if (pvzHls) {
+        pvzHls.destroy();
+        pvzHls = null;
+      }
+    };
+    const playPvzTrailer = () => {
+      if (!(pvzTrailer instanceof HTMLVideoElement)) return;
+      stopPvzTrailer();
+      pvzTrailer.muted = false;
+      pvzTrailer.volume = 0.3;
+      pvzTrailer.poster = "pvz-cover.webp";
+      if (typeof Hls !== "undefined" && Hls.isSupported()) {
+        pvzHls = new Hls();
+        pvzHls.loadSource(pvzTrailerUrl);
+        pvzHls.attachMedia(pvzTrailer);
+        pvzHls.on(Hls.Events.MANIFEST_PARSED, () => {
+          pvzTrailer.currentTime = 0;
+          pvzTrailer.play().catch(() => {});
+        });
+      } else if (pvzTrailer.canPlayType("application/vnd.apple.mpegurl")) {
+        pvzTrailer.src = pvzTrailerUrl;
+        pvzTrailer.addEventListener("loadedmetadata", () => {
+          pvzTrailer.currentTime = 0;
+          pvzTrailer.play().catch(() => {});
+        }, { once: true });
+      }
+      if (pvzRepeat instanceof HTMLButtonElement) pvzRepeat.hidden = true;
+    };
+    if (pvzRepeat instanceof HTMLButtonElement) pvzRepeat.hidden = true;
+    if (pvzTrailer instanceof HTMLVideoElement) {
+      pvzTrailer.addEventListener("ended", () => {
+        if (pvzRepeat instanceof HTMLButtonElement) pvzRepeat.hidden = false;
+      });
+    }
+    document.querySelectorAll("[data-open-pvz-details]").forEach((button) => {
+      button.addEventListener("click", () => {
+        if (pvzDetailsDialog instanceof HTMLDialogElement && !pvzDetailsDialog.open) {
+          pvzDetailsDialog.showModal();
+          playPvzTrailer();
+        }
+      });
+    });
+    if (pvzDetailsDialog instanceof HTMLDialogElement && pvzDetailsClose instanceof HTMLButtonElement) {
+      pvzDetailsClose.addEventListener("click", () => pvzDetailsDialog.close());
+      pvzDetailsDialog.addEventListener("click", (event) => {
+        if (event.target === pvzDetailsDialog) pvzDetailsDialog.close();
+      });
+      pvzDetailsDialog.addEventListener("close", () => {
+        stopPvzTrailer();
+        if (pvzRepeat instanceof HTMLButtonElement) pvzRepeat.hidden = true;
+      });
+    }
+    if (pvzRepeat instanceof HTMLButtonElement) {
+      pvzRepeat.addEventListener("click", () => {
+        playPvzTrailer();
+      });
+    }
+
+    const gtaSaDetailsDialog = document.querySelector("#gta-sa-details-dialog");
+    const gtaSaDetailsClose = document.querySelector("#gta-sa-dialog-close");
+    const gtaSaRepeat = document.querySelector("#gta-sa-repeat");
+    const gtaSaTrailerElement = document.querySelector("#gta-sa-trailer");
+    const playGtaSaTrailer = () => {
+      if (!(gtaSaTrailerElement instanceof HTMLVideoElement) || !(gtaSaDetailsDialog instanceof HTMLDialogElement) || !gtaSaDetailsDialog.open) return;
+      gtaSaTrailerElement.pause();
+      gtaSaTrailerElement.currentTime = 0;
+      gtaSaTrailerElement.muted = false;
+      gtaSaTrailerElement.volume = 0.3;
+      gtaSaTrailerElement.play().catch(() => {});
+      if (gtaSaRepeat instanceof HTMLButtonElement) gtaSaRepeat.hidden = true;
+    };
+    if (gtaSaTrailerElement instanceof HTMLVideoElement) {
+      gtaSaTrailerElement.addEventListener("ended", () => {
+        if (gtaSaRepeat instanceof HTMLButtonElement) gtaSaRepeat.hidden = false;
+      });
+      gtaSaTrailerElement.addEventListener("play", () => {
+        if (!(gtaSaDetailsDialog instanceof HTMLDialogElement) || !gtaSaDetailsDialog.open) {
+          gtaSaTrailerElement.pause();
+          return;
+        }
+        if (gtaSaRepeat instanceof HTMLButtonElement) gtaSaRepeat.hidden = true;
+      });
+    }
+    document.querySelectorAll("[data-open-gta-sa-details]").forEach((button) => {
+      button.addEventListener("click", () => {
+        if (gtaSaDetailsDialog instanceof HTMLDialogElement && !gtaSaDetailsDialog.open) {
+          gtaSaDetailsDialog.showModal();
+          playGtaSaTrailer();
+        }
+      });
+    });
+    if (gtaSaDetailsDialog instanceof HTMLDialogElement && gtaSaDetailsClose instanceof HTMLButtonElement) {
+      gtaSaDetailsClose.addEventListener("click", () => gtaSaDetailsDialog.close());
+      gtaSaDetailsDialog.addEventListener("click", (event) => {
+        if (event.target === gtaSaDetailsDialog) gtaSaDetailsDialog.close();
+      });
+      gtaSaDetailsDialog.addEventListener("close", () => {
+        if (gtaSaTrailerElement instanceof HTMLVideoElement) {
+          gtaSaTrailerElement.pause();
+          gtaSaTrailerElement.currentTime = 0;
+        }
+        if (gtaSaRepeat instanceof HTMLButtonElement) gtaSaRepeat.hidden = true;
+      });
+    }
+    if (gtaSaRepeat instanceof HTMLButtonElement) {
+      gtaSaRepeat.addEventListener("click", () => playGtaSaTrailer());
+    }
+
+    document.querySelectorAll(".run-sheep-dialog-media video").forEach((trailer) => {
+      if (!(trailer instanceof HTMLVideoElement)) return;
+      trailer.volume = 0.3;
+      trailer.muted = false;
+    });
+
+    const imageLightbox = document.querySelector("#image-lightbox");
+    const imageLightboxPreview = document.querySelector("#image-lightbox-preview");
+    const imageLightboxTitle = document.querySelector("#image-lightbox-title");
+    const imageLightboxClose = document.querySelector(".image-lightbox-close");
+    const imageLightboxPrev = document.querySelector(".image-lightbox-prev");
+    const imageLightboxNext = document.querySelector(".image-lightbox-next");
+    const imageLightboxCounter = document.querySelector("#image-lightbox-counter");
+    const zoomableImages = [...document.querySelectorAll(".feature-banner-image, .feature-thumbs img, .game-cover-image")];
+    let lightboxImages = [];
+    let lightboxIndex = 0;
+    let lightboxResumeTimer = 0;
+    let lightboxAnimationTimer = 0;
+
+    const pauseFeatureCarousel = () => {
+      window.clearTimeout(lightboxResumeTimer);
+      featureCarousel?.dispatchEvent(new CustomEvent("lightbox-open"));
+    };
+    const resumeFeatureCarousel = () => {
+      window.clearTimeout(lightboxResumeTimer);
+      lightboxResumeTimer = window.setTimeout(() => {
+        featureCarousel?.dispatchEvent(new CustomEvent("lightbox-close"));
+      }, 3000);
+    };
+    const showLightboxImage = (index) => {
+      if (!(imageLightboxPreview instanceof HTMLImageElement) || lightboxImages.length === 0) return;
+      lightboxIndex = (index + lightboxImages.length) % lightboxImages.length;
+      const image = lightboxImages[lightboxIndex];
+      if (!(image instanceof HTMLImageElement)) return;
+      window.clearTimeout(lightboxAnimationTimer);
+      imageLightboxPreview.classList.remove("is-changing");
+      void imageLightboxPreview.offsetWidth;
+      imageLightboxPreview.src = image.currentSrc || image.src;
+      imageLightboxPreview.classList.add("is-changing");
+      imageLightboxPreview.alt = image.alt || "Imagen ampliada";
+      if (imageLightboxTitle instanceof HTMLElement) {
+        imageLightboxTitle.textContent = image.alt || "Vista ampliada";
+      }
+      if (imageLightboxCounter instanceof HTMLElement) {
+        imageLightboxCounter.textContent = `${lightboxIndex + 1} / ${lightboxImages.length}`;
+      }
+      lightboxAnimationTimer = window.setTimeout(() => imageLightboxPreview.classList.remove("is-changing"), 220);
+    };
+
+    const getImageGallery = (image) => {
+      let featureSlide = image.closest("[data-feature-slide]");
+      if (!featureSlide) {
+        const gameCard = image.closest(".game");
+        const openButton = gameCard?.querySelector("[data-open-run-sheep-details], [data-open-sheep-doom-details], [data-open-sheep-pac-details], [data-open-pvz-details], [data-open-gta-sa-details], [data-open-fnaf1-details], [data-open-fnaf2-details], [data-open-fnaf3-details], [data-open-fnaf4-details]");
+        const openAttribute = openButton && [...openButton.attributes].find((attribute) => attribute.name.startsWith("data-open-"));
+        if (openAttribute) {
+          featureSlide = [...document.querySelectorAll("[data-feature-slide]")].find((slide) => slide.querySelector(`[${openAttribute.name}]`));
+        }
+      }
+      const galleryImages = featureSlide ? [...featureSlide.querySelectorAll(".feature-thumbs img")].filter((galleryImage) => galleryImage.getAttribute("src")) : [];
+      return galleryImages.length > 0 ? galleryImages : [image];
+    };
+
+    zoomableImages.forEach((image) => {
+      if (!(image instanceof HTMLImageElement)) return;
+      if (!image.getAttribute("src")) return;
+      image.tabIndex = 0;
+      image.setAttribute("role", "button");
+      image.setAttribute("aria-label", `Ampliar imagen: ${image.alt || "captura del juego"}`);
+      const openLightbox = () => {
+        if (!(imageLightbox instanceof HTMLDialogElement)) return;
+        lightboxImages = getImageGallery(image);
+        const imageIndex = lightboxImages.indexOf(image);
+        lightboxIndex = imageIndex >= 0 ? imageIndex : 0;
+        showLightboxImage(lightboxIndex);
+        pauseFeatureCarousel();
+        if (!imageLightbox.open) imageLightbox.showModal();
+      };
+      image.addEventListener("click", openLightbox);
+      image.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openLightbox();
+        }
+      });
+    });
+    if (imageLightbox instanceof HTMLDialogElement) {
+      if (imageLightboxClose instanceof HTMLButtonElement) {
+        imageLightboxClose.addEventListener("click", () => imageLightbox.close());
+      }
+      if (imageLightboxPrev instanceof HTMLButtonElement) {
+        imageLightboxPrev.addEventListener("click", () => showLightboxImage(lightboxIndex - 1));
+      }
+      if (imageLightboxNext instanceof HTMLButtonElement) {
+        imageLightboxNext.addEventListener("click", () => showLightboxImage(lightboxIndex + 1));
+      }
+      imageLightbox.addEventListener("click", (event) => {
+        if (event.target === imageLightbox) imageLightbox.close();
+      });
+      imageLightbox.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") showLightboxImage(lightboxIndex - 1);
+        if (event.key === "ArrowRight") showLightboxImage(lightboxIndex + 1);
+      });
+      imageLightbox.addEventListener("close", () => {
+        if (imageLightboxPreview instanceof HTMLImageElement) {
+          window.clearTimeout(lightboxAnimationTimer);
+          imageLightboxPreview.classList.remove("is-changing");
+          imageLightboxPreview.removeAttribute("src");
+          imageLightboxPreview.alt = "";
+        }
+        resumeFeatureCarousel();
+      });
+    }
+
+    const fnafGames = [
+      {
+        id: "fnaf1",
+        trailerUrl: "https://video.akamai.steamstatic.com/store_trailers/319510/24296/52d5d95dcd9546a4e48e973b368c3cbb98782f65/1750507160/hls_264_master.m3u8",
+        poster: "fnaf1-cover.jpg"
+      },
+      {
+        id: "fnaf2",
+        trailerUrl: "https://video.akamai.steamstatic.com/store_trailers/332800/27365/4473bcdfc1f5da8b8ac25fa3e68f5152c981ac47/1750510026/hls_264_master.m3u8",
+        poster: "fnaf2-cover.jpg"
+      },
+      {
+        id: "fnaf3",
+        trailerUrl: "https://video.akamai.steamstatic.com/store_trailers/354140/32188/b651e2a4e5d03b0ccb2963cc6b5dcd2b5ac2135a/1750514205/hls_264_master.m3u8",
+        poster: "fnaf3-cover.jpg"
+      },
+      {
+        id: "fnaf4",
+        trailerUrl: "https://video.akamai.steamstatic.com/store_trailers/388090/39464/5342cdb10559278b420dda0599042a2099ba3330/1750523485/hls_264_master.m3u8",
+        poster: "fnaf4-cover.jpg"
+      }
+    ];
+
+    fnafGames.forEach((game) => {
+      const dialog = document.querySelector(`#${game.id}-details-dialog`);
+      const closeButton = document.querySelector(`#${game.id}-dialog-close`);
+      const trailer = document.querySelector(`#${game.id}-trailer`);
+      const repeat = document.querySelector(`#${game.id}-repeat`);
+      let hls = null;
+
+      const stopTrailer = () => {
+        if (trailer instanceof HTMLVideoElement) {
+          trailer.pause();
+          trailer.removeAttribute("src");
+          trailer.load();
+        }
+        if (hls) {
+          hls.destroy();
+          hls = null;
+        }
+      };
+
+      const playTrailer = () => {
+        if (!(trailer instanceof HTMLVideoElement)) return;
+        stopTrailer();
+        trailer.muted = false;
+        trailer.volume = 0.3;
+        trailer.poster = game.poster;
+        if (typeof Hls !== "undefined" && Hls.isSupported()) {
+          hls = new Hls();
+          hls.loadSource(game.trailerUrl);
+          hls.attachMedia(trailer);
+          hls.on(Hls.Events.MANIFEST_PARSED, () => {
+            trailer.currentTime = 0;
+            trailer.play().catch(() => {});
+          });
+        } else if (trailer.canPlayType("application/vnd.apple.mpegurl")) {
+          trailer.src = game.trailerUrl;
+          trailer.addEventListener("loadedmetadata", () => {
+            trailer.currentTime = 0;
+            trailer.play().catch(() => {});
+          }, { once: true });
+        }
+        if (repeat instanceof HTMLButtonElement) repeat.hidden = true;
+      };
+
+      if (trailer instanceof HTMLVideoElement) {
+        trailer.addEventListener("ended", () => {
+          if (repeat instanceof HTMLButtonElement) repeat.hidden = false;
+        });
+        trailer.addEventListener("play", () => {
+          if (repeat instanceof HTMLButtonElement) repeat.hidden = true;
+        });
+      }
+      document.querySelectorAll(`[data-open-${game.id}-details]`).forEach((button) => {
+        button.addEventListener("click", () => {
+          if (dialog instanceof HTMLDialogElement && !dialog.open) {
+            dialog.showModal();
+            playTrailer();
+          }
+        });
+      });
+      if (dialog instanceof HTMLDialogElement && closeButton instanceof HTMLButtonElement) {
+        closeButton.addEventListener("click", () => dialog.close());
+        dialog.addEventListener("click", (event) => {
+          if (event.target === dialog) dialog.close();
+        });
+        dialog.addEventListener("close", () => {
+          stopTrailer();
+          if (repeat instanceof HTMLButtonElement) repeat.hidden = true;
+        });
+      }
+      if (repeat instanceof HTMLButtonElement) {
+        repeat.addEventListener("click", () => playTrailer());
+      }
+    });
+
     const newsGrid = document.querySelector("#news-grid");
     const newsStatus = document.querySelector("#news-status");
     const storeView = document.querySelector("#store-view");
@@ -952,6 +2001,185 @@
       });
     });
     setActiveView(window.location.hash === "#news" ? "news" : "store");
+
+    const drawGameRatingStars = (container, rating) => {
+      container.replaceChildren();
+      container.setAttribute("aria-label", rating > 0 ? `${rating.toFixed(1)} de 5 estrellas` : "Sin votos");
+      for (let index = 0; index < 5; index += 1) {
+        const star = document.createElement("span");
+        star.className = "game-rating-star";
+        star.textContent = "★";
+        star.style.setProperty("--fill", `${Math.max(0, Math.min(1, rating - index)) * 100}%`);
+        container.append(star);
+      }
+    };
+    const gameRatingPanels = new Map();
+    document.querySelectorAll(".run-sheep-dialog").forEach((dialog) => {
+      if (!(dialog instanceof HTMLDialogElement)) return;
+      const dialogInner = dialog.querySelector(".run-sheep-dialog-inner");
+      const gameId = dialog.id.replace(/-details-dialog$/, "");
+      if (!(dialogInner instanceof HTMLElement) || !gameId) return;
+
+      const panel = document.createElement("section");
+      panel.className = "game-rating-panel";
+      const header = document.createElement("div");
+      header.className = "game-rating-header";
+      const titleArea = document.createElement("div");
+      const title = document.createElement("h3");
+      title.textContent = "Valora este juego";
+      const note = document.createElement("p");
+      note.className = "game-rating-note";
+      note.textContent = "Tu voto se suma a la puntuación global.";
+      titleArea.append(title, note);
+
+      const summary = document.createElement("div");
+      summary.className = "game-rating-summary";
+      const percentage = document.createElement("strong");
+      percentage.className = "game-rating-percent";
+      percentage.textContent = "—%";
+      const averageArea = document.createElement("div");
+      const averageStars = document.createElement("span");
+      averageStars.className = "game-rating-stars";
+      const average = document.createElement("span");
+      average.className = "game-rating-average";
+      const voteCount = document.createElement("span");
+      voteCount.className = "game-rating-votes";
+      averageArea.append(averageStars, average, voteCount);
+      summary.append(percentage, averageArea);
+      header.append(titleArea, summary);
+
+      const ratingForm = document.createElement("form");
+      ratingForm.className = "game-rating-actions";
+      const ratingLabel = document.createElement("span");
+      ratingLabel.textContent = "Tu voto";
+      const picker = document.createElement("div");
+      picker.className = "game-rating-picker";
+      picker.setAttribute("role", "group");
+      picker.setAttribute("aria-label", "Elige de media a cinco estrellas");
+      const selectedValue = document.createElement("output");
+      selectedValue.className = "game-rating-average";
+      selectedValue.setAttribute("aria-live", "polite");
+      const submit = document.createElement("button");
+      submit.className = "game-rating-submit";
+      submit.type = "submit";
+      submit.textContent = "Enviar voto";
+      const status = document.createElement("p");
+      status.className = "game-rating-status";
+      status.setAttribute("role", "status");
+      status.setAttribute("aria-live", "polite");
+      ratingForm.append(ratingLabel, picker, selectedValue, submit, status);
+      panel.append(header, ratingForm);
+      dialogInner.append(panel);
+
+      let selectedRating = 0;
+      let hasVotedThisPage = false;
+      const drawVote = (rating) => {
+        [...picker.querySelectorAll(".game-rating-star")].forEach((star, index) => {
+          star.style.setProperty("--fill", `${Math.max(0, Math.min(1, rating - index)) * 100}%`);
+        });
+        selectedValue.textContent = rating > 0 ? `${rating.toLocaleString("es-ES", { minimumFractionDigits: 1, maximumFractionDigits: 1 })} / 5` : "Sin puntuar";
+      };
+      for (let starIndex = 1; starIndex <= 5; starIndex += 1) {
+        const star = document.createElement("button");
+        star.className = "game-rating-star";
+        star.type = "button";
+        star.textContent = "★";
+        star.setAttribute("aria-label", `Estrella ${starIndex}: clic a la izquierda para ${starIndex - 0.5} o a la derecha para ${starIndex}`);
+        const pointerRating = (event) => {
+          const bounds = star.getBoundingClientRect();
+          return starIndex - (event.clientX - bounds.left < bounds.width / 2 ? 0.5 : 0);
+        };
+        star.addEventListener("pointermove", (event) => drawVote(pointerRating(event)));
+        star.addEventListener("click", (event) => {
+          selectedRating = event.detail === 0 ? starIndex : pointerRating(event);
+          drawVote(selectedRating);
+        });
+        picker.append(star);
+      }
+      picker.addEventListener("pointerleave", () => drawVote(selectedRating));
+      picker.addEventListener("keydown", (event) => {
+        const changes = { ArrowRight: 0.5, ArrowUp: 0.5, ArrowLeft: -0.5, ArrowDown: -0.5 };
+        if (event.key === "Home") selectedRating = 0.5;
+        else if (event.key === "End") selectedRating = 5;
+        else if (Object.prototype.hasOwnProperty.call(changes, event.key)) {
+          selectedRating = Math.max(0, Math.min(5, selectedRating + changes[event.key]));
+        } else {
+          return;
+        }
+        event.preventDefault();
+        drawVote(selectedRating);
+      });
+
+      gameRatingPanels.set(gameId, { percentage, averageStars, average, voteCount, status });
+      ratingForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (selectedRating === 0) {
+          status.textContent = "Elige una puntuación de media a cinco estrellas.";
+          status.classList.add("is-error");
+          picker.querySelector("button")?.focus();
+          return;
+        }
+        if (hasVotedThisPage) return;
+
+        submit.disabled = true;
+        status.classList.remove("is-error");
+        status.textContent = "Guardando tu voto…";
+        try {
+          const response = await fetch("/api/ratings", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ gameId, rating: selectedRating }),
+          });
+          const result = await response.json();
+          if (!response.ok) throw new Error(result.error || `HTTP ${response.status}`);
+          updateGlobalGameRatings(result.ratings);
+          hasVotedThisPage = true;
+          picker.querySelectorAll("button").forEach((star) => { star.disabled = true; });
+          submit.textContent = "Voto registrado";
+          status.textContent = "¡Gracias! Puedes votar de nuevo al recargar la página.";
+        } catch (error) {
+          console.error(`No se pudo registrar la valoración de ${gameId}.`, error);
+          status.classList.add("is-error");
+          status.textContent = "No se pudo guardar el voto. Intenta de nuevo.";
+        } finally {
+          submit.disabled = hasVotedThisPage;
+        }
+      });
+    });
+
+    function updateGlobalGameRatings(ratings) {
+      if (!ratings || typeof ratings !== "object") throw new TypeError("La respuesta de valoraciones no es válida.");
+      gameRatingPanels.forEach((panel, gameId) => {
+        const rating = ratings[gameId];
+        if (!rating || !Number.isInteger(rating.votes) || rating.votes < 0) {
+          throw new TypeError(`La puntuación de ${gameId} no es válida.`);
+        }
+        const hasVotes = rating.votes > 0;
+        if (hasVotes && (!Number.isFinite(rating.average) || !Number.isFinite(rating.percentage))) {
+          throw new TypeError(`El promedio de ${gameId} no es válido.`);
+        }
+        panel.percentage.textContent = hasVotes ? `${rating.percentage}%` : "—%";
+        panel.average.textContent = hasVotes ? `${rating.average.toLocaleString("es-ES", { minimumFractionDigits: 1, maximumFractionDigits: 1 })} / 5 · ` : "";
+        panel.voteCount.textContent = hasVotes ? `${rating.votes} ${rating.votes === 1 ? "voto" : "votos"}` : "Aún sin votos";
+        drawGameRatingStars(panel.averageStars, hasVotes ? rating.average : 0);
+      });
+    }
+
+    async function loadGlobalGameRatings() {
+      try {
+        const response = await fetch("/api/ratings", { cache: "no-store" });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const result = await response.json();
+        updateGlobalGameRatings(result.ratings);
+      } catch (error) {
+        console.error("No se pudieron cargar las puntuaciones globales.", error);
+        gameRatingPanels.forEach((panel) => {
+          panel.status.classList.add("is-error");
+          panel.status.textContent = "No se pudo conectar con las puntuaciones globales.";
+        });
+      }
+    }
+    loadGlobalGameRatings();
 
     const newsSources = [
       { name: "Vandal", url: "https://vandal.elespanol.com/xml.cgi" },

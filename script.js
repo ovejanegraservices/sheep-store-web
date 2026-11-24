@@ -2132,10 +2132,11 @@ if (
 
 const servicesDialog = document.querySelector("#services-dialog");
 const businessMaintenanceDialog = document.querySelector("#business-maintenance-dialog");
+const repairDialog = document.querySelector("#repair-dialog");
+const maintenanceDialog = document.querySelector("#maintenance-dialog");
 const serviceOpenButtons = document.querySelectorAll("[data-open-services]");
 const serviceTabButtons = document.querySelectorAll("[data-service-tab]");
-const serviceRepairPanel = document.querySelector("#service-repair-panel");
-const serviceMaintenancePanel = document.querySelector("#service-maintenance-panel");
+const webDevelopmentDialog = document.querySelector("#web-development-dialog");
 const businessMaintenanceButton = document.querySelector("#open-business-maintenance");
 const serviceWhatsApp = "51978561560";
 const openServiceWhatsApp = (message) => {
@@ -2146,14 +2147,11 @@ const openServiceWhatsApp = (message) => {
 if (
   servicesDialog instanceof HTMLDialogElement &&
   businessMaintenanceDialog instanceof HTMLDialogElement &&
-  serviceRepairPanel instanceof HTMLElement &&
-  serviceMaintenancePanel instanceof HTMLElement
+  repairDialog instanceof HTMLDialogElement &&
+  maintenanceDialog instanceof HTMLDialogElement &&
+  webDevelopmentDialog instanceof HTMLDialogElement
 ) {
   const setServiceView = (view = "") => {
-    const showRepair = view === "repair";
-    const showMaintenance = view === "maintenance";
-    serviceRepairPanel.hidden = !showRepair;
-    serviceMaintenancePanel.hidden = !showMaintenance;
     serviceTabButtons.forEach((button) => {
       button.setAttribute("aria-pressed", String(button.dataset.serviceTab === view));
     });
@@ -2161,13 +2159,38 @@ if (
 
   serviceOpenButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      setServiceView(button.dataset.serviceView || "");
+      const view = button.dataset.serviceView || "";
+      setServiceView(view);
       if (!servicesDialog.open) servicesDialog.showModal();
+      const detailDialog = {
+        repair: repairDialog,
+        maintenance: maintenanceDialog,
+        "web-development": webDevelopmentDialog,
+      }[view];
+      if (detailDialog && !detailDialog.open) detailDialog.showModal();
     });
   });
 
   serviceTabButtons.forEach((button) => {
-    button.addEventListener("click", () => setServiceView(button.dataset.serviceTab || ""));
+    button.addEventListener("click", () => {
+      const view = button.dataset.serviceTab || "";
+      setServiceView(view);
+      const detailDialog = {
+        repair: repairDialog,
+        maintenance: maintenanceDialog,
+        "web-development": webDevelopmentDialog,
+      }[view];
+      if (detailDialog && !detailDialog.open) detailDialog.showModal();
+    });
+  });
+
+  [repairDialog, maintenanceDialog, webDevelopmentDialog].forEach((dialog) => {
+    dialog.querySelector(".service-detail-back, .web-development-back")
+      ?.addEventListener("click", () => dialog.close());
+    dialog.addEventListener("close", () => setServiceView(""));
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) dialog.close();
+    });
   });
 
   const servicesClose = servicesDialog.querySelector(".services-close");
@@ -2261,6 +2284,60 @@ if (
       ),
       "",
       `Total estimado: S/ ${total.toLocaleString("es-PE")}`,
+      "",
+      `Número de contacto: ${phone}`,
+      `Correo electrónico de contacto: ${email}`,
+    ].join("\n");
+    openServiceWhatsApp(body);
+  });
+
+  const webDevelopmentForm = document.querySelector("#web-development-request-form");
+  const webDevelopmentPackage = document.querySelector("#web-development-package");
+  const webDevelopmentPriceQuote = document.querySelector("#web-development-price-quote");
+  const webDevelopmentPackages = {
+    landing: { name: "Landing page básica", price: 550, days: 7, description: "Una página, WhatsApp, redes, contacto y diseño adaptable" },
+    informativa: { name: "Página informativa", price: 1100, days: 15, description: "Hasta 5 páginas o secciones, formulario, mapa, galería y SEO inicial" },
+    profesional: { name: "Web profesional", price: 2100, days: 25, description: "Hasta 10 páginas, catálogo, funciones ampliadas y capacitación básica" },
+    tienda: { name: "Tienda virtual", price: 4800, days: 40, description: "Catálogo inicial, carrito o pedidos, medios de pago acordados y administración" },
+    corporativa: { name: "Web corporativa", price: 6500, days: 50, description: "Proyecto personalizado; alcance e integraciones definidos en una propuesta" },
+  };
+  const updateWebDevelopmentQuote = () => {
+    if (
+      !(webDevelopmentPackage instanceof HTMLSelectElement) ||
+      !webDevelopmentPriceQuote
+    ) return;
+    const selectedPackage = webDevelopmentPackages[webDevelopmentPackage.value];
+    webDevelopmentPriceQuote.textContent = selectedPackage
+      ? `${selectedPackage.name}: S/ ${selectedPackage.price.toLocaleString("es-PE")} · ${selectedPackage.days} días hábiles estimados.`
+      : "Selecciona un paquete para ver el precio y el plazo estimado.";
+  };
+
+  webDevelopmentPackage?.addEventListener("change", updateWebDevelopmentQuote);
+  updateWebDevelopmentQuote();
+
+  webDevelopmentForm?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (
+      !(webDevelopmentForm instanceof HTMLFormElement) ||
+      !(webDevelopmentPackage instanceof HTMLSelectElement)
+    ) return;
+    const selectedPackage = webDevelopmentPackages[webDevelopmentPackage.value];
+    if (!selectedPackage) {
+      webDevelopmentPackage.focus();
+      return;
+    }
+    const formData = new FormData(webDevelopmentForm);
+    const phone = String(formData.get("telefono") || "").trim();
+    const email = String(formData.get("correo_contacto") || "").trim();
+    const body = [
+      "CONSULTA DE DESARROLLO WEB — SHEEP STORE",
+      "",
+      `Paquete seleccionado: ${selectedPackage.name}`,
+      `Precio sugerido: S/ ${selectedPackage.price.toLocaleString("es-PE")}`,
+      `Plazo estimado: ${selectedPackage.days} días hábiles`,
+      `Incluye: ${selectedPackage.description}`,
+      "",
+      "Entiendo que el precio es referencial y que el alcance final, dominio, hosting y servicios externos pueden cotizarse por separado.",
       "",
       `Número de contacto: ${phone}`,
       `Correo electrónico de contacto: ${email}`,

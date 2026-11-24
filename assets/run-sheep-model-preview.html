@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#101411" />
+  <title>Modelo de terror / Vista 3D</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: "Segoe UI", sans-serif;
+      color: #eef2ea;
+      background: #101411;
+      font-synthesis: none;
+      --lime: #c9ef68;
+      --muted: #a4afa4;
+    }
+    * { box-sizing: border-box; }
+    html, body { width: 100%; min-width: 320px; height: 100%; margin: 0; overflow: hidden; }
+    body { background: radial-gradient(ellipse at 50% 35%, #26362a 0, #151b17 48%, #101411 100%); }
+    button { font: inherit; }
+    button:focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; }
+    #scene { position: fixed; inset: 0; }
+    #scene canvas { display: block; width: 100%; height: 100%; }
+    .topbar { position: fixed; z-index: 2; top: 0; right: 0; left: 0; display: flex; align-items: start; justify-content: space-between; gap: 20px; padding: 22px 26px; pointer-events: none; }
+    .brand { display: grid; gap: 5px; }
+    .brand small { color: var(--lime); font-size: 9px; font-weight: 750; letter-spacing: 1.5px; }
+    .brand h1 { margin: 0; color: #f3f5ef; font-size: 21px; font-weight: 650; }
+    .status { display: inline-flex; align-items: center; gap: 7px; padding: 8px 10px; border: 1px solid #ffffff20; border-radius: 3px; background: #121713c9; color: #dce5d8; font-size: 9px; font-weight: 700; }
+    .status::before { width: 6px; height: 6px; border-radius: 50%; background: var(--lime); content: ""; box-shadow: 0 0 10px #c9ef6870; }
+    .bottom-bar { position: fixed; z-index: 2; right: 0; bottom: 0; left: 0; display: flex; align-items: end; justify-content: space-between; gap: 20px; padding: 20px 26px 24px; background: linear-gradient(0deg, #0d110fe8, #0d110f00); }
+    .model-meta { display: grid; gap: 5px; }
+    .model-meta strong { color: #f0f3ed; font-size: 11px; font-weight: 600; }
+    .model-meta span { color: var(--muted); font-size: 9px; }
+    .actions { display: flex; gap: 8px; }
+    .actions button { min-height: 36px; padding: 0 12px; border: 1px solid #ffffff35; border-radius: 3px; background: #171d19; color: #edf2eb; cursor: pointer; font-size: 10px; font-weight: 650; }
+    .actions button.primary { border-color: var(--lime); background: var(--lime); color: #162014; }
+    .actions button:hover { border-color: #fff; background: #fff; color: #171815; }
+    .loading { position: fixed; z-index: 3; inset: 0; display: grid; place-items: center; background: #101411; color: #dce5d8; font-size: 12px; }
+    .loading[hidden] { display: none; }
+    .error { position: fixed; z-index: 4; right: 20px; bottom: 88px; left: 20px; display: none; margin: auto; width: min(520px, calc(100vw - 40px)); padding: 15px; border: 1px solid #ff9076; border-radius: 4px; background: #211b19; color: #ffe2d8; font-size: 11px; line-height: 1.5; }
+    .error.is-visible { display: block; }
+    @media (max-width: 600px) {
+      .topbar { align-items: start; padding: 16px; }
+      .brand h1 { font-size: 17px; }
+      .status { font-size: 8px; }
+      .bottom-bar { align-items: start; flex-direction: column; padding: 16px; }
+      .actions { width: 100%; }
+      .actions button { flex: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+  </style>
+  <script type="importmap">
+    {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}
+  </script>
+</head>
+<body>
+  <div id="scene" aria-label="Vista 3D interactiva del modelo de terror"></div>
+  <div class="loading" id="loading">Cargando modelo 3D...</div>
+  <header class="topbar">
+    <div class="brand"><small>PROTOTIPO DE TERROR · MODELO 3D</small><h1>Criatura</h1></div>
+    <div class="status" id="motion-status">EN MOVIMIENTO</div>
+  </header>
+  <footer class="bottom-bar">
+    <div class="model-meta"><strong>Vista de personaje</strong><span>Modelo GLB · animación procedural de previsualización</span></div>
+    <div class="actions"><button class="primary" id="motion-toggle" type="button">Pausar movimiento</button><button id="camera-reset" type="button">Reiniciar cámara</button></div>
+  </footer>
+  <p class="error" id="load-error" role="alert"></p>
+  <script type="module">
+    import * as THREE from "three";
+    import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+    import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+    import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
+
+    const sceneHost = document.querySelector("#scene");
+    const loading = document.querySelector("#loading");
+    const loadError = document.querySelector("#load-error");
+    const motionToggle = document.querySelector("#motion-toggle");
+    const motionStatus = document.querySelector("#motion-status");
+    const cameraReset = document.querySelector("#camera-reset");
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color("#101411");
+    scene.fog = new THREE.Fog("#101411", 8, 24);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.05;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    sceneHost.append(renderer.domElement);
+
+    const camera = new THREE.PerspectiveCamera(36, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.set(0, 1.65, 5.4);
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.target.set(0, 1.1, 0);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.06;
+    controls.minDistance = 2.7;
+    controls.maxDistance = 8;
+    controls.maxPolarAngle = Math.PI * 0.49;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 1.15;
+
+    scene.add(new THREE.HemisphereLight(0xdce9d9, 0x18211b, 2.0));
+    const keyLight = new THREE.DirectionalLight(0xf4f5e9, 3.2);
+    keyLight.position.set(3.5, 6, 4);
+    keyLight.castShadow = true;
+    keyLight.shadow.mapSize.set(1024, 1024);
+    scene.add(keyLight);
+    const rimLight = new THREE.PointLight(0x9bdc89, 11, 12, 2);
+    rimLight.position.set(-3, 2.7, -2.4);
+    scene.add(rimLight);
+
+    const floor = new THREE.Mesh(
+      new THREE.PlaneGeometry(200, 200),
+      new THREE.MeshStandardMaterial({ color: 0x111713, roughness: 0.92, metalness: 0.05 })
+    );
+    floor.rotation.x = -Math.PI / 2;
+    floor.position.y = -0.02;
+    floor.receiveShadow = true;
+    scene.add(floor);
+
+    const ring = new THREE.Mesh(
+      new THREE.TorusGeometry(1.05, 0.012, 8, 96),
+      new THREE.MeshBasicMaterial({ color: 0x86b96d, transparent: true, opacity: 0.56 })
+    );
+    ring.rotation.x = Math.PI / 2;
+    ring.position.y = 0.01;
+    ring.scale.set(1.35, 0.78, 1);
+    scene.add(ring);
+    const grid = new THREE.GridHelper(18, 36, 0x38483a, 0x273128);
+    grid.position.y = 0;
+    scene.add(grid);
+
+    const modelPivot = new THREE.Group();
+    scene.add(modelPivot);
+    let modelRoot = null;
+    let baseHeight = 1.8;
+    let isMoving = true;
+    const loader = new GLTFLoader();
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5.7/");
+    loader.setDRACOLoader(dracoLoader);
+
+    loader.load(
+      "model-1794380759306.glb",
+      (gltf) => {
+        modelRoot = gltf.scene;
+        const initialBounds = new THREE.Box3().setFromObject(modelRoot);
+        const initialSize = initialBounds.getSize(new THREE.Vector3());
+        const largestDimension = Math.max(initialSize.x, initialSize.y, initialSize.z) || 1;
+        const targetHeight = 2.15;
+        modelRoot.scale.setScalar(targetHeight / largestDimension);
+        const scaledBounds = new THREE.Box3().setFromObject(modelRoot);
+        const center = scaledBounds.getCenter(new THREE.Vector3());
+        modelRoot.position.x -= center.x;
+        modelRoot.position.z -= center.z;
+        modelRoot.position.y -= scaledBounds.min.y;
+        modelPivot.add(modelRoot);
+        baseHeight = modelRoot.position.y;
+        modelRoot.traverse((part) => {
+          if (part.isMesh) {
+            part.castShadow = true;
+            part.receiveShadow = true;
+            if (part.material && "envMapIntensity" in part.material) part.material.envMapIntensity = 0.7;
+          }
+        });
+        const finalSize = new THREE.Box3().setFromObject(modelRoot).getSize(new THREE.Vector3());
+        controls.target.set(0, finalSize.y * 0.52, 0);
+        camera.position.set(0, Math.max(finalSize.y * 0.74, 1.4), Math.max(finalSize.y * 2.35, 4.2));
+        controls.update();
+        loading.hidden = true;
+      },
+      undefined,
+      (error) => {
+        console.error("No se pudo cargar el modelo GLB.", error);
+        loading.hidden = true;
+        loadError.textContent = "No se pudo cargar model-1794380759306.glb. Comprueba que el archivo esté junto a esta página.";
+        loadError.classList.add("is-visible");
+      }
+    );
+
+    motionToggle.addEventListener("click", () => {
+      isMoving = !isMoving;
+      controls.autoRotate = isMoving;
+      motionToggle.textContent = isMoving ? "Pausar movimiento" : "Reanudar movimiento";
+      motionStatus.textContent = isMoving ? "EN MOVIMIENTO" : "PAUSADO";
+      if (!isMoving && modelRoot) {
+        modelPivot.position.y = 0;
+        modelPivot.rotation.x = 0;
+        modelPivot.rotation.z = 0;
+      }
+    });
+
+    cameraReset.addEventListener("click", () => {
+      camera.position.set(0, Math.max(baseHeight * 0.74, 1.4), Math.max(baseHeight * 2.35, 4.2));
+      controls.target.set(0, baseHeight * 0.52, 0);
+      controls.update();
+    });
+
+    const clock = new THREE.Clock();
+    function animate() {
+      requestAnimationFrame(animate);
+      const time = clock.getElapsedTime();
+      if (modelRoot && isMoving) {
+        const cycle = time * 8.4;
+        const stride = Math.sin(cycle);
+        modelPivot.position.y = Math.abs(stride) * 0.14;
+        modelPivot.position.x = Math.sin(cycle * 0.5) * 0.24;
+        modelPivot.rotation.x = Math.cos(cycle) * 0.065;
+        modelPivot.rotation.z = Math.sin(cycle * 0.5) * 0.09;
+      }
+      ring.material.opacity = 0.38 + Math.sin(time * 2.1) * 0.12;
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener("resize", () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+    });
+  </script>
+</body>
+</html>

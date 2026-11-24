@@ -638,8 +638,22 @@
           <button class="service-menu-button" type="button" data-service-tab="maintenance" aria-controls="service-maintenance-panel" aria-pressed="false">
             <span>02</span><strong>Mantenimiento</strong><span aria-hidden="true">↗</span>
           </button>
+          <button class="service-menu-button" type="button" data-service-tab="web-development" aria-controls="service-web-development-panel" aria-pressed="false">
+            <span>03</span><strong>Desarrollo de páginas web</strong><span aria-hidden="true">↗</span>
+          </button>
         </div>
-        <section class="service-form-panel" id="service-repair-panel" aria-labelledby="service-repair-title" hidden>
+      </div>
+    </dialog>
+    <dialog class="services-dialog service-detail-dialog" id="repair-dialog" aria-labelledby="repair-dialog-title">
+      <div class="services-panel">
+        <div class="programs-header">
+          <div>
+            <p class="eyebrow">Sheep Store / Atención técnica</p>
+            <h2 id="repair-dialog-title">Reparación</h2>
+          </div>
+          <button class="service-detail-back" type="button" aria-label="Volver a servicios">← Volver a servicios</button>
+        </div>
+        <section class="service-form-panel" id="service-repair-panel" aria-labelledby="service-repair-title">
           <h3 id="service-repair-title">Cuéntanos qué le sucede</h3>
           <p>Déjanos los detalles y un número para que un asesor pueda contactarte.</p>
           <form class="service-request-form" id="repair-request-form">
@@ -653,7 +667,18 @@
           </form>
           <p class="service-email-note">Se abrirá WhatsApp con los detalles de tu solicitud listos para enviar. Revísalos y pulsa Enviar.</p>
         </section>
-        <section class="service-form-panel" id="service-maintenance-panel" aria-labelledby="service-maintenance-title" hidden>
+      </div>
+    </dialog>
+    <dialog class="services-dialog service-detail-dialog" id="maintenance-dialog" aria-labelledby="maintenance-dialog-title">
+      <div class="services-panel">
+        <div class="programs-header">
+          <div>
+            <p class="eyebrow">Sheep Store / Atención técnica</p>
+            <h2 id="maintenance-dialog-title">Mantenimiento</h2>
+          </div>
+          <button class="service-detail-back" type="button" aria-label="Volver a servicios">← Volver a servicios</button>
+        </div>
+        <section class="service-form-panel" id="service-maintenance-panel" aria-labelledby="service-maintenance-title">
           <h3 id="service-maintenance-title">Mantenimiento preventivo</h3>
           <p>Indica por separado cuántas laptops, PC y tarjetas gráficas necesitas atender.</p>
           <form class="service-request-form" id="maintenance-request-form">
@@ -680,6 +705,56 @@
           </form>
           <button class="business-maintenance-button" id="open-business-maintenance" type="button">Mantenimiento para empresas <span aria-hidden="true">↗</span></button>
           <p class="service-email-note">Se abrirá WhatsApp con los detalles y el total estimado listos para enviar. Revísalos y pulsa Enviar.</p>
+        </section>
+      </div>
+    </dialog>
+    <dialog class="services-dialog web-development-dialog" id="web-development-dialog" aria-labelledby="service-web-development-title">
+      <div class="services-panel">
+        <div class="programs-header">
+          <div>
+            <p class="eyebrow">Sheep Store / Desarrollo web</p>
+            <h2 id="service-web-development-title">Desarrollo de páginas web</h2>
+          </div>
+          <button class="web-development-back" type="button" aria-label="Volver a servicios">← Volver a servicios</button>
+        </div>
+        <section class="service-form-panel" id="service-web-development-panel">
+          <p>Elige un paquete para conocer el precio sugerido y el plazo estimado de entrega.</p>
+          <section class="business-pricing" aria-labelledby="web-development-pricing-title">
+            <h3 id="web-development-pricing-title">Paquetes y precios sugeridos</h3>
+            <div class="business-pricing-scroll" tabindex="0" role="region" aria-label="Precios y plazos estimados de desarrollo web">
+              <table class="business-pricing-table web-development-pricing-table">
+                <thead>
+                  <tr><th scope="col">Paquete</th><th scope="col">Precio</th><th scope="col">Plazo estimado</th><th scope="col">Incluye</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">Landing page básica</th><td>S/ 550</td><td>7 días hábiles</td><td>Una página, WhatsApp, redes, contacto y diseño adaptable.</td></tr>
+                  <tr><th scope="row">Página informativa</th><td>S/ 1,100</td><td>15 días hábiles</td><td>Hasta 5 páginas o secciones, formulario, mapa, galería y SEO inicial.</td></tr>
+                  <tr><th scope="row">Web profesional</th><td>S/ 2,100</td><td>25 días hábiles</td><td>Hasta 10 páginas, catálogo, funciones ampliadas y capacitación básica.</td></tr>
+                  <tr><th scope="row">Tienda virtual</th><td>S/ 4,800</td><td>40 días hábiles</td><td>Catálogo inicial, carrito o pedidos, medios de pago acordados y administración.</td></tr>
+                  <tr><th scope="row">Web corporativa</th><td>S/ 6,500</td><td>50 días hábiles</td><td>Proyecto personalizado; alcance e integraciones definidos en una propuesta.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <p class="service-price-note">Precios referenciales sujetos al alcance final. Dominio, hosting y servicios externos se cotizan aparte, salvo indicación expresa.</p>
+          <form class="service-request-form" id="web-development-request-form">
+            <label for="web-development-package">Paquete de desarrollo</label>
+            <select id="web-development-package" name="paquete" required>
+              <option value="" selected disabled>Selecciona un paquete</option>
+              <option value="landing">Landing page básica</option>
+              <option value="informativa">Página informativa</option>
+              <option value="profesional">Web profesional</option>
+              <option value="tienda">Tienda virtual</option>
+              <option value="corporativa">Web corporativa</option>
+            </select>
+            <p class="business-price-quote" id="web-development-price-quote" aria-live="polite">Selecciona un paquete para ver el precio y el plazo estimado.</p>
+            <label for="web-development-phone">Número de contacto <span class="required-indicator">(obligatorio)</span></label>
+            <input id="web-development-phone" name="telefono" type="tel" autocomplete="tel" required placeholder="+51 999 999 999" />
+            <label for="web-development-email">Correo electrónico de contacto <span class="required-indicator">(obligatorio)</span></label>
+            <input id="web-development-email" name="correo_contacto" type="email" autocomplete="email" required placeholder="tu@correo.com" />
+            <button class="service-submit" type="submit">Consultar por WhatsApp <span aria-hidden="true">↗</span></button>
+          </form>
+          <p class="service-email-note">Se abrirá WhatsApp con el paquete, el precio sugerido y el plazo estimado listos para enviar.</p>
         </section>
       </div>
     </dialog>
